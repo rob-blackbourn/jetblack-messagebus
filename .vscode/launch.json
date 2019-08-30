@@ -1,0 +1,27 @@
+{
+   // Use IntelliSense to find out which attributes exist for C# debugging
+   // Use hover for the description of the existing attributes
+   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+   "version": "0.2.0",
+   "configurations": [
+        {
+            "name": "JetBlack.MessageBus.Distributor",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
