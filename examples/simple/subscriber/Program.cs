@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Adapters.Configuration;
-using JetBlack.MessageBus.Common.IO;
 
 namespace subscriber
 {
@@ -40,7 +40,15 @@ namespace subscriber
                 return;
 
             foreach (var packet in e.Data)
-                Console.WriteLine(packet.Body);
+            {
+                if (packet.Body is Dictionary<string, object>)
+                {
+                    var data = (Dictionary<string, object>)packet.Body;
+                    Console.WriteLine("Data: " + string.Join(",", data.Select(x => $"{x.Key}={x.Value}")));
+                }
+                else
+                    Console.WriteLine(packet.Body);
+            }
         }
 
         private static void OnDataError(object? sender, DataErrorEventArgs e)
