@@ -109,7 +109,9 @@ namespace publisher
             // Bring the cache data up to date.
             foreach (var item in data)
             {
+                #nullable disable
                 cacheItem.Data[item.Key] = item.Value;
+                #nullable enable
             }
 
             // If there are any clients listening publish the data.
