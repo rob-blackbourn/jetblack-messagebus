@@ -134,10 +134,10 @@ namespace JetBlack.MessageBus.Adapters
                         case MessageType.ForwardedMulticastData:
                             RaiseOnDataOrHeartbeat((ForwardedMulticastData)message);
                             break;
-                        case MessageType.UnicastData:
+                        case MessageType.ForwardedUnicastData:
                             RaiseOnData((ForwardedUnicastData)message);
                             break;
-                        case MessageType.ForwardedUnicastData:
+                        case MessageType.ForwardedSubscriptionRequest:
                             RaiseOnForwardedSubscriptionRequest((ForwardedSubscriptionRequest)message);
                             break;
                         default:
