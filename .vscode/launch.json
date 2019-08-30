@@ -1,9 +1,9 @@
 {
-   // Use IntelliSense to find out which attributes exist for C# debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-   "version": "0.2.0",
-   "configurations": [
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
         {
             "name": "JetBlack.MessageBus.Distributor",
             "type": "coreclr",
@@ -15,6 +15,39 @@
             "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "simple notifier",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build simple notifier",
+            "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/simple/notifier",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "simple publisher",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build simple publisher",
+            "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/simple/publisher",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "simple subscriber",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build simple subscriber",
+            "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/examples/simple/subscriber",
+            "console": "externalTerminal",
             "stopAtEntry": false
         },
         {

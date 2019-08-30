@@ -67,7 +67,7 @@ namespace JetBlack.MessageBus.Distributor
 
         public void Start(TimeSpan heartbeatInterval)
         {
-            Log.Info($"Starting server {Assembly.GetExecutingAssembly().GetName().Version}");
+            Log.Info($"Starting server version {Assembly.GetExecutingAssembly().GetName().Version}");
 
             _eventQueue.Start();
             _acceptor.Start();

@@ -53,6 +53,8 @@ namespace JetBlack.MessageBus.Distributor
 
         private void Accept()
         {
+            Log.Info($"Listening on {_endPoint}");
+
             var listener = new TcpListener(_endPoint);
             listener.Start();
 
@@ -69,6 +71,7 @@ namespace JetBlack.MessageBus.Distributor
                     throw;
                 }
             }
+
             listener.Stop();
         }
 

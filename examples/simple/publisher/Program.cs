@@ -1,7 +1,6 @@
 ﻿using System;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Adapters.Configuration;
 using JetBlack.MessageBus.Common.IO;
 
 namespace publisher
@@ -31,6 +30,7 @@ namespace publisher
 
                 var data = new[] { new DataPacket(Guid.NewGuid(), message) };
 
+                Console.WriteLine($"Publishing on feed \"{feed}\" topic \"{topic}\" message \"{message}\"");
                 client.Publish(feed, topic, true, data);
             }
 

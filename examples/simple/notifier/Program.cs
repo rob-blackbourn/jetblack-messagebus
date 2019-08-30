@@ -1,8 +1,6 @@
 ﻿using System;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Adapters.Configuration;
-using JetBlack.MessageBus.Common.IO;
 
 namespace notifier
 {
@@ -21,6 +19,8 @@ namespace notifier
                 Console.Write("Feed: ");
                 var feed = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(feed)) break;
+
+                Console.WriteLine($"Requesting notifications for subscriptions on feed \"{feed}\".");
                 client.AddNotification(feed);
             }
 
