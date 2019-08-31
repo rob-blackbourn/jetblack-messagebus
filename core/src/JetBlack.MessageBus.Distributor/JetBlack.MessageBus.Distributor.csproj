@@ -14,6 +14,7 @@
     <Version>0.1.0</Version>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
+    <RepositoryUrl>https://github.com/rob-blackbourn/message-bus</RepositoryUrl>
   </PropertyGroup>
   
   <ItemGroup>
