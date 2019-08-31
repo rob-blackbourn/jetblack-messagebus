@@ -2,6 +2,8 @@
 
 A real time message bus written in .Net Core 3.0 running on Linux.
 
+This is work in progress.
+
 ## Usage
 
 See the examples folder for more detailed examples.
