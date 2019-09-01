@@ -25,45 +25,45 @@ The following messages can be sent:
 
 Data sent to this specific client.
 
-- ClientId: UUID
-- Host: string
-- User: string
-- Feed: string
-- Topic: string
-- IsImage: boolean
-- Data: { Header: UUID, Body: byte[]}[]
+- [ClientId](#clientid)
+- [Host](#host)
+- [User](#user)
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsImage](#isimage)
+- [Data](#data)
 
 ### Multicast data
 
 Data sent to all subscribers of a topic.
 
-- Host: string
-- User: string
-- Feed: string
-- Topic: string
-- IsImage: boolean
-- Data: { Header: UUID, Body: byte[]}[]
+- [Host](#host)
+- [User](#user)
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsImage](#isimage)
+- [Data](#data)
 
 ### Forwarded Subscription Request
 
 The subscription request made by a client.
 
-- ClientId: UUID
-- Host: string
-- User: string
-- Feed: string
-- Topic: string
-- IsAdd: boolean
+- [ClientId](#clientid)
+- [Host](#host)
+- [User](#user)
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsAdd](#isadd)
 
 ### Authorization Request
 
 A request from a server for authorization for a client to a topic on a feed.
 
-- User: string
-- Host: string
-- ClientId: UUID
-- Feed: string
-- Topic: string
+- [User](#user)
+- [Host](#host)
+- [ClientId](#clientid)
+- [Feed](#feed)
+- [Topic](#topic)
 
 
 ## Messages Sent
@@ -72,45 +72,45 @@ A request from a server for authorization for a client to a topic on a feed.
 
 A request to the server for a subscription to be added or removed.
 
-- Feed: string
-- Topic: string
-- IsAdd: boolean
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsAdd](#isadd)
 
 ### Notification Request
 
 A request to the server to be notified when any client makes a subscription to a feed.
 
-- Feed: string
-- IsAdd: boolean
+- [Feed](#feed)
+- [IsAdd](#isadd)
 
 ### Send
 
 Send data to a specific client
 
-- ClientId: UUID
-- Feed: string
-- Topic: string
-- IsImage: bool
-- Data: { Header: UUID, Body: byte[]}[]
+- [ClientId](#clientid)
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsImage](#isimage)
+- [Data](#data)
 
 ### Publish
 
 Publish data to all subscribers of a feed and topic.
 
-- Feed: string
-- Topic: string
-- IsImage: bool
-- Data: { Header: UUID, Body: byte[]}[]
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsImage](#isimage)
+- [Data](#data)
 
 ### Authorize
 
 Send authorization details for a clients request to subscribe to a topic on a feed.
 
-- ClientId: UUID
-- Feed: string
-- Topic: string
-- IsAuthorizationRequired: bool
-- Entitlements: UUID[]
+- [ClientId](#clientid)
+- [Feed](#feed)
+- [Topic](#topic)
+- [IsAuthorizationRequired](#isauthorizationrequired)
+- [Entitlements](#entitlements)
 
 ## Data Types
 
@@ -122,22 +122,40 @@ or authorizing a clients subscription (see [Authorize](#authorize))
 
 ### Host
 
-The host name of an authenticated client.
+The host name of an authenticated client as a string.
 
 ### User
 
-The user name of an authenticated client.
+The user name of an authenticated client as a string.
 
 ### Feed
 
-The name of the feed.
+The name of the feed as a string.
 
 ### Topic
 
-The name of a topic in a feed.
+The name of a topic in a feed as a string.
 
 ### Data
 
 The data sent or received. This is a sequence of header and body tuples.
 The header is a UUID which represents the entitlement. The body contains
 the actual data.
+
+### IsImage
+
+A boolean indicating if the data represents a full set or just the changes. 
+
+### IsAdd
+
+A boolean indicating whether a subscription was or has been added or removed.
+
+### IsAuthorizationRequired
+
+A boolean indicating whether a subscription requires authorization.
+
+### Entitlements
+
+A sequence of UUIDs. These are sent in an authorization response, and then
+when sending or publishing data. The server will only forward data to a client
+for the UUIDs it has been authorized with.

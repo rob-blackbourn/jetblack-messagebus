@@ -205,6 +205,8 @@ A broadcast feed publishes all of its data as soon as it is available. An exampl
 
 In contrast to a broadcast feed, a select feed waits for a client to request the data before it starts to publish it. This presents less network traffic, but provides more complexity in the message bus and publisher.
 
+An implementation overview can be found [here](docs/selectfeed.md).
+
 ### SSL
 
 This message bus supports SSL connections between clients and the server.
@@ -219,7 +221,11 @@ Authentication is provided as a pluggable component. Out of the box three method
 
 SSL connections are recommended when using authentication to prevent password snooping.
 
+For more information see [here](docs/authentication.md).
+
 ### Authorization
 
 Many financial feeds require the distribution of data to be restricted to those who have paid for it. This message bus supports such authorization, such that it will not transmit data to clients that are not entitled to receive it.
+
+A discussion of the authorization mechanism cn be found [here](docs/authorization.md).
 
