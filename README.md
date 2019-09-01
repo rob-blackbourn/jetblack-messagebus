@@ -4,6 +4,21 @@ A real time message bus written in .Net Core 3.0 running on Linux.
 
 This is work in progress.
 
+## Why?
+
+There are a number of excellent message bus implementations available, all
+with different features. What makes this different?
+
+The distinguishing feature of this message bus is it's support for *select* 
+feed publishers. Typically a message bus implements a *broadcast* feed 
+(e.g. RabbitMQ, Redis, etc). The source publishes messages on topics while
+clients subscribe to topics of interest to them.
+
+In a select feed the publisher gets *notified* when a client subscribes or
+unsubscribes from a topic. This allows the publisher to only publish data
+that is being listened to, and also to send an initial *image* to the new
+subscriber, after which it publishes *deltas* to all subscribers.
+
 ## Usage
 
 See the examples folder for more detailed examples.
