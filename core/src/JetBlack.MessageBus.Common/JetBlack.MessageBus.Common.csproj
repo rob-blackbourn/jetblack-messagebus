@@ -8,7 +8,7 @@
     <PackageVersion>0.1.0</PackageVersion>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
-    <RepositoryUrl>https://github.com/rob-blackbourn/message-bus</RepositoryUrl>
+    <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-messagebus</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

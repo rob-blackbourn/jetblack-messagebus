@@ -1,4 +1,4 @@
-# message-bus
+# jetblack-messagebus
 
 A real time message bus written in .Net Core 3.0 running on Linux.
 
@@ -29,7 +29,8 @@ You must have dotnet core 3.0 installed.
 
 ### Distributor
 
-Download the distributor tarball from the GitHub [releases](https://github.com/rob-blackbourn/message-bus/releases) page. It will look something like `message-bus-0.0.1.tar.gz`. Untar it into a folder and run it using the dotnet runtime.
+Download the distributor tarball from the GitHub 
+[releases](https://github.com/rob-blackbourn/jetblack-messagebus/releases) page. It will look something like `message-bus-0.0.1.tar.gz`. Untar it into a folder and run it using the dotnet runtime.
 
 ```bash
 ~ $ tar xzf ~/Downloads/message-bus-0.1.0.tar.gz
