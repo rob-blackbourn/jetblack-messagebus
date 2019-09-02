@@ -69,9 +69,6 @@ namespace JetBlack.MessageBus.Messages
                 (Entitlements?.GetHashCode() ?? 0);
         }
 
-        public override string ToString()
-        {
-            return $"{base.ToString()}, ClientId={ClientId}, Feed={Feed}, Topic={Topic}, IsAuthorizationRequired={IsAuthorizationRequired}, Entitlements={Entitlements?.Length}";
-        }
+        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(Entitlements)}.Length={Entitlements?.Length}";
     }
 }

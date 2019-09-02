@@ -69,9 +69,6 @@ namespace JetBlack.MessageBus.Messages
                 Topic.GetHashCode();
         }
 
-        public override string ToString()
-        {
-            return $"{base.ToString()}, ClientId={ClientId}, Host={Host}, User={User}, Feed={Feed}, Topic={Topic}";
-        }
+        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Host)}=\"{Host}\",{nameof(User)}=\"{User}\",{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\"";
     }
 }

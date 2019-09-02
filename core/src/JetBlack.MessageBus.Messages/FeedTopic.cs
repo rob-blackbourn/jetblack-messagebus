@@ -28,9 +28,6 @@ namespace JetBlack.MessageBus.Messages
             return obj is FeedTopic && Equals((FeedTopic)obj);
         }
 
-        public override string ToString()
-        {
-            return $"Feed={Feed}, Topic={Topic}";
-        }
+        public override string ToString() => $"{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\"";
     }
 }

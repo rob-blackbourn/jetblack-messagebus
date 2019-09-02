@@ -53,9 +53,6 @@ namespace JetBlack.MessageBus.Messages
             return writer;
         }
 
-        public override string ToString()
-        {
-            return $"MessageType={MessageType}";
-        }
+        public override string ToString() => $"{nameof(MessageType)}={MessageType}";
     }
 }

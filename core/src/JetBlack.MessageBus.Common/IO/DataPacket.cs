@@ -14,5 +14,7 @@ namespace JetBlack.MessageBus.Common.IO
 
         public Guid Header { get; }
         public object? Body { get; }
+
+        public override string ToString() => $"{nameof(Header)}={Header},{nameof(Body)}={Body}";
     }
 }

@@ -47,9 +47,6 @@ namespace JetBlack.MessageBus.Messages
             return writer;
         }
 
-        public override string ToString()
-        {
-            return $"{base.ToString()}, User={User}, Host={Host}, Feed={Feed}, Topic={Topic}, IsImage={IsImage}, Data={Data?.Length}";
-        }
+        public override string ToString() => $"{base.ToString()},{nameof(User)}=\"{User}\",{nameof(Host)}=\"{Host}\",{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(Data)}.Length={Data?.Length}";
     }
 }

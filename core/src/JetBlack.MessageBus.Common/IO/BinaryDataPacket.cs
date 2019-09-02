@@ -36,9 +36,6 @@ namespace JetBlack.MessageBus.Common.IO
             return Header.GetHashCode() ^ (Body?.GetHashCode() ?? 0);
         }
 
-        public override string ToString()
-        {
-            return $"Header={Header}, Body={Body}";
-        }
+        public override string ToString() => $"{nameof(Header)}={Header}, {nameof(Body)}.Length={Body?.Length}";
     }
 }
