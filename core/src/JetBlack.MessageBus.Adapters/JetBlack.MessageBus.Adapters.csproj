@@ -9,7 +9,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
-    <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-message</RepositoryUrl>
+    <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-messagebus</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
