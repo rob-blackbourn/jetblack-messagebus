@@ -184,7 +184,7 @@ namespace JetBlack.MessageBus.Common.IO
         public void Write(Guid value)
         {
             var buf = value.ToByteArray();
-            _stream.Write(buf);
+            _stream.Write(buf, 0, buf.Length);
         }
 
         /// <summary>
