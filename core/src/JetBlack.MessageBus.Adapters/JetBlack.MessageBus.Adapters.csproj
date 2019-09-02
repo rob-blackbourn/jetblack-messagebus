@@ -5,7 +5,7 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <PackageId>JetBlack.MessageBus.Adapters</PackageId>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
