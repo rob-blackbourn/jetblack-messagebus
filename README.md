@@ -30,12 +30,12 @@ You must have dotnet core 3.0 installed.
 ### Distributor
 
 Download the distributor tarball from the GitHub 
-[releases](https://github.com/rob-blackbourn/jetblack-messagebus/releases) page. It will look something like `message-bus-0.0.1.tar.gz`. Untar it into a folder and run it using the dotnet runtime.
+[releases](https://github.com/rob-blackbourn/jetblack-messagebus/releases) page. It will look something like `jetblack-messagebus-1.0.0.tar.gz`. Untar it into a folder and run it using the dotnet runtime.
 
 ```bash
-~ $ tar xzf ~/Downloads/message-bus-0.1.0.tar.gz
-~ $ cd message-bus-0.1.0
-~/message-bus-0.1.0 $ dotnet JetBlack.MessageBus.Distributor.dll
+~ $ tar xzf ~/Downloads/jetblack-messagebus-1.0.0.tar.gz
+~ $ cd jetblack-messagebus-1.0.0
+~/jetblack-messagebus-1.0.0 $ dotnet JetBlack.MessageBus.Distributor.dll
 2019-08-31 09:01:10,482 [1] INFO  JetBlack.MessageBus.Distributor.Server [?] - Starting server version 1.0.0.0
 2019-08-31 09:01:10,495 [1] INFO  JetBlack.MessageBus.Distributor.Server [?] - Server started
 Press any key to stop...
