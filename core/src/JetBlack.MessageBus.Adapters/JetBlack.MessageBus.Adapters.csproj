@@ -5,6 +5,7 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <PackageId>JetBlack.MessageBus.Adapters</PackageId>
+    <PackageVersion>0.1.0</PackageVersion>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
     <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-message</RepositoryUrl>
