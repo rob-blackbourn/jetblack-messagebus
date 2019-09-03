@@ -7,7 +7,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 {
     public class AuthorizationResponseEventArg : EventArgs
     {
-        public AuthorizationResponseEventArg(Interactor authorizer, Interactor requester, AuthorizationResponse response)
+        public AuthorizationResponseEventArg(Interactor authorizer, Interactor requester, AuthorizationResponse response, bool isInitial)
         {
             Authorizer = authorizer;
             Requester = requester;
@@ -17,5 +17,6 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         public Interactor Authorizer { get; }
         public Interactor Requester { get; }
         public AuthorizationResponse Response { get; }
+        public bool IsInitial { get; }
     }
 }

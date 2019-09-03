@@ -18,7 +18,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
         {
         }
 
-        public void AddSubscription(Interactor subscriber, string feed, string topic, AuthorizationInfo authorizationInfo)
+        public void AddSubscription(Interactor subscriber, string feed, string topic, AuthorizationInfo authorizationInfo, bool isAuthorizationUpdate)
         {
             // Find topic subscriptions for this feed.
             if (!_cache.TryGetValue(feed, out var topicSubscriptions))
@@ -32,8 +32,10 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             if (!subscribersForTopic.TryGetValue(subscriber, out var subscriptionState))
                 subscribersForTopic.Add(subscriber, subscriptionState = new SubscriptionState(authorizationInfo));
 
-            // Increment the subscription count.
-            subscriptionState.Count = subscriptionState.Count + 1;
+            if (isAuthorizationUpdate)
+                subscriptionState.AuthorizationInfo = authorizationInfo;
+            else
+                subscriptionState.Count = subscriptionState.Count + 1;
         }
 
         public void RemoveSubscription(Interactor subscriber, string feed, string topic, bool removeAll)
@@ -79,7 +81,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             {
                 // Are there subscribers for this topic?
                 if (topicCache.TryGetValue(topic, out var subscribersForTopic))
-                    return subscribersForTopic.Select(x => KeyValuePair.Create(x.Key, x.Value.AuthorizationState));
+                    return subscribersForTopic.Select(x => KeyValuePair.Create(x.Key, x.Value.AuthorizationInfo));
             }
             return new KeyValuePair<Interactor, AuthorizationInfo>[0];
         }
@@ -97,12 +99,11 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
         {
             public SubscriptionState(AuthorizationInfo authorizationInfo)
             {
-                AuthorizationState = authorizationInfo;
+                AuthorizationInfo = authorizationInfo;
             }
 
             public int Count { get; set; }
-            public AuthorizationInfo AuthorizationState { get; }
-            public ISet<Guid>? Entitlements { get; private set; }
+            public AuthorizationInfo AuthorizationInfo { get; set; }
         }
     }
 }

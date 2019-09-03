@@ -16,6 +16,7 @@ using JetBlack.MessageBus.Messages;
 using JetBlack.MessageBus.Common.IO;
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Roles;
+using System.Collections.Generic;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
@@ -24,10 +25,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         private static readonly ILog Log = LogManager.GetLogger(typeof(Interactor));
 
         private readonly BlockingCollection<Message> _writeQueue = new BlockingCollection<Message>();
+        private readonly IDictionary<string, IDictionary<string, AuthorizationResponse>> _authorizations = new Dictionary<string, IDictionary<string, AuthorizationResponse>>();
         private readonly Stream _stream;
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
         private readonly CancellationToken _token;
-        private RoleManager? _roleManager;
+        private readonly RoleManager _roleManager;
 
         public static Interactor Create(
             TcpClient tcpClient,
@@ -79,13 +81,45 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public bool HasRole(string feed, Role role)
         {
-            return _roleManager != null && _roleManager.HasRole(feed, role);
+            return _roleManager.HasRole(feed, role);
         }
 
         public void Start()
         {
             Task.Run(() => QueueReceivedMessages(), _token);
             Task.Run(() => WriteQueuedMessages(), _token);
+        }
+
+        public void SendMessage(Message message)
+        {
+            _writeQueue.Add(message, _token);
+        }
+
+        public Message ReceiveMessage()
+        {
+            return Message.Read(new DataReader(_stream));
+        }
+
+        public void SetAuthorization(string feed, string topic, AuthorizationResponse authorization)
+        {
+            if (!_authorizations.TryGetValue(feed, out var topicAuthorizations))
+                _authorizations.Add(feed, topicAuthorizations = new Dictionary<string, AuthorizationResponse>());
+
+            topicAuthorizations[topic] = authorization;
+        }
+
+        public bool TryGetAuthorization(string feed, string topic, out AuthorizationResponse? authorization)
+        {
+            if (_authorizations.TryGetValue(feed, out var topicAuthorizations))
+                return topicAuthorizations.TryGetValue(topic, out authorization);
+
+            authorization = null;
+            return false;
+        }
+
+        public bool HasAuthorization(string feed, string topic)
+        {
+            return _authorizations.TryGetValue(feed, out var topicAuthorizations) && topicAuthorizations.ContainsKey(feed);
         }
 
         private void QueueReceivedMessages()
@@ -134,16 +168,6 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             }
 
             Log.Debug($"Exited read loop for {this}");
-        }
-
-        public void SendMessage(Message message)
-        {
-            _writeQueue.Add(message, _token);
-        }
-
-        public Message ReceiveMessage()
-        {
-            return Message.Read(new DataReader(_stream));
         }
 
         public int CompareTo(Interactor? other)

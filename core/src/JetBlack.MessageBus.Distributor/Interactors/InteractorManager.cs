@@ -52,38 +52,41 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             {
                 Log.Debug("No authorization required");
                 AcceptAuthorization(interactor, new AuthorizationResponse(interactor.Id, feed, topic, false, null));
+                return;
             }
-            else
-            {
-                var authorizationRequest = new AuthorizationRequest(interactor.Id, interactor.Host, interactor.User, feed, topic);
 
-                foreach (var authorizer in _repository.Find(feed, Role.Authorize))
+            var authorizationRequest = new AuthorizationRequest(interactor.Id, interactor.Host, interactor.User, feed, topic);
+
+            foreach (var authorizer in _repository.Find(feed, Role.Authorize))
+            {
+                try
                 {
-                    try
-                    {
-                        Log.Debug($"Requesting authorization from {authorizer}");
-                        authorizer.SendMessage(authorizationRequest);
-                    }
-                    catch (Exception exception)
-                    {
-                        Log.Warn($"Failed to send {authorizer} message {authorizationRequest}", exception);
-                    }
+                    Log.Debug($"Requesting authorization from {authorizer}");
+                    authorizer.SendMessage(authorizationRequest);
+                }
+                catch (Exception exception)
+                {
+                    Log.Warn($"Failed to send {authorizer} message {authorizationRequest}", exception);
                 }
             }
         }
 
-        internal void AcceptAuthorization(Interactor authorizer, AuthorizationResponse message)
+        internal void AcceptAuthorization(Interactor authorizer, AuthorizationResponse authorization)
         {
-            Log.Debug($"Accepting an authorization response from {authorizer} with {message}.");
+            Log.Debug($"Accepting an authorization response from {authorizer} with {authorization}.");
 
-            var requestor = _repository.Find(message.ClientId);
+            var requestor = _repository.Find(authorization.ClientId);
             if (requestor == null)
             {
-                Log.Warn($"Unable to queue an authorization response for unknown ClientId={message.ClientId} for Feed=\"{message.Feed}\", Topic=\"{message.Topic}\".");
+                Log.Warn($"Unable to queue an authorization response for unknown ClientId={authorization.ClientId} for Feed=\"{authorization.Feed}\", Topic=\"{authorization.Topic}\".");
                 return;
             }
 
-            AuthorizationResponses?.Invoke(this, new AuthorizationResponseEventArg(authorizer, requestor, message));
+            var hasAuthorization = requestor.HasAuthorization(authorization.Feed, authorization.Topic);
+            if (!hasAuthorization)
+                requestor.SetAuthorization(authorization.Feed, authorization.Topic, authorization);
+
+            AuthorizationResponses?.Invoke(this, new AuthorizationResponseEventArg(authorizer, requestor, authorization, !hasAuthorization));
         }
 
         private bool IsAuthorizationRequired(string feed)

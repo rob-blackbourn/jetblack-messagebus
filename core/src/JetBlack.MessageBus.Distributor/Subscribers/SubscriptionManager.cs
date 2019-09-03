@@ -40,22 +40,40 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             _publisherManager.StalePublishers += OnStalePublishers;
         }
 
-        public void RequestSubscription(Interactor subscriber, SubscriptionRequest subscriptionRequest)
+        public void RequestSubscription(Interactor subscriber, SubscriptionRequest request)
         {
-            if (!subscriber.HasRole(subscriptionRequest.Feed, Role.Subscribe))
+            if (!subscriber.HasRole(request.Feed, Role.Subscribe))
             {
-                Log.Warn($"Rejected request from {subscriber} to subscribe to feed \"{subscriptionRequest.Feed}\"");
+                Log.Warn($"Rejected request from {subscriber} to subscribe to feed \"{request.Feed}\"");
                 return;
             }
 
-            Log.Info($"Received subscription from {subscriber} on \"{subscriptionRequest}\"");
+            Log.Info($"Received subscription from {subscriber} on \"{request}\"");
 
-            if (subscriptionRequest.IsAdd)
-                _interactorManager.RequestAuthorization(subscriber, subscriptionRequest.Feed, subscriptionRequest.Topic);
+            if (request.IsAdd)
+            {
+                if (subscriber.TryGetAuthorization(request.Feed, request.Topic, out var authorization) && authorization != null)
+                {
+                    // If we've already authorized just add the subscription.
+                    AddSubscription(
+                        subscriber,
+                        request.Feed,
+                        request.Topic,
+                        authorization.IsAuthorizationRequired,
+                        authorization.Entitlements,
+                        false);
+                }
+                else
+                {
+                    // Request authorization for unauthorized subscriptions.
+                    _interactorManager.RequestAuthorization(subscriber, request.Feed, request.Topic);
+                }
+            }
             else
             {
-                _repository.RemoveSubscription(subscriber, subscriptionRequest.Feed, subscriptionRequest.Topic, false);
-                _notificationManager.ForwardSubscription(subscriber, subscriptionRequest);
+                // Subscriptions can be removed whether or not they have been authorized.
+                _repository.RemoveSubscription(subscriber, request.Feed, request.Topic, false);
+                _notificationManager.ForwardSubscription(subscriber, request);
             }
         }
 
@@ -89,6 +107,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
         {
             if (args.Response.IsAuthorizationRequired && (args.Response.Entitlements == null || args.Response.Entitlements.Length == 0))
             {
+                // Inform the subscriber that they are not entitled.
                 var message = new ForwardedMulticastData(string.Empty, string.Empty, args.Response.Feed, args.Response.Topic, true, null);
                 try
                 {
@@ -102,17 +121,35 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 return;
             }
 
-            _repository.AddSubscription(
+            AddSubscription(
                 args.Requester,
                 args.Response.Feed,
                 args.Response.Topic,
+                args.Response.IsAuthorizationRequired,
+                args.Response.Entitlements,
+                !args.IsInitial);
+        }
+
+        private void AddSubscription(
+            Interactor requester,
+            string feed,
+            string topic,
+            bool isAuthorizationRequired,
+            Guid[]? entitlements,
+            bool isAuthorizationUpdate)
+        {
+            _repository.AddSubscription(
+                requester,
+                feed,
+                topic,
                 new AuthorizationInfo(
-                    args.Response.IsAuthorizationRequired,
-                    new HashSet<Guid>(args.Response.Entitlements ?? new Guid[0])));
+                    isAuthorizationRequired,
+                    new HashSet<Guid>(entitlements ?? new Guid[0])),
+                isAuthorizationUpdate);
 
             _notificationManager.ForwardSubscription(
-                args.Requester,
-                new SubscriptionRequest(args.Response.Feed, args.Response.Topic, true));
+                requester,
+                new SubscriptionRequest(feed, topic, true));
         }
 
         public void SendUnicastData(Interactor publisher, UnicastData unicastData)
