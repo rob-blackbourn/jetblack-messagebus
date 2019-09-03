@@ -16,7 +16,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             if (args == null || args.Length != 1)
                 throw new ArgumentException("Expected 1 argument");
 
-            FileName = args[0];
+            FileName = Environment.ExpandEnvironmentVariables(args[0]);
             Manager = PasswordManager.Load(FileName);
         }
 
