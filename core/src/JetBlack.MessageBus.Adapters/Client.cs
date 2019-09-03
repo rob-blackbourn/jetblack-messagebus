@@ -29,7 +29,7 @@ namespace JetBlack.MessageBus.Adapters
             var byteEncoder = config.ByteEncoderType?.LoadType()?.Construct<IByteEncoder>() ?? new BinaryEncoder();
 
             return Create(
-              config.Server,
+              Environment.ExpandEnvironmentVariables(config.Server),
               config.Port,
               byteEncoder,
               config.MonitorHeartbeat,
