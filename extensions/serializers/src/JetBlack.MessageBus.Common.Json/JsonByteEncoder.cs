@@ -4,7 +4,6 @@ using System;
 using System.Text;
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 using JetBlack.MessageBus.Common.IO;
 
