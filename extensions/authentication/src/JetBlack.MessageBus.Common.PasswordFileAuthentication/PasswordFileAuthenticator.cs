@@ -27,6 +27,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             _watcher.Changed += OnChanged;
 
             _manager = PasswordManager.Load(FileName);
+
+            _watcher.EnableRaisingEvents = true;
         }
 
         private void OnChanged(object? sender, FileSystemEventArgs e)
