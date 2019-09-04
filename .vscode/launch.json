@@ -14,6 +14,9 @@
             "args": [],
             "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -41,6 +44,9 @@
             "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/notifier",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -52,6 +58,9 @@
             "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/publisher",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -63,6 +72,9 @@
             "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/subscriber",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -74,6 +86,9 @@
             "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -85,6 +100,9 @@
             "program": "${workspaceFolder}/examples/authorization/authorizer/bin/Debug/netcoreapp3.0/authorizer.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/subscriber",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -96,6 +114,9 @@
             "program": "${workspaceFolder}/examples/authorization/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/subscriber",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -107,6 +128,9 @@
             "program": "${workspaceFolder}/examples/authorization/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/subscriber",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -118,6 +142,9 @@
             "program": "${workspaceFolder}/examples/authorization/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
             "args": [],
             "cwd": "${workspaceFolder}/examples/simple/subscriber",
+            "env": {
+                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+            },
             "console": "externalTerminal",
             "stopAtEntry": false
         },
