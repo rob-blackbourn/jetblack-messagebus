@@ -12,7 +12,8 @@ namespace JetBlack.MessageBus.Distributor.Plugins
 
         public PluginLoadContext(string pluginPath)
         {
-            _resolver = new AssemblyDependencyResolver(Environment.ExpandEnvironmentVariables(pluginPath));
+            var expandedPluginPath = Environment.ExpandEnvironmentVariables(pluginPath);
+            _resolver = new AssemblyDependencyResolver(expandedPluginPath);
         }
 
         protected override Assembly? Load(AssemblyName assemblyName)

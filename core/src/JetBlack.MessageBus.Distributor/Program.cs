@@ -33,6 +33,7 @@ namespace JetBlack.MessageBus.Distributor
             server.Dispose();
         }
 
+        // TODO: Move this to the config class
         private static X509Certificate2? CreateCertificate(SslConfig? config)
         {
             if (config == null || !config.IsEnabled)
