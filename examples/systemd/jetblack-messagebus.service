@@ -1,0 +1,15 @@
+[Unit]
+Description=Jetblack Message Bus
+After=syslog.target
+
+[Service]
+Type=simple
+User=jetblack
+Group=jetblack
+WorkingDirectory=/opt/jetblack-messagebus
+ExecStart=/opt/dotnet/dotnet /opt/jetblack-messagebus/JetBlack.MessageBus.Distributor.dll
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
