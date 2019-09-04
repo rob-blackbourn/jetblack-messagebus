@@ -1,11 +1,9 @@
 ﻿#nullable enable
 
 using System;
-using System.Net;
 using Microsoft.Extensions.Configuration;
 using log4net;
 
-using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Configuration;
 
@@ -43,9 +41,8 @@ namespace JetBlack.MessageBus.Distributor
             if (distributorConfig == null)
                 throw new ApplicationException("No configuration");
 
-            var endPoint = new IPEndPoint(distributorConfig.Address?.AsIPAddress() ?? IPAddress.Any, distributorConfig.Port);
+            var endPoint = distributorConfig.ToIPEndPoint();
             var certificate = distributorConfig.SslConfig?.ToCertificate();
-
             var authenticator = distributorConfig.Authentication?.Construct<IAuthenticator>() ?? new NullAuthenticator(new string[0]);
             var distributorRole = distributorConfig.ToDistributorRole();
 

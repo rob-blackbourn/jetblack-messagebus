@@ -3,6 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+
+using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Distributor.Roles;
 
 namespace JetBlack.MessageBus.Distributor.Configuration
@@ -26,6 +29,11 @@ namespace JetBlack.MessageBus.Distributor.Configuration
                 Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role),
                 IsAuthorizationRequired,
                 FeedRoles?.ToDictionary(x => x.Key, x => x.Value.ToFeedRole(x.Key)));
+        }
+
+        public IPEndPoint ToIPEndPoint()
+        {
+            return new IPEndPoint(Address?.AsIPAddress() ?? IPAddress.Any, Port);
         }
     }
 }
