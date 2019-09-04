@@ -2,14 +2,12 @@
 
 using System;
 using System.Net;
-using log4net;
 using Microsoft.Extensions.Configuration;
+using log4net;
 
 using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Common.Security.Authentication;
-using JetBlack.MessageBus.Common.Security.Cryptography;
 using JetBlack.MessageBus.Distributor.Configuration;
-using System.Security.Cryptography.X509Certificates;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
@@ -33,21 +31,6 @@ namespace JetBlack.MessageBus.Distributor
             server.Dispose();
         }
 
-        // TODO: Move this to the config class
-        private static X509Certificate2? CreateCertificate(SslConfig? config)
-        {
-            if (config == null || !config.IsEnabled)
-                return null;
-
-            if (config.CertFile == null || config.KeyFile == null)
-                throw new ApplicationException("Invalid SSL configuration");
-
-            var certFile = Environment.ExpandEnvironmentVariables(config.CertFile);
-            var keyFile = Environment.ExpandEnvironmentVariables(config.KeyFile);
-
-            return CertBuilder.FromFile(certFile, keyFile);
-        }
-
         static Server CreateServer(string settingsFilename)
         {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
@@ -61,7 +44,7 @@ namespace JetBlack.MessageBus.Distributor
                 throw new ApplicationException("No configuration");
 
             var endPoint = new IPEndPoint(distributorConfig.Address?.AsIPAddress() ?? IPAddress.Any, distributorConfig.Port);
-            var certificate = CreateCertificate(distributorConfig.SslConfig);
+            var certificate = distributorConfig.SslConfig?.ToCertificate();
 
             var authenticator = distributorConfig.Authentication?.Construct<IAuthenticator>() ?? new NullAuthenticator(new string[0]);
             var distributorRole = distributorConfig.ToDistributorRole();
