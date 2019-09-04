@@ -16,7 +16,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             if (args.Length != 2)
                 throw new ArgumentException("usage: <ldap-server> <ldap-port>");
 
-            Server = args[0];
+            Server = Environment.ExpandEnvironmentVariables(args[0]);
 
             if (int.TryParse(args[1], out var port))
                 Port = port;
