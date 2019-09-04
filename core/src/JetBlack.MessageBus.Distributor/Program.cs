@@ -6,6 +6,9 @@ using log4net;
 
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Configuration;
+using System.Runtime.ExceptionServices;
+using System.Threading;
+using System.Diagnostics;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
@@ -23,16 +26,28 @@ namespace JetBlack.MessageBus.Distributor
 
             var server = CreateServer(settingFilename);
 
-            Console.WriteLine("Press any key to stop...");
-            Console.ReadKey(true);
+            var exitEvent = new ManualResetEvent(false);
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
+            {
+                Console.WriteLine("Shutting down ...");
+                exitEvent.Set();
+            };
+            Console.CancelKeyPress += (sender, args) =>
+            {
+                // This will call AppDomain.ProcessExit.
+                Environment.Exit(0);
+            };
+
+            var process = Process.GetCurrentProcess();
+            Console.WriteLine($"Waiting for SIGTERM/SIGINT on PID {process.Id}");
+            exitEvent.WaitOne();
 
             server.Dispose();
         }
 
         static Server CreateServer(string settingsFilename)
         {
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingsFilename)
                 .Build();
