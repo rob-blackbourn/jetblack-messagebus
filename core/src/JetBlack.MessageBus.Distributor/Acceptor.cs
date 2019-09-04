@@ -2,23 +2,22 @@
 
 using System;
 using System.Net;
+using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
-using log4net;
-
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Interactors;
-using System.Net.Sockets;
-using System.Security.Cryptography.X509Certificates;
 using JetBlack.MessageBus.Distributor.Roles;
+using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor
 {
     public class Acceptor
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(Acceptor));
-
+        private readonly ILogger<Acceptor> _logger;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly IPEndPoint _endPoint;
         private readonly X509Certificate2? _certificate;
         private readonly IAuthenticator _authenticator;
@@ -32,6 +31,7 @@ namespace JetBlack.MessageBus.Distributor
             IAuthenticator authenticator,
             DistributorRole distributorRole,
             EventQueue<InteractorEventArgs> eventQueue,
+            ILoggerFactory loggerFactory,
             CancellationToken token)
         {
             _endPoint = endPoint;
@@ -39,6 +39,8 @@ namespace JetBlack.MessageBus.Distributor
             _authenticator = authenticator;
             _distributorRole = distributorRole;
             _eventQueue = eventQueue;
+            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.CreateLogger<Acceptor>();
             _token = token;
         }
 
@@ -53,7 +55,7 @@ namespace JetBlack.MessageBus.Distributor
 
         private void Accept()
         {
-            Log.Info($"Listening on {_endPoint}");
+            _logger.LogInformation("Listening on {EndPoint}", _endPoint);
 
             var listener = new TcpListener(_endPoint);
             listener.Start();
@@ -67,7 +69,7 @@ namespace JetBlack.MessageBus.Distributor
                 }
                 catch (Exception error)
                 {
-                    Log.Warn("Failed to accept connection", error);
+                    _logger.LogWarning(error, "Failed to accept connection");
                     throw;
                 }
             }
@@ -85,12 +87,13 @@ namespace JetBlack.MessageBus.Distributor
                     _authenticator,
                     _distributorRole,
                     _eventQueue,
+                    _loggerFactory,
                     _token);
                 _eventQueue.Enqueue(new InteractorConnectedEventArgs(interactor));
             }
             catch (Exception error)
             {
-                Log.Warn("Failed to create interactor", error);
+                _logger.LogWarning(error, "Failed to create interactor");
             }
         }
     }

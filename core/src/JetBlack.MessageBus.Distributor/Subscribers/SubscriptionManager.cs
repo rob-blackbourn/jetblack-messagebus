@@ -2,8 +2,6 @@
 
 using System.Linq;
 
-using log4net;
-
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Distributor.Notifiers;
 using JetBlack.MessageBus.Distributor.Publishers;
@@ -11,25 +9,29 @@ using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor.Subscribers
 {
     internal class SubscriptionManager
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(SubscriptionManager));
-
+        private readonly ILogger<SubscriptionManager> _logger;
         private readonly SubscriptionRepository _repository;
         private readonly InteractorManager _interactorManager;
         private readonly NotificationManager _notificationManager;
         private readonly PublisherManager _publisherManager;
 
-        public SubscriptionManager(InteractorManager interactorManager, NotificationManager notificationManager)
+        public SubscriptionManager(
+            InteractorManager interactorManager,
+            NotificationManager notificationManager,
+            ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<SubscriptionManager>();
             _repository = new SubscriptionRepository();
 
             _interactorManager = interactorManager;
             _notificationManager = notificationManager;
-            _publisherManager = new PublisherManager(interactorManager);
+            _publisherManager = new PublisherManager(interactorManager, loggerFactory);
 
             interactorManager.ClosedInteractors += OnClosedInteractor;
             interactorManager.FaultedInteractors += OnFaultedInteractor;
@@ -44,11 +46,11 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
         {
             if (!subscriber.HasRole(request.Feed, Role.Subscribe))
             {
-                Log.Warn($"Rejected request from {subscriber} to subscribe to feed \"{request.Feed}\"");
+                _logger.LogWarning("Rejected request from {Subscriber} to subscribe to feed \"{Feed}\"", subscriber, request.Feed);
                 return;
             }
 
-            Log.Info($"Received subscription from {subscriber} on \"{request}\"");
+            _logger.LogInformation("Received subscription from {Subscriber} on \"{Request}\"", subscriber, request);
 
             if (request.IsAdd)
             {
@@ -79,7 +81,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         private void OnFaultedInteractor(object? sender, InteractorFaultedEventArgs args)
         {
-            Log.Debug($"Interactor faulted: {args.Interactor} - {args.Error.Message}");
+            _logger.LogDebug("Interactor faulted: {Interactor} - {Message}", args.Interactor, args.Error.Message);
 
             CloseInteractor(args.Interactor);
         }
@@ -91,7 +93,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         private void CloseInteractor(Interactor interactor)
         {
-            Log.Debug($"Removing subscriptions for {interactor}");
+            _logger.LogDebug("Removing subscriptions for {Interactor}", interactor);
 
             // Remove the subscriptions
             var feedTopics = _repository.FindByInteractor(interactor).ToList();
@@ -115,7 +117,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 }
                 catch (Exception error)
                 {
-                    Log.Debug($"Failed to send to {args.Requester} multi cast message {message}", error);
+                    _logger.LogDebug(error, "Failed to send to {Requester} multi cast message {Message}", args.Requester, message);
                 }
 
                 return;
@@ -184,9 +186,9 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                     {
                         args.Interactor.SendMessage(message);
                     }
-                    catch (Exception exception)
+                    catch (Exception error)
                     {
-                        Log.Debug($"Failed to inform {subscriber} regarding {message}", exception);
+                        _logger.LogDebug(error, "Failed to inform {subscriber} regarding {Message}", message);
                     }
                 }
             }
@@ -209,9 +211,9 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 {
                     subscriber.SendMessage(staleMessage);
                 }
-                catch (Exception exception)
+                catch (Exception error)
                 {
-                    Log.Debug($"Failed to inform {subscriber} of stale {staleFeedTopic}", exception);
+                    _logger.LogDebug(error, "Failed to inform {Subscriber} of stale {StaleFeedTopic}", subscriber, staleFeedTopic);
                 }
             }
         }

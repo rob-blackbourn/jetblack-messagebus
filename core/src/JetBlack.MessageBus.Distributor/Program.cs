@@ -1,33 +1,31 @@
 ﻿#nullable enable
 
 using System;
-using Microsoft.Extensions.Configuration;
-using log4net;
-
-using JetBlack.MessageBus.Common.Security.Authentication;
-using JetBlack.MessageBus.Distributor.Configuration;
-using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Diagnostics;
 
-[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Configuration;
+using Microsoft.Extensions.Logging.Console;
+
+using JetBlack.MessageBus.Common.Security.Authentication;
+using JetBlack.MessageBus.Distributor.Configuration;
 
 namespace JetBlack.MessageBus.Distributor
 {
-    class Program
+    class Program : IDisposable
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(Program));
 
         public const string DefaultSettingsFilename = "appsettings.json";
 
         static void Main(string[] args)
         {
-            var settingFilename = (args != null && args.Length >= 1) ? args[0] : DefaultSettingsFilename;
+            var settingsFilename = (args != null && args.Length >= 1) ? args[0] : DefaultSettingsFilename;
 
-            var server = CreateServer(settingFilename);
+            var program = new Program(settingsFilename);
 
             var exitEvent = new ManualResetEvent(false);
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
             {
                 Console.WriteLine("Shutting down ...");
@@ -43,16 +41,41 @@ namespace JetBlack.MessageBus.Distributor
             Console.WriteLine($"Waiting for SIGTERM/SIGINT on PID {process.Id}");
             exitEvent.WaitOne();
 
-            server.Dispose();
+            program.Dispose();
         }
 
-        static Server CreateServer(string settingsFilename)
+
+        private readonly ILogger<Program> _logger;
+        private readonly DistributorConfig _distributorConfig;
+        private readonly Server _server;
+
+        public Program(string settingsFilename)
         {
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingsFilename)
                 .Build();
-            var distributorSection = configuration.GetSection("distributor");
-            var distributorConfig = distributorSection.Get<DistributorConfig>();
+
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddConfiguration(configuration.GetSection("Logging"))
+                    .AddConsole();
+            });
+
+            _logger = loggerFactory.CreateLogger<Program>();
+
+            _distributorConfig = configuration.GetSection("distributor").Get<DistributorConfig>();
+
+            _server = CreateServer(_distributorConfig, loggerFactory);
+        }
+
+        public void Start()
+        {
+            _server.Start(_distributorConfig.HeartbeatInterval);
+        }
+
+        private Server CreateServer(DistributorConfig distributorConfig, ILoggerFactory loggerFactory)
+        {
             if (distributorConfig == null)
                 throw new ApplicationException("No configuration");
 
@@ -61,15 +84,15 @@ namespace JetBlack.MessageBus.Distributor
             var authenticator = distributorConfig.Authentication?.Construct<IAuthenticator>() ?? new NullAuthenticator(new string[0]);
             var distributorRole = distributorConfig.ToDistributorRole();
 
-            var server = new Server(endPoint, authenticator, certificate, distributorRole);
+            var server = new Server(endPoint, authenticator, certificate, distributorRole, loggerFactory);
             server.Start(distributorConfig.HeartbeatInterval);
 
             return server;
         }
 
-        private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs args)
+        public void Dispose()
         {
-            Log.Fatal($"Unhandled error received - IsTerminating={args.IsTerminating}", args.ExceptionObject as Exception);
+            _server.Dispose();
         }
     }
 }

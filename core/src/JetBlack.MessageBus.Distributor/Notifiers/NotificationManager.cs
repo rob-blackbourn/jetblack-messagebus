@@ -1,20 +1,22 @@
 #nullable enable
 
 using System;
+
+using Microsoft.Extensions.Logging;
+
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Messages;
-using log4net;
 
 namespace JetBlack.MessageBus.Distributor.Notifiers
 {
     public class NotificationManager
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(NotificationManager));
-
+        private readonly ILogger<NotificationManager> _logger;
         private readonly NotificationRepository _repository;
 
-        public NotificationManager(InteractorManager interactorManager)
+        public NotificationManager(InteractorManager interactorManager, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<NotificationManager>();
             _repository = new NotificationRepository();
             interactorManager.ClosedInteractors += OnClosedInteractor;
             interactorManager.FaultedInteractors += OnFaultedInteractor;
@@ -24,19 +26,19 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
         private void OnFaultedInteractor(object? sender, InteractorFaultedEventArgs args)
         {
-            Log.Debug($"Interactor faulted: {args.Interactor} - {args.Error.Message}");
+            _logger.LogDebug("Interactor faulted: {Interactor} - {Message}", args.Interactor, args.Error.Message);
             _repository.RemoveInteractor(args.Interactor);
         }
 
         private void OnClosedInteractor(object? sender, InteractorClosedEventArgs args)
         {
-            Log.Debug($"Removing notification requests from {args.Interactor}");
+            _logger.LogDebug("Removing notification requests from {Interactor}", args.Interactor);
             _repository.RemoveInteractor(args.Interactor);
         }
 
         public void RequestNotification(Interactor notifiable, NotificationRequest notificationRequest)
         {
-            Log.Info($"Handling notification request for {notifiable} on {notificationRequest}");
+            _logger.LogInformation("Handling notification request for {Notifiable} on {Message}", notifiable, notificationRequest);
 
             if (notificationRequest.IsAdd)
             {
@@ -56,7 +58,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
             var forwardedSubscriptionRequest = new ForwardedSubscriptionRequest(subscriber.User, subscriber.Host, subscriber.Id, subscriptionRequest.Feed, subscriptionRequest.Topic, subscriptionRequest.IsAdd);
 
-            Log.Debug($"Notifying interactors[{string.Join(",", notifiables)}] of subscription {forwardedSubscriptionRequest}");
+            _logger.LogDebug("Notifying interactors[{Interactors}] of subscription {Message}", string.Join(",", notifiables), forwardedSubscriptionRequest);
 
             // Inform each notifiable interactor of the subscription request.
             foreach (var notifiable in notifiables)
@@ -65,9 +67,9 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
                 {
                     notifiable.SendMessage(forwardedSubscriptionRequest);
                 }
-                catch (Exception exception)
+                catch (Exception error)
                 {
-                    Log.Debug($"Failed to notify {notifiable} regarding {forwardedSubscriptionRequest}", exception);
+                    _logger.LogDebug(error, "Failed to notify {Notifiable} regarding {Message}", notifiable, forwardedSubscriptionRequest);
                 }
             }
         }

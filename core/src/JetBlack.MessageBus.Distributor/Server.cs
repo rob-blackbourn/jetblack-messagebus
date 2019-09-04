@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 
-using log4net;
+using Microsoft.Extensions.Logging;
 
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Interactors;
@@ -20,8 +20,7 @@ namespace JetBlack.MessageBus.Distributor
 {
     public class Server : IDisposable
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(Server));
-
+        private readonly ILogger<Server> _logger;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
         private readonly Acceptor _acceptor;
@@ -35,9 +34,12 @@ namespace JetBlack.MessageBus.Distributor
             IPEndPoint endPoint,
             IAuthenticator authenticator,
             X509Certificate2? certificate,
-            DistributorRole distributorRole)
+            DistributorRole distributorRole,
+            ILoggerFactory loggerFactory)
         {
-            _eventQueue = new EventQueue<InteractorEventArgs>(_cancellationTokenSource.Token);
+            _logger = loggerFactory.CreateLogger<Server>();
+
+            _eventQueue = new EventQueue<InteractorEventArgs>(loggerFactory, _cancellationTokenSource.Token);
             _eventQueue.OnItemDequeued += OnInteractorEvent;
 
             _heartbeatTimer = new Timer(HeartbeatCallback);
@@ -48,13 +50,17 @@ namespace JetBlack.MessageBus.Distributor
                 authenticator,
                 distributorRole,
                 _eventQueue,
+                loggerFactory,
                 _cancellationTokenSource.Token);
 
-            _interactorManager = new InteractorManager(distributorRole);
+            _interactorManager = new InteractorManager(distributorRole, loggerFactory);
 
-            _notificationManager = new NotificationManager(_interactorManager);
+            _notificationManager = new NotificationManager(_interactorManager, loggerFactory);
 
-            _subscriptionManager = new SubscriptionManager(_interactorManager, _notificationManager);
+            _subscriptionManager = new SubscriptionManager(
+                _interactorManager,
+                _notificationManager,
+                loggerFactory);
 
             _heartbeatInteractor = new Interactor(
                 new MemoryStream(),
@@ -62,12 +68,13 @@ namespace JetBlack.MessageBus.Distributor
                 "admin",
                 new RoleManager(new DistributorRole(Role.Publish, Role.Authorize | Role.Notify | Role.Subscribe, false, null), string.Empty, string.Empty),
                 _eventQueue,
+                loggerFactory.CreateLogger<Interactor>(),
                 _cancellationTokenSource.Token);
         }
 
         public void Start(TimeSpan heartbeatInterval)
         {
-            Log.Info($"Starting server version {Assembly.GetExecutingAssembly().GetName().Version}");
+            _logger.LogInformation("Starting server version {Version}", Assembly.GetExecutingAssembly().GetName().Version);
 
             _eventQueue.Start();
             _acceptor.Start();
@@ -75,7 +82,7 @@ namespace JetBlack.MessageBus.Distributor
             if (heartbeatInterval != TimeSpan.Zero)
                 _heartbeatTimer.Change(heartbeatInterval, heartbeatInterval);
 
-            Log.Info("Server started");
+            _logger.LogInformation("Server started");
         }
 
         private void OnInteractorEvent(object? sender, InteractorEventArgs args)
@@ -104,7 +111,7 @@ namespace JetBlack.MessageBus.Distributor
 
         private void OnMessage(InteractorMessageEventArgs args)
         {
-            Log.Debug($"OnMessage(sender={args.Interactor}, message={args.Message}");
+            _logger.LogDebug("OnMessage(sender={Sender}, message={Message}", args.Interactor, args.Message);
 
             switch (args.Message.MessageType)
             {
@@ -129,26 +136,26 @@ namespace JetBlack.MessageBus.Distributor
                     break;
 
                 default:
-                    Log.Warn($"Received unknown message type {args.Message.MessageType} from interactor {args.Interactor}.");
+                    _logger.LogWarning("Received unknown message type {MessageType} from interactor {Interactor}.", args.Message.MessageType, args.Interactor);
                     break;
             }
         }
 
         private void HeartbeatCallback(object? state)
         {
-            Log.Debug("Sending heartbeat");
+            _logger.LogDebug("Sending heartbeat");
             _eventQueue.Enqueue(new InteractorMessageEventArgs(_heartbeatInteractor, new MulticastData("__admin__", "heartbeat", true, null)));
         }
 
         public void Dispose()
         {
-            Log.Info("Stopping server");
+            _logger.LogInformation("Stopping server");
 
             _heartbeatTimer.Dispose();
 
             _cancellationTokenSource.Cancel();
 
-            Log.Info("Server stopped");
+            _logger.LogInformation("Server stopped");
         }
     }
 }

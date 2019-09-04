@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Security;
@@ -10,20 +11,18 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
-using log4net;
+using Microsoft.Extensions.Logging;
 
 using JetBlack.MessageBus.Messages;
 using JetBlack.MessageBus.Common.IO;
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Roles;
-using System.Collections.Generic;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
     public class Interactor
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(Interactor));
-
+        private readonly ILogger<Interactor> _logger;
         private readonly BlockingCollection<Message> _writeQueue = new BlockingCollection<Message>();
         private readonly IDictionary<string, IDictionary<string, AuthorizationResponse>> _authorizations = new Dictionary<string, IDictionary<string, AuthorizationResponse>>();
         private readonly Stream _stream;
@@ -37,6 +36,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             IAuthenticator authenticator,
             DistributorRole distributorRole,
             EventQueue<InteractorEventArgs> eventQueue,
+            ILoggerFactory loggerFactory,
             CancellationToken token)
         {
             var stream = (Stream)tcpClient.GetStream();
@@ -51,10 +51,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
 
             var identity = authenticator.Authenticate(stream);
-            Log.Info($"Authenticated with {identity.AuthenticationType} as {identity.Name}");
+            var logger = loggerFactory.CreateLogger<Interactor>();
+            logger.LogInformation("Authenticated with {Type} as {Name}", identity.AuthenticationType, identity.Name);
             var roleManager = new RoleManager(distributorRole, hostName, identity.Name);
 
-            var interactor = new Interactor(stream, hostName, identity.Name, roleManager, eventQueue, token);
+            var interactor = new Interactor(stream, hostName, identity.Name, roleManager, eventQueue, logger, token);
             return interactor;
         }
 
@@ -64,8 +65,10 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             string userName,
             RoleManager roleManager,
             EventQueue<InteractorEventArgs> eventQueue,
+            ILogger<Interactor> logger,
             CancellationToken token)
         {
+            _logger = logger;
             _stream = stream;
             Id = Guid.NewGuid();
             Host = hostName;
@@ -137,13 +140,13 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 }
                 catch (Exception error)
                 {
-                    Log.Warn($"Failed to receive message for {this}");
+                    _logger.LogWarning(error, "Failed to receive message for {Interactor}", this);
                     _eventQueue.Enqueue(new InteractorErrorEventArgs(this, error));
                     break;
                 }
             }
 
-            Log.Debug($"Exited read loop for {this}");
+            _logger.LogDebug("Exited read loop for {Interactor}", this);
         }
 
         private void WriteQueuedMessages()
@@ -167,7 +170,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 }
             }
 
-            Log.Debug($"Exited read loop for {this}");
+            _logger.LogDebug("Exited read loop for {Interactor}", this);
         }
 
         public int CompareTo(Interactor? other)

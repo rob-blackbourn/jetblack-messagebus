@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using log4net;
+using Microsoft.Extensions.Logging;
 
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Distributor.Roles;
@@ -15,12 +15,14 @@ namespace JetBlack.MessageBus.Distributor.Publishers
 {
     public class PublisherManager
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(PublisherManager));
-
+        private readonly ILogger<PublisherManager> _logger;
         private readonly PublisherRepository _repository;
 
-        public PublisherManager(InteractorManager interactorManager)
+        public PublisherManager(
+            InteractorManager interactorManager,
+            ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<PublisherManager>();
             _repository = new PublisherRepository();
             interactorManager.ClosedInteractors += OnClosedInteractor;
             interactorManager.FaultedInteractors += OnFaultedInteractor;
@@ -32,7 +34,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
         {
             if (!publisher.HasRole(unicastData.Feed, Role.Publish))
             {
-                Log.Warn($"Rejected request from {publisher} to publish on feed {unicastData.Feed}");
+                _logger.LogWarning("Rejected request from {Publisher} to publish on feed {Feed}", publisher, unicastData.Feed);
                 return;
             }
 
@@ -45,7 +47,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 unicastData.IsImage,
                 GetAuthorizedData(unicastData.Data, authorization));
 
-            Log.Debug($"Sending unicast data from {publisher} to {subscriber}: {clientUnicastData}");
+            _logger.LogDebug("Sending unicast data from {Publisher} to {Subscriber}: {Message}", publisher, subscriber, clientUnicastData);
 
             _repository.AddPublisher(publisher, unicastData.Feed, unicastData.Topic);
 
@@ -53,9 +55,9 @@ namespace JetBlack.MessageBus.Distributor.Publishers
             {
                 subscriber.SendMessage(clientUnicastData);
             }
-            catch (Exception exception)
+            catch (Exception error)
             {
-                Log.Debug($"Failed to send to subscriber {subscriber} unicast data {clientUnicastData}", exception);
+                _logger.LogDebug(error, "Failed to send to subscriber {Subscriber} unicast data {Message}", subscriber, clientUnicastData);
             }
         }
 
@@ -63,7 +65,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
         {
             if (!(publisher == null || publisher.HasRole(multicastData.Feed, Role.Publish)))
             {
-                Log.Warn($"Rejected request from {publisher} to publish to Feed {multicastData.Feed}");
+                _logger.LogWarning("Rejected request from {Publisher} to publish to Feed {Feed}", publisher, multicastData.Feed);
                 return;
             }
 
@@ -80,7 +82,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                     multicastData.IsImage,
                     GetAuthorizedData(multicastData.Data, authorization));
 
-                Log.Debug($"Sending multicast data from {publisher} to {subscriber}: {subscriberMulticastData}");
+                _logger.LogDebug("Sending multicast data from {Publisher} to {Subscriber}: {Message}", publisher, subscriber, subscriberMulticastData);
 
                 if (publisher != null)
                     _repository.AddPublisher(publisher, subscriberMulticastData.Feed, subscriberMulticastData.Topic);
@@ -89,9 +91,9 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 {
                     subscriber.SendMessage(subscriberMulticastData);
                 }
-                catch (Exception exception)
+                catch (Exception error)
                 {
-                    Log.Debug($"Failed to send to subscriber {subscriber} multicast data {subscriberMulticastData}", exception);
+                    _logger.LogDebug(error, "Failed to send to subscriber {Subscriber} multicast data {Message}", subscriber, subscriberMulticastData);
                 }
             }
         }
@@ -110,7 +112,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
 
         private void OnFaultedInteractor(object? sender, InteractorFaultedEventArgs args)
         {
-            Log.Debug($"Interactor faulted: {args.Interactor} - {args.Error.Message}");
+            _logger.LogDebug("Interactor faulted: {Interactor} - {Message}", args.Interactor, args.Error.Message);
             CloseInteractor(args.Interactor);
         }
 

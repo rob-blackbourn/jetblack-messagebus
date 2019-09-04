@@ -4,19 +4,20 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using log4net;
+
+using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor
 {
     public class EventQueue<T> where T : EventArgs
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(EventQueue<T>));
-
+        private readonly ILogger<EventQueue<T>> _logger;
         private readonly CancellationToken _token;
         private readonly BlockingCollection<T> _interactorEventQueue = new BlockingCollection<T>();
 
-        public EventQueue(CancellationToken token)
+        public EventQueue(ILoggerFactory loggerFactory, CancellationToken token)
         {
+            _logger = loggerFactory.CreateLogger<EventQueue<T>>();
             _token = token;
         }
 
@@ -43,17 +44,17 @@ namespace JetBlack.MessageBus.Distributor
                 }
                 catch (OperationCanceledException)
                 {
-                    Log.Info("The event queue has finished");
+                    _logger.LogInformation("The event queue has finished");
                     break;
                 }
                 catch (Exception error)
                 {
-                    Log.Error("The event queue has faulted", error);
+                    _logger.LogError(error, "The event queue has faulted");
                     break;
                 }
             }
 
-            Log.Info("Exited the event loop");
+            _logger.LogInformation("Exited the event loop");
         }
     }
 }

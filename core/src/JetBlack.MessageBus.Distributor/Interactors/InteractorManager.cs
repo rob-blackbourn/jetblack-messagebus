@@ -1,20 +1,21 @@
 #nullable enable
 
 using System;
+
 using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
     public class InteractorManager
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(InteractorManager));
-
+        private readonly ILogger<InteractorManager> _logger;
         private readonly InteractorRepository _repository;
 
-        public InteractorManager(DistributorRole distributorRole)
+        public InteractorManager(DistributorRole distributorRole, ILoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<InteractorManager>();
             _repository = new InteractorRepository(distributorRole);
         }
 
@@ -24,14 +25,14 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void AddInteractor(Interactor interactor)
         {
-            Log.Info($"Adding interactor: {interactor}");
+            _logger.LogInformation("Adding interactor: {Interactor}", interactor);
 
             _repository.Add(interactor);
         }
 
         public void CloseInteractor(Interactor interactor)
         {
-            Log.Info($"Closing interactor: {interactor}");
+            _logger.LogInformation("Closing interactor: {Interactor}", interactor);
 
             _repository.Remove(interactor);
             ClosedInteractors?.Invoke(this, new InteractorClosedEventArgs(interactor));
@@ -39,18 +40,22 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void FaultInteractor(Interactor interactor, Exception error)
         {
-            Log.Info($"Faulting interactor: {interactor}");
+            _logger.LogInformation("Faulting interactor: {Interactor}", interactor);
 
             _repository.Remove(interactor);
             FaultedInteractors?.Invoke(this, new InteractorFaultedEventArgs(interactor, error));
         }
         internal void RequestAuthorization(Interactor interactor, string feed, string topic)
         {
-            Log.Debug($"Requesting authorization Interactor={interactor}, Feed={feed}, Topic={topic}");
+            _logger.LogDebug(
+                "Requesting authorization Interactor={Interactor}, Feed={Feed}, Topic={Topic}",
+                interactor,
+                feed,
+                topic);
 
             if (!IsAuthorizationRequired(feed))
             {
-                Log.Debug("No authorization required");
+                _logger.LogDebug("No authorization required");
                 AcceptAuthorization(interactor, new AuthorizationResponse(interactor.Id, feed, topic, false, null));
                 return;
             }
@@ -61,24 +66,28 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             {
                 try
                 {
-                    Log.Debug($"Requesting authorization from {authorizer}");
+                    _logger.LogDebug("Requesting authorization from {Authorizer}", authorizer);
                     authorizer.SendMessage(authorizationRequest);
                 }
-                catch (Exception exception)
+                catch (Exception error)
                 {
-                    Log.Warn($"Failed to send {authorizer} message {authorizationRequest}", exception);
+                    _logger.LogWarning(error, "Failed to send {Authorizer} message {Request}", authorizer, authorizationRequest);
                 }
             }
         }
 
         internal void AcceptAuthorization(Interactor authorizer, AuthorizationResponse authorization)
         {
-            Log.Debug($"Accepting an authorization response from {authorizer} with {authorization}.");
+            _logger.LogDebug("Accepting an authorization response from {Authorizer} with {Authorization}.", authorizer, authorization);
 
             var requestor = _repository.Find(authorization.ClientId);
             if (requestor == null)
             {
-                Log.Warn($"Unable to queue an authorization response for unknown ClientId={authorization.ClientId} for Feed=\"{authorization.Feed}\", Topic=\"{authorization.Topic}\".");
+                _logger.LogWarning(
+                    "Unable to queue an authorization response for unknown ClientId={ClientId} for Feed=\"{Feed}\", Topic=\"{Topic}\".",
+                    authorization.ClientId,
+                    authorization.Feed,
+                    authorization.Topic);
                 return;
             }
 
@@ -96,7 +105,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void Dispose()
         {
-            Log.Debug($"Disposing all interactors.");
+            _logger.LogDebug("Disposing all interactors.");
             _repository.Dispose();
         }
     }
