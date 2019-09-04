@@ -1,158 +1,175 @@
 {
-    // Use IntelliSense to find out which attributes exist for C# debugging
-    // Use hover for the description of the existing attributes
-    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Distributor",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
-            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "Distributor: LDAP",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-            "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
-            "args": [
-                "${workspaceFolder}/examples/server-config/ldap/appsettings.json"
-            ],
-            "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "integratedTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "simple notifier",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build simple notifier",
-            "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/notifier",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "simple publisher",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build simple publisher",
-            "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/publisher",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "simple subscriber",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build simple subscriber",
-            "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/subscriber",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "selectfeed publisher",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build selectfeed publisher",
-            "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "auth authorizer",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build auth authorizer",
-            "program": "${workspaceFolder}/examples/authorization/authorizer/bin/Debug/netcoreapp3.0/authorizer.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/subscriber",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "auth notifier",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build auth notifier",
-            "program": "${workspaceFolder}/examples/authorization/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/subscriber",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "auth publisher",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build auth publisher",
-            "program": "${workspaceFolder}/examples/authorization/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/subscriber",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "auth subscriber",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build auth subscriber",
-            "program": "${workspaceFolder}/examples/authorization/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/examples/simple/subscriber",
-            "env": {
-                "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
-            },
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
-        }
-    ]
+  // Use IntelliSense to find out which attributes exist for C# debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Distributor",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Distributor: LDAP",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
+      "args": [
+        "${workspaceFolder}/examples/server-config/ldap/appsettings.json"
+      ],
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "simple notifier",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple notifier",
+      "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/notifier",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "simple publisher",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple publisher",
+      "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "simple subscriber",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple subscriber",
+      "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "selectfeed publisher",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build selectfeed publisher",
+      "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "auth authorizer",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build auth authorizer",
+      "program": "${workspaceFolder}/examples/authorization/authorizer/bin/Debug/netcoreapp3.0/authorizer.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "auth notifier",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build auth notifier",
+      "program": "${workspaceFolder}/examples/authorization/notifier/bin/Debug/netcoreapp3.0/notifier.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "auth publisher",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build auth publisher",
+      "program": "${workspaceFolder}/examples/authorization/publisher/bin/Debug/netcoreapp3.0/publisher.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "auth subscriber",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build auth subscriber",
+      "program": "${workspaceFolder}/examples/authorization/subscriber/bin/Debug/netcoreapp3.0/subscriber.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "MakePassword",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build MakePassword",
+      "program": "${workspaceFolder}/utilities/src/MakePassword/bin/Debug/netcoreapp3.0/MakePassword.dll",
+      "args": [
+        "password.json",
+        "tom"
+      ],
+      "cwd": "${workspaceFolder}/utilities/src/MakePassword",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ]
 }
