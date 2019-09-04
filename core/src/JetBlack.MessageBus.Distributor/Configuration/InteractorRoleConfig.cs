@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBlack.MessageBus.Distributor.Roles;
@@ -14,7 +15,7 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public InteractorRole ToInteractorRole(string host, string user)
         {
             return new InteractorRole(
-              host,
+              Environment.ExpandEnvironmentVariables(host),
               user,
               Allow.Aggregate(Role.None, (aggregate, role) => aggregate | role),
               Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role));
