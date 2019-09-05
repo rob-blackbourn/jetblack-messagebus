@@ -8,10 +8,10 @@ namespace JetBlack.MessageBus.Common.IO
 {
     public class DataPacket : IEquatable<DataPacket>
     {
-        public DataPacket(HashSet<int>? entitlements, byte[]? body)
+        public DataPacket(HashSet<int>? entitlements, byte[]? data)
         {
             Entitlements = entitlements;
-            Data = body;
+            Data = data;
         }
 
         public HashSet<int>? Entitlements { get; }

@@ -31,7 +31,7 @@ Data sent to this specific client.
 - [Feed](#feed)
 - [Topic](#topic)
 - [IsImage](#isimage)
-- [Data](#data)
+- [DataPackets](#datapackets)
 
 ### Multicast data
 
@@ -42,7 +42,7 @@ Data sent to all subscribers of a topic.
 - [Feed](#feed)
 - [Topic](#topic)
 - [IsImage](#isimage)
-- [Data](#data)
+- [DataPackets](#datapackets)
 
 ### Forwarded Subscription Request
 
@@ -91,7 +91,7 @@ Send data to a specific client
 - [Feed](#feed)
 - [Topic](#topic)
 - [IsImage](#isimage)
-- [Data](#data)
+- [DataPackets](#datapackets)
 
 ### Publish
 
@@ -100,7 +100,7 @@ Publish data to all subscribers of a feed and topic.
 - [Feed](#feed)
 - [Topic](#topic)
 - [IsImage](#isimage)
-- [Data](#data)
+- [DataPackets](#datapackets)
 
 ### Authorize
 
@@ -136,11 +136,11 @@ The name of the feed as a string.
 
 The name of a topic in a feed as a string.
 
-### Data
+### DataPackets
 
-The data sent or received. This is a sequence of header and body tuples.
-The header is a UUID which represents the entitlement. The body contains
-the actual data.
+The data sent or received. This is a sequence of entitlement and data tuples.
+The entitlements is a set of ints which represents the entitlement. The data
+contains the actual data as an array of bytes.
 
 ### IsImage
 
@@ -156,6 +156,6 @@ A boolean indicating whether a subscription requires authorization.
 
 ### Entitlements
 
-A sequence of UUIDs. These are sent in an authorization response, and then
+A set of ints. These are sent in an authorization response, and then
 when sending or publishing data. The server will only forward data to a client
-for the UUIDs it has been authorized with.
+for the intss it has been authorized with.

@@ -247,9 +247,9 @@ namespace JetBlack.MessageBus.Common.IO
 
         public DataPacket ReadBinaryDataPacket()
         {
-            var header = ReadInt32HashSet();
-            var body = ReadByteArray();
-            return new DataPacket(header, body);
+            var entitlements = ReadInt32HashSet();
+            var data = ReadByteArray();
+            return new DataPacket(entitlements, data);
         }
 
         public DataPacket[]? ReadBinaryDataPacketArray()
