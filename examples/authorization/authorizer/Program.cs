@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 using JetBlack.MessageBus.Adapters;
+using JetBlack.MessageBus.Common;
 
 using Common;
 
@@ -25,7 +26,7 @@ namespace AuthEntitler
             Console.Write("Username: ");
             var username = Console.ReadLine();
             Console.Write("Password: ");
-            var password = Console.ReadLine();
+            var password = ConsoleHelper.ReadPassword();
 
             var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);

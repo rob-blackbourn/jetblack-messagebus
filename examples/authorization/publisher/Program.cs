@@ -7,6 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 
 using JetBlack.MessageBus.Adapters;
+using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Common.IO;
 
 using Common;
@@ -30,7 +31,7 @@ namespace AuthPublisher
                 Console.Write("Username: ");
                 var username = Console.ReadLine();
                 Console.Write("Password: ");
-                var password = Console.ReadLine();
+                var password = ConsoleHelper.ReadPassword();
 
                 var server = Environment.ExpandEnvironmentVariables("%FQDN%");
                 var authenticator = new BasicClientAuthenticator(username, password);
