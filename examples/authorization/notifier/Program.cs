@@ -1,12 +1,9 @@
 ﻿#nullable enable
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Adapters.Configuration;
+using JetBlack.MessageBus.Common.Json;
 
 namespace AuthNotifier
 {
@@ -20,12 +17,6 @@ namespace AuthNotifier
 
             var settingsFilename = (args != null && args.Length >= 1) ? args[0] : DefaultSettingsFilename;
 
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile(settingsFilename)
-                .Build();
-            var section = configuration.GetSection("client");
-            var config = section.Get<ClientConfig>();
-
             Console.WriteLine("Enter a username and password.");
             Console.WriteLine("Known users are:");
             Console.WriteLine("  username=\"tom\", password=\"tomsPassword\", roles=Subscribe");
@@ -37,8 +28,9 @@ namespace AuthNotifier
             Console.Write("Password: ");
             var password = Console.ReadLine();
 
+            var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);
-            var client = Client.Create(config, authenticator, true);
+            var client = Client.Create(server, 9091, new JsonByteEncoder(), authenticator: authenticator, isSslEnabled: true);
 
             client.OnForwardedSubscription += OnForwardedSubscription;
 

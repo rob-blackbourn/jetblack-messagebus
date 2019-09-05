@@ -12,32 +12,13 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
-using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Common.IO;
-using JetBlack.MessageBus.Adapters.Configuration;
 using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Adapters
 {
     public class Client : IClient
     {
-        public static Client Create(ClientConfig config, IClientAuthenticator authenticator, bool autoConnect)
-        {
-            if (config.Server == null)
-                throw new ArgumentException("The server must be specified");
-
-            var byteEncoder = config.ByteEncoderType?.LoadType()?.Construct<IByteEncoder>() ?? new BinaryEncoder();
-
-            return Create(
-              Environment.ExpandEnvironmentVariables(config.Server),
-              config.Port,
-              byteEncoder,
-              config.MonitorHeartbeat,
-              config.IsSslEnabled,
-              authenticator,
-              autoConnect);
-        }
-
         public static Client Create(
             string server,
             int port,
