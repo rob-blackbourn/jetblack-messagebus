@@ -1,20 +1,20 @@
 #nullable enable
 
-using System;
+using System.Collections.Generic;
 
 namespace JetBlack.MessageBus.Common.IO
 {
     public class DataPacket
     {
-        public DataPacket(Guid header, object? body)
+        public DataPacket(HashSet<int>? entitlements, object? data)
         {
-            Header = header;
-            Body = body;
+            Entitlements = entitlements;
+            Data = data;
         }
 
-        public Guid Header { get; }
-        public object? Body { get; }
+        public HashSet<int>? Entitlements { get; }
+        public object? Data { get; }
 
-        public override string ToString() => $"{nameof(Header)}={Header},{nameof(Body)}={Body}";
+        public override string ToString() => $"{nameof(Entitlements)}.Count={Entitlements?.Count ?? 0},{nameof(Data)}={Data}";
     }
 }

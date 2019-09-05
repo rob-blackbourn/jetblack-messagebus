@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JetBlack.MessageBus.Common.IO;
+using System.Collections.Generic;
 
 namespace JetBlack.MessageBus.Messages.Test
 {
@@ -39,7 +40,7 @@ namespace JetBlack.MessageBus.Messages.Test
                     new BinaryDataPacket[]
                     {
                          new BinaryDataPacket(
-                             Guid.NewGuid(),
+                             new HashSet<int> {1},
                              new byte[] { 1, 2, 3, 4, 5, 6 })
                     });
 

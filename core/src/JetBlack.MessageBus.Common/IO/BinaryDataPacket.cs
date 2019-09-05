@@ -1,29 +1,38 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JetBlack.MessageBus.Common.IO
 {
     public class BinaryDataPacket : IEquatable<BinaryDataPacket>
     {
-        public BinaryDataPacket(Guid header, byte[]? body)
+        public BinaryDataPacket(HashSet<int>? entitlements, byte[]? body)
         {
-            Header = header;
-            Body = body;
+            Entitlements = entitlements;
+            Data = body;
         }
 
-        public Guid Header { get; }
-        public byte[]? Body { get; }
+        public HashSet<int>? Entitlements { get; }
+        public byte[]? Data { get; }
 
         public bool Equals(BinaryDataPacket? other)
         {
             return other != null &&
-                Header == other.Header &&
                 (
-                    (Body == null && other.Body == null) ||
-                    (Body != null && Body.SequenceEqual(other.Body))
+                    (Entitlements == null && other.Entitlements == null) ||
+                    (Entitlements != null && Entitlements.SetEquals(other.Entitlements))
+                ) &&
+                (
+                    (Data == null && other.Data == null) ||
+                    (Data != null && Data.SequenceEqual(other.Data))
                 );
+        }
+
+        public bool IsAuthorized(ISet<int> allEntitlements)
+        {
+            return Entitlements != null && allEntitlements.IsSubsetOf(Entitlements);
         }
 
         public override bool Equals(object? obj)
@@ -33,9 +42,9 @@ namespace JetBlack.MessageBus.Common.IO
 
         public override int GetHashCode()
         {
-            return Header.GetHashCode() ^ (Body?.GetHashCode() ?? 0);
+            return (Entitlements?.GetHashCode() ?? 0) ^ (Data?.GetHashCode() ?? 0);
         }
 
-        public override string ToString() => $"{nameof(Header)}={Header}, {nameof(Body)}.Length={Body?.Length}";
+        public override string ToString() => $"{nameof(Entitlements)}.Count={Entitlements?.Count ?? 0}, {nameof(Data)}.Length={Data?.Length ?? 0}";
     }
 }

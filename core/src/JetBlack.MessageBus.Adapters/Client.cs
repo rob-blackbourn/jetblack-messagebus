@@ -43,7 +43,7 @@ namespace JetBlack.MessageBus.Adapters
             int port,
             IByteEncoder byteEncoder,
             bool monitorHeartbeat = false,
-            bool IsSslEnabled = false,
+            bool isSslEnabled = false,
             IClientAuthenticator? authenticator = null,
             bool autoConnect = true)
         {
@@ -55,7 +55,7 @@ namespace JetBlack.MessageBus.Adapters
             tcpClient.Connect(endpoint.Address, endpoint.Port);
 
             var stream = (Stream)tcpClient.GetStream();
-            if (IsSslEnabled)
+            if (isSslEnabled)
             {
                 var sslStream = new SslStream(
                     stream,
@@ -260,7 +260,7 @@ namespace JetBlack.MessageBus.Adapters
             }
         }
 
-        public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, Guid[] entitlements)
+        public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, HashSet<int>? entitlements)
         {
             if (feed == null)
                 throw new ArgumentNullException(nameof(feed));
@@ -313,7 +313,7 @@ namespace JetBlack.MessageBus.Adapters
 
             var encoded = new BinaryDataPacket[data.Count];
             for (var i = 0; i < data.Count; ++i)
-                encoded[i] = new BinaryDataPacket(data[i].Header, _byteEncoder.Encode(data[i].Body));
+                encoded[i] = new BinaryDataPacket(data[i].Entitlements, _byteEncoder.Encode(data[i].Data));
             return encoded;
         }
 
@@ -324,7 +324,7 @@ namespace JetBlack.MessageBus.Adapters
 
             var decoded = new DataPacket[data.Length];
             for (int i = 0; i < data.Length; ++i)
-                decoded[i] = new DataPacket(data[i].Header, _byteEncoder.Decode(data[i].Body));
+                decoded[i] = new DataPacket(data[i].Entitlements, _byteEncoder.Decode(data[i].Data));
 
             return decoded;
         }

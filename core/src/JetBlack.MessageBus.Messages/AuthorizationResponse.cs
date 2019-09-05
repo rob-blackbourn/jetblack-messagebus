@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBlack.MessageBus.Common.IO;
 
@@ -8,7 +9,7 @@ namespace JetBlack.MessageBus.Messages
 {
     public class AuthorizationResponse : Message, IEquatable<AuthorizationResponse>
     {
-        public AuthorizationResponse(Guid clientId, string feed, string topic, bool isAuthorizationRequired, Guid[]? entitlements)
+        public AuthorizationResponse(Guid clientId, string feed, string topic, bool isAuthorizationRequired, HashSet<int>? entitlements)
             : base(MessageType.AuthorizationResponse)
         {
             ClientId = clientId;
@@ -22,7 +23,7 @@ namespace JetBlack.MessageBus.Messages
         public string Feed { get; }
         public string Topic { get; }
         public bool IsAuthorizationRequired { get; }
-        public Guid[]? Entitlements { get; }
+        public HashSet<int>? Entitlements { get; }
 
         public static AuthorizationResponse ReadBody(DataReader reader)
         {
@@ -30,7 +31,7 @@ namespace JetBlack.MessageBus.Messages
             var feed = reader.ReadString();
             var topic = reader.ReadString();
             var isAuthorizationRequired = reader.ReadBoolean();
-            var entitlements = reader.ReadGuidArray();
+            var entitlements = reader.ReadInt32HashSet();
             return new AuthorizationResponse(clientId, feed, topic, isAuthorizationRequired, entitlements);
         }
 
@@ -69,6 +70,6 @@ namespace JetBlack.MessageBus.Messages
                 (Entitlements?.GetHashCode() ?? 0);
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(Entitlements)}.Length={Entitlements?.Length}";
+        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(Entitlements)}.Count={Entitlements?.Count ?? 0}";
     }
 }

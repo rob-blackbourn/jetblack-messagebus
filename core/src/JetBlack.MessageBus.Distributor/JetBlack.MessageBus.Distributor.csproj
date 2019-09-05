@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageId>JetBlack.MessageBus.Distributor</PackageId>
     <Version>1.0.1</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

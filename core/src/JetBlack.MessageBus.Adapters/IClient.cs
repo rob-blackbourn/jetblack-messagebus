@@ -21,6 +21,6 @@ namespace JetBlack.MessageBus.Adapters
         void RemoveNotification(string feed);
         void Send(Guid clientId, string feed, string topic, bool isImage, IReadOnlyList<DataPacket>? data);
         void Publish(string feed, string topic, bool isImage, IReadOnlyList<DataPacket>? data);
-        void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, Guid[] entitlements);
+        void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, HashSet<int>? entitlements);
     }
 }

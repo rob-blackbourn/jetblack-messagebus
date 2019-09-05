@@ -16,7 +16,7 @@ namespace publisher
         public CachingPublisher(Client client)
         {
             _client = client;
-            _cache = new Cache(client, Guid.NewGuid());
+            _cache = new Cache(client, null);
 
             _client.OnForwardedSubscription += (sender, args) =>
             {

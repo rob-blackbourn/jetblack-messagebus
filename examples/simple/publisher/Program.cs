@@ -29,7 +29,7 @@ namespace publisher
                 var message = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(topic)) break;
 
-                var data = new[] { new DataPacket(Guid.NewGuid(), message) };
+                var data = new[] { new DataPacket(null, message) };
 
                 Console.WriteLine($"Publishing on feed \"{feed}\" topic \"{topic}\" message \"{message}\"");
                 client.Publish(feed, topic, true, data);

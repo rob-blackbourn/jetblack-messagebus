@@ -107,7 +107,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         public void OnAuthorizationResponse(object? sender, AuthorizationResponseEventArg args)
         {
-            if (args.Response.IsAuthorizationRequired && (args.Response.Entitlements == null || args.Response.Entitlements.Length == 0))
+            if (args.Response.IsAuthorizationRequired && (args.Response.Entitlements == null || args.Response.Entitlements.Count == 0))
             {
                 // Inform the subscriber that they are not entitled.
                 var message = new ForwardedMulticastData(string.Empty, string.Empty, args.Response.Feed, args.Response.Topic, true, null);
@@ -137,7 +137,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             string feed,
             string topic,
             bool isAuthorizationRequired,
-            Guid[]? entitlements,
+            HashSet<int>? entitlements,
             bool isAuthorizationUpdate)
         {
             _repository.AddSubscription(
@@ -146,7 +146,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 topic,
                 new AuthorizationInfo(
                     isAuthorizationRequired,
-                    new HashSet<Guid>(entitlements ?? new Guid[0])),
+                    entitlements),
                 isAuthorizationUpdate);
 
             _notificationManager.ForwardSubscription(

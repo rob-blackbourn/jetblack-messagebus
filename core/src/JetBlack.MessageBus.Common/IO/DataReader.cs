@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -162,6 +163,28 @@ namespace JetBlack.MessageBus.Common.IO
             return array;
         }
 
+        public int[]? ReadInt32Array()
+        {
+            var count = ReadInt32();
+            if (count == 0)
+                return null;
+            var array = new int[count];
+            for (var i = 0; i < count; ++i)
+                array[i] = ReadInt32();
+            return array;
+        }
+
+        public HashSet<int>? ReadInt32HashSet()
+        {
+            var count = ReadInt32();
+            if (count == 0)
+                return null;
+            var set = new HashSet<int>();
+            for (var i = 0; i < count; ++i)
+                set.Add(ReadInt32());
+            return set;
+        }
+
         /// <summary>
         /// Read an array of bytes.
         /// </summary>
@@ -224,7 +247,7 @@ namespace JetBlack.MessageBus.Common.IO
 
         public BinaryDataPacket ReadBinaryDataPacket()
         {
-            var header = ReadGuid();
+            var header = ReadInt32HashSet();
             var body = ReadByteArray();
             return new BinaryDataPacket(header, body);
         }

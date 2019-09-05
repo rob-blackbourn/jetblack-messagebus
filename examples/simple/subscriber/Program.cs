@@ -42,13 +42,13 @@ namespace subscriber
 
             foreach (var packet in e.Data)
             {
-                if (packet.Body is Dictionary<string, object>)
+                if (packet.Data is Dictionary<string, object>)
                 {
-                    var data = (Dictionary<string, object>)packet.Body;
+                    var data = (Dictionary<string, object>)packet.Data;
                     Console.WriteLine("Data: " + string.Join(",", data.Select(x => $"{x.Key}={x.Value}")));
                 }
                 else
-                    Console.WriteLine(packet.Body);
+                    Console.WriteLine(packet.Data);
             }
         }
 

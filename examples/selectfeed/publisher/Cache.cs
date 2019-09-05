@@ -14,9 +14,9 @@ namespace publisher
         private readonly Dictionary<string, Dictionary<string, CacheItem>> _cacheItems = new Dictionary<string, Dictionary<string, CacheItem>>();
 
         private readonly Client _client;
-        private readonly Guid _entitlement;
+        private readonly HashSet<int>? _entitlement;
 
-        public Cache(Client client, Guid entitlement)
+        public Cache(Client client, HashSet<int>? entitlement)
         {
             _client = client;
             _entitlement = entitlement;
@@ -109,9 +109,9 @@ namespace publisher
             // Bring the cache data up to date.
             foreach (var item in data)
             {
-                #nullable disable
+#nullable disable
                 cacheItem.Data[item.Key] = item.Value;
-                #nullable enable
+#nullable enable
             }
 
             // If there are any clients listening publish the data.

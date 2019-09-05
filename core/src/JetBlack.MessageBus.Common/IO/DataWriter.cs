@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -165,13 +166,37 @@ namespace JetBlack.MessageBus.Common.IO
         /// Write an array of stings to a stream
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write(string[] value)
+        public void Write(string[]? value)
         {
             if (value == null)
                 Write(0);
             else
             {
                 Write(value.Length);
+                foreach (var t in value)
+                    Write(t);
+            }
+        }
+
+        public void Write(int[]? value)
+        {
+            if (value == null)
+                Write(0);
+            else
+            {
+                Write(value.Length);
+                foreach (var t in value)
+                    Write(t);
+            }
+        }
+
+        public void Write(HashSet<int>? value)
+        {
+            if (value == null)
+                Write(0);
+            else
+            {
+                Write(value.Count);
                 foreach (var t in value)
                     Write(t);
             }
@@ -205,8 +230,8 @@ namespace JetBlack.MessageBus.Common.IO
 
         public void Write(BinaryDataPacket dataPacket)
         {
-            Write(dataPacket.Header);
-            Write(dataPacket.Body);
+            Write(dataPacket.Entitlements);
+            Write(dataPacket.Data);
         }
 
         public void Write(BinaryDataPacket[]? data)

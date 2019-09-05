@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JetBlack.MessageBus.Common.IO;
+using System.Collections.Generic;
 
 namespace JetBlack.MessageBus.Messages.Test
 {
@@ -15,7 +16,7 @@ namespace JetBlack.MessageBus.Messages.Test
         {
             using (var stream = new MemoryStream())
             {
-                var source = new AuthorizationResponse(Guid.NewGuid(), "FEED", "TOPIC", true, new Guid[] { Guid.NewGuid() });
+                var source = new AuthorizationResponse(Guid.NewGuid(), "FEED", "TOPIC", true, new HashSet<int> { 1 });
                 source.Write(new DataWriter(stream));
                 stream.Seek(0, SeekOrigin.Begin);
                 var dest = Message.Read(new DataReader(stream));

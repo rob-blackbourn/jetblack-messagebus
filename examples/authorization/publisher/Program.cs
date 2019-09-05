@@ -2,11 +2,10 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Adapters.Configuration;
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Json;
 
 using Common;
 
@@ -14,19 +13,9 @@ namespace AuthPublisher
 {
     class Program
     {
-        public const string DefaultSettingsFilename = "appsettings.json";
-
         static void Main(string[] args)
         {
             Console.WriteLine("publisher");
-
-            var settingsFilename = (args != null && args.Length >= 1) ? args[0] : DefaultSettingsFilename;
-
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile(settingsFilename)
-                .Build();
-            var section = configuration.GetSection("client");
-            var config = section.Get<ClientConfig>();
 
             try
             {
@@ -41,8 +30,9 @@ namespace AuthPublisher
                 Console.Write("Password: ");
                 var password = Console.ReadLine();
 
+                var server = Environment.ExpandEnvironmentVariables("%FQDN%");
                 var authenticator = new BasicClientAuthenticator(username, password);
-                var client = Client.Create(config, authenticator, true);
+                var client = Client.Create(server, 9091, new JsonByteEncoder(), authenticator: authenticator, isSslEnabled: true);
 
                 client.OnConnectionChanged += OnConnectionChanged;
 
@@ -64,8 +54,8 @@ namespace AuthPublisher
 
                 var data = new DataPacket[]
                 {
-                    new DataPacket(Constants.Level1, level1Data),
-                    new DataPacket(Constants.Level2, level2Data)
+                    new DataPacket(new HashSet<int>{Constants.Level1}, level1Data),
+                    new DataPacket(new HashSet<int>{Constants.Level2}, level2Data)
                 };
 
                 Console.WriteLine("Enter the feed and topic to publish on");

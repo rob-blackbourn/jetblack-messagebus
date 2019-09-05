@@ -14,8 +14,10 @@ namespace JetBlack.MessageBus.Distributor.Configuration
 
         public InteractorRole ToInteractorRole(string host, string user)
         {
+            var expandedHost = Environment.ExpandEnvironmentVariables(host);
+
             return new InteractorRole(
-              Environment.ExpandEnvironmentVariables(host),
+              expandedHost,
               user,
               Allow.Aggregate(Role.None, (aggregate, role) => aggregate | role),
               Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role));

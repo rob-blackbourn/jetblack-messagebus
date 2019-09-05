@@ -1,19 +1,18 @@
 #nullable enable
 
-using System;
 using System.Collections.Generic;
 
 namespace JetBlack.MessageBus.Distributor
 {
     public class AuthorizationInfo
     {
-        public AuthorizationInfo(bool isAuthorizationRequired, ISet<Guid> entitlements)
+        public AuthorizationInfo(bool isAuthorizationRequired, ISet<int>? entitlements)
         {
             IsAuthorizationRequired = isAuthorizationRequired;
-            Entitlements = entitlements;
+            Entitlements = entitlements ?? new HashSet<int>();
         }
 
-        public bool IsAuthorizationRequired { get; private set; }
-        public ISet<Guid> Entitlements { get; private set; }
+        public bool IsAuthorizationRequired { get; }
+        public ISet<int> Entitlements { get; }
     }
 }
