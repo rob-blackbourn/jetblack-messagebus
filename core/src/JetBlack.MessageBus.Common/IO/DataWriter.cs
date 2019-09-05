@@ -228,20 +228,20 @@ namespace JetBlack.MessageBus.Common.IO
             }
         }
 
-        public void Write(BinaryDataPacket dataPacket)
+        public void Write(DataPacket dataPacket)
         {
             Write(dataPacket.Entitlements);
             Write(dataPacket.Data);
         }
 
-        public void Write(BinaryDataPacket[]? data)
+        public void Write(DataPacket[]? dataPackets)
         {
-            if (data == null)
+            if (dataPackets == null)
                 Write(0);
             else
             {
-                Write(data.Length);
-                foreach (var dataPacket in data)
+                Write(dataPackets.Length);
+                foreach (var dataPacket in dataPackets)
                     Write(dataPacket);
             }
         }

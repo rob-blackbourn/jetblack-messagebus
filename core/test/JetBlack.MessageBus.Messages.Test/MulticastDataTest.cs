@@ -37,9 +37,9 @@ namespace JetBlack.MessageBus.Messages.Test
                     "__admin__",
                     "heartbeat",
                     true,
-                    new BinaryDataPacket[]
+                    new DataPacket[]
                     {
-                         new BinaryDataPacket(
+                         new DataPacket(
                              new HashSet<int> {1},
                              new byte[] { 1, 2, 3, 4, 5, 6 })
                     });

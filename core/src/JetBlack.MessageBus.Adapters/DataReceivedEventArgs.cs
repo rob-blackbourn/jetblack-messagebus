@@ -7,14 +7,14 @@ namespace JetBlack.MessageBus.Adapters
 {
     public class DataReceivedEventArgs : EventArgs
     {
-        public DataReceivedEventArgs(string user, string host, string feed, string topic, DataPacket[]? data, bool isImage)
+        public DataReceivedEventArgs(string user, string host, string feed, string topic, DataPacket[]? dataPackets, bool isImage)
         {
             User = user;
             Host = host;
             Feed = feed;
             Topic = topic;
             IsImage = isImage;
-            Data = data;
+            DataPackets = dataPackets;
         }
 
         public string User { get; }
@@ -22,6 +22,6 @@ namespace JetBlack.MessageBus.Adapters
         public string Feed { get; }
         public string Topic { get; }
         public bool IsImage { get; }
-        public DataPacket[]? Data { get; }
+        public DataPacket[]? DataPackets { get; }
     }
 }

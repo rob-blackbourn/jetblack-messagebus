@@ -2,10 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
+
+using Newtonsoft.Json;
 
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common.IO;
-using JetBlack.MessageBus.Common.Json;
 
 using Common;
 
@@ -32,7 +34,7 @@ namespace AuthPublisher
 
                 var server = Environment.ExpandEnvironmentVariables("%FQDN%");
                 var authenticator = new BasicClientAuthenticator(username, password);
-                var client = Client.Create(server, 9091, new JsonByteEncoder(), authenticator: authenticator, isSslEnabled: true);
+                var client = Client.Create(server, 9091, authenticator: authenticator, isSslEnabled: true);
 
                 client.OnConnectionChanged += OnConnectionChanged;
 
@@ -52,10 +54,10 @@ namespace AuthPublisher
                     {"ASK_Size1", 15},
                 };
 
-                var data = new DataPacket[]
+                var data = new[]
                 {
-                    new DataPacket(new HashSet<int>{Constants.Level1}, level1Data),
-                    new DataPacket(new HashSet<int>{Constants.Level2}, level2Data)
+                    new DataPacket(new HashSet<int>{Constants.Level1}, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(level1Data))),
+                    new DataPacket(new HashSet<int>{Constants.Level2}, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(level2Data)))
                 };
 
                 Console.WriteLine("Enter the feed and topic to publish on");

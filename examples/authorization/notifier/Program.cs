@@ -3,7 +3,6 @@
 using System;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Common.Json;
 
 namespace AuthNotifier
 {
@@ -30,7 +29,7 @@ namespace AuthNotifier
 
             var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);
-            var client = Client.Create(server, 9091, new JsonByteEncoder(), authenticator: authenticator, isSslEnabled: true);
+            var client = Client.Create(server, 9091, authenticator: authenticator, isSslEnabled: true);
 
             client.OnForwardedSubscription += OnForwardedSubscription;
 

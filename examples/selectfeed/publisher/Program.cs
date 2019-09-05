@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Timers;
 
-using JetBlack.MessageBus.Common.Json;
 using JetBlack.MessageBus.Adapters;
 
 namespace publisher
@@ -15,7 +14,7 @@ namespace publisher
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091, new JsonByteEncoder());
+            var client = Client.Create("localhost", 9091);
             var cachingPublisher = new CachingPublisher(client);
             StartPublishing(cachingPublisher);
             System.Threading.Thread.CurrentThread.Join();

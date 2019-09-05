@@ -10,8 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\src\JetBlack.MessageBus.Common\JetBlack.MessageBus.Common.csproj" />
     <ProjectReference Include="..\..\..\core\src\JetBlack.MessageBus.Adapters\JetBlack.MessageBus.Adapters.csproj" />
-    <ProjectReference Include="..\..\..\extensions\authentication\src\JetBlack.MessageBus.Common.PasswordFileAuthentication\JetBlack.MessageBus.Common.PasswordFileAuthentication.csproj" />
-    <ProjectReference Include="..\..\..\extensions\serializers\src\JetBlack.MessageBus.Common.Json\JetBlack.MessageBus.Common.Json.csproj" />
     <ProjectReference Include="..\common\common.csproj" />
   </ItemGroup>
 

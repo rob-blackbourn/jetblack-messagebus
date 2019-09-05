@@ -245,23 +245,23 @@ namespace JetBlack.MessageBus.Common.IO
             return array;
         }
 
-        public BinaryDataPacket ReadBinaryDataPacket()
+        public DataPacket ReadBinaryDataPacket()
         {
             var header = ReadInt32HashSet();
             var body = ReadByteArray();
-            return new BinaryDataPacket(header, body);
+            return new DataPacket(header, body);
         }
 
-        public BinaryDataPacket[]? ReadBinaryDataPacketArray()
+        public DataPacket[]? ReadBinaryDataPacketArray()
         {
             var count = ReadInt32();
             if (count == 0)
                 return null;
 
-            BinaryDataPacket[] data = new BinaryDataPacket[count];
+            DataPacket[] dataPackets = new DataPacket[count];
             for (var i = 0; i < count; ++i)
-                data[i] = ReadBinaryDataPacket();
-            return data;
+                dataPackets[i] = ReadBinaryDataPacket();
+            return dataPackets;
         }
 
         private byte[] ReadFully(byte[] buf)

@@ -6,7 +6,7 @@ namespace JetBlack.MessageBus.Messages
 {
     public class ForwardedMulticastData : Message
     {
-        public ForwardedMulticastData(string user, string host, string feed, string topic, bool isImage, BinaryDataPacket[]? data)
+        public ForwardedMulticastData(string user, string host, string feed, string topic, bool isImage, DataPacket[]? dataPackets)
             : base(MessageType.ForwardedMulticastData)
         {
             User = user;
@@ -14,7 +14,7 @@ namespace JetBlack.MessageBus.Messages
             Feed = feed;
             Topic = topic;
             IsImage = isImage;
-            Data = data;
+            DataPackets = dataPackets;
         }
 
         public string User { get; }
@@ -22,7 +22,7 @@ namespace JetBlack.MessageBus.Messages
         public string Feed { get; }
         public string Topic { get; }
         public bool IsImage { get; }
-        public BinaryDataPacket[]? Data { get; }
+        public DataPacket[]? DataPackets { get; }
 
         public static ForwardedMulticastData ReadBody(DataReader reader)
         {
@@ -31,8 +31,8 @@ namespace JetBlack.MessageBus.Messages
             var feed = reader.ReadString();
             var topic = reader.ReadString();
             var isImage = reader.ReadBoolean();
-            var data = reader.ReadBinaryDataPacketArray();
-            return new ForwardedMulticastData(user, host, feed, topic, isImage, data);
+            var dataPackets = reader.ReadBinaryDataPacketArray();
+            return new ForwardedMulticastData(user, host, feed, topic, isImage, dataPackets);
         }
 
         public override DataWriter Write(DataWriter writer)
@@ -43,10 +43,10 @@ namespace JetBlack.MessageBus.Messages
             writer.Write(Feed);
             writer.Write(Topic);
             writer.Write(IsImage);
-            writer.Write(Data);
+            writer.Write(DataPackets);
             return writer;
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(User)}=\"{User}\",{nameof(Host)}=\"{Host}\",{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(Data)}.Length={Data?.Length}";
+        public override string ToString() => $"{base.ToString()},{nameof(User)}=\"{User}\",{nameof(Host)}=\"{Host}\",{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(DataPackets)}.Length={DataPackets?.Length}";
     }
 }

@@ -17,12 +17,11 @@ using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Adapters
 {
-    public class Client : IClient
+    public class Client
     {
         public static Client Create(
             string server,
             int port,
-            IByteEncoder byteEncoder,
             bool monitorHeartbeat = false,
             bool isSslEnabled = false,
             IClientAuthenticator? authenticator = null,
@@ -50,7 +49,7 @@ namespace JetBlack.MessageBus.Adapters
             if (authenticator != null)
                 authenticator.Authenticate(stream);
 
-            var client = new Client(stream, byteEncoder);
+            var client = new Client(stream);
 
             if (autoConnect)
                 client.Start();
@@ -71,7 +70,6 @@ namespace JetBlack.MessageBus.Adapters
         }
 
         public event EventHandler<DataReceivedEventArgs>? OnDataReceived;
-        public event EventHandler<DataErrorEventArgs>? OnDataError;
         public event EventHandler<ForwardedSubscriptionEventArgs>? OnForwardedSubscription;
         public event EventHandler<AuthorizationRequestEventArgs>? OnAuthorizationRequest;
         public event EventHandler<ConnectionChangedEventArgs>? OnConnectionChanged;
@@ -79,13 +77,11 @@ namespace JetBlack.MessageBus.Adapters
 
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly Stream _stream;
-        private readonly IByteEncoder _byteEncoder;
         private readonly BlockingCollection<Message> _writeQueue = new BlockingCollection<Message>();
 
-        internal Client(Stream stream, IByteEncoder byteEncoder)
+        internal Client(Stream stream)
         {
             _stream = stream;
-            _byteEncoder = byteEncoder;
         }
 
         public void Start()
@@ -207,38 +203,24 @@ namespace JetBlack.MessageBus.Adapters
             _writeQueue.Add(new NotificationRequest(feed, isAdd));
         }
 
-        public void Send(Guid clientId, string feed, string topic, bool isImage, IReadOnlyList<DataPacket>? data)
+        public void Send(Guid clientId, string feed, string topic, bool isImage, DataPacket[]? dataPackets)
         {
             if (feed == null)
                 throw new ArgumentNullException(nameof(feed));
             if (topic == null)
                 throw new ArgumentNullException(nameof(topic));
 
-            try
-            {
-                _writeQueue.Add(new UnicastData(clientId, feed, topic, isImage, Encode(data)));
-            }
-            catch (Exception error)
-            {
-                OnDataError?.Invoke(this, new DataErrorEventArgs(true, string.Empty, string.Empty, feed, topic, isImage, data, error));
-            }
+            _writeQueue.Add(new UnicastData(clientId, feed, topic, isImage, dataPackets));
         }
 
-        public void Publish(string feed, string topic, bool isImage, IReadOnlyList<DataPacket>? data)
+        public void Publish(string feed, string topic, bool isImage, DataPacket[]? dataPackets)
         {
             if (feed == null)
                 throw new ArgumentNullException(nameof(feed));
             if (topic == null)
                 throw new ArgumentNullException(nameof(topic));
 
-            try
-            {
-                _writeQueue.Add(new MulticastData(feed, topic, isImage, Encode(data)));
-            }
-            catch (Exception error)
-            {
-                OnDataError?.Invoke(this, new DataErrorEventArgs(true, string.Empty, string.Empty, feed, topic, isImage, data, error));
-            }
+            _writeQueue.Add(new MulticastData(feed, topic, isImage, dataPackets));
         }
 
         public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, HashSet<int>? entitlements)
@@ -274,7 +256,7 @@ namespace JetBlack.MessageBus.Adapters
             if (message.Feed == "__admin__" && message.Topic == "heartbeat")
                 RaiseOnHeartbeat();
             else
-                RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.Data, message.IsImage);
+                RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.DataPackets, message.IsImage);
         }
 
         private void RaiseOnHeartbeat()
@@ -284,42 +266,12 @@ namespace JetBlack.MessageBus.Adapters
 
         private void RaiseOnData(ForwardedUnicastData message)
         {
-            RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.Data, message.IsImage);
+            RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.DataPackets, message.IsImage);
         }
 
-        private BinaryDataPacket[]? Encode(IReadOnlyList<DataPacket>? data)
+        private void RaiseOnData(string user, string host, string feed, string topic, DataPacket[]? dataPackets, bool isImage)
         {
-            if (data == null)
-                return null;
-
-            var encoded = new BinaryDataPacket[data.Count];
-            for (var i = 0; i < data.Count; ++i)
-                encoded[i] = new BinaryDataPacket(data[i].Entitlements, _byteEncoder.Encode(data[i].Data));
-            return encoded;
-        }
-
-        protected DataPacket[]? Decode(BinaryDataPacket[]? data)
-        {
-            if (data == null)
-                return null;
-
-            var decoded = new DataPacket[data.Length];
-            for (int i = 0; i < data.Length; ++i)
-                decoded[i] = new DataPacket(data[i].Entitlements, _byteEncoder.Decode(data[i].Data));
-
-            return decoded;
-        }
-
-        private void RaiseOnData(string user, string host, string feed, string topic, BinaryDataPacket[]? data, bool isImage)
-        {
-            try
-            {
-                OnDataReceived?.Invoke(this, new DataReceivedEventArgs(user, host, feed, topic, Decode(data), isImage));
-            }
-            catch (Exception error)
-            {
-                OnDataError?.Invoke(this, new DataErrorEventArgs(false, user, host, feed, topic, isImage, data, error));
-            }
+            OnDataReceived?.Invoke(this, new DataReceivedEventArgs(user, host, feed, topic, dataPackets, isImage));
         }
 
         public void Dispose()

@@ -3,9 +3,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common.IO;
+using Newtonsoft.Json;
 
 namespace publisher
 {
@@ -53,13 +54,16 @@ namespace publisher
                 // Send the image and mark this client appropriately.
                 cacheItem.ClientStates[clientId] = true;
 
+                var json = JsonConvert.SerializeObject(cacheItem.Data);
+                var data = Encoding.UTF8.GetBytes(json);
+
                 Console.WriteLine($"Sending image on feed \"{feed}\" with topic \"{topic}\" to client {clientId}");
                 _client.Send(
                     clientId,
                     feed,
                     topic,
                     true,
-                    new[] { new DataPacket(_entitlement, cacheItem.Data) });
+                    new[] { new DataPacket(_entitlement, data) });
             }
         }
 
@@ -89,7 +93,7 @@ namespace publisher
             }
         }
 
-        public void Publish(string feed, string topic, Dictionary<string, object> data)
+        public void Publish(string feed, string topic, Dictionary<string, object> delta)
         {
             // If the feed is not in the cache add it.
             if (!_cacheItems.TryGetValue(feed, out var topicCache))
@@ -102,21 +106,24 @@ namespace publisher
             if (!topicCache.TryGetValue(topic, out var cacheItem))
             {
                 cacheItem = new CacheItem();
-                cacheItem.Data = data.AsEnumerable().ToDictionary(x => x.Key, x => x.Value);
+                cacheItem.Data = delta.AsEnumerable().ToDictionary(x => x.Key, x => x.Value);
                 topicCache.Add(topic, cacheItem);
             }
 
             // Bring the cache data up to date.
-            foreach (var item in data)
+            foreach (var fieldValue in delta)
             {
 #nullable disable
-                cacheItem.Data[item.Key] = item.Value;
+                cacheItem.Data[fieldValue.Key] = fieldValue.Value;
 #nullable enable
             }
 
             // If there are any clients listening publish the data.
             if (cacheItem.ClientStates.Count > 0)
             {
+                var json = JsonConvert.SerializeObject(delta);
+                var data = Encoding.UTF8.GetBytes(json);
+
                 Console.WriteLine($"Publishing update on feed \"{feed}\" with topic \"{topic}\"");
                 _client.Publish(
                     feed,

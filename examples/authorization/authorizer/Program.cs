@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Common.Json;
 
 using Common;
 
@@ -30,7 +29,7 @@ namespace AuthEntitler
 
             var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);
-            var client = Client.Create(server, 9091, new JsonByteEncoder(), authenticator: authenticator, isSslEnabled: true);
+            var client = Client.Create(server, 9091, authenticator: authenticator, isSslEnabled: true);
 
             client.OnAuthorizationRequest += OnAuthorizationRequest;
 

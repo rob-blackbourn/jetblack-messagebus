@@ -8,21 +8,21 @@ namespace JetBlack.MessageBus.Messages
 {
     public class UnicastData : Message, IEquatable<UnicastData>
     {
-        public UnicastData(Guid clientId, string feed, string topic, bool isImage, BinaryDataPacket[]? data)
+        public UnicastData(Guid clientId, string feed, string topic, bool isImage, DataPacket[]? dataPackets)
             : base(MessageType.UnicastData)
         {
             ClientId = clientId;
             Feed = feed;
             Topic = topic;
             IsImage = isImage;
-            Data = data;
+            DataPackets = dataPackets;
         }
 
         public Guid ClientId { get; }
         public string Feed { get; }
         public string Topic { get; }
         public bool IsImage { get; }
-        public BinaryDataPacket[]? Data { get; }
+        public DataPacket[]? DataPackets { get; }
 
         public static UnicastData ReadBody(DataReader reader)
         {
@@ -30,8 +30,8 @@ namespace JetBlack.MessageBus.Messages
             var feed = reader.ReadString();
             var topic = reader.ReadString();
             var isImage = reader.ReadBoolean();
-            var data = reader.ReadBinaryDataPacketArray();
-            return new UnicastData(clientId, feed, topic, isImage, data);
+            var dataPackets = reader.ReadBinaryDataPacketArray();
+            return new UnicastData(clientId, feed, topic, isImage, dataPackets);
         }
 
         public override DataWriter Write(DataWriter writer)
@@ -41,7 +41,7 @@ namespace JetBlack.MessageBus.Messages
             writer.Write(Feed);
             writer.Write(Topic);
             writer.Write(IsImage);
-            writer.Write(Data);
+            writer.Write(DataPackets);
             return writer;
         }
 
@@ -54,8 +54,8 @@ namespace JetBlack.MessageBus.Messages
               Topic == other.Topic &&
               IsImage == other.IsImage &&
               (
-                (Data == null && other.Data == null) ||
-                (Data != null && other.Data != null && Data.SequenceEqual(other.Data))
+                (DataPackets == null && other.DataPackets == null) ||
+                (DataPackets != null && other.DataPackets != null && DataPackets.SequenceEqual(other.DataPackets))
               );
         }
 
@@ -71,10 +71,10 @@ namespace JetBlack.MessageBus.Messages
               Feed.GetHashCode() ^
               Topic.GetHashCode() ^
               IsImage.GetHashCode() ^
-              (Data?.GetHashCode() ?? 0);
+              (DataPackets?.GetHashCode() ?? 0);
 
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(Data)}.Length={Data?.Length}";
+        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(DataPackets)}.Length={DataPackets?.Length}";
     }
 }

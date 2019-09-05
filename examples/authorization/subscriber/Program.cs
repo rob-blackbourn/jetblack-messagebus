@@ -3,9 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+
+using Newtonsoft.Json;
 
 using JetBlack.MessageBus.Adapters;
-using JetBlack.MessageBus.Common.Json;
 
 namespace AuthSubscriber
 {
@@ -28,10 +30,9 @@ namespace AuthSubscriber
 
             var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);
-            var client = Client.Create(server, 9091, new JsonByteEncoder(), authenticator: authenticator, isSslEnabled: true);
+            var client = Client.Create(server, 9091, authenticator: authenticator, isSslEnabled: true);
 
             client.OnDataReceived += OnDataReceived;
-            client.OnDataError += OnDataError;
 
             Console.WriteLine("Enter an empty feed or topic to quit");
             while (true)
@@ -52,28 +53,27 @@ namespace AuthSubscriber
             client.Dispose();
         }
 
-        private static void OnDataReceived(object? sender, DataReceivedEventArgs e)
+        private static void OnDataReceived(object? sender, DataReceivedEventArgs args)
         {
-            if (e.Data == null)
+            Console.WriteLine($"Received data on feed \"{args.Feed}\" for topic \"{args.Topic}\"");
+
+            if (args.DataPackets == null)
             {
-                Console.WriteLine("Client disconnected");
+                Console.WriteLine("No data");
                 return;
             }
 
-            foreach (var packet in e.Data)
+            foreach (var packet in args.DataPackets)
             {
-                if (packet.Data == null)
-                    continue;
-                var data = (IDictionary<string, object>)packet.Data;
-                Console.WriteLine(
-                "Data: " +
-                    string.Join(",", data.Select(x => $"{x.Key}={x.Value}")));
+                if (packet.Data != null)
+                {
+                    var json = Encoding.UTF8.GetString(packet.Data);
+                    var message = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    Console.WriteLine(
+                    "Data: " +
+                        string.Join(",", message.Select(x => $"{x.Key}={x.Value}")));
+                }
             }
-        }
-
-        private static void OnDataError(object? sender, DataErrorEventArgs e)
-        {
-            Console.WriteLine("Error: " + e);
         }
     }
 }

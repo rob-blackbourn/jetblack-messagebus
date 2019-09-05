@@ -1,6 +1,5 @@
 ﻿using System;
 
-using JetBlack.MessageBus.Common.Json;
 using JetBlack.MessageBus.Adapters;
 
 namespace notifier
@@ -10,7 +9,7 @@ namespace notifier
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091, new JsonByteEncoder());
+            var client = Client.Create("localhost", 9091);
             client.OnForwardedSubscription += OnForwardedSubscription;
 
             Console.WriteLine("Enter the feed to be notified on.");
@@ -30,7 +29,7 @@ namespace notifier
 
         private static void OnForwardedSubscription(object? sender, ForwardedSubscriptionEventArgs args)
         {
-            Console.WriteLine(args);
+            Console.WriteLine($"Received forwarded subscription from client {args.ClientId} on feed \"{args.Feed}\" for topic \"{args.Topic}\"");
         }
     }
 }

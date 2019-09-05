@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+
+using Newtonsoft.Json;
 
 using JetBlack.MessageBus.Adapters;
 
@@ -46,7 +49,8 @@ namespace subscriber
             {
                 if (packet.Data != null)
                 {
-                    var message = Encoding.UTF8.GetString(packet.Data);
+                    var json = Encoding.UTF8.GetString(packet.Data);
+                    var message = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
                     Console.WriteLine($"Received: \"{message}\"");
                 }
             }

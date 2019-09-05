@@ -91,8 +91,7 @@ Create a subscriber in a new terminal.
 ~/subscriber $ dotnet add package JetBlack.MessageBus.Adapters
 ~/subscriber $ cat > Program.cs
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 using JetBlack.MessageBus.Adapters;
 
@@ -120,20 +119,16 @@ namespace subscriber
       object sender,
       DataReceivedEventArgs e)
     {
-      if (e.Data == null)
+      if (e.DataPackets == null)
         return;
 
-      foreach (var packet in e.Data)
+      foreach (var packet in e.DataPackets)
       {
-        if (packet.Body is Dictionary<string, object>)
+        if (packet.Data != null)
         {
-          var data = (Dictionary<string, object>)packet.Body;
-          Console.WriteLine(
-            "Data: " + 
-            string.Join(",", data.Select(x => $"{x.Key}={x.Value}")));
+          var message = Encoding.UTF8.GetString(packet.Data);
+          Console.WriteLine($"Received: \"{message}\"");
         }
-        else
-            Console.WriteLine(packet.Body);
       }
     }
   }
@@ -155,6 +150,7 @@ Create a publisher in a new terminal
 ~/publisher $ dotnet add package JetBlack.MessageBus.Adapters
 ~/publisher $ cat > Program.cs
 using System;
+using System.Text;
 
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common.IO;
@@ -168,12 +164,15 @@ namespace publisher
             var authenticator = new NullClientAuthenticator();
             var client = Client.Create("localhost", 9091);
 
-	    Console.WriteLine("Publishing message to feed \"TEST\" and topic \"FOO\".");
-            var data = new[] { new DataPacket(Guid.NewGuid(), "Hello, World!") };
-            client.Publish("TEST", "FOO", true, data);
+            Console.WriteLine("Publishing message to feed \"TEST\" and topic \"FOO\".");
+            var dataPackets = new[]
+            {
+                new DataPacket(null, Encoding.UTF8.GetBytes("Hello, World!"))
+            };
+            client.Publish("TEST", "FOO", true, dataPackets);
 
             Console.WriteLine("Press ENTER to quit");
-	    Console.ReadLine();
+            Console.ReadLine();
 
             client.Dispose();
         }

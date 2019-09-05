@@ -45,7 +45,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 unicastData.Feed,
                 unicastData.Topic,
                 unicastData.IsImage,
-                GetAuthorizedData(unicastData.Data, authorization));
+                GetAuthorizedData(unicastData.DataPackets, authorization));
 
             _logger.LogDebug("Sending unicast data from {Publisher} to {Subscriber}: {Message}", publisher, subscriber, clientUnicastData);
 
@@ -80,7 +80,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                     multicastData.Feed,
                     multicastData.Topic,
                     multicastData.IsImage,
-                    GetAuthorizedData(multicastData.Data, authorization));
+                    GetAuthorizedData(multicastData.DataPackets, authorization));
 
                 _logger.LogDebug("Sending multicast data from {Publisher} to {Subscriber}: {Message}", publisher, subscriber, subscriberMulticastData);
 
@@ -98,11 +98,11 @@ namespace JetBlack.MessageBus.Distributor.Publishers
             }
         }
 
-        private BinaryDataPacket[]? GetAuthorizedData(BinaryDataPacket[]? data, AuthorizationInfo authorization)
+        private DataPacket[]? GetAuthorizedData(DataPacket[]? dataPackets, AuthorizationInfo authorization)
         {
             return authorization.IsAuthorizationRequired
-                    ? data.Where(packet => packet.IsAuthorized(authorization.Entitlements)).ToArray()
-                    : data;
+                    ? dataPackets.Where(packet => packet.IsAuthorized(authorization.Entitlements)).ToArray()
+                    : dataPackets;
         }
 
         private void OnClosedInteractor(object? sender, InteractorClosedEventArgs args)
