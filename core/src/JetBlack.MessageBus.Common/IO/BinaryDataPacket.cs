@@ -32,7 +32,7 @@ namespace JetBlack.MessageBus.Common.IO
 
         public bool IsAuthorized(ISet<int> allEntitlements)
         {
-            return Entitlements != null && allEntitlements.IsSubsetOf(Entitlements);
+            return Entitlements != null && allEntitlements.IsSupersetOf(Entitlements);
         }
 
         public override bool Equals(object? obj)
