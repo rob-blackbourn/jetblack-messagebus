@@ -1,7 +1,8 @@
 ﻿using System;
 
-using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Json;
+using JetBlack.MessageBus.Adapters;
 
 namespace publisher
 {
@@ -10,7 +11,7 @@ namespace publisher
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091);
+            var client = Client.Create("localhost", 9091, new JsonByteEncoder());
 
             Console.WriteLine("Enter the feed and topic to publish on, then the message to send.");
             Console.WriteLine("Press ENTER to quit");

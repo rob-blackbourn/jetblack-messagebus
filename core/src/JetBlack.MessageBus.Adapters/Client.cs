@@ -38,19 +38,14 @@ namespace JetBlack.MessageBus.Adapters
               autoConnect);
         }
 
-        public static Client Create(string server, int port)
-        {
-            return Create(server, port, new BinaryEncoder(), false, false, new NullClientAuthenticator(), true);
-        }
-
         public static Client Create(
             string server,
             int port,
             IByteEncoder byteEncoder,
-            bool monitorHeartbeat,
-            bool IsSslEnabled,
-            IClientAuthenticator authenticator,
-            bool autoConnect)
+            bool monitorHeartbeat = false,
+            bool IsSslEnabled = false,
+            IClientAuthenticator? authenticator = null,
+            bool autoConnect = true)
         {
             var ipAddress = Dns.GetHostEntry(server).AddressList
                .First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);

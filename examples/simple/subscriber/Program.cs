@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using JetBlack.MessageBus.Common.Json;
 using JetBlack.MessageBus.Adapters;
 
 namespace subscriber
@@ -11,7 +12,7 @@ namespace subscriber
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091);
+            var client = Client.Create("localhost", 9091, new JsonByteEncoder());
 
             client.OnDataReceived += OnDataReceived;
             client.OnDataError += OnDataError;
