@@ -69,6 +69,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePassword", "utilities\s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "subscriber", "examples\selectfeed\subscriber\subscriber.csproj", "{A7931AD7-F828-4510-A661-70474377E9BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.JwtAuthentication", "extensions\authentication\src\JetBlack.MessageBus.JwtAuthentication\JetBlack.MessageBus.JwtAuthentication.csproj", "{8ECA7204-D019-4E5E-96CA-0FD49157C418}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.JwtAuthentication.Test", "extensions\authentication\test\JetBlack.MessageBus.JwtAuthentication.Test\JetBlack.MessageBus.JwtAuthentication.Test.csproj", "{525BF985-C55B-4122-A83B-9E40DDA14B1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -322,6 +326,30 @@ Global
 		{A7931AD7-F828-4510-A661-70474377E9BD}.Release|x64.Build.0 = Release|Any CPU
 		{A7931AD7-F828-4510-A661-70474377E9BD}.Release|x86.ActiveCfg = Release|Any CPU
 		{A7931AD7-F828-4510-A661-70474377E9BD}.Release|x86.Build.0 = Release|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Debug|x64.Build.0 = Debug|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Debug|x86.Build.0 = Debug|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Release|x64.ActiveCfg = Release|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Release|x64.Build.0 = Release|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Release|x86.ActiveCfg = Release|Any CPU
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418}.Release|x86.Build.0 = Release|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Debug|x64.Build.0 = Debug|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Release|x64.ActiveCfg = Release|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Release|x64.Build.0 = Release|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6C5C5A10-D8C4-4ADB-8D8A-25DD6031EEA3} = {BED777EA-B6A5-4CEE-B09E-599453CE1F59}
@@ -353,5 +381,7 @@ Global
 		{659365FD-6492-42DA-9B96-6769C9E810BD} = {6201F32D-A38D-44F9-9BB4-E16E6DDB7A3B}
 		{9C222EB8-E90A-4C65-B619-D2A5B1A9EC60} = {659365FD-6492-42DA-9B96-6769C9E810BD}
 		{A7931AD7-F828-4510-A661-70474377E9BD} = {18DFA3EC-97E8-4774-B981-866B1D7E8BDB}
+		{8ECA7204-D019-4E5E-96CA-0FD49157C418} = {DA927A58-8EEE-4E93-83EC-CCACFB483D4E}
+		{525BF985-C55B-4122-A83B-9E40DDA14B1E} = {5B6F2458-1CA7-48E1-9D2B-0505A6AD22CE}
 	EndGlobalSection
 EndGlobal

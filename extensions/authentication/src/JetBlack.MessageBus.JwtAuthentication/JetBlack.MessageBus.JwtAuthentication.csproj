@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>JetBlack.MessageBus.JwtAuthentication</PackageId>
+    <Version>2.0.0</Version>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Authors>Rob Blackbourn</Authors>
+    <Company>JetBlack</Company>
+    <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-messagebus</RepositoryUrl>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\core\src\JetBlack.MessageBus.Common\JetBlack.MessageBus.Common.csproj">
+        <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+  </ItemGroup>
+
+</Project>
