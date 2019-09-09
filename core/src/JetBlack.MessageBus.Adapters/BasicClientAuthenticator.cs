@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.IO;
+
 using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Adapters
@@ -22,5 +23,7 @@ namespace JetBlack.MessageBus.Adapters
             writer.Write(Username);
             writer.Write(_password);
         }
+
+        public override string ToString() => $"{nameof(Username)}=\"{Username}\"";
     }
 }
