@@ -38,14 +38,14 @@ namespace JetBlack.MessageBus.Distributor
             };
 
             var process = Process.GetCurrentProcess();
-            Console.WriteLine($"Waiting for SIGTERM/SIGINT on PID {process.Id}");
+            program.Logger.LogInformation("Waiting for SIGTERM/SIGINT on PID {ProcessId}", process.Id);
             exitEvent.WaitOne();
 
             program.Dispose();
         }
 
 
-        private readonly ILogger<Program> _logger;
+        public ILogger<Program> Logger { get; }
         private readonly DistributorConfig _distributorConfig;
         private readonly Server _server;
 
@@ -62,7 +62,7 @@ namespace JetBlack.MessageBus.Distributor
                     .AddConsole();
             });
 
-            _logger = loggerFactory.CreateLogger<Program>();
+            Logger = loggerFactory.CreateLogger<Program>();
 
             _distributorConfig = configuration.GetSection("distributor").Get<DistributorConfig>();
 
