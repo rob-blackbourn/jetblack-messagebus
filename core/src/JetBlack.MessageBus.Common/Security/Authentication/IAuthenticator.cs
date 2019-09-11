@@ -7,6 +7,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
 {
     public interface IAuthenticator
     {
+        string Name { get; }
         GenericIdentity Authenticate(Stream stream);
     }
 }

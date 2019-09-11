@@ -36,6 +36,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             Manager = PasswordManager.Load(FileName);
         }
 
+        public string Name => "BASIC";
         public string FileName { get; }
         public PasswordManager Manager
         {
@@ -64,7 +65,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             if (!Manager.IsValid(username, password))
                 throw new SecurityException();
 
-            return new GenericIdentity(username, "BASIC");
+            return new GenericIdentity(username, Name);
         }
     }
 }

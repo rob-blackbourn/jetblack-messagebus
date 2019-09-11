@@ -53,6 +53,22 @@
       "stopAtEntry": false
     },
     {
+      "name": "Distributor: Token",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
+      "args": [
+        "${workspaceFolder}/examples/server-config/token/appsettings.json"
+      ],
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
       "name": "simple notifier",
       "type": "coreclr",
       "request": "launch",

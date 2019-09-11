@@ -24,6 +24,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                 throw new ArgumentException("Expected the second argument ldap-port to be an integer");
         }
 
+        public string Name => @"LDAP";
         public string Server { get; }
         public int Port { get; }
 
@@ -42,7 +43,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                     if (!ldap.Bound)
                         throw new SecurityException();
 
-                    return new GenericIdentity(username, "LDAP");
+                    return new GenericIdentity(username, Name);
                 }
                 catch
                 {

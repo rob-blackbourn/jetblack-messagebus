@@ -25,6 +25,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
         }
 
+        public string Name => "JWT";
         public SymmetricSecurityKey SecurityKey { get; }
 
         public GenericIdentity Authenticate(Stream stream)
@@ -44,7 +45,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                     IssuerSigningKey = SecurityKey
                 };
                 tokenHandler.ValidateToken(encodedToken, parameters, out var securityToken);
-                return new GenericIdentity(((JwtSecurityToken)securityToken).Subject, "JWT");
+                return new GenericIdentity(((JwtSecurityToken)securityToken).Subject, Name);
             }
             catch
             {
