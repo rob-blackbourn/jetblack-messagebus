@@ -104,11 +104,18 @@ namespace JetBlack.MessageBus.Common.IO
         /// Write a string
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write(string value)
+        public void Write(string? value)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(value);
-            Write(bytes.Length);
-            _stream.Write(bytes, 0, bytes.Length);
+            if (value == null)
+            {
+                Write(0);
+            }
+            else
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(value);
+                Write(bytes.Length);
+                _stream.Write(bytes, 0, bytes.Length);
+            }
         }
 
         /// <summary>

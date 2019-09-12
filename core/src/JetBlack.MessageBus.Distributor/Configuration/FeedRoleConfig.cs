@@ -11,6 +11,9 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public List<Role>? Allow { get; set; }
         public List<Role>? Deny { get; set; }
         public bool IsAuthorized { get; set; }
+        public bool IsImpersonationAllowed { get; set; } = false;
+        public bool IsProxyAllowed { get; set; } = false;
+
         public Dictionary<string, Dictionary<string, InteractorRoleConfig>?>? InteractorRoles { get; set; }
 
         public FeedRole ToFeedRole(string feed)
@@ -20,6 +23,8 @@ namespace JetBlack.MessageBus.Distributor.Configuration
                 Allow.Aggregate(Role.None, (aggregate, role) => aggregate | role),
                 Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role),
                 IsAuthorized,
+                IsImpersonationAllowed,
+                IsProxyAllowed,
                 InteractorRoles?.SelectMany(x => x.Value.Select(y => y.Value.ToInteractorRole(x.Key, y.Key)))?.ToList());
         }
     }

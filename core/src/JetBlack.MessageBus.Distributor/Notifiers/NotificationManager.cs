@@ -56,7 +56,13 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
             if (notifiables == null)
                 return;
 
-            var forwardedSubscriptionRequest = new ForwardedSubscriptionRequest(subscriber.User, subscriber.Host, subscriber.Id, subscriptionRequest.Feed, subscriptionRequest.Topic, subscriptionRequest.IsAdd);
+            var forwardedSubscriptionRequest = new ForwardedSubscriptionRequest(
+                subscriber.UserForFeed(subscriptionRequest.Feed),
+                subscriber.HostForFeed(subscriptionRequest.Feed),
+                subscriber.Id,
+                subscriptionRequest.Feed,
+                subscriptionRequest.Topic,
+                subscriptionRequest.IsAdd);
 
             _logger.LogDebug("Notifying interactors[{Interactors}] of subscription {Message}", string.Join(",", notifiables), forwardedSubscriptionRequest);
 

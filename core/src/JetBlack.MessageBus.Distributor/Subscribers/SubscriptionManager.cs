@@ -181,7 +181,12 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 // Tell the requestor about subscribers that are interested in this topic.
                 foreach (var subscriber in matchingSubscriptions.Value)
                 {
-                    var message = new ForwardedSubscriptionRequest(subscriber.User, subscriber.Host, subscriber.Id, args.Feed, matchingSubscriptions.Key, true);
+                    var message = new ForwardedSubscriptionRequest(
+                        subscriber.UserForFeed(args.Feed),
+                        subscriber.HostForFeed(args.Feed),
+                        subscriber.Id,
+                        args.Feed,
+                        matchingSubscriptions.Key, true);
                     try
                     {
                         args.Interactor.SendMessage(message);

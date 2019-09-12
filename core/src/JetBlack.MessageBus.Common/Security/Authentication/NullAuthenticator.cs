@@ -1,7 +1,6 @@
 #nullable enable
 
 using System.IO;
-using System.Security.Principal;
 
 namespace JetBlack.MessageBus.Common.Security.Authentication
 {
@@ -14,10 +13,10 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
 
         public string Name => "NULL";
 
-        public GenericIdentity Authenticate(Stream stream)
+        public AuthenticationResponse Authenticate(Stream stream)
         {
             // Always true.
-            return new GenericIdentity("unknown", Name);
+            return new AuthenticationResponse("unknown", Name, null, null);
         }
     }
 }

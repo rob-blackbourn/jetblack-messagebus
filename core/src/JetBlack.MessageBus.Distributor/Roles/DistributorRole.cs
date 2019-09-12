@@ -39,6 +39,20 @@ namespace JetBlack.MessageBus.Distributor.Roles
             return IsAuthorizationRequired;
         }
 
+        public bool IsImpersonationAllowedForFeed(string feed)
+        {
+            if (FeedRoles.TryGetValue(feed, out var feedRole))
+                return feedRole.IsImpersonationAllowed;
+            return false;
+        }
+
+        public bool IsProxyAllowedForFeed(string feed)
+        {
+            if (FeedRoles.TryGetValue(feed, out var feedRole))
+                return feedRole.IsProxyAllowed;
+            return false;
+        }
+
         public override string ToString() => $"{nameof(Allow)}={Allow},{nameof(Deny)}={Deny},{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(FeedRoles)}=[{string.Join(", ", FeedRoles.Values)}]";
     }
 }

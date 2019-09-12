@@ -28,11 +28,13 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
         public string Server { get; }
         public int Port { get; }
 
-        public GenericIdentity Authenticate(Stream stream)
+        public AuthenticationResponse Authenticate(Stream stream)
         {
             var reader = new DataReader(stream);
             var username = reader.ReadString();
             var password = reader.ReadString();
+            var impersonating = reader.ReadNullableString();
+            var forwardedFor = reader.ReadNullableString();
 
             using (var ldap = new LdapConnection { SecureSocketLayer = true })
             {
@@ -43,7 +45,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                     if (!ldap.Bound)
                         throw new SecurityException();
 
-                    return new GenericIdentity(username, Name);
+                    return new AuthenticationResponse(username, Name, impersonating, forwardedFor);
                 }
                 catch
                 {

@@ -54,8 +54,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication.Test
                 stream.Seek(0, SeekOrigin.Begin);
                 var authenticator = new JwtAuthenticator(new[] { secret });
                 var identity = authenticator.Authenticate(stream);
-                Assert.AreEqual(identity.Name, username);
-                Assert.AreEqual(identity.AuthenticationType, "JWT");
+                Assert.AreEqual(identity.User, username);
+                Assert.AreEqual(identity.Method, "JWT");
             }
         }
 

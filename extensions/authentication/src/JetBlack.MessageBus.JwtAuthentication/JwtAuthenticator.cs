@@ -28,10 +28,12 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
         public string Name => "JWT";
         public SymmetricSecurityKey SecurityKey { get; }
 
-        public GenericIdentity Authenticate(Stream stream)
+        public AuthenticationResponse Authenticate(Stream stream)
         {
             var reader = new DataReader(stream);
             var encodedToken = reader.ReadString();
+            var impersonating = reader.ReadNullableString();
+            var forwardedFor = reader.ReadNullableString();
 
             try
             {
@@ -45,7 +47,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                     IssuerSigningKey = SecurityKey
                 };
                 tokenHandler.ValidateToken(encodedToken, parameters, out var securityToken);
-                return new GenericIdentity(((JwtSecurityToken)securityToken).Subject, Name);
+                return new AuthenticationResponse(((JwtSecurityToken)securityToken).Subject, Name, impersonating, forwardedFor);
             }
             catch
             {

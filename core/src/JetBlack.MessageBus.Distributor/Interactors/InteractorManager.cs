@@ -53,16 +53,28 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 feed,
                 topic);
 
-            if (!IsAuthorizationRequired(feed))
+            if (!interactor.IsAuthorizationRequired(feed))
             {
                 _logger.LogDebug("No authorization required");
                 AcceptAuthorization(interactor, new AuthorizationResponse(interactor.Id, feed, topic, false, null));
                 return;
             }
 
-            var authorizationRequest = new AuthorizationRequest(interactor.Id, interactor.Host, interactor.User, feed, topic);
+            var authorizationRequest = new AuthorizationRequest(
+                interactor.Id,
+                interactor.HostForFeed(feed),
+                interactor.UserForFeed(feed),
+                feed,
+                topic);
 
-            foreach (var authorizer in _repository.Find(feed, Role.Authorize))
+            var authorizers = _repository.Find(feed, Role.Authorize);
+            if (authorizers.Count == 0)
+            {
+                _logger.LogWarning("No authorizers for for feed {Feed}", feed);
+                return;
+            }
+
+            foreach (var authorizer in authorizers)
             {
                 try
                 {
@@ -96,11 +108,6 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 requestor.SetAuthorization(authorization.Feed, authorization.Topic, authorization);
 
             AuthorizationResponses?.Invoke(this, new AuthorizationResponseEventArg(authorizer, requestor, authorization, !hasAuthorization));
-        }
-
-        private bool IsAuthorizationRequired(string feed)
-        {
-            return _repository.DistributorRole.IsAuthorizationRequiredForFeed(feed);
         }
 
         public void Dispose()

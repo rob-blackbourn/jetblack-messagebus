@@ -56,16 +56,18 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             }
         }
 
-        public GenericIdentity Authenticate(Stream stream)
+        public AuthenticationResponse Authenticate(Stream stream)
         {
             var reader = new DataReader(stream);
             var username = reader.ReadString();
             var password = reader.ReadString();
+            var impersonating = reader.ReadNullableString();
+            var forwardedFor = reader.ReadNullableString();
 
             if (!Manager.IsValid(username, password))
                 throw new SecurityException();
 
-            return new GenericIdentity(username, Name);
+            return new AuthenticationResponse(username, Name, impersonating, forwardedFor);
         }
     }
 }

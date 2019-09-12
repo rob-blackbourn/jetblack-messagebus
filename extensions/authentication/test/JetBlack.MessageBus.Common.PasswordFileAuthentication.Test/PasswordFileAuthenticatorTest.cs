@@ -28,8 +28,8 @@ namespace JetBlack.MessageBus.Common.PasswordFileAuthentication.Test
 
                 stream.Seek(0, SeekOrigin.Begin);
                 var identity = authenticator.Authenticate(stream);
-                Assert.AreEqual(identity.Name, "john");
-                Assert.AreEqual(identity.AuthenticationType, "BASIC");
+                Assert.AreEqual(identity.User, "john");
+                Assert.AreEqual(identity.Method, "BASIC");
             }
         }
 

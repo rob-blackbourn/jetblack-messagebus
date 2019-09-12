@@ -50,19 +50,22 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             var address = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
 
-            var identity = authenticator.Authenticate(stream);
+            var authenticationResponse = authenticator.Authenticate(stream);
             var logger = loggerFactory.CreateLogger<Interactor>();
-            logger.LogInformation("Authenticated with {Type} as {Name}", identity.AuthenticationType, identity.Name);
-            var roleManager = new RoleManager(distributorRole, hostName, identity.Name);
+            logger.LogInformation("Authenticated with {Type} as {Name}", authenticationResponse.Method, authenticationResponse.User);
+            var roleManager = new RoleManager(
+                distributorRole,
+                hostName,
+                authenticationResponse.User,
+                authenticationResponse.Impersonating,
+                authenticationResponse.ForwardedFor);
 
-            var interactor = new Interactor(stream, hostName, identity.Name, roleManager, eventQueue, logger, token);
+            var interactor = new Interactor(stream, roleManager, eventQueue, logger, token);
             return interactor;
         }
 
         internal Interactor(
             Stream stream,
-            string hostName,
-            string userName,
             RoleManager roleManager,
             EventQueue<InteractorEventArgs> eventQueue,
             ILogger<Interactor> logger,
@@ -71,20 +74,40 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             _logger = logger;
             _stream = stream;
             Id = Guid.NewGuid();
-            Host = hostName;
-            User = userName;
             _roleManager = roleManager;
             _token = token;
             _eventQueue = eventQueue;
         }
 
         public Guid Id { get; }
-        public string Host { get; }
-        public string User { get; }
+        public string Host => _roleManager.Host;
+        public string User => _roleManager.User;
+        public string? Impersonating => _roleManager.Impersonating;
+        public string? ForwardedFor => _roleManager.ForwardedFor;
 
         public bool HasRole(string feed, Role role)
         {
             return _roleManager.HasRole(feed, role);
+        }
+
+        public string UserForFeed(string feed)
+        {
+            return _roleManager.IsImpersonationAllowed(feed)
+                ? Impersonating ?? User
+                : User;
+        }
+
+        public string HostForFeed(string feed)
+        {
+            return _roleManager.IsProxyAllowed(feed)
+                ? (ForwardedFor ?? Host)
+                : Host;
+        }
+
+
+        public bool IsAuthorizationRequired(string feed)
+        {
+            return _roleManager.IsAuthorizationRequired(feed);
         }
 
         public void Start()
@@ -193,10 +216,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             return Id.GetHashCode();
         }
 
-        public override string ToString()
-        {
-            return $"{Id}: {Host}";
-        }
+        public override string ToString() => $"{Id}: {User}({Impersonating}) {Host}({ForwardedFor})";
 
         public void Dispose()
         {

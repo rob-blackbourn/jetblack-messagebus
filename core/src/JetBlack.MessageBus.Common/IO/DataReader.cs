@@ -148,6 +148,18 @@ namespace JetBlack.MessageBus.Common.IO
             return Encoding.UTF8.GetString(buf);
         }
 
+        public string? ReadNullableString()
+        {
+            var len = ReadInt32();
+            if (len == 0)
+                return null;
+            else
+            {
+                var buf = ReadFully(new byte[len]);
+                return Encoding.UTF8.GetString(buf);
+            }
+        }
+
         /// <summary>
         /// Read an array of strings.
         /// </summary>

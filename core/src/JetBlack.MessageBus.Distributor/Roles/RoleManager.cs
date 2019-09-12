@@ -6,17 +6,22 @@ namespace JetBlack.MessageBus.Distributor.Roles
 {
     public class RoleManager
     {
-        private readonly DistributorRole _distributorRole;
-        private readonly string _host;
-        private readonly string _user;
         private readonly IDictionary<string, IDictionary<Role, bool>> _feedDecision = new Dictionary<string, IDictionary<Role, bool>>();
 
-        public RoleManager(DistributorRole distributorPermission, string host, string user)
+        public RoleManager(DistributorRole distributorPermission, string host, string user, string? impersonating, string? forwardedFor)
         {
-            _distributorRole = distributorPermission;
-            _host = host;
-            _user = user;
+            DistributorRole = distributorPermission;
+            Host = host;
+            User = user;
+            Impersonating = string.IsNullOrWhiteSpace(impersonating) ? null : impersonating;
+            ForwardedFor = string.IsNullOrWhiteSpace(forwardedFor) ? null : forwardedFor;
         }
+
+        public DistributorRole DistributorRole { get; }
+        public string User { get; }
+        public string Host { get; }
+        public string? Impersonating { get; }
+        public string? ForwardedFor { get; }
 
         public bool HasRole(string feed, Role role)
         {
@@ -26,12 +31,27 @@ namespace JetBlack.MessageBus.Distributor.Roles
             if (roleDecision.TryGetValue(role, out var decision))
                 return decision;
 
-            decision = _distributorRole.HasRole(_host, _user, feed, role);
+            decision = DistributorRole.HasRole(Host, User, feed, role);
 
             // Cache the decision;
             roleDecision.Add(role, decision);
 
             return decision;
+        }
+
+        public bool IsAuthorizationRequired(string feed)
+        {
+            return DistributorRole.IsAuthorizationRequiredForFeed(feed);
+        }
+
+        public bool IsImpersonationAllowed(string feed)
+        {
+            return DistributorRole.IsImpersonationAllowedForFeed(feed);
+        }
+
+        public bool IsProxyAllowed(string feed)
+        {
+            return DistributorRole.IsProxyAllowedForFeed(feed);
         }
     }
 }

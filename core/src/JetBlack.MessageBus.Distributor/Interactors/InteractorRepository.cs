@@ -10,7 +10,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
     public class InteractorRepository : IDisposable, IEnumerable<Interactor>
     {
         private readonly IDictionary<Guid, Interactor> _interactors = new Dictionary<Guid, Interactor>();
-        private readonly IDictionary<string, IDictionary<Role, ISet<Interactor>>> _feedRoleInteractors = new Dictionary<string, IDictionary<Role, ISet<Interactor>>>();
+        private readonly IDictionary<string, IDictionary<Role, HashSet<Interactor>>> _feedRoleInteractors = new Dictionary<string, IDictionary<Role, HashSet<Interactor>>>();
 
         internal InteractorRepository(DistributorRole distributorRole)
         {
@@ -39,7 +39,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             return null;
         }
 
-        internal IEnumerable<Interactor> Find(string feed, Role role)
+        internal IReadOnlyCollection<Interactor> Find(string feed, Role role)
         {
             if (_feedRoleInteractors.TryGetValue(feed, out var roleInteractors))
             {
@@ -55,11 +55,14 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             foreach (var feed in DistributorRole.FeedRoles.Keys)
             {
                 if (!_feedRoleInteractors.TryGetValue(feed, out var roleInteractor))
-                    _feedRoleInteractors.Add(feed, roleInteractor = new Dictionary<Role, ISet<Interactor>>());
+                    _feedRoleInteractors.Add(feed, roleInteractor = new Dictionary<Role, HashSet<Interactor>>());
+
+                var host = interactor.HostForFeed(feed);
+                var user = interactor.UserForFeed(feed);
 
                 foreach (var role in new[] { Role.Publish, Role.Subscribe, Role.Notify, Role.Authorize })
                 {
-                    if (DistributorRole.HasRole(interactor.Host, interactor.User, feed, role))
+                    if (DistributorRole.HasRole(host, user, feed, role))
                     {
                         if (!roleInteractor.TryGetValue(role, out var interactors))
                             roleInteractor.Add(role, interactors = new HashSet<Interactor>());
