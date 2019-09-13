@@ -31,7 +31,7 @@ namespace JetBlack.MessageBus.Distributor.Roles
             if (roleDecision.TryGetValue(role, out var decision))
                 return decision;
 
-            decision = DistributorRole.HasRole(Host, User, feed, role);
+            decision = DistributorRole.HasRole(HostForFeed(feed), UserForFeed(feed), feed, role);
 
             // Cache the decision;
             roleDecision.Add(role, decision);
@@ -53,5 +53,20 @@ namespace JetBlack.MessageBus.Distributor.Roles
         {
             return DistributorRole.IsProxyAllowedForFeed(feed);
         }
+
+        public string UserForFeed(string feed)
+        {
+            return IsImpersonationAllowed(feed)
+                ? Impersonating ?? User
+                : User;
+        }
+
+        public string HostForFeed(string feed)
+        {
+            return IsProxyAllowed(feed)
+                ? (ForwardedFor ?? Host)
+                : Host;
+        }
+
     }
 }

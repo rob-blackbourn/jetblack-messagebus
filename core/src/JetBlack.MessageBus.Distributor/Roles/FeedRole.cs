@@ -36,6 +36,8 @@ namespace JetBlack.MessageBus.Distributor.Roles
 
             if (InteractorRoles.TryGetValue(new InteractorRole.Key(host, user), out var interactorRole))
                 decision = interactorRole.HasRole(role, decision);
+            else if (InteractorRoles.TryGetValue(new InteractorRole.Key("*", user), out interactorRole))
+                decision = interactorRole.HasRole(role, decision);
 
             return decision;
         }

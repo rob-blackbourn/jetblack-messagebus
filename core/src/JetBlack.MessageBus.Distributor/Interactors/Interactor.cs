@@ -90,25 +90,9 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             return _roleManager.HasRole(feed, role);
         }
 
-        public string UserForFeed(string feed)
-        {
-            return _roleManager.IsImpersonationAllowed(feed)
-                ? Impersonating ?? User
-                : User;
-        }
-
-        public string HostForFeed(string feed)
-        {
-            return _roleManager.IsProxyAllowed(feed)
-                ? (ForwardedFor ?? Host)
-                : Host;
-        }
-
-
-        public bool IsAuthorizationRequired(string feed)
-        {
-            return _roleManager.IsAuthorizationRequired(feed);
-        }
+        public string UserForFeed(string feed) => _roleManager.UserForFeed(feed);
+        public string HostForFeed(string feed) => _roleManager.HostForFeed(feed);
+        public bool IsAuthorizationRequired(string feed) => _roleManager.IsAuthorizationRequired(feed);
 
         public void Start()
         {
