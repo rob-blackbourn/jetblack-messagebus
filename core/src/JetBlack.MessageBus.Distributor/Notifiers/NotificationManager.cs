@@ -4,8 +4,6 @@ using System;
 
 using Microsoft.Extensions.Logging;
 
-using Prometheus;
-
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Messages;
 
@@ -15,8 +13,6 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
     {
         private readonly ILogger<NotificationManager> _logger;
         private readonly NotificationRepository _repository;
-        private readonly CounterDictionary _notificationRequestCount = new CounterDictionary("notification_request_count", "The number of notification requests");
-        private readonly CounterDictionary _forwardedSubscriptionCount = new CounterDictionary("notification_forwarded_subscription_count", "The number of forwarded subscriptions");
 
         public NotificationManager(InteractorManager interactorManager, ILoggerFactory loggerFactory)
         {
@@ -44,8 +40,6 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
         {
             _logger.LogInformation("Handling notification request for {Notifiable} on {Message}", notifiable, notificationRequest);
 
-            _notificationRequestCount[notificationRequest.Feed].Inc();
-
             if (notificationRequest.IsAdd)
             {
                 if (_repository.AddRequest(notifiable, notificationRequest.Feed))
@@ -62,7 +56,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
             if (notifiables == null)
                 return;
 
-            _forwardedSubscriptionCount[subscriptionRequest.Feed].Inc();
+            subscriber.Metrics.ForwardedSubscriptions[subscriptionRequest.Feed].Inc();
 
             var forwardedSubscriptionRequest = new ForwardedSubscriptionRequest(
                 subscriber.UserForFeed(subscriptionRequest.Feed),

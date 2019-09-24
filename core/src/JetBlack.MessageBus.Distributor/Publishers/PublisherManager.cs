@@ -17,8 +17,6 @@ namespace JetBlack.MessageBus.Distributor.Publishers
     {
         private readonly ILogger<PublisherManager> _logger;
         private readonly PublisherRepository _repository;
-        private readonly CounterDictionary _unicastMessageCount = new CounterDictionary("publisher_unicast_message_count", "The number of unicast messages sent");
-        private readonly CounterDictionary _multicastMessageCount = new CounterDictionary("publisher_multicast_message_count", "The number of multicast messages sent");
 
         public PublisherManager(
             InteractorManager interactorManager,
@@ -40,7 +38,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 return;
             }
 
-            _unicastMessageCount[unicastData.Feed].Inc();
+            publisher.Metrics.UnicastMessages[unicastData.Feed].Inc();
 
             var clientUnicastData = new ForwardedUnicastData(
                 publisher.UserForFeed(unicastData.Feed),
@@ -73,7 +71,8 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 return;
             }
 
-            _multicastMessageCount[multicastData.Feed].Inc();
+            if (publisher != null)
+                publisher.Metrics.MulticastMessages[multicastData.Feed].Inc();
 
             foreach (var subscriberAndAuthorizationInfo in subscribers)
             {

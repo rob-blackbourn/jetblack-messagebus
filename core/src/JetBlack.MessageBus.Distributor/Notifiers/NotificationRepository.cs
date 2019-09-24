@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using JetBlack.MessageBus.Common.Linq;
 using JetBlack.MessageBus.Distributor.Interactors;
 
 namespace JetBlack.MessageBus.Distributor.Notifiers
@@ -11,7 +10,6 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
     internal class NotificationRepository
     {
         private readonly Dictionary<string, ISet<Interactor>> _feedToNotifiables = new Dictionary<string, ISet<Interactor>>();
-        private readonly GaugeDictionary _feedRequestCount = new GaugeDictionary("notification_request_count", "The number of notification requests");
 
         public NotificationRepository()
         {
@@ -23,7 +21,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
             var topicsWithoutInteractors = new HashSet<string>();
             foreach (var (feed, feedInteractors) in _feedToNotifiables.Where(x => x.Value.Contains(interactor)))
             {
-                _feedRequestCount[feed].Dec();
+                interactor.Metrics.FeedRequests[feed].Dec();
                 feedInteractors.Remove(interactor);
                 if (feedInteractors.Count == 0)
                     topicsWithoutInteractors.Add(feed);
@@ -46,7 +44,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
             // Add to the notifiables for this topic pattern and inform the subscription manager of the new notification request.
             notifiables.Add(notifiable);
-            _feedRequestCount[feed].Inc();
+            notifiable.Metrics.FeedRequests[feed].Inc();
             return true;
         }
 
@@ -62,7 +60,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
             // Remove the interactor from the set of notifiables.
             notifiables.Remove(notifiable);
-            _feedRequestCount[feed].Dec();
+            notifiable.Metrics.FeedRequests[feed].Dec();
 
             // Are there any interactors left listening to this feed?
             if (notifiables.Count != 0)

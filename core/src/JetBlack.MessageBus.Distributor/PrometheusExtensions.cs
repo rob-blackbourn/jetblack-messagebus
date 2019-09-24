@@ -1,135 +1,69 @@
-using System;
+#nullable enable
+
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Prometheus;
 
 namespace JetBlack.MessageBus.Distributor
 {
-    public static class PrometheusExtensions
+    public class CounterSelector
     {
-        public static Counter Get(this IDictionary<ITuple, Counter> counters, ITuple key, string name, string help, params string[] labelNames)
+        private readonly Counter _counter;
+        private readonly string[] _labelValues;
+        private readonly IDictionary<string, Counter.Child> _cache = new Dictionary<string, Counter.Child>();
+
+        public CounterSelector(Counter counter, params string[] labelValues)
         {
-            if (!counters.TryGetValue(key, out var counter))
+            _counter = counter;
+            _labelValues = labelValues;
+        }
+
+        public Counter.Child this[string key]
+        {
+            get
             {
-                counters.Add(key, counter = Metrics.CreateCounter(name, help, ExtendLabelNames(key, labelNames)));
-            }
-            return counter;
-        }
-
-        public static Counter Get(this IDictionary<string, Counter> counters, string key, string name, string help, params string[] labelNames)
-        {
-            if (!counters.TryGetValue(key, out var counter))
-            {
-                counters.Add(key, counter = Metrics.CreateCounter(name, help, ExtendLabelNames(key, labelNames)));
-            }
-            return counter;
-        }
-
-        public static Gauge Get(this IDictionary<ITuple, Gauge> counters, ITuple key, string name, string help, params string[] labelNames)
-        {
-            if (!counters.TryGetValue(key, out var gauge))
-                counters.Add(key, gauge = Metrics.CreateGauge(name, help, ExtendLabelNames(key, labelNames)));
-            return gauge;
-        }
-
-        public static Gauge Get(this IDictionary<string, Gauge> counters, string key, string name, string help, params string[] labelNames)
-        {
-            if (!counters.TryGetValue(key, out var gauge))
-                counters.Add(key, gauge = Metrics.CreateGauge(name, help, ExtendLabelNames(key, labelNames)));
-            return gauge;
-        }
-
-        private static string[] ExtendLabelNames(string labelName, string[] labelNames)
-        {
-            var labels = new string[1 + labelNames.Length];
-            labels[0] = labelName;
-            labelNames.CopyTo(labels, 1);
-            return labels;
-        }
-
-        private static string[] ExtendLabelNames(ITuple key, string[] labelNames)
-        {
-            var labels = new string[key.Length + labelNames.Length];
-            key.CopyTo(labels, 0);
-            labelNames.CopyTo(labels, key.Length);
-            return labels;
-        }
-
-        private static void CopyTo(this ITuple source, string[] dest, int index)
-        {
-            for (int i = 0; i < source.Length; ++i)
-            {
-                var value = source[i];
-                if (value != null && value is string)
-                    dest[i + index] = (string)value;
-                else
-                    throw new ApplicationException("Invalid type");
+                if (!_cache.TryGetValue(key, out var counter))
+                    _cache.Add(key, counter = Create(key));
+                return counter;
             }
         }
 
-    }
-
-    public class CounterDictionary
-    {
-        private readonly Dictionary<string, Counter> _counters = new Dictionary<string, Counter>();
-
-        public CounterDictionary(string name, string help, params string[] labelNames)
+        private Counter.Child Create(string key)
         {
-            Name = name;
-            Help = help;
-            LabelNames = labelNames;
-        }
-
-        public string Name { get; }
-        public string Help { get; }
-        public string[] LabelNames { get; }
-
-        public Counter this[string key]
-        {
-            get => _counters.Get(key, Name, Help, LabelNames);
+            var labelValues = new string[1 + _labelValues.Length];
+            labelValues[0] = key;
+            _labelValues.CopyTo(labelValues, 1);
+            return _counter.WithLabels(labelValues);
         }
     }
 
-    public class GaugeDictionary
+    public class GaugeSelector
     {
-        private readonly Dictionary<string, Gauge> _counters = new Dictionary<string, Gauge>();
+        private readonly Gauge _gauge;
+        private readonly string[] _labelValues;
+        private readonly IDictionary<string, Gauge.Child> _cache = new Dictionary<string, Gauge.Child>();
 
-        public GaugeDictionary(string name, string help, params string[] labelNames)
+        public GaugeSelector(Gauge gauge, params string[] labelValues)
         {
-            Name = name;
-            Help = help;
-            LabelNames = labelNames;
+            _gauge = gauge;
+            _labelValues = labelValues;
         }
 
-        public string Name { get; }
-        public string Help { get; }
-        public string[] LabelNames { get; }
-
-        public Gauge this[string key]
+        public Gauge.Child this[string key]
         {
-            get => _counters.Get(key, Name, Help, LabelNames);
-        }
-    }
-
-
-    public class GaugeDictionary2
-    {
-        private readonly Dictionary<ITuple, Gauge> _counters = new Dictionary<ITuple, Gauge>();
-
-        public GaugeDictionary2(string name, string help, params string[] labelNames)
-        {
-            Name = name;
-            Help = help;
-            LabelNames = labelNames;
+            get
+            {
+                if (!_cache.TryGetValue(key, out var gauge))
+                    _cache.Add(key, gauge = Create(key));
+                return gauge;
+            }
         }
 
-        public string Name { get; }
-        public string Help { get; }
-        public string[] LabelNames { get; }
-
-        public Gauge this[ITuple key]
+        private Gauge.Child Create(string key)
         {
-            get => _counters.Get(key, Name, Help, LabelNames);
+            var labelValues = new string[1 + _labelValues.Length];
+            labelValues[0] = key;
+            _labelValues.CopyTo(labelValues, 1);
+            return _gauge.WithLabels(labelValues);
         }
     }
 }
