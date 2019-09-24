@@ -2,9 +2,12 @@
 
 using System;
 
+using Microsoft.Extensions.Logging;
+
+using Prometheus;
+
 using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
-using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
@@ -12,6 +15,9 @@ namespace JetBlack.MessageBus.Distributor.Interactors
     {
         private readonly ILogger<InteractorManager> _logger;
         private readonly InteractorRepository _repository;
+        private readonly Counter _interatorsFaulted = Metrics.CreateCounter("interactor_faults", "The number of interactor faults");
+        private readonly Counter _authorizationRequests = Metrics.CreateCounter("authorization_requests", "The number of authorization requests");
+        private readonly Counter _authorizationResponses = Metrics.CreateCounter("authorization_responses", "The number of authorization responses");
 
         public InteractorManager(DistributorRole distributorRole, ILoggerFactory loggerFactory)
         {
@@ -41,6 +47,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         public void FaultInteractor(Interactor interactor, Exception error)
         {
             _logger.LogInformation("Faulting interactor: {Interactor}", interactor);
+            _interatorsFaulted.Inc();
 
             _repository.Remove(interactor);
             FaultedInteractors?.Invoke(this, new InteractorFaultedEventArgs(interactor, error));
@@ -52,6 +59,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 interactor,
                 feed,
                 topic);
+            _authorizationRequests.Inc();
 
             if (!interactor.IsAuthorizationRequired(feed))
             {
@@ -91,6 +99,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         internal void AcceptAuthorization(Interactor authorizer, AuthorizationResponse authorization)
         {
             _logger.LogDebug("Accepting an authorization response from {Authorizer} with {Authorization}.", authorizer, authorization);
+            _authorizationResponses.Inc();
 
             var requestor = _repository.Find(authorization.ClientId);
             if (requestor == null)

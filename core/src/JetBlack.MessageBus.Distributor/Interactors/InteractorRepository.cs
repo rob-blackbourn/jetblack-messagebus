@@ -3,6 +3,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+using Prometheus;
+
 using JetBlack.MessageBus.Distributor.Roles;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
@@ -11,6 +14,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
     {
         private readonly IDictionary<Guid, Interactor> _interactors = new Dictionary<Guid, Interactor>();
         private readonly IDictionary<string, IDictionary<Role, HashSet<Interactor>>> _feedRoleInteractors = new Dictionary<string, IDictionary<Role, HashSet<Interactor>>>();
+        private readonly Gauge _interactorCount = Metrics.CreateGauge("interactors", "The number of interactors");
 
         internal InteractorRepository(DistributorRole distributorRole)
         {
@@ -21,12 +25,16 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void Add(Interactor interactor)
         {
+            _interactorCount.Inc();
+
             _interactors.Add(interactor.Id, interactor);
             AddFeedRoles(interactor);
         }
 
         public bool Remove(Interactor interactor)
         {
+            _interactorCount.Dec();
+
             RemoveFeedRoles(interactor);
             return _interactors.Remove(interactor.Id);
         }

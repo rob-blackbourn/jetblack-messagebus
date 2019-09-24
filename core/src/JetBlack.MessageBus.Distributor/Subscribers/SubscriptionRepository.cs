@@ -12,7 +12,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
     {
         // Feed->Topic->Interactor->SubscriptionCount.
         private readonly IDictionary<string, IDictionary<string, IDictionary<Interactor, SubscriptionState>>> _cache = new Dictionary<string, IDictionary<string, IDictionary<Interactor, SubscriptionState>>>();
-        // Feed->Topic->Interactor->SubscriptionCount.
+        private readonly GaugeDictionary _subscriptionCount = new GaugeDictionary("subscriber_count", "The number of subscribers");
 
         public SubscriptionRepository()
         {
@@ -20,6 +20,8 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         public void AddSubscription(Interactor subscriber, string feed, string topic, AuthorizationInfo authorizationInfo, bool isAuthorizationUpdate)
         {
+            _subscriptionCount[feed].Inc();
+
             // Find topic subscriptions for this feed.
             if (!_cache.TryGetValue(feed, out var topicSubscriptions))
                 _cache.Add(feed, topicSubscriptions = new Dictionary<string, IDictionary<Interactor, SubscriptionState>>());
@@ -51,6 +53,11 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             // Has this subscriber registered an interest in the topic?
             if (!subscribersForTopic.TryGetValue(subscriber, out var subscriptionState))
                 return;
+
+            if (removeAll)
+                _subscriptionCount[feed].Dec(subscriptionState.Count);
+            else
+                _subscriptionCount[feed].Dec();
 
             if (removeAll || --subscriptionState.Count == 0)
                 subscribersForTopic.Remove(subscriber);

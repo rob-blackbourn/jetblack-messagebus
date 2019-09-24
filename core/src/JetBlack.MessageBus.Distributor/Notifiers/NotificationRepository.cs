@@ -2,6 +2,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+
+using JetBlack.MessageBus.Common.Linq;
 using JetBlack.MessageBus.Distributor.Interactors;
 
 namespace JetBlack.MessageBus.Distributor.Notifiers
@@ -9,6 +11,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
     internal class NotificationRepository
     {
         private readonly Dictionary<string, ISet<Interactor>> _feedToNotifiables = new Dictionary<string, ISet<Interactor>>();
+        private readonly GaugeDictionary _feedRequestCount = new GaugeDictionary("notification_request_count", "The number of notification requests");
 
         public NotificationRepository()
         {
@@ -18,11 +21,12 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
         {
             // Remove the interactor where it appears in the notifiables, remembering any topics which are left without any interactors.
             var topicsWithoutInteractors = new HashSet<string>();
-            foreach (var topicPatternToNotifiable in _feedToNotifiables.Where(x => x.Value.Contains(interactor)))
+            foreach (var (feed, feedInteractors) in _feedToNotifiables.Where(x => x.Value.Contains(interactor)))
             {
-                topicPatternToNotifiable.Value.Remove(interactor);
-                if (topicPatternToNotifiable.Value.Count == 0)
-                    topicsWithoutInteractors.Add(topicPatternToNotifiable.Key);
+                _feedRequestCount[feed].Dec();
+                feedInteractors.Remove(interactor);
+                if (feedInteractors.Count == 0)
+                    topicsWithoutInteractors.Add(feed);
             }
 
             // Remove any topics left without interactors.
@@ -42,6 +46,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
             // Add to the notifiables for this topic pattern and inform the subscription manager of the new notification request.
             notifiables.Add(notifiable);
+            _feedRequestCount[feed].Inc();
             return true;
         }
 
@@ -57,6 +62,7 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
             // Remove the interactor from the set of notifiables.
             notifiables.Remove(notifiable);
+            _feedRequestCount[feed].Dec();
 
             // Are there any interactors left listening to this feed?
             if (notifiables.Count != 0)

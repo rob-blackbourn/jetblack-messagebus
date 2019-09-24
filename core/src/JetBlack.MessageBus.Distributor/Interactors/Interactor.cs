@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 
+using Prometheus;
+
 using JetBlack.MessageBus.Messages;
 using JetBlack.MessageBus.Common.IO;
 using JetBlack.MessageBus.Common.Security.Authentication;
@@ -29,6 +31,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
         private readonly CancellationToken _token;
         private readonly RoleManager _roleManager;
+        private readonly Counter _readErrorCount;
+        private readonly Counter _readReceivedCount;
+        private readonly Counter _writeRequestCount;
+        private readonly Counter _writeSendCount;
+        private readonly Gauge _writeQueueLength;
 
         public static Interactor Create(
             TcpClient tcpClient,
@@ -77,6 +84,19 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             _roleManager = roleManager;
             _token = token;
             _eventQueue = eventQueue;
+
+            var labels = new[] {
+                "_" + Id.ToString("N"),
+                _roleManager.Host,
+                _roleManager.User
+            };
+
+            _readErrorCount = Metrics.CreateCounter("interactor_read_error_count", "The number of read errors for an interactor", labels);
+            _readReceivedCount = Metrics.CreateCounter("interactor_read_received_count", "The number of read messages read by an interactor", labels);
+
+            _writeRequestCount = Metrics.CreateCounter("interactor_writes_request_count", "The number of write messages queued on an interactor", labels);
+            _writeSendCount = Metrics.CreateCounter("interactor_write_send_count", "The number of write messages sent from an interactor", labels);
+            _writeQueueLength = Metrics.CreateGauge("interactor_write_queue_length", "The number of messages on an interactor write queue", labels);
         }
 
         public Guid Id { get; }
@@ -102,10 +122,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void SendMessage(Message message)
         {
+            _writeQueueLength.Inc();
             _writeQueue.Add(message, _token);
         }
 
-        public Message ReceiveMessage()
+        private Message ReceiveMessage()
         {
             return Message.Read(new DataReader(_stream));
         }
@@ -139,6 +160,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 try
                 {
                     var message = ReceiveMessage();
+                    _readReceivedCount.Inc();
                     _eventQueue.Enqueue(new InteractorMessageEventArgs(this, message));
                 }
                 catch (OperationCanceledException)
@@ -163,8 +185,10 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 try
                 {
                     var message = _writeQueue.Take(_token);
+                    _writeQueueLength.Dec();
                     message.Write(new DataWriter(_stream));
                     _stream.Flush();
+                    _writeSendCount.Inc();
                 }
                 catch (OperationCanceledException)
                 {

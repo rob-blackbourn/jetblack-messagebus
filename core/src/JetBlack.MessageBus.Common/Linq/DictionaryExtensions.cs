@@ -188,10 +188,27 @@ namespace JetBlack.MessageBus.Common.Linq
         /// <param name="action">The action to apply.</param>
         /// <typeparam name="TKey">The type of the dictionary keys</typeparam>
         /// <typeparam name="TValue">The type of the dictionary values</typeparam>
-        public static void ForeEach<TKey, TValue>(this IDictionary<TKey, TValue> source, Action<KeyValuePair<TKey, TValue>, int> action)
+        public static void ForEach<TKey, TValue>(this IDictionary<TKey, TValue> source, Action<KeyValuePair<TKey, TValue>, int> action)
         {
             foreach (var item in source.Select((entry, i) => new { entry, i }))
                 action(item.entry, item.i);
+        }
+
+        public static IEnumerable<Tuple<TKey, TValue>> ToTuple<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source)
+        {
+            foreach (var item in source)
+                yield return item.ToTuple();
+        }
+
+        public static Tuple<TKey, TValue> ToTuple<TKey, TValue>(this KeyValuePair<TKey, TValue> item)
+        {
+            return Tuple.Create(item.Key, item.Value);
+        }
+
+        public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> tuple, out TKey key, out TValue value)
+        {
+            key = tuple.Key;
+            value = tuple.Value;
         }
     }
 }
