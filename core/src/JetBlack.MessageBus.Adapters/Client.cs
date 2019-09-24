@@ -29,7 +29,7 @@ namespace JetBlack.MessageBus.Adapters
         {
             var ipAddress = Dns.GetHostEntry(server).AddressList
                .First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
-            var endpoint = new IPEndPoint(ipAddress, 9091);
+            var endpoint = new IPEndPoint(ipAddress, port);
 
             var tcpClient = new TcpClient();
             tcpClient.Connect(endpoint.Address, endpoint.Port);
