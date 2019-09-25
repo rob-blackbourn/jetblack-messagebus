@@ -23,8 +23,7 @@ namespace JetBlack.MessageBus.Common.PasswordFileAuthentication.Test
             using (var stream = new MemoryStream())
             {
                 var writer = new DataWriter(stream);
-                writer.Write("john");
-                writer.Write("trustno1");
+                writer.Write("Username=john;Password=trustno1");
 
                 stream.Seek(0, SeekOrigin.Begin);
                 var identity = authenticator.Authenticate(stream);
@@ -43,8 +42,7 @@ namespace JetBlack.MessageBus.Common.PasswordFileAuthentication.Test
             using (var stream = new MemoryStream())
             {
                 var writer = new DataWriter(stream);
-                writer.Write("john");
-                writer.Write("bad password");
+                writer.Write("Username=john;Password=bad password");
 
                 stream.Seek(0, SeekOrigin.Begin);
                 Assert.ThrowsException<SecurityException>(() =>

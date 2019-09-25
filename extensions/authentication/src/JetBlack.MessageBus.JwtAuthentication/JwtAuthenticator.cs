@@ -4,7 +4,6 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Security;
-using System.Security.Principal;
 using System.Text;
 
 using Microsoft.IdentityModel.Tokens;
@@ -25,20 +24,19 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
         }
 
-        public string Name => "JWT";
+        public string Method => "JWT";
         public SymmetricSecurityKey SecurityKey { get; }
 
         public AuthenticationResponse Authenticate(Stream stream)
         {
             var reader = new DataReader(stream);
-            var encodedToken = reader.ReadString();
-            var impersonating = reader.ReadNullableString();
-            var forwardedFor = reader.ReadNullableString();
+            var connectionString = reader.ReadString();
+            var connectionDetails = JwtConnectionDetails.Parse(connectionString);
 
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.ReadJwtToken(encodedToken);
+                var token = tokenHandler.ReadJwtToken(connectionDetails.Token);
                 var parameters = new TokenValidationParameters
                 {
                     RequireExpirationTime = true,
@@ -46,8 +44,12 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                     ValidateAudience = false,
                     IssuerSigningKey = SecurityKey
                 };
-                tokenHandler.ValidateToken(encodedToken, parameters, out var securityToken);
-                return new AuthenticationResponse(((JwtSecurityToken)securityToken).Subject, Name, impersonating, forwardedFor);
+                tokenHandler.ValidateToken(connectionDetails.Token, parameters, out var securityToken);
+                return new AuthenticationResponse(
+                    ((JwtSecurityToken)securityToken).Subject,
+                    Method,
+                    connectionDetails.Impersonating,
+                    connectionDetails.ForwardedFor);
             }
             catch
             {

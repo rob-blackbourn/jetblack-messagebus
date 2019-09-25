@@ -6,7 +6,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
 {
     public interface IAuthenticator
     {
-        string Name { get; }
+        string Method { get; }
         AuthenticationResponse Authenticate(Stream stream);
     }
 }

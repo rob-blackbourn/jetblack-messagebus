@@ -3,9 +3,10 @@
 using System;
 using System.IO;
 using System.Security;
-using System.Security.Principal;
-using JetBlack.MessageBus.Common.IO;
+
 using Novell.Directory.Ldap;
+
+using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Common.Security.Authentication
 {
@@ -24,28 +25,30 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                 throw new ArgumentException("Expected the second argument ldap-port to be an integer");
         }
 
-        public string Name => @"LDAP";
+        public string Method => @"LDAP";
         public string Server { get; }
         public int Port { get; }
 
         public AuthenticationResponse Authenticate(Stream stream)
         {
             var reader = new DataReader(stream);
-            var username = reader.ReadString();
-            var password = reader.ReadString();
-            var impersonating = reader.ReadNullableString();
-            var forwardedFor = reader.ReadNullableString();
+            var connectionString = reader.ReadString();
+            var connectionDetails = LdapConnectionDetails.Parse(connectionString);
 
             using (var ldap = new LdapConnection { SecureSocketLayer = true })
             {
                 ldap.Connect(Server, Port);
                 try
                 {
-                    ldap.Bind(username, password);
+                    ldap.Bind(connectionDetails.Username, connectionDetails.Password);
                     if (!ldap.Bound)
                         throw new SecurityException();
 
-                    return new AuthenticationResponse(username, Name, impersonating, forwardedFor);
+                    return new AuthenticationResponse(
+                        connectionDetails.Username,
+                        Method,
+                        connectionDetails.Impersonating,
+                        connectionDetails.ForwardedFor);
                 }
                 catch
                 {
@@ -53,5 +56,6 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                 }
             }
         }
+
     }
 }

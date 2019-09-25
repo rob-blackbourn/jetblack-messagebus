@@ -59,7 +59,7 @@ namespace JetBlack.MessageBus.Distributor
                 "Listening on {EndPoint} with SSL {SslState} with {Authenticator} authentication",
                 _endPoint,
                 _certificate == null ? "disabled" : "enabled",
-                _authenticator.Name);
+                _authenticator.Method);
 
             var listener = new TcpListener(_endPoint);
             listener.Start();
