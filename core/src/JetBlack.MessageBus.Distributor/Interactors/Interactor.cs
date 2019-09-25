@@ -25,10 +25,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         private readonly ILogger<Interactor> _logger;
         private readonly BlockingCollection<Message> _writeQueue = new BlockingCollection<Message>();
         private readonly IDictionary<string, IDictionary<string, AuthorizationResponse>> _authorizations = new Dictionary<string, IDictionary<string, AuthorizationResponse>>();
+        private readonly CancellationTokenSource _tokenSource;
         private readonly Stream _stream;
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
-        private readonly CancellationToken _token;
         private readonly RoleManager _roleManager;
+        private readonly Task _readTask, _writeTask;
 
         public static Interactor Create(
             TcpClient tcpClient,
@@ -77,13 +78,15 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             ILogger<Interactor> logger,
             CancellationToken token)
         {
+            _tokenSource = CancellationTokenSource.CreateLinkedTokenSource(token);
             _logger = logger;
             _stream = stream;
             Id = Guid.NewGuid();
             Application = application;
             _roleManager = roleManager;
-            _token = token;
             _eventQueue = eventQueue;
+            _readTask = new Task(QueueReceivedMessages, _tokenSource.Token);
+            _writeTask = new Task(WriteQueuedMessages, _tokenSource.Token);
             Metrics = new InteractorMetrics(User, Host, Id, Application);
         }
 
@@ -106,19 +109,22 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void Start()
         {
-            Task.Run(() => QueueReceivedMessages(), _token);
-            Task.Run(() => WriteQueuedMessages(), _token);
+            _readTask.Start();
+            _writeTask.Start();
         }
 
         public void SendMessage(Message message)
         {
-            Metrics.WriteQueueLength.Inc();
-            _writeQueue.Add(message, _token);
-        }
-
-        private Message ReceiveMessage()
-        {
-            return Message.Read(new DataReader(_stream));
+            try
+            {
+                _writeQueue.Add(message, _tokenSource.Token);
+                Metrics.WriteQueueLength.Inc();
+            }
+            catch (OperationCanceledException)
+            {
+                // We may get post cancellation writes if the event queue still
+                // contains messages for this interactor.
+            }
         }
 
         public void SetAuthorization(string feed, string topic, AuthorizationResponse authorization)
@@ -145,11 +151,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         private void QueueReceivedMessages()
         {
-            while (!_token.IsCancellationRequested)
+            while (!_tokenSource.IsCancellationRequested)
             {
                 try
                 {
-                    var message = ReceiveMessage();
+                    var message = Message.Read(new DataReader(_stream));
                     Metrics.ReadsReceived.Inc();
                     _eventQueue.Enqueue(new InteractorMessageEventArgs(this, message));
                 }
@@ -159,22 +165,24 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 }
                 catch (Exception error)
                 {
-                    _logger.LogWarning(error, "Failed to receive message for {Interactor}", this);
                     _eventQueue.Enqueue(new InteractorErrorEventArgs(this, error));
                     break;
                 }
             }
 
             _logger.LogDebug("Exited read loop for {Interactor}", this);
+
+            if (!_tokenSource.IsCancellationRequested)
+                _tokenSource.Cancel();
         }
 
         private void WriteQueuedMessages()
         {
-            while (!_token.IsCancellationRequested)
+            while (!_tokenSource.IsCancellationRequested)
             {
                 try
                 {
-                    var message = _writeQueue.Take(_token);
+                    var message = _writeQueue.Take(_tokenSource.Token);
                     Metrics.WriteQueueLength.Dec();
                     message.Write(new DataWriter(_stream));
                     _stream.Flush();
@@ -191,7 +199,10 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 }
             }
 
-            _logger.LogDebug("Exited read loop for {Interactor}", this);
+            _logger.LogDebug("Exited write loop for {Interactor}", this);
+
+            if (!_tokenSource.IsCancellationRequested)
+                _tokenSource.Cancel();
         }
 
         public int CompareTo(Interactor? other)
@@ -218,7 +229,15 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void Dispose()
         {
+            if (!_tokenSource.IsCancellationRequested)
+                _tokenSource.Cancel();
+
+            _readTask.Wait();
+            _writeTask.Wait();
+
             _stream.Close();
+
+            _tokenSource.Dispose();
         }
     }
 }
