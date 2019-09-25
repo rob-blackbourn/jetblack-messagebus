@@ -17,7 +17,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -53,13 +53,13 @@
       "stopAtEntry": false
     },
     {
-      "name": "Distributor: Token",
+      "name": "Distributor: JWT",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build JetBlack.MessageBus.Distributor",
       "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.0/JetBlack.MessageBus.Distributor.dll",
       "args": [
-        "${workspaceFolder}/examples/server-config/token/appsettings.json"
+        "${workspaceFolder}/examples/server-config/jwt/appsettings.json"
       ],
       "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
       "env": {

@@ -1,14 +1,9 @@
 #nullable enable
 
-using System.IO;
-
 namespace JetBlack.MessageBus.Adapters
 {
-    public class NullClientAuthenticator : IClientAuthenticator
+    public class NullClientAuthenticator : ClientAuthenticator
     {
-        public void Authenticate(Stream stream)
-        {
-            // Nothing to do
-        }
+        protected override string ToConnectionString() => string.Empty;
     }
 }

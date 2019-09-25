@@ -11,12 +11,12 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             // Nothing to do here.
         }
 
-        public string Name => "NULL";
+        public string Method => "NULL";
 
         public AuthenticationResponse Authenticate(Stream stream)
         {
             // Always true.
-            return new AuthenticationResponse("unknown", Name, null, null);
+            return new AuthenticationResponse("unknown", Method, null, null);
         }
     }
 }

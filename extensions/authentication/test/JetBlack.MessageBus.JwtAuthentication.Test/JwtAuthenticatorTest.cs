@@ -3,12 +3,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Security;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Text;
-using System.Threading;
 
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.IdentityModel.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using JetBlack.MessageBus.Common.IO;
@@ -49,7 +46,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication.Test
             using (var stream = new MemoryStream())
             {
                 var writer = new DataWriter(stream);
-                writer.Write(encodedToken);
+                writer.Write($"Token={encodedToken}");
 
                 stream.Seek(0, SeekOrigin.Begin);
                 var authenticator = new JwtAuthenticator(new[] { secret });
@@ -91,7 +88,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication.Test
             using (var stream = new MemoryStream())
             {
                 var writer = new DataWriter(stream);
-                writer.Write(encodedToken);
+                writer.Write($"Token={encodedToken}");
 
                 stream.Seek(0, SeekOrigin.Begin);
                 var authenticator = new JwtAuthenticator(new[] { invalidSecret });

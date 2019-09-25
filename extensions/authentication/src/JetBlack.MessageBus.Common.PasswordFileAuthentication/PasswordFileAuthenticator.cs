@@ -3,7 +3,6 @@
 using System;
 using System.IO;
 using System.Security;
-using System.Security.Principal;
 using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Common.Security.Authentication
@@ -21,6 +20,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             FileName = Environment.ExpandEnvironmentVariables(args[0]);
 
             var directory = Path.GetDirectoryName(FileName);
+            if (directory == string.Empty)
+                directory = ".";
             var fileName = Path.GetFileName(FileName);
 
             _watcher = new FileSystemWatcher(directory, fileName);
@@ -36,7 +37,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             Manager = PasswordManager.Load(FileName);
         }
 
-        public string Name => "BASIC";
+        public string Method => "BASIC";
         public string FileName { get; }
         public PasswordManager Manager
         {
@@ -59,15 +60,17 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
         public AuthenticationResponse Authenticate(Stream stream)
         {
             var reader = new DataReader(stream);
-            var username = reader.ReadString();
-            var password = reader.ReadString();
-            var impersonating = reader.ReadNullableString();
-            var forwardedFor = reader.ReadNullableString();
+            var connectionString = reader.ReadString();
+            var connectionDetails = PasswordFileConnectionDetails.Parse(connectionString);
 
-            if (!Manager.IsValid(username, password))
+            if (!Manager.IsValid(connectionDetails.Username, connectionDetails.Password))
                 throw new SecurityException();
 
-            return new AuthenticationResponse(username, Name, impersonating, forwardedFor);
+            return new AuthenticationResponse(
+                connectionDetails.Username,
+                Method,
+                connectionDetails.Impersonating,
+                connectionDetails.ForwardedFor);
         }
     }
 }
