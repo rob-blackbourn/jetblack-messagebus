@@ -64,6 +64,8 @@ namespace JetBlack.MessageBus.Distributor
             }
 
             _logger.LogInformation("Exited the event loop");
+
+            _eventsQueueLength.Set(0);
         }
     }
 }

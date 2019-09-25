@@ -201,6 +201,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             _logger.LogDebug("Exited write loop for {Interactor}", this);
 
+            Metrics.WriteQueueLength.Set(0);
+
             if (!_tokenSource.IsCancellationRequested)
                 _tokenSource.Cancel();
         }
