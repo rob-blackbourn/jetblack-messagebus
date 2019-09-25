@@ -89,7 +89,7 @@ namespace publisher
             if (cacheItem.ClientStates.Count == 0 || cacheItem.Data == null)
             {
                 Console.WriteLine($"Stop publishing feed \"{feed}\" topic \"{topic}\"");
-                _cacheItems.Remove(topic);
+                _cacheItems.Remove(feed);
             }
         }
 

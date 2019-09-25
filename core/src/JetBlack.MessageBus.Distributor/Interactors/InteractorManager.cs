@@ -2,9 +2,10 @@
 
 using System;
 
+using Microsoft.Extensions.Logging;
+
 using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
-using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
@@ -42,6 +43,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         {
             _logger.LogInformation("Faulting interactor: {Interactor}", interactor);
 
+            interactor.Metrics.Faulted.Inc();
+
             _repository.Remove(interactor);
             FaultedInteractors?.Invoke(this, new InteractorFaultedEventArgs(interactor, error));
         }
@@ -52,6 +55,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 interactor,
                 feed,
                 topic);
+
+            interactor.Metrics.AuthorizationRequests.Inc();
 
             if (!interactor.IsAuthorizationRequired(feed))
             {
@@ -91,6 +96,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         internal void AcceptAuthorization(Interactor authorizer, AuthorizationResponse authorization)
         {
             _logger.LogDebug("Accepting an authorization response from {Authorizer} with {Authorization}.", authorizer, authorization);
+
+            authorizer.Metrics.AuthorizationResponses.Inc();
 
             var requestor = _repository.Find(authorization.ClientId);
             if (requestor == null)

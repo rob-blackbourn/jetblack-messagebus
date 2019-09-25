@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 
+using Prometheus;
+
 namespace JetBlack.MessageBus.Distributor
 {
     public class EventQueue<T> where T : EventArgs
@@ -14,6 +16,9 @@ namespace JetBlack.MessageBus.Distributor
         private readonly ILogger<EventQueue<T>> _logger;
         private readonly CancellationToken _token;
         private readonly BlockingCollection<T> _interactorEventQueue = new BlockingCollection<T>();
+        private readonly Counter _eventsEnqueued = Metrics.CreateCounter("messagebus_events_enqueued", "The number of events enqueued");
+        private readonly Counter _eventsDequeued = Metrics.CreateCounter("messagebus_events_dequeued", "The number of events dequeued");
+        private readonly Gauge _eventsQueueLength = Metrics.CreateGauge("messagebus_events_queue_length", "The number of events on the queue");
 
         public EventQueue(ILoggerFactory loggerFactory, CancellationToken token)
         {
@@ -25,6 +30,8 @@ namespace JetBlack.MessageBus.Distributor
 
         public void Enqueue(T item)
         {
+            _eventsEnqueued.Inc();
+            _eventsQueueLength.Inc();
             _interactorEventQueue.Add(item, _token);
         }
 
@@ -40,6 +47,8 @@ namespace JetBlack.MessageBus.Distributor
                 try
                 {
                     var item = _interactorEventQueue.Take(_token);
+                    _eventsDequeued.Inc();
+                    _eventsQueueLength.Dec();
                     OnItemDequeued?.Invoke(this, item);
                 }
                 catch (OperationCanceledException)

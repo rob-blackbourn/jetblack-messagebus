@@ -38,6 +38,8 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 return;
             }
 
+            publisher.Metrics.UnicastMessages[unicastData.Feed].Inc();
+
             var clientUnicastData = new ForwardedUnicastData(
                 publisher.UserForFeed(unicastData.Feed),
                 publisher.HostForFeed(unicastData.Feed),
@@ -68,6 +70,9 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 _logger.LogWarning("Rejected request from {Publisher} to publish to Feed {Feed}", publisher, multicastData.Feed);
                 return;
             }
+
+            if (publisher != null)
+                publisher.Metrics.MulticastMessages[multicastData.Feed].Inc();
 
             foreach (var subscriberAndAuthorizationInfo in subscribers)
             {

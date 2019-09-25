@@ -56,6 +56,8 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
             if (notifiables == null)
                 return;
 
+            subscriber.Metrics.ForwardedSubscriptions[subscriptionRequest.Feed].Inc();
+
             var forwardedSubscriptionRequest = new ForwardedSubscriptionRequest(
                 subscriber.UserForFeed(subscriptionRequest.Feed),
                 subscriber.HostForFeed(subscriptionRequest.Feed),

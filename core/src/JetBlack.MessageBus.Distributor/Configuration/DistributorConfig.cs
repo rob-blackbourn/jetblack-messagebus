@@ -16,6 +16,7 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public int Port { get; set; }
         public TimeSpan HeartbeatInterval { get; set; }
         public SslConfig? SslConfig { get; set; }
+        public PrometheusConfig? Prometheus { get; set; }
         public PluginConfig? Authentication { get; set; }
         public List<Role>? Allow { get; set; }
         public List<Role>? Deny { get; set; }

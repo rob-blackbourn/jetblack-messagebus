@@ -7,7 +7,8 @@ using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Configuration;
-using Microsoft.Extensions.Logging.Console;
+
+using Prometheus;
 
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Configuration;
@@ -48,6 +49,7 @@ namespace JetBlack.MessageBus.Distributor
         public ILogger<Program> Logger { get; }
         private readonly DistributorConfig _distributorConfig;
         private readonly Server _server;
+        private MetricServer? _metricServer;
 
         public Program(string settingsFilename)
         {
@@ -79,6 +81,16 @@ namespace JetBlack.MessageBus.Distributor
             if (distributorConfig == null)
                 throw new ApplicationException("No configuration");
 
+            if (distributorConfig.Prometheus?.IsEnabled != true)
+            {
+                _metricServer = null;
+            }
+            else
+            {
+                _metricServer = new MetricServer(distributorConfig.Prometheus.Port);
+                _metricServer.Start();
+            }
+
             var endPoint = distributorConfig.ToIPEndPoint();
             var certificate = distributorConfig.SslConfig?.ToCertificate();
             var authenticator = distributorConfig.Authentication?.Construct<IAuthenticator>() ?? new NullAuthenticator(new string[0]);
@@ -93,6 +105,7 @@ namespace JetBlack.MessageBus.Distributor
         public void Dispose()
         {
             _server.Dispose();
+            _metricServer?.Stop();
         }
     }
 }

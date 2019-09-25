@@ -77,6 +77,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             _roleManager = roleManager;
             _token = token;
             _eventQueue = eventQueue;
+            Metrics = new InteractorMetrics(User, Host, Id);
         }
 
         public Guid Id { get; }
@@ -84,6 +85,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         public string User => _roleManager.User;
         public string? Impersonating => _roleManager.Impersonating;
         public string? ForwardedFor => _roleManager.ForwardedFor;
+        public InteractorMetrics Metrics { get; }
 
         public bool HasRole(string feed, Role role)
         {
@@ -102,10 +104,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public void SendMessage(Message message)
         {
+            Metrics.WriteQueueLength.Inc();
             _writeQueue.Add(message, _token);
         }
 
-        public Message ReceiveMessage()
+        private Message ReceiveMessage()
         {
             return Message.Read(new DataReader(_stream));
         }
@@ -139,6 +142,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 try
                 {
                     var message = ReceiveMessage();
+                    Metrics.ReadsReceived.Inc();
                     _eventQueue.Enqueue(new InteractorMessageEventArgs(this, message));
                 }
                 catch (OperationCanceledException)
@@ -163,8 +167,10 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 try
                 {
                     var message = _writeQueue.Take(_token);
+                    Metrics.WriteQueueLength.Dec();
                     message.Write(new DataWriter(_stream));
                     _stream.Flush();
+                    Metrics.WritesSent.Inc();
                 }
                 catch (OperationCanceledException)
                 {
