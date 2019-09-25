@@ -54,7 +54,7 @@ namespace JetBlack.MessageBus.Distributor
         public Program(string settingsFilename)
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonFile(settingsFilename)
+                .AddJsonFile(settingsFilename, false, true)
                 .Build();
 
             var loggerFactory = LoggerFactory.Create(builder =>
