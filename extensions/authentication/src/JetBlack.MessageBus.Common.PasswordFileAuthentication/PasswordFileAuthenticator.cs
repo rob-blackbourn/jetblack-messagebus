@@ -70,7 +70,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                 connectionDetails.Username,
                 Method,
                 connectionDetails.Impersonating,
-                connectionDetails.ForwardedFor);
+                connectionDetails.ForwardedFor,
+                connectionDetails.Application);
         }
     }
 }

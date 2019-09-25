@@ -33,7 +33,7 @@ namespace JetBlack.MessageBus.Adapters
 
         public override string ToString() =>
             $"{nameof(Username)}=\"{Username}\"" +
-            ",{nameof(Impersonating)}=\"{Impersonating}\"" +
-            ",{nameof(ForwardedFor)}=\"{ForwardedFor}\"";
+            $",{nameof(Impersonating)}=\"{Impersonating}\"" +
+            $",{nameof(ForwardedFor)}=\"{ForwardedFor}\"";
     }
 }

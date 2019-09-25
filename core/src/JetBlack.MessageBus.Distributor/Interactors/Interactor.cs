@@ -60,12 +60,18 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 authenticationResponse.Impersonating,
                 authenticationResponse.ForwardedFor);
 
-            var interactor = new Interactor(stream, roleManager, eventQueue, logger, token);
-            return interactor;
+            return new Interactor(
+                stream,
+                authenticationResponse.Application ?? "unspecified",
+                roleManager,
+                eventQueue,
+                logger,
+                token);
         }
 
         internal Interactor(
             Stream stream,
+            string application,
             RoleManager roleManager,
             EventQueue<InteractorEventArgs> eventQueue,
             ILogger<Interactor> logger,
@@ -74,13 +80,15 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             _logger = logger;
             _stream = stream;
             Id = Guid.NewGuid();
+            Application = application;
             _roleManager = roleManager;
             _token = token;
             _eventQueue = eventQueue;
-            Metrics = new InteractorMetrics(User, Host, Id);
+            Metrics = new InteractorMetrics(User, Host, Id, Application);
         }
 
         public Guid Id { get; }
+        public string Application { get; }
         public string Host => _roleManager.Host;
         public string User => _roleManager.User;
         public string? Impersonating => _roleManager.Impersonating;
