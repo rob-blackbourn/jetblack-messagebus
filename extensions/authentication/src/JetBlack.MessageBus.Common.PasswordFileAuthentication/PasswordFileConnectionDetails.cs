@@ -7,18 +7,25 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
 {
     public class PasswordFileConnectionDetails
     {
-        private PasswordFileConnectionDetails(string username, string password, string? impersonating, string? forwardedFor)
+        private PasswordFileConnectionDetails(
+            string username,
+            string password,
+            string? impersonating,
+            string? forwardedFor,
+            string? application)
         {
             Username = username;
             Password = password;
             Impersonating = impersonating;
             ForwardedFor = forwardedFor;
+            Application = application;
         }
 
         public string Username { get; }
         public string Password { get; }
         public string? Impersonating { get; }
         public string? ForwardedFor { get; }
+        public string? Application { get; }
 
         public static PasswordFileConnectionDetails Parse(string connectionString)
         {
@@ -32,13 +39,20 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                 throw new ArgumentException("Failed to find \"Password\"");
             dict.TryGetValue("Impersonating", out var impersonating);
             dict.TryGetValue("ForwardedFor", out var forwardedFor);
+            dict.TryGetValue("Application", out var application);
 
-            return new PasswordFileConnectionDetails(username, password, impersonating, forwardedFor);
+            return new PasswordFileConnectionDetails(
+                username,
+                password,
+                impersonating,
+                forwardedFor,
+                application);
         }
 
         public override string ToString() =>
             $"{nameof(Username)}=\"{Username}\"" +
-            ",{nameof(Impersonating)}=\"{Impersonating}\"" +
-            ",{nameof(ForwardedFor)}=\"{ForwardedFor}\"";
+            $",{nameof(Impersonating)}=\"{Impersonating}\"" +
+            $",{nameof(ForwardedFor)}=\"{ForwardedFor}\"" +
+            $",{nameof(Application)}=\"{Application}\"";
     }
 }

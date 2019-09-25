@@ -49,7 +49,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                     ((JwtSecurityToken)securityToken).Subject,
                     Method,
                     connectionDetails.Impersonating,
-                    connectionDetails.ForwardedFor);
+                    connectionDetails.ForwardedFor,
+                    connectionDetails.Application);
             }
             catch
             {
