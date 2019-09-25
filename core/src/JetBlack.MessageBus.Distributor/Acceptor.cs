@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Distributor.Roles;
+using JetBlack.MessageBus.Distributor.Utilities;
 using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor
@@ -94,6 +95,10 @@ namespace JetBlack.MessageBus.Distributor
                     _loggerFactory,
                     _token);
                 _eventQueue.Enqueue(new InteractorConnectedEventArgs(interactor));
+            }
+            catch (SslException error)
+            {
+                _logger.LogWarning("SSL handshake failed for connection from {Address}", error.Address);
             }
             catch (Exception error)
             {

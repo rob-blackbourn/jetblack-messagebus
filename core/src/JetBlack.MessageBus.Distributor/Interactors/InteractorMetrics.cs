@@ -4,6 +4,8 @@ using System;
 
 using Prometheus;
 
+using JetBlack.MessageBus.Distributor.Utilities;
+
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
     public class InteractorMetrics

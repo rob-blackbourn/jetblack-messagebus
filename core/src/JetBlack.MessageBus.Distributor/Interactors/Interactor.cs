@@ -17,6 +17,7 @@ using JetBlack.MessageBus.Messages;
 using JetBlack.MessageBus.Common.IO;
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Roles;
+using JetBlack.MessageBus.Distributor.Utilities;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
 {
@@ -40,19 +41,14 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             ILoggerFactory loggerFactory,
             CancellationToken token)
         {
-            var stream = (Stream)tcpClient.GetStream();
-            if (certificate != null)
-            {
-                var sslStream = new SslStream(stream, false);
-                sslStream.AuthenticateAsServer(certificate, clientCertificateRequired: false, checkCertificateRevocation: true);
-                stream = sslStream;
-            }
+            var logger = loggerFactory.CreateLogger<Interactor>();
+
+            var stream = GetStream(tcpClient, certificate, logger);
 
             var address = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
 
             var authenticationResponse = authenticator.Authenticate(stream);
-            var logger = loggerFactory.CreateLogger<Interactor>();
             logger.LogInformation("Authenticated with {Type} as {Name}", authenticationResponse.Method, authenticationResponse.User);
             var roleManager = new RoleManager(
                 distributorRole,
@@ -68,6 +64,24 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 eventQueue,
                 logger,
                 token);
+        }
+
+        private static Stream GetStream(TcpClient tcpClient, X509Certificate2? certificate, ILogger<Interactor> logger)
+        {
+            var stream = tcpClient.GetStream();
+            if (certificate == null)
+                return stream;
+
+            try
+            {
+                var sslStream = new SslStream(stream, false);
+                sslStream.AuthenticateAsServer(certificate, clientCertificateRequired: false, checkCertificateRevocation: true);
+                return sslStream;
+            }
+            catch
+            {
+                throw new SslException(((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address);
+            }
         }
 
         internal Interactor(
