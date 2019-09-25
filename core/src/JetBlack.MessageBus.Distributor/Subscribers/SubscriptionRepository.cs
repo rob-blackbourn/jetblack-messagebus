@@ -19,7 +19,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         public void AddSubscription(Interactor subscriber, string feed, string topic, AuthorizationInfo authorizationInfo, bool isAuthorizationUpdate)
         {
-            subscriber.Metrics.Subscribers[feed].Inc();
+            subscriber.Metrics.Subscriptions[feed].Inc();
 
             // Find topic subscriptions for this feed.
             if (!_cache.TryGetValue(feed, out var topicSubscriptions))
@@ -54,9 +54,9 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 return;
 
             if (removeAll)
-                subscriber.Metrics.Subscribers[feed].Dec(subscriptionState.Count);
+                subscriber.Metrics.Subscriptions[feed].Dec(subscriptionState.Count);
             else
-                subscriber.Metrics.Subscribers[feed].Dec();
+                subscriber.Metrics.Subscriptions[feed].Dec();
 
             if (removeAll || --subscriptionState.Count == 0)
                 subscribersForTopic.Remove(subscriber);

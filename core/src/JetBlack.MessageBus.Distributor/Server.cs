@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -21,7 +22,7 @@ namespace JetBlack.MessageBus.Distributor
     public class Server : IDisposable
     {
         private readonly ILogger<Server> _logger;
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _tokenSource = new CancellationTokenSource();
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
         private readonly Acceptor _acceptor;
         private readonly Timer _heartbeatTimer;
@@ -39,7 +40,7 @@ namespace JetBlack.MessageBus.Distributor
         {
             _logger = loggerFactory.CreateLogger<Server>();
 
-            _eventQueue = new EventQueue<InteractorEventArgs>(loggerFactory, _cancellationTokenSource.Token);
+            _eventQueue = new EventQueue<InteractorEventArgs>(loggerFactory, _tokenSource.Token);
             _eventQueue.OnItemDequeued += OnInteractorEvent;
 
             _heartbeatTimer = new Timer(HeartbeatCallback);
@@ -51,7 +52,7 @@ namespace JetBlack.MessageBus.Distributor
                 distributorRole,
                 _eventQueue,
                 loggerFactory,
-                _cancellationTokenSource.Token);
+                _tokenSource.Token);
 
             _interactorManager = new InteractorManager(distributorRole, loggerFactory);
 
@@ -68,7 +69,7 @@ namespace JetBlack.MessageBus.Distributor
                 new RoleManager(new DistributorRole(Role.Publish, Role.Authorize | Role.Notify | Role.Subscribe, false, null), "localhost", "admin", null, null),
                 _eventQueue,
                 loggerFactory.CreateLogger<Interactor>(),
-                _cancellationTokenSource.Token);
+                _tokenSource.Token);
         }
 
         public void Start(TimeSpan heartbeatInterval)
@@ -88,10 +89,25 @@ namespace JetBlack.MessageBus.Distributor
         {
             if (args is InteractorConnectedEventArgs)
                 OnInteractorConnected((InteractorConnectedEventArgs)args);
-            else if (args is InteractorMessageEventArgs)
-                OnMessage((InteractorMessageEventArgs)args);
             else if (args is InteractorErrorEventArgs)
                 OnInteractorError((InteractorErrorEventArgs)args);
+            else if (args is InteractorClosedEventArgs)
+                OnInteractorClosed((InteractorClosedEventArgs)args);
+            else if (args is InteractorMessageEventArgs)
+                OnMessage((InteractorMessageEventArgs)args);
+            else
+                _logger.LogError("Unhandled interactor event");
+        }
+
+        private static bool IsCloseException(Exception error)
+        {
+            if (error is EndOfStreamException)
+                return true;
+            var socketError = error.InnerException as SocketException;
+            if (socketError != null && socketError.SocketErrorCode == SocketError.ConnectionReset)
+                return true;
+
+            return false;
         }
 
         private void OnInteractorConnected(InteractorConnectedEventArgs args)
@@ -100,9 +116,14 @@ namespace JetBlack.MessageBus.Distributor
             args.Interactor.Start();
         }
 
+        private void OnInteractorClosed(InteractorClosedEventArgs args)
+        {
+            _interactorManager.CloseInteractor(args.Interactor);
+        }
+
         private void OnInteractorError(InteractorErrorEventArgs args)
         {
-            if (args.Error is EndOfStreamException)
+            if (IsCloseException(args.Error))
                 _interactorManager.CloseInteractor(args.Interactor);
             else
                 _interactorManager.FaultInteractor(args.Interactor, args.Error);
@@ -151,8 +172,9 @@ namespace JetBlack.MessageBus.Distributor
             _logger.LogInformation("Stopping server");
 
             _heartbeatTimer.Dispose();
+            _heartbeatInteractor.Dispose();
 
-            _cancellationTokenSource.Cancel();
+            _tokenSource.Cancel();
 
             _logger.LogInformation("Server stopped");
         }

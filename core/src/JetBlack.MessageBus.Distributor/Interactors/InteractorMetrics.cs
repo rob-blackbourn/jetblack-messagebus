@@ -40,8 +40,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 _Metrics.Instance.MulticastMessages,
                 labelValues);
 
-            Subscribers = new GaugeSelector(
-                _Metrics.Instance.Subscribers,
+            Subscriptions = new GaugeSelector(
+                _Metrics.Instance.Subscriptions,
                 labelValues);
         }
 
@@ -56,7 +56,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         public GaugeSelector FeedRequests { get; }
         public CounterSelector UnicastMessages { get; }
         public CounterSelector MulticastMessages { get; }
-        public GaugeSelector Subscribers { get; }
+        public GaugeSelector Subscriptions { get; }
 
         private class _Metrics
         {
@@ -123,9 +123,9 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                     "The number of multicast messages sent",
                     Feed, Host, User, Id, Application);
 
-                Subscribers = Metrics.CreateGauge(
-                    "messagebus_subscribers",
-                    "The number of subscribers",
+                Subscriptions = Metrics.CreateGauge(
+                    "messagebus_subscriptions",
+                    "The number of subscriptions",
                     Feed, Host, User, Id, Application);
             }
 
@@ -140,7 +140,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             public Gauge FeedRequests { get; }
             public Counter UnicastMessages { get; }
             public Counter MulticastMessages { get; }
-            public Gauge Subscribers { get; }
+            public Gauge Subscriptions { get; }
         }
     }
 }

@@ -35,6 +35,9 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             interactor.Metrics.Interactors.Dec();
 
             RemoveFeedRoles(interactor);
+
+            interactor.Dispose();
+
             return _interactors.Remove(interactor.Id);
         }
 
