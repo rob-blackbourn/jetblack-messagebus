@@ -248,8 +248,10 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             if (!_tokenSource.IsCancellationRequested)
                 _tokenSource.Cancel();
 
-            _readTask.Wait();
-            _writeTask.Wait();
+            if (!_readTask.IsCanceled)
+                _readTask.Wait();
+            if (!_writeTask.IsCanceled)
+                _writeTask.Wait();
 
             _stream.Close();
 
