@@ -12,6 +12,7 @@ using Prometheus;
 
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Configuration;
+using JetBlack.MessageBus.Distributor.Utilities;
 
 namespace JetBlack.MessageBus.Distributor
 {
@@ -57,16 +58,16 @@ namespace JetBlack.MessageBus.Distributor
                 .AddJsonFile(settingsFilename, false, true)
                 .Build();
 
+            _distributorConfig = configuration.GetSection("distributor").Get<DistributorConfig>();
+
             var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder
                     .AddConfiguration(configuration.GetSection("Logging"))
-                    .AddConsole();
+                    .AddDistributorLogger(_distributorConfig);
             });
 
             Logger = loggerFactory.CreateLogger<Program>();
-
-            _distributorConfig = configuration.GetSection("distributor").Get<DistributorConfig>();
 
             _server = CreateServer(_distributorConfig, loggerFactory);
         }

@@ -22,6 +22,7 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public List<Role>? Deny { get; set; }
         public bool IsAuthorizationRequired { get; set; }
         public Dictionary<string, FeedRoleConfig>? FeedRoles { get; set; }
+        public bool UseJsonLogger { get; set; } = false;
 
         public DistributorRole ToDistributorRole()
         {
