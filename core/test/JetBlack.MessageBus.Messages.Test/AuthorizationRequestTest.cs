@@ -15,7 +15,7 @@ namespace JetBlack.MessageBus.Messages.Test
         {
             using (var stream = new MemoryStream())
             {
-                var source = new AuthorizationRequest(Guid.NewGuid(), "HOST", "USER", null, null, "FEED", "TOPIC");
+                var source = new AuthorizationRequest(Guid.NewGuid(), "HOST", "USER", "FEED", "TOPIC");
                 source.Write(new DataWriter(stream));
                 stream.Seek(0, SeekOrigin.Begin);
                 var dest = Message.Read(new DataReader(stream));

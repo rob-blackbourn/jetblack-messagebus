@@ -67,10 +67,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             var authorizationRequest = new AuthorizationRequest(
                 interactor.Id,
-                interactor.Host,
-                interactor.User,
-                interactor.ForwardedFor,
-                interactor.Impersonating,
+                interactor.HostForFeed(feed),
+                interactor.UserForFeed(feed),
                 feed,
                 topic);
 

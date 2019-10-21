@@ -241,8 +241,6 @@ namespace JetBlack.MessageBus.Adapters
                     message.ClientId,
                     message.Host,
                     message.User,
-                    message.ForwardedFor,
-                    message.Impersonating,
                     message.Feed,
                     message.Topic));
         }
