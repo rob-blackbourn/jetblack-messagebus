@@ -1,5 +1,7 @@
 #nullable enable
+
 using System;
+
 using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Messages

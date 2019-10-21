@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+
 using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Messages
