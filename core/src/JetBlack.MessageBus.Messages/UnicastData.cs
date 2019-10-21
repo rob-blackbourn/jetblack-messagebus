@@ -75,6 +75,12 @@ namespace JetBlack.MessageBus.Messages
 
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(DataPackets)}.Length={DataPackets?.Length}";
+        public override string ToString() =>
+            $"{base.ToString()}" +
+            $",{nameof(ClientId)}={ClientId}" +
+            $",{nameof(Feed)}=\"{Feed}\"" +
+            $",{nameof(Topic)}=\"{Topic}\"" +
+            $",{nameof(IsImage)}={IsImage}" +
+            $",{nameof(DataPackets)}.Length={DataPackets?.Length}";
     }
 }

@@ -7,12 +7,14 @@ namespace JetBlack.MessageBus.Messages
 {
     public class AuthorizationRequest : Message, IEquatable<AuthorizationRequest>
     {
-        public AuthorizationRequest(Guid clientId, string host, string user, string feed, string topic)
+        public AuthorizationRequest(Guid clientId, string host, string user, string? forwardedFor, string? impersonating, string feed, string topic)
             : base(MessageType.AuthorizationRequest)
         {
             ClientId = clientId;
             Host = host;
             User = user;
+            ForwardedFor = forwardedFor;
+            Impersonating = impersonating;
             Feed = feed;
             Topic = topic;
         }
@@ -20,6 +22,8 @@ namespace JetBlack.MessageBus.Messages
         public Guid ClientId { get; }
         public string Host { get; }
         public string User { get; }
+        public string? ForwardedFor { get; }
+        public string? Impersonating { get; }
         public string Feed { get; }
         public string Topic { get; }
 
@@ -28,9 +32,11 @@ namespace JetBlack.MessageBus.Messages
             var clientId = reader.ReadGuid();
             var host = reader.ReadString();
             var user = reader.ReadString();
+            var forwardedFor = reader.ReadNullableString();
+            var impersonating = reader.ReadNullableString();
             var feed = reader.ReadString();
             var topic = reader.ReadString();
-            return new AuthorizationRequest(clientId, host, user, feed, topic);
+            return new AuthorizationRequest(clientId, host, user, forwardedFor, impersonating, feed, topic);
         }
 
         public override DataWriter Write(DataWriter writer)
@@ -39,6 +45,8 @@ namespace JetBlack.MessageBus.Messages
             writer.Write(ClientId);
             writer.Write(Host);
             writer.Write(User);
+            writer.Write(ForwardedFor);
+            writer.Write(Impersonating);
             writer.Write(Feed);
             writer.Write(Topic);
             return writer;
@@ -65,10 +73,20 @@ namespace JetBlack.MessageBus.Messages
                 ClientId.GetHashCode() ^
                 Host.GetHashCode() ^
                 User.GetHashCode() ^
+                (ForwardedFor?.GetHashCode() ?? 0) ^
+                (Impersonating?.GetHashCode() ?? 0) ^
                 Feed.GetHashCode() ^
                 Topic.GetHashCode();
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Host)}=\"{Host}\",{nameof(User)}=\"{User}\",{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\"";
+        public override string ToString() =>
+            $"{base.ToString()}" +
+            $",{nameof(ClientId)}={ClientId}" +
+            $",{nameof(Host)}=\"{Host}\"" +
+            $",{nameof(User)}=\"{User}\"" +
+            $",{nameof(ForwardedFor)}=\"{ForwardedFor}\"" +
+            $",{nameof(Impersonating)}=\"{Impersonating}\"" +
+            $",{nameof(Feed)}=\"{Feed}\"" +
+            $",{nameof(Topic)}=\"{Topic}\"";
     }
 }

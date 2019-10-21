@@ -70,6 +70,12 @@ namespace JetBlack.MessageBus.Messages
                 (Entitlements?.GetHashCode() ?? 0);
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(Entitlements)}.Count={Entitlements?.Count ?? 0}";
+        public override string ToString() =>
+            $"{base.ToString()}" +
+            $",{nameof(ClientId)}={ClientId}" +
+            $",{nameof(Feed)}=\"{Feed}\"" +
+            $",{nameof(Topic)}=\"{Topic}\"" +
+            $",{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired}" +
+            $",{nameof(Entitlements)}.Count={Entitlements?.Count ?? 0}";
     }
 }

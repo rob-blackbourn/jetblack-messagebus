@@ -57,6 +57,10 @@ namespace JetBlack.MessageBus.Messages
               IsAdd.GetHashCode();
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsAdd)}={IsAdd}";
+        public override string ToString() =>
+            $"{base.ToString()}" +
+            $",{nameof(Feed)}=\"{Feed}\"" +
+            $",{nameof(Topic)}=\"{Topic}\"" +
+            $",{nameof(IsAdd)}={IsAdd}";
     }
 }

@@ -1,10 +1,13 @@
 #nullable enable
 
+using System;
+using System.Linq;
+
 using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Messages
 {
-    public class ForwardedMulticastData : Message
+    public class ForwardedMulticastData : Message, IEquatable<ForwardedMulticastData>
     {
         public ForwardedMulticastData(string user, string host, string feed, string topic, bool isImage, DataPacket[]? dataPackets)
             : base(MessageType.ForwardedMulticastData)
@@ -47,6 +50,43 @@ namespace JetBlack.MessageBus.Messages
             return writer;
         }
 
-        public override string ToString() => $"{base.ToString()},{nameof(User)}=\"{User}\",{nameof(Host)}=\"{Host}\",{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(DataPackets)}.Length={DataPackets?.Length}";
+        public bool Equals(ForwardedMulticastData? other)
+        {
+            return other != null &&
+                User == other.User &&
+                Host == other.Host &&
+                Feed == other.Feed &&
+                Topic == other.Topic &&
+              IsImage == other.IsImage &&
+              (
+                (DataPackets == null && other.DataPackets == null) ||
+                (DataPackets != null && other.DataPackets != null && DataPackets.SequenceEqual(other.DataPackets))
+              );
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as ForwardedMulticastData);
+        }
+
+        public override int GetHashCode()
+        {
+            return MessageType.GetHashCode() ^
+              User.GetHashCode() ^
+              Host.GetHashCode() ^
+              Feed.GetHashCode() ^
+              Topic.GetHashCode() ^
+              IsImage.GetHashCode() ^
+              (DataPackets?.GetHashCode() ?? 0);
+        }
+
+        public override string ToString() =>
+            $"{base.ToString()}" +
+            $",{nameof(User)}=\"{User}\"" +
+            $",{nameof(Host)}=\"{Host}\"" +
+            $",{nameof(Feed)}=\"{Feed}\"" +
+            $",{nameof(Topic)}=\"{Topic}\"" +
+            $",{nameof(IsImage)}={IsImage}" +
+            $",{nameof(DataPackets)}.Length={DataPackets?.Length}";
     }
 }

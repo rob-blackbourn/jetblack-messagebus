@@ -235,7 +235,16 @@ namespace JetBlack.MessageBus.Adapters
 
         private void RaiseOnAuthorizationRequest(AuthorizationRequest message)
         {
-            OnAuthorizationRequest?.Invoke(this, new AuthorizationRequestEventArgs(message.ClientId, message.Host, message.User, message.Feed, message.Topic));
+            OnAuthorizationRequest?.Invoke(
+                this,
+                new AuthorizationRequestEventArgs(
+                    message.ClientId,
+                    message.Host,
+                    message.User,
+                    message.ForwardedFor,
+                    message.Impersonating,
+                    message.Feed,
+                    message.Topic));
         }
 
         private void RaiseOnForwardedSubscriptionRequest(ForwardedSubscriptionRequest message)

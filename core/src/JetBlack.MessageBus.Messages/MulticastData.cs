@@ -66,12 +66,13 @@ namespace JetBlack.MessageBus.Messages
               Topic.GetHashCode() ^
               IsImage.GetHashCode() ^
               (DataPackets?.GetHashCode() ?? 0);
-
         }
 
-        public override string ToString()
-        {
-            return $"{base.ToString()},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",{nameof(IsImage)}={IsImage},{nameof(DataPackets)}.Length={DataPackets?.Length}";
-        }
+        public override string ToString() =>
+            $"{base.ToString()}" +
+            $",{nameof(Feed)}=\"{Feed}\"" +
+            $",{nameof(Topic)}=\"{Topic}\"" +
+            $",{nameof(IsImage)}={IsImage}" +
+            $",{nameof(DataPackets)}.Length={DataPackets?.Length}";
     }
 }
