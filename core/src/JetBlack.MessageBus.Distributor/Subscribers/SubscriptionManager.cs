@@ -137,7 +137,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             string feed,
             string topic,
             bool isAuthorizationRequired,
-            HashSet<int>? entitlements,
+            ISet<int>? entitlements,
             bool isAuthorizationUpdate)
         {
             _repository.AddSubscription(

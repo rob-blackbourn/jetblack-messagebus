@@ -4,6 +4,9 @@
       "Entitler",
       "MESSAGEBUS",
       "Selectfeed",
+      "aburrows",
+      "inazir",
+      "interactor",
       "notifiables"
     ],
     "files.exclude": {

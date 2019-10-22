@@ -8,13 +8,13 @@ namespace JetBlack.MessageBus.Common.IO
 {
     public class DataPacket : IEquatable<DataPacket>
     {
-        public DataPacket(HashSet<int>? entitlements, byte[]? data)
+        public DataPacket(ISet<int>? entitlements, byte[]? data)
         {
             Entitlements = entitlements;
             Data = data;
         }
 
-        public HashSet<int>? Entitlements { get; }
+        public ISet<int>? Entitlements { get; }
         public byte[]? Data { get; }
 
         public bool Equals(DataPacket? other)

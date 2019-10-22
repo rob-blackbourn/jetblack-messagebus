@@ -186,7 +186,7 @@ namespace JetBlack.MessageBus.Common.IO
             return array;
         }
 
-        public HashSet<int>? ReadInt32HashSet()
+        public ISet<int>? ReadInt32Set()
         {
             var count = ReadInt32();
             if (count == 0)
@@ -259,7 +259,7 @@ namespace JetBlack.MessageBus.Common.IO
 
         public DataPacket ReadBinaryDataPacket()
         {
-            var entitlements = ReadInt32HashSet();
+            var entitlements = ReadInt32Set();
             var data = ReadByteArray();
             return new DataPacket(entitlements, data);
         }

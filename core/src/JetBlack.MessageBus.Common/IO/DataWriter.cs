@@ -197,7 +197,7 @@ namespace JetBlack.MessageBus.Common.IO
             }
         }
 
-        public void Write(HashSet<int>? value)
+        public void Write(ISet<int>? value)
         {
             if (value == null)
                 Write(0);

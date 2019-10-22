@@ -223,7 +223,7 @@ namespace JetBlack.MessageBus.Adapters
             _writeQueue.Add(new MulticastData(feed, topic, isImage, dataPackets));
         }
 
-        public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, HashSet<int>? entitlements)
+        public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, ISet<int>? entitlements)
         {
             if (feed == null)
                 throw new ArgumentNullException(nameof(feed));

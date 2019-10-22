@@ -9,7 +9,7 @@ namespace JetBlack.MessageBus.Messages
 {
     public class AuthorizationResponse : Message, IEquatable<AuthorizationResponse>
     {
-        public AuthorizationResponse(Guid clientId, string feed, string topic, bool isAuthorizationRequired, HashSet<int>? entitlements)
+        public AuthorizationResponse(Guid clientId, string feed, string topic, bool isAuthorizationRequired, ISet<int>? entitlements)
             : base(MessageType.AuthorizationResponse)
         {
             ClientId = clientId;
@@ -23,7 +23,7 @@ namespace JetBlack.MessageBus.Messages
         public string Feed { get; }
         public string Topic { get; }
         public bool IsAuthorizationRequired { get; }
-        public HashSet<int>? Entitlements { get; }
+        public ISet<int>? Entitlements { get; }
 
         public static AuthorizationResponse ReadBody(DataReader reader)
         {
@@ -31,7 +31,7 @@ namespace JetBlack.MessageBus.Messages
             var feed = reader.ReadString();
             var topic = reader.ReadString();
             var isAuthorizationRequired = reader.ReadBoolean();
-            var entitlements = reader.ReadInt32HashSet();
+            var entitlements = reader.ReadInt32Set();
             return new AuthorizationResponse(clientId, feed, topic, isAuthorizationRequired, entitlements);
         }
 
