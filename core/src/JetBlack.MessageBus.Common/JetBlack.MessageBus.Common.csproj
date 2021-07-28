@@ -14,6 +14,8 @@
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
     <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-messagebus</RepositoryUrl>
+    <Description>Common code for JetBlack.MesssageBus projects.</Description>
+    <PackageTags>MessageBus, Network, Publish, Subscribe, pubsub</PackageTags>
   </PropertyGroup>
 
 </Project>

@@ -3,23 +3,35 @@ RELEASE=jetblack-messagebus-3.0.0
 .PHONY: all build clean
 
 all:
-	@echo "targets: build clean."
+	@echo "targets: build clean"
 
 build:
-	dotnet build
-	mkdir -p build/${RELEASE}/core/JetBlack.MessageBus.Distributor
-	cp -r core/src/JetBlack.MessageBus.Distributor/bin/Debug/* build/${RELEASE}/core/JetBlack.MessageBus.Distributor
-	mkdir -p build/${RELEASE}/core/JetBlack.MessageBus.Adapters
-	cp -r core/src/JetBlack.MessageBus.Adapters/bin/Debug/* build/${RELEASE}/core/JetBlack.MessageBus.Adapters
-	mkdir -p build/${RELEASE}/extensions/JetBlack.MessageBus.Extension.LdapAuthentication
-	cp -r extensions/authentication/src/JetBlack.MessageBus.Extension.LdapAuthentication/bin/Debug/* build/${RELEASE}/extensions/JetBlack.MessageBus.Extension.LdapAuthentication
-	mkdir -p build/${RELEASE}/extensions/JetBlack.MessageBus.Extension.PasswordFileAuthentication
-	cp -r extensions/authentication/src/JetBlack.MessageBus.Extension.PasswordFileAuthentication/bin/Debug/* build/${RELEASE}/extensions/JetBlack.MessageBus.Extension.PasswordFileAuthentication
-	mkdir -p build/${RELEASE}/extensions/JetBlack.MessageBus.Extension.JwtAuthentication
-	cp -r extensions/authentication/src/JetBlack.MessageBus.Extension.JwtAuthentication/bin/Debug/* build/${RELEASE}/extensions/JetBlack.MessageBus.Extension.JwtAuthentication
-	cp scripts/* build/${RELEASE}
-	cd build && tar cvzf ${RELEASE}.tar.gz ${RELEASE}
-	cd build && zip -r ${RELEASE}.zip ${RELEASE}
+	dotnet publish core/src/JetBlack.MessageBus.Distributor -o build/distributor-5.0.0
+
+push-common:
+	dotnet pack core/src/JetBlack.MessageBus.Common
+	dotnet nuget push core/src/JetBlack.MessageBus.Common/bin/Debug/JetBlack.MessageBus.Common.5.0.0.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
+push-messages:
+	dotnet pack core/src/JetBlack.MessageBus.Messages
+	dotnet nuget push core/src/JetBlack.MessageBus.Messages/bin/Debug/JetBlack.MessageBus.Messages.5.0.0.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
+push-adapters:
+	dotnet pack core/src/JetBlack.MessageBus.Adapters
+	dotnet nuget push core/src/JetBlack.MessageBus.Adapters/bin/Debug/JetBlack.MessageBus.Adapters.5.0.0.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
+push-jwtauthentication:
+	dotnet pack extensions/authentication/src/JetBlack.MessageBus.Extension.JwtAuthentication
+	dotnet nuget push extensions/authentication/src/JetBlack.MessageBus.Extension.JwtAuthentication/bin/Debug/JetBlack.MessageBus.Extension.JwtAuthentication.5.0.0.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
+push-ldapauthentication:
+	dotnet pack extensions/authentication/src/JetBlack.MessageBus.Extension.LdapAuthentication
+	dotnet nuget push extensions/authentication/src/JetBlack.MessageBus.Extension.LdapAuthentication/bin/Debug/JetBlack.MessageBus.Extension.LdapAuthentication.5.0.0.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
+push-pwdauthentication:
+	dotnet pack extensions/authentication/src/JetBlack.MessageBus.Extension.PasswordFileAuthentication
+	dotnet nuget push extensions/authentication/src/JetBlack.MessageBus.Extension.PasswordFileAuthentication/bin/Debug/JetBlack.MessageBus.Extension.PasswordFileAuthentication.5.0.0.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
 
 clean:
 	rm -r build
