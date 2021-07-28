@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\JetBlack.MessageBus.JwtAuthentication\JetBlack.MessageBus.JwtAuthentication.csproj" />
+    <ProjectReference Include="..\..\src\JetBlack.MessageBus.Extension.JwtAuthentication\JetBlack.MessageBus.Extension.JwtAuthentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

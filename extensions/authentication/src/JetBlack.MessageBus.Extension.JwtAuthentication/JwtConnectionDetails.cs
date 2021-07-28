@@ -3,7 +3,7 @@
 using System;
 using System.Linq;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Extension.JwtAuthentication
 {
     public class JwtConnectionDetails
     {

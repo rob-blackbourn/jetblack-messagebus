@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>JetBlack.MessageBus.JwtAuthentication</PackageId>
-    <Version>4.0.0</Version>
+    <PackageId>JetBlack.MessageBus.Extension.JwtAuthentication</PackageId>
+    <Version>5.0.0</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>

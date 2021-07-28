@@ -9,8 +9,9 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Security.Authentication;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Extension.JwtAuthentication
 {
     public class JwtAuthenticator : IAuthenticator
     {
