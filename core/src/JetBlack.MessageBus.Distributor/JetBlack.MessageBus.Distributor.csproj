@@ -31,7 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\JetBlack.MessageBus.Common\JetBlack.MessageBus.Common.csproj" />
     <ProjectReference Include="..\JetBlack.MessageBus.Messages\JetBlack.MessageBus.Messages.csproj" />
-    <ProjectReference Include="..\..\..\extensions\authentication\src\JetBlack.MessageBus.Common.PasswordFileAuthentication\JetBlack.MessageBus.Common.PasswordFileAuthentication.csproj" />
+    <ProjectReference Include="..\..\..\extensions\authentication\src\JetBlack.MessageBus.Extension.PasswordFileAuthentication\JetBlack.MessageBus.Extension.PasswordFileAuthentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

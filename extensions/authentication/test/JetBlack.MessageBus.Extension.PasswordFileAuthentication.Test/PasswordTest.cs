@@ -3,7 +3,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JetBlack.MessageBus.Common.Security.Authentication;
 
-namespace JetBlack.MessageBus.Common.PasswordFileAuthentication.Test
+namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
 {
     [TestClass]
     public class PasswordTest

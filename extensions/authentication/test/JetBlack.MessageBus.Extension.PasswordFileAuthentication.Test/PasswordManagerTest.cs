@@ -1,10 +1,14 @@
 #nullable enable
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using JetBlack.MessageBus.Common.Security.Authentication;
 using System.IO;
 
-namespace JetBlack.MessageBus.Common.PasswordFileAuthentication.Test
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using JetBlack.MessageBus.Common.Security.Authentication;
+
+using JetBlack.MessageBus.Extension.PasswordFileAuthentication;
+
+namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
 {
     [TestClass]
     public class PasswordManagerTest

@@ -8,7 +8,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JetBlack.MessageBus.Common.IO;
 using JetBlack.MessageBus.Common.Security.Authentication;
 
-namespace JetBlack.MessageBus.Common.PasswordFileAuthentication.Test
+using JetBlack.MessageBus.Extension.PasswordFileAuthentication;
+
+namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
 {
     [TestClass]
     public class PasswordFileAuthenticatorTest

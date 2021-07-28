@@ -3,12 +3,14 @@
 using System;
 using System.IO;
 using System.Security;
+using System.Threading.Tasks;
 
 using Novell.Directory.Ldap;
 
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Security.Authentication;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Extension.LdapAuthentication
 {
     public class LdapAuthenticator : IAuthenticator
     {
@@ -57,6 +59,5 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
                 }
             }
         }
-
     }
 }
