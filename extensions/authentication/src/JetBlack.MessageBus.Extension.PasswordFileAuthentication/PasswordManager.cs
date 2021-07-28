@@ -52,7 +52,10 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             {
                 var serializer = new JsonSerializer();
                 var passwords = serializer.Deserialize<Dictionary<string, Password>>(jsonReader);
-                return new PasswordManager(passwords);
+                if (passwords == null)
+                    return new PasswordManager();
+                else
+                    return new PasswordManager(passwords);
             }
         }
 

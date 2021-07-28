@@ -3,7 +3,7 @@
 using System;
 using System.Linq;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Extension.JwtAuthentication
 {
     public class JwtConnectionDetails
     {
@@ -26,8 +26,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
 
         public static JwtConnectionDetails Parse(string connectionString)
         {
-            var dict = connectionString.Split(';')
-                .Select(part => part.Split('=', 2))
+            var dict = connectionString.Split(new char[] {';'})
+                .Select(part => part.Split(new char[] {'='}, 2))
                 .ToDictionary(key => key[0], value => value[1]);
 
             if (!dict.TryGetValue("Token", out var token))

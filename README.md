@@ -1,6 +1,6 @@
 # jetblack-messagebus
 
-A real time message bus written in .Net Core 3.0 running on Linux.
+A real time message bus written in .Net Core 3.1 running on Linux.
 
 This is work in progress.
 
@@ -25,17 +25,20 @@ See the examples folder for more detailed examples.
 
 ### Prerequisites
 
-You must have dotnet core 3.0 installed.
+You must have dotnet core 3.1 installed.
 
 ### Distributor
 
 Download the distributor tarball from the GitHub 
-[releases](https://github.com/rob-blackbourn/jetblack-messagebus/releases) page. It will look something like `jetblack-messagebus-2.0.0.tar.gz`. Untar it into a folder and run it using the dotnet runtime.
+[releases](https://github.com/rob-blackbourn/jetblack-messagebus/releases) page.
+It will look something like `jetblack-messagebus-5.0.0.tar.gz` or
+`jetblack-messagebus-5.0.0.zip`. Un-tar it into a folder and run it using the dotnet runtime.
 
 ```bash
-~ $ tar xzf ~/Downloads/jetblack-messagebus-2.0.0.tar.gz
-~ $ cd jetblack-messagebus-2.0.0
-~/jetblack-messagebus-2.0.0 $ dotnet JetBlack.MessageBus.Distributor.dll
+~ $ tar xzf ~/Downloads/jetblack-messagebus-5.0.0.tar.gz
+~ $ cd jetblack-messagebus-5.0.0/core/JetBlack.MessageBus.Distributor/netcoreapp3.1
+
+~/jetblack-messagebus-5.0.0/core/JetBlack.MessageBus.Distributor/netcoreapp3.1 $ dotnet JetBlack.MessageBus.Distributor.dll
 2019-08-31 09:01:10,482 [1] INFO  JetBlack.MessageBus.Distributor.Server [?] - Starting server version 2.0.0.0
 2019-08-31 09:01:10,495 [1] INFO  JetBlack.MessageBus.Distributor.Server [?] - Server started
 Press any key to stop...

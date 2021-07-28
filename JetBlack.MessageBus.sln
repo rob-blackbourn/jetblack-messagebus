@@ -27,13 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DA927A58-8EEE-4E93-83EC-CCACFB483D4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Common.PasswordFileAuthentication", "extensions\authentication\src\JetBlack.MessageBus.Common.PasswordFileAuthentication\JetBlack.MessageBus.Common.PasswordFileAuthentication.csproj", "{43D31BAA-2F49-417E-AFAD-9BC5C6D46192}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Extension.PasswordFileAuthentication", "extensions\authentication\src\JetBlack.MessageBus.Extension.PasswordFileAuthentication\JetBlack.MessageBus.Extension.PasswordFileAuthentication.csproj", "{43D31BAA-2F49-417E-AFAD-9BC5C6D46192}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Common.LdapAuthentication", "extensions\authentication\src\JetBlack.MessageBus.Common.LdapAuthentication\JetBlack.MessageBus.Common.LdapAuthentication.csproj", "{34861773-EFD6-40F3-AA04-9766F086156E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Extension.Common.LdapAuthentication", "extensions\authentication\src\JetBlack.MessageBus.Extension.LdapAuthentication\JetBlack.MessageBus.Extension.LdapAuthentication.csproj", "{34861773-EFD6-40F3-AA04-9766F086156E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5B6F2458-1CA7-48E1-9D2B-0505A6AD22CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Common.PasswordFileAuthentication.Test", "extensions\authentication\test\JetBlack.MessageBus.Common.PasswordFileAuthentication.Test\JetBlack.MessageBus.Common.PasswordFileAuthentication.Test.csproj", "{CBA5DE39-8796-458B-8E8B-427C2AA125CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test", "extensions\authentication\test\JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test\JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test.csproj", "{CBA5DE39-8796-458B-8E8B-427C2AA125CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{0A57F0C4-BD54-4ED1-8D70-04FD265FB744}"
 EndProject
@@ -69,9 +69,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakePassword", "utilities\s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "subscriber", "examples\selectfeed\subscriber\subscriber.csproj", "{A7931AD7-F828-4510-A661-70474377E9BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.JwtAuthentication", "extensions\authentication\src\JetBlack.MessageBus.JwtAuthentication\JetBlack.MessageBus.JwtAuthentication.csproj", "{8ECA7204-D019-4E5E-96CA-0FD49157C418}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Extension.JwtAuthentication", "extensions\authentication\src\JetBlack.MessageBus.Extension.JwtAuthentication\JetBlack.MessageBus.Extension.JwtAuthentication.csproj", "{8ECA7204-D019-4E5E-96CA-0FD49157C418}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.JwtAuthentication.Test", "extensions\authentication\test\JetBlack.MessageBus.JwtAuthentication.Test\JetBlack.MessageBus.JwtAuthentication.Test.csproj", "{525BF985-C55B-4122-A83B-9E40DDA14B1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBlack.MessageBus.Extension.JwtAuthentication.Test", "extensions\authentication\test\JetBlack.MessageBus.Extension.JwtAuthentication.Test\JetBlack.MessageBus.Extension.JwtAuthentication.Test.csproj", "{525BF985-C55B-4122-A83B-9E40DDA14B1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

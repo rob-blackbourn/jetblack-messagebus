@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>JetBlack.MessageBus.Common.LdapAuthentication</PackageId>
-    <Version>4.0.0</Version>
+    <PackageId>JetBlack.MessageBus.Extension.JwtAuthentication</PackageId>
+    <Version>5.0.0</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Novell.Directory.Ldap.NETStandard2_0" Version="3.1.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
   </ItemGroup>
 
 </Project>

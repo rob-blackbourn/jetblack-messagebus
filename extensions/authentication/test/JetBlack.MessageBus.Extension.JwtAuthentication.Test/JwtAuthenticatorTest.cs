@@ -9,8 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Security.Authentication;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication.Test
+namespace JetBlack.MessageBus.Extension.JwtAuthentication
 {
     [TestClass]
     public class UnitTest1

@@ -29,8 +29,8 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
 
         public static PasswordFileConnectionDetails Parse(string connectionString)
         {
-            var dict = connectionString.Split(';')
-                .Select(part => part.Split('=', 2))
+            var dict = connectionString.Split(new char[] {';'})
+                .Select(part => part.Split(new char[] {'='}, 2))
                 .ToDictionary(key => key[0], value => value[1]);
 
             if (!dict.TryGetValue("Username", out var username))
