@@ -42,7 +42,7 @@ It will look something like `jetblack-messagebus-5.0.0.tar.gz` or
 2019-08-31 09:01:10,482 [1] INFO  JetBlack.MessageBus.Distributor.Server [?] - Starting server version 2.0.0.0
 2019-08-31 09:01:10,495 [1] INFO  JetBlack.MessageBus.Distributor.Server [?] - Server started
 Press any key to stop...
-2019-08-31 09:01:10,497 [7] INFO  JetBlack.MessageBus.Distributor.Acceptor [?] - Listening on 0.0.0.0:9091
+2019-08-31 09:01:10,497 [7] INFO  JetBlack.MessageBus.Distributor.Acceptor [?] - Listening on 0.0.0.0:9001
 ```
 
 ### Clients
@@ -68,7 +68,7 @@ namespace notifier
     static void Main(string[] args)
     {
       var authenticator = new NullClientAuthenticator();
-      var client = Client.Create("localhost", 9091);
+      var client = Client.Create("localhost", 9001);
       client.OnForwardedSubscription +=
         (sender, args) => Console.WriteLine(args);
       Console.WriteLine("Requesting notifications on feed \"TEST\".");
@@ -105,7 +105,7 @@ namespace subscriber
     static void Main(string[] args)
     {
         var authenticator = new NullClientAuthenticator();
-        var client = Client.Create("localhost", 9091);
+        var client = Client.Create("localhost", 9001);
 
         client.OnDataReceived += OnDataReceived;
 
@@ -165,7 +165,7 @@ namespace publisher
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091);
+            var client = Client.Create("localhost", 9001);
 
             Console.WriteLine("Publishing message to feed \"TEST\" and topic \"FOO\".");
             var dataPackets = new[]

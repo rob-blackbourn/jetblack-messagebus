@@ -3,10 +3,29 @@ RELEASE=jetblack-messagebus-3.0.0
 .PHONY: all build clean
 
 all:
-	@echo "targets: build clean"
+	@echo "targets: publish clean"
 
-build:
-	dotnet publish core/src/JetBlack.MessageBus.Distributor -o build/distributor-5.0.0
+publish: publish-win10-x86 publish-win10-x64 publish-linux-x64 publish-osx-x64
+
+publish-win10-x86:
+	dotnet publish core/src/JetBlack.MessageBus.Distributor -r win10-x86 -p:PublishSingleFile=true -o build/distributor-5.0.0-win10-x86
+	cd build && zip -r distributor-5.0.0-win10-x86.zip distributor-5.0.0-win10-x86
+	rm -r build/distributor-5.0.0-win10-x86
+
+publish-win10-x64:
+	dotnet publish core/src/JetBlack.MessageBus.Distributor -r win10-x64 -p:PublishSingleFile=true -o build/distributor-5.0.0-win10-x64
+	cd build && zip -r distributor-5.0.0-win10-x64.zip distributor-5.0.0-win10-x64
+	rm -r build/distributor-5.0.0-win10-x64
+
+publish-linux-x64:
+	dotnet publish core/src/JetBlack.MessageBus.Distributor -r linux-x64 -p:PublishSingleFile=true -o build/distributor-5.0.0-linux-x64
+	cd build && tar cvzf distributor-5.0.0-linux-x64.tar.gz distributor-5.0.0-linux-x64
+	rm -r build/distributor-5.0.0-linux-x64
+
+publish-osx-x64:
+	dotnet publish core/src/JetBlack.MessageBus.Distributor -r osx-x64 -p:PublishSingleFile=true -o build/distributor-5.0.0-osx-x64
+	cd build && tar cvzf distributor-5.0.0-osx-x64.tar.gz distributor-5.0.0-osx-x64
+	rm -r build/distributor-5.0.0-osx-x64
 
 push-common:
 	dotnet pack core/src/JetBlack.MessageBus.Common

@@ -11,7 +11,7 @@ namespace publisher
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091);
+            var client = Client.Create("localhost", 9001);
 
             Console.WriteLine("Enter the feed and topic to publish on, then the message to send.");
             Console.WriteLine("Press ENTER to quit");

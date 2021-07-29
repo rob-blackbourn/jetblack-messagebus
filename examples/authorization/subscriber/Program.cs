@@ -31,7 +31,7 @@ namespace AuthSubscriber
 
             var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);
-            var client = Client.Create(server, 9091, authenticator: authenticator, isSslEnabled: true);
+            var client = Client.Create(server, 9001, authenticator: authenticator, isSslEnabled: true);
 
             client.OnDataReceived += OnDataReceived;
 

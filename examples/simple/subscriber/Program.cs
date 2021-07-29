@@ -10,7 +10,7 @@ namespace subscriber
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091);
+            var client = Client.Create("localhost", 9001);
 
             client.OnDataReceived += OnDataReceived;
 

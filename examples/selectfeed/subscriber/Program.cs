@@ -13,7 +13,7 @@ namespace subscriber
         static void Main(string[] args)
         {
             var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9091);
+            var client = Client.Create("localhost", 9001);
 
             client.OnDataReceived += OnDataReceived;
 
@@ -37,11 +37,12 @@ namespace subscriber
 
         private static void OnDataReceived(object? sender, DataReceivedEventArgs args)
         {
-            Console.Write($"Received data on feed \"{args.Feed}\" for topic \"{args.Topic}\"");
+            var type = args.IsImage ? "image" : "delta";
+            Console.WriteLine($"Received {type} on feed \"{args.Feed}\" for topic \"{args.Topic}\"");
 
             if (args.DataPackets == null)
             {
-                Console.Write("No Data");
+                Console.WriteLine("No Data");
                 return;
             }
 
@@ -51,7 +52,15 @@ namespace subscriber
                 {
                     var json = Encoding.UTF8.GetString(packet.Data);
                     var message = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                    Console.WriteLine($"Received: \"{message}\"");
+                    if (message == null)
+                    {
+                        return;
+                    }
+
+                    foreach (var item in message)
+                    {
+                        Console.WriteLine($"{item.Key}: {item.Value}");
+                    }
                 }
             }
         }
