@@ -81,10 +81,148 @@ subscription. At this point it sends all the data it has (an <em>image</em>) to
 that the client, and then subsequently sends any new or changed data
 (the <em>delta</em>) to all subscribing clients.</p>
 <h2 id="selectfeed-publisher">Selectfeed Publisher</h2>
-<p>Tehere is an example of a selectfeed publisher
+<p>There is an example of a selectfeed publisher
 <a href="https://github.com/rob-blackbourn/jetblack-messagebus/tree/master/examples/selectfeed/publisher">here</a>.</p>
-<p>Much of the code is for creating a mock exchange. The only file we care
-about is <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/examples/selectfeed/publisher/Publisher.cs">Publisher.cs</a>.</p>
+<p>Much of the code is for creating a mock exchange feed. The mock exchange
+feed has a public property <code>Data</code> which provides a dictionary indexed by
+ticker of a dictionary of field names and values. It also has an event
+<code>OnData</code> which is raised when the data for a ticker changes. To summarise
+we have a database of tickers with field-value properties, and an event
+that gets raised when the values for a ticker changes.</p>
+<p>The code for the publisher is in
+<a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/examples/selectfeed/publisher/Publisher.cs">Publisher.cs</a>. The first place to look
+is in the constructor.</p>
+<pre><code class="lang-cs">public Publisher(ExchangeFeed exchangeFeed)
+{
+    _exchangeFeed = exchangeFeed;
+    _exchangeFeed.OnData += HandleExchangeData;
+
+    _client = Client.Create(&quot;localhost&quot;, 9001);
+    _client.OnForwardedSubscription += HandleForwardedSubscription;
+    _client.AddNotification(Feed);
+}
+</code></pre>
+<p>The constructor takes the mock exchange feed as an argument and it adds
+an event handler of the <code>OnData</code> event. We'll see how that's implemented
+a little later. It then creates a client, adds an event handler for the
+forwarded subscription, the requests notifications for the event. We'll
+come to the event hasndler shortly. The key piece of state data we now
+need is to hold what tickers have been subscribed to, and by whome. We
+make an instance field to hold this.</p>
+<pre><code class="lang-cs">private readonly Dictionary&lt;string, Dictionary&lt;Guid, int&gt;&gt; _subscriptions = new Dictionary&lt;string, Dictionary&lt;Guid, int&gt;&gt;();
+</code></pre>
+<p>The outer dictioary will be keyed by the ticker (or &quot;topic&quot; - these are
+synonymous), and the inner dictionary is keyed by the client identifier
+with the value holding the number of subscriptions to this ticker a client
+has made. Now we can implement the <code>HandleExchangeData</code> event handler.</p>
+<pre><code class="lang-cs">private void HandleExchangeData(object sender, ExchangeEventArgs args)
+{
+    lock (this)
+    {
+        if (!_subscriptions.ContainsKey(args.Ticker))
+            return;
+
+        Console.WriteLine($&quot;Publishing {args.Ticker}&quot;);
+        _client.Publish(Feed, args.Ticker, false, ToDataPackets(args.Delta));
+    }
+}
+</code></pre>
+<p>When a ticker is updated we want to publish it if there are subscriptions,
+so all we need to do is check if the <code>_subscriptions</code> state has any client
+entries. If it does we call <code>Publish</code> on the client giving the <code>Feed</code>,
+<code>args.Ticker</code> (for the topic), and the <code>args.Delta</code> (the dictionary of
+changes). The <code>ToDataPackets</code> method is encoding the dictionary into JSON
+then into bytes.</p>
+<p>Note how all interaction is done inside a lock, as the events will be
+called from different threads.</p>
+<p>The <code>HandleForwardedSubscriptions</code> event handler must deal with adding and
+removing subscriptions.</p>
+<pre><code class="lang-cs">private void HandleForwardedSubscription(object sender, ForwardedSubscriptionEventArgs args)
+{
+    lock (this)
+    {
+        if (args.IsAdd)
+        {
+            AddSubscription(args.ClientId, args.Feed, args.Topic);
+        }
+        else
+        {
+            RemoveSubscription(args.ClientId, args.Feed, args.Topic);
+        }
+    }
+}
+</code></pre>
+<p>First let's look at adding a subscription.</p>
+<pre><code class="lang-cs">public void AddSubscription(Guid clientId, string feed, string topic)
+{
+    lock (this)
+    {
+        if (!_subscriptions.TryGetValue(topic, out var topicSubscriptions))
+        {
+            topicSubscriptions = new Dictionary&lt;Guid, int&gt;();
+            _subscriptions.Add(topic, topicSubscriptions);
+        }
+
+        if (topicSubscriptions.ContainsKey(clientId))
+        {
+            topicSubscriptions[clientId] += 1;
+        }
+        else
+        {
+            Console.WriteLine($&quot;Sending image of {topic} to {clientId}&quot;);
+            topicSubscriptions[clientId] = 1;
+            _client.Send(clientId, feed, topic, true, ToDataPackets(_exchangeFeed.Data[topic]));
+        }
+    }
+}
+</code></pre>
+<p>The goal is to increment the count for a given ticker and client. First
+we try to get the topic subscriptions for the ticker. If there are none
+we create a new empty dictionary for them. If the topic subscriptions
+already contains a subscription from the client we increment it. Otherwise
+we make a new entry for the client and set the count to 1.</p>
+<p>Removing a subscription does the reverse.</p>
+<pre><code class="lang-cs">public void RemoveSubscription(Guid clientId, string feed, string topic)
+{
+    lock (this)
+    {
+        if (!_subscriptions.TryGetValue(topic, out var topicSubscriptions))
+        {
+            return;
+        }
+
+        if (!topicSubscriptions.ContainsKey(clientId))
+        {
+            return;
+        }
+
+        topicSubscriptions[clientId] -= 1;
+        if (topicSubscriptions[clientId] &gt; 0)
+        {
+            return;
+        }
+
+        topicSubscriptions.Remove(clientId);
+        if (topicSubscriptions.Count &gt; 0)
+        {
+            return;
+        }
+
+        _subscriptions.Remove(topic);
+
+        Console.WriteLine($&quot;Stopped publishing {topic}&quot;);
+    }
+}
+</code></pre>
+<p>First we handle the edge case where we have been sent a subscription
+for a ticker that doesn't exist and we ensure the provided client
+has actually made a subscription. With these checks complete we can
+decrement the subscription count for this ticker and client. If the
+client still has subscriptions we return, otherwise we remove the client
+form those subscribing to the ticker. After removing the client from
+those subscribing to the ticker we check to see if the are any clients
+still subscribing to the ticker. If there are not we remove the ticker
+from the subscriptions.</p>
 </article>
           </div>
           

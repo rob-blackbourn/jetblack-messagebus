@@ -25,7 +25,19 @@ namespace SelectfeedPublisher
 
             _exchangeFeed.OnData += HandleExchangeData;
             _client.OnForwardedSubscription += HandleForwardedSubscription;
-            _client.AddNotification("LSE");
+            _client.AddNotification(Feed);
+        }
+
+        private void HandleExchangeData(object sender, ExchangeEventArgs args)
+        {
+            lock (_gate)
+            {
+                if (!_subscriptions.ContainsKey(args.Ticker))
+                    return;
+
+                Console.WriteLine($"Publishing {args.Ticker}");
+                _client.Publish(Feed, args.Ticker, false, ToDataPackets(args.Delta));
+            }
         }
 
         private void HandleForwardedSubscription(object sender, ForwardedSubscriptionEventArgs args)
@@ -41,27 +53,6 @@ namespace SelectfeedPublisher
                     RemoveSubscription(args.ClientId, args.Feed, args.Topic);
                 }
             }
-        }
-
-        private void HandleExchangeData(object sender, ExchangeEventArgs args)
-        {
-            lock (_gate)
-            {
-                if (!_subscriptions.ContainsKey(args.Ticker))
-                    return;
-
-                Console.WriteLine($"Publishing {args.Ticker}");
-                _client.Publish(Feed, args.Ticker, false, ToDataPackets(args.Delta));
-            }
-        }
-
-        private static DataPacket[] ToDataPackets(Dictionary<string, object> data)
-        {
-            var json = JsonConvert.SerializeObject(data);
-            return new DataPacket[]
-            {
-                new DataPacket(null, Encoding.UTF8.GetBytes(json))
-            };
         }
 
         public void AddSubscription(Guid clientId, string feed, string topic)
@@ -117,6 +108,15 @@ namespace SelectfeedPublisher
 
                 Console.WriteLine($"Stopped publishing {topic}");
             }
+        }
+
+        private static DataPacket[] ToDataPackets(Dictionary<string, object> data)
+        {
+            var json = JsonConvert.SerializeObject(data);
+            return new DataPacket[]
+            {
+                new DataPacket(null, Encoding.UTF8.GetBytes(json))
+            };
         }
 
         public void Dispose()

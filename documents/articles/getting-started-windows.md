@@ -3,7 +3,7 @@
 Here we write a simple notifier, publisher, and subscriber
 in the Windows environment.
 
-## Installtion
+## Installation
 
 First download and install the message bus service.
 
