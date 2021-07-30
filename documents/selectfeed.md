@@ -16,5 +16,9 @@ that the client, and then subsequently sends any new or changed data
 
 ## Selectfeed Publisher
 
-Create a new console project call "SelectfeedPublisher" and add the
-adapters nuget package.
+Tehere is an example of a selectfeed publisher
+[here](https://github.com/rob-blackbourn/jetblack-messagebus/tree/master/examples/selectfeed/publisher).
+
+Much of the code is for creating a mock exchange. The only file we care
+about is [Publisher.cs](https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/examples/selectfeed/publisher/Publisher.cs).
+
