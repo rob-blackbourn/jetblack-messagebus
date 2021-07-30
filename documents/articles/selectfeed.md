@@ -181,3 +181,8 @@ form those subscribing to the ticker. After removing the client from
 those subscribing to the ticker we check to see if the are any clients
 still subscribing to the ticker. If there are not we remove the ticker
 from the subscriptions.
+
+You can find a subscriber to this data
+[here](https://github.com/rob-blackbourn/jetblack-messagebus/tree/master/examples/selectfeed/subscriber).
+It handles adding and removing the subscriptions, and the deserialization
+of the JSON data into a dictionary.
