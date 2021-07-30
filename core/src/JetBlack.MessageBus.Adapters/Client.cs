@@ -17,8 +17,21 @@ using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Adapters
 {
+    /// <summary>
+    /// The message bus client.
+    /// </summary>
     public class Client
     {
+        /// <summary>
+        /// Create a new client.
+        /// </summary>
+        /// <param name="server">The server host name.</param>
+        /// <param name="port">The server port</param>
+        /// <param name="monitorHeartbeat">If true send heartbeats.</param>
+        /// <param name="isSslEnabled">If true use SSL.</param>
+        /// <param name="authenticator">The client authenticator.</param>
+        /// <param name="autoConnect">If true automatically connect to the message bus.</param>
+        /// <returns></returns>
         public static Client Create(
             string server,
             int port,
@@ -69,10 +82,25 @@ namespace JetBlack.MessageBus.Adapters
             return sslPolicyErrors == SslPolicyErrors.None;
         }
 
+        /// <summary>
+        /// Raised when data has received from a subscribed feed and topic.
+        /// </summary>
         public event EventHandler<DataReceivedEventArgs>? OnDataReceived;
+        /// <summary>
+        /// Raised when a requested notification is received.
+        /// </summary>
         public event EventHandler<ForwardedSubscriptionEventArgs>? OnForwardedSubscription;
+        /// <summary>
+        /// Raised when authorisation is requested.
+        /// </summary>
         public event EventHandler<AuthorizationRequestEventArgs>? OnAuthorizationRequest;
+        /// <summary>
+        /// Raised when the connection state has changed.
+        /// </summary>
         public event EventHandler<ConnectionChangedEventArgs>? OnConnectionChanged;
+        /// <summary>
+        /// Raised when a heartbeat has been received.
+        /// </summary>
         public event EventHandler<EventArgs>? OnHeartbeat;
 
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -84,6 +112,9 @@ namespace JetBlack.MessageBus.Adapters
             _stream = stream;
         }
 
+        /// <summary>
+        /// Start processing message bus data.
+        /// </summary>
         public void Start()
         {
             Task.Run(() => Read(), _cancellationTokenSource.Token);
@@ -165,11 +196,21 @@ namespace JetBlack.MessageBus.Adapters
             OnConnectionChanged?.Invoke(this, new ConnectionChangedEventArgs(state, error));
         }
 
+        /// <summary>
+        /// Add a subscription to a feed and topic.
+        /// </summary>
+        /// <param name="feed">The feed name.</param>
+        /// <param name="topic">The topic name</param>
         public void AddSubscription(string feed, string topic)
         {
             MakeSubscriptionRequest(feed, topic, true);
         }
 
+        /// <summary>
+        /// Remove a subscription to a feed and topic.
+        /// </summary>
+        /// <param name="feed">The feed name.</param>
+        /// <param name="topic">The topic name</param>
         public void RemoveSubscription(string feed, string topic)
         {
             MakeSubscriptionRequest(feed, topic, false);
@@ -185,11 +226,19 @@ namespace JetBlack.MessageBus.Adapters
             _writeQueue.Add(new SubscriptionRequest(feed, topic, isAdd));
         }
 
+        /// <summary>
+        /// Request notifications of subscriptions to a feed.
+        /// </summary>
+        /// <param name="feed">The feed name.</param>
         public void AddNotification(string feed)
         {
             MakeNotificationRequest(feed, true);
         }
 
+        /// <summary>
+        /// Remove notification of subscriptions to a feed.
+        /// </summary>
+        /// <param name="feed">The feed name.</param>
         public void RemoveNotification(string feed)
         {
             MakeNotificationRequest(feed, false);
@@ -203,6 +252,14 @@ namespace JetBlack.MessageBus.Adapters
             _writeQueue.Add(new NotificationRequest(feed, isAdd));
         }
 
+        /// <summary>
+        /// Send a message to a specific client.
+        /// </summary>
+        /// <param name="clientId">The client id.</param>
+        /// <param name="feed">The feed name.</param>
+        /// <param name="topic">The topic name</param>
+        /// <param name="isImage">A boolean indicating if the message was an image.</param>
+        /// <param name="dataPackets">The data packets to send.</param>
         public void Send(Guid clientId, string feed, string topic, bool isImage, DataPacket[]? dataPackets)
         {
             if (feed == null)
@@ -213,6 +270,13 @@ namespace JetBlack.MessageBus.Adapters
             _writeQueue.Add(new UnicastData(clientId, feed, topic, isImage, dataPackets));
         }
 
+        /// <summary>
+        /// Publish a message to the subscribers of a feed and topic.
+        /// </summary>
+        /// <param name="feed">The feed name.</param>
+        /// <param name="topic">The topic name</param>
+        /// <param name="isImage">A boolean indicating if the message was an image.</param>
+        /// <param name="dataPackets">The data packets to send.</param>
         public void Publish(string feed, string topic, bool isImage, DataPacket[]? dataPackets)
         {
             if (feed == null)
@@ -223,6 +287,14 @@ namespace JetBlack.MessageBus.Adapters
             _writeQueue.Add(new MulticastData(feed, topic, isImage, dataPackets));
         }
 
+        /// <summary>
+        /// Authorise a client.
+        /// </summary>
+        /// <param name="clientId">The client id.</param>
+        /// <param name="feed">The feed name.</param>
+        /// <param name="topic">The topic name</param>
+        /// <param name="isAuthorizationRequired">If true authorisation is required.</param>
+        /// <param name="entitlements">The set of entitlements granted to the client.</param>
         public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, ISet<int>? entitlements)
         {
             if (feed == null)
@@ -281,6 +353,9 @@ namespace JetBlack.MessageBus.Adapters
             OnDataReceived?.Invoke(this, new DataReceivedEventArgs(user, host, feed, topic, dataPackets, isImage));
         }
 
+        /// <summary>
+        /// Dispose of the client, closing the connection.
+        /// </summary>
         public void Dispose()
         {
             _cancellationTokenSource.Cancel();

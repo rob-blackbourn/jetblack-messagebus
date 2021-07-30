@@ -1,7 +1,3 @@
-# Overview
-
-A real time message bus written in .Net Core 3.1 running on Linux and Windows.
-
 ## Why?
 
 There are a number of excellent message bus implementations available, all

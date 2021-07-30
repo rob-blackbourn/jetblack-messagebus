@@ -4,8 +4,18 @@ using System.Text;
 
 namespace JetBlack.MessageBus.Adapters
 {
+    /// <summary>
+    /// A token based authenticator.
+    /// </summary>
     public class TokenClientAuthenticator : ClientAuthenticator
     {
+        /// <summary>
+        /// Construct the token based authenticator.
+        /// </summary>
+        /// <param name="token">The token to authenticate with.</param>
+        /// <param name="impersonating"></param>
+        /// <param name="forwardedFor"></param>
+        /// <param name="application"></param>
         public TokenClientAuthenticator(
             string token,
             string? impersonating = null,
@@ -18,11 +28,15 @@ namespace JetBlack.MessageBus.Adapters
             Application = application;
         }
 
+        /// <summary>
+        /// The token used for authentication.
+        /// </summary>
         public string Token { get; }
         public string? Impersonating { get; }
         public string? ForwardedFor { get; }
         public string? Application { get; }
 
+        /// <inheritdoc />
         protected override string ToConnectionString()
         {
             var connectionString = new StringBuilder();

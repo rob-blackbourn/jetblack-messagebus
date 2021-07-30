@@ -4,9 +4,21 @@ using System.Text;
 
 namespace JetBlack.MessageBus.Adapters
 {
+    /// <summary>
+    /// The base class for client authenticators.
+    /// </summary>
     public class BasicClientAuthenticator : ClientAuthenticator
     {
         private readonly string _password;
+
+        /// <summary>
+        /// Construct a basic client authenticator.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <param name="impersonating">The username that is being impersonated.</param>
+        /// <param name="forwardedFor"></param>
+        /// <param name="application"></param>
         public BasicClientAuthenticator(
             string username,
             string password,

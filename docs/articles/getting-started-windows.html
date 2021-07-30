@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting Started - Windows </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting Started - Windows ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started---windows">Getting Started - Windows</h1>
+
+<p>Here we write a simple notifier, publisher, and subscriber
+in the Windows environment.</p>
+<h2 id="installtion">Installtion</h2>
+<p>First download and install the message bus service.</p>
+<p>To get the distributor go to the
+<a href="https://github.com/rob-blackbourn/jetblack-messagebus/releases">Releases</a>
+page of the repo and download the distributor for your platform: typically.
+distributor-5.0.0-win10-x64.zip.</p>
+<p>Unzip the archive into a folder of your choice and double-click on
+<code>JetBlack.MessageBus.Distributor.exe</code> to start it. The first time
+the service is run Windows will pop up a security alert indicating
+the service wants to access a network port. Click on &quot;Allow access&quot;
+to continue.</p>
+<h2 id="write-some-code">Write some code</h2>
+<h3 id="notifier">Notifier</h3>
+<p>We'll start by writing a <em>notifier</em>. The notifier listens to other client's
+subscriptions.</p>
+<p>Open Visual Studio and create a new C# console project call &quot;SimpleNotifier&quot;
+using the target framework &quot;.NET Core 3.1&quot;.</p>
+<p>Once the project has been created right-click on the &quot;Dependencies&quot; and
+select &quot;Manage Nuget Packages...&quot;. In the &quot;Browse&quot; tab search for the package
+<code>JetBlack.MessageBus.Adapters</code>, and install it.</p>
+<p>Change the file <code>Program.cs</code> to have the following content:</p>
+<pre><code class="lang-cs">using System;
+
+using JetBlack.MessageBus.Adapters;
+
+namespace SimpleNotifier
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create the client.
+            var client = Client.Create(&quot;localhost&quot;, 9001);
+            client.OnForwardedSubscription +=
+              (sender, args) =&gt; Console.WriteLine(args);
+
+            // Request notifications on the &quot;TEST&quot; feed.
+            Console.WriteLine(&quot;Requesting notifications on feed \&quot;TEST\&quot;.&quot;);
+            client.AddNotification(&quot;TEST&quot;);
+            Console.WriteLine(&quot;Press ENTER to quit&quot;);
+            Console.ReadLine();
+            
+            client.Dispose();
+        }
+    }
+}
+</code></pre>
+<p>The program is pretty simple. It creates a client which connects to <code>localhost</code>
+on port <code>9001</code>, which matches the distributor. It adds an event handler for
+the event <code>OnForwardedSubscription</code>. These are subscriptions made
+by another client that have been &quot;forwarded&quot; to this client. The event handler
+writes the event to the console. Finally it calls <code>AddNotification</code> for the
+<em>feed</em> <code>TEST</code> then waits for the <code>ENTER</code> key to be pressed after which it will
+dispose of the client and exit.</p>
+<p>When we run the program it responds:</p>
+<pre><code>Requesting notifications on feed &quot;TEST&quot;.
+Press ENTER to quit
+</code></pre>
+<p>Looking at the console for the distributor we see the following new lines:</p>
+<pre><code>2021-07-29 12:49:45.2520206 info: JetBlack.MessageBus.Distributor.Interactors.Interactor[0]
+      Authenticated with NULL as nobody
+2021-07-29 12:49:45.2591651 info: JetBlack.MessageBus.Distributor.Interactors.InteractorManager[0]
+      Adding interactor: 46e44dfc-961b-4fae-b6e3-78cabfea9df5: nobody() DESKTOP-011OALS()
+2021-07-29 12:49:46.2827504 dbug: JetBlack.MessageBus.Distributor.Server[0]
+      OnMessage(sender=46e44dfc-961b-4fae-b6e3-78cabfea9df5: nobody() DESKTOP-011OALS(), message=MessageType=NotificationRequest,Feed=&quot;TEST&quot;,IsAdd=True
+2021-07-29 12:49:46.2836294 info: JetBlack.MessageBus.Distributor.Notifiers.NotificationManager[0]
+      Handling notification request for 46e44dfc-961b-4fae-b6e3-78cabfea9df5: nobody() DESKTOP-011OALS() on MessageType=NotificationRequest,Feed=&quot;TEST&quot;,IsAdd=True
+</code></pre>
+<p>We can see the client (or <em>interactor</em>) connecting. Then the receipt and handling
+of the notification request.</p>
+<h3 id="subscriber">Subscriber</h3>
+<p>Leave the notifier running and create a new C# console project called &quot;SimpleSubscriber&quot;
+in the same way we did for &quot;SimpleNotifier&quot;, adding the nuget package for adapters.</p>
+<p>Change the code in &quot;Program.cs&quot; to be:</p>
+<pre><code class="lang-cs">using System;
+using System.Text;
+
+using JetBlack.MessageBus.Adapters;
+
+namespace SimpleSubscriber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var client = Client.Create(&quot;localhost&quot;, 9001);
+
+            client.OnDataReceived += OnDataReceived;
+
+            Console.WriteLine(&quot;Subscribing to feed \&quot;TEST\&quot; topic \&quot;FOO\&quot;.&quot;);
+            client.AddSubscription(&quot;TEST&quot;, &quot;FOO&quot;);
+
+            Console.WriteLine(&quot;Press ENTER to quit&quot;);
+            Console.ReadLine();
+
+            client.Dispose();
+        }
+
+        private static void OnDataReceived(
+          object sender,
+          DataReceivedEventArgs e)
+        {
+            if (e.DataPackets == null)
+            {
+                Console.WriteLine(&quot;No data&quot;);
+                return;
+            }
+
+            foreach (var packet in e.DataPackets)
+            {
+                if (packet.Data != null)
+                {
+                    var message = Encoding.UTF8.GetString(packet.Data);
+                    Console.WriteLine($&quot;Received: \&quot;{message}\&quot;&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>The subscriber creates the client in the same way as the notifier. This time
+it adds an event handler for <code>OnDataReceived</code>, which just writes the data it
+receives to the console. The message bus is agnostic to the format of the
+data. In this case we will be receiving <code>utf-8</code> strings. Note that the data
+is presented as <em>packets</em>. This is the mechanism by which authorisation is
+implemented. There is no authentication or authorisation in this example, but
+if there was the client would only receive packets for which it was authorised.</p>
+<p>After adding the event handler the client calls <code>AddSubscription</code> to the feed <code>TEST</code> and the topic <code>FOO</code>.</p>
+<p>Running the program provides the following output:</p>
+<pre><code>Subscribing to feed &quot;TEST&quot; topic &quot;FOO&quot;.
+Press ENTER to quit
+</code></pre>
+<p>However in the notifier we see the following:</p>
+<pre><code>User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=0098299b-e985-4c3e-a617-b45c53bf078b,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+</code></pre>
+<p>The notifier has received the forwarded subscription. It receives the clients credntials, it's Id, the feed, topic, and whether the subscription has been added or removed.</p>
+<p>In the distributor console we see a bunch of information:</p>
+<pre><code>2021-07-29 13:39:26.1057383 info: JetBlack.MessageBus.Distributor.Interactors.Interactor[0]
+      Authenticated with NULL as nobody
+2021-07-29 13:39:26.1093019 info: JetBlack.MessageBus.Distributor.Interactors.InteractorManager[0]
+      Adding interactor: 0098299b-e985-4c3e-a617-b45c53bf078b: nobody() DESKTOP-011OALS()
+2021-07-29 13:39:26.7359492 dbug: JetBlack.MessageBus.Distributor.Server[0]
+      OnMessage(sender=0098299b-e985-4c3e-a617-b45c53bf078b: nobody() DESKTOP-011OALS(), message=MessageType=SubscriptionRequest,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+2021-07-29 13:39:26.7511101 info: JetBlack.MessageBus.Distributor.Subscribers.SubscriptionManager[0]
+      Received subscription from 0098299b-e985-4c3e-a617-b45c53bf078b: nobody() DESKTOP-011OALS() on &quot;MessageType=SubscriptionRequest,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True&quot;
+2021-07-29 13:39:26.7526426 dbug: JetBlack.MessageBus.Distributor.Interactors.InteractorManager[0]
+      Requesting authorization Interactor=0098299b-e985-4c3e-a617-b45c53bf078b: nobody() DESKTOP-011OALS(), Feed=TEST, Topic=FOO
+2021-07-29 13:39:26.7533329 dbug: JetBlack.MessageBus.Distributor.Interactors.InteractorManager[0]
+      No authorization required
+2021-07-29 13:39:26.7558562 dbug: JetBlack.MessageBus.Distributor.Interactors.InteractorManager[0]
+      Accepting an authorization response from 0098299b-e985-4c3e-a617-b45c53bf078b: nobody() DESKTOP-011OALS() with MessageType=AuthorizationResponse,ClientId=0098299b-e985-4c3e-a617-b45c53bf078b,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAuthorizationRequired=False,Entitlements.Count=0.
+2021-07-29 13:39:26.7655983 dbug: JetBlack.MessageBus.Distributor.Notifiers.NotificationManager[0]
+      Notifying interactors[46e44dfc-961b-4fae-b6e3-78cabfea9df5: nobody() DESKTOP-011OALS()] of subscription MessageType=ForwardedSubscriptionRequest,User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=0098299b-e985-4c3e-a617-b45c53bf078b,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+</code></pre>
+<p>First we see the subscriber connect. Next the distributor receives the subscription
+request. It checks for authorization, then finally informs clients requesting
+notifications of the subscription.</p>
+<p>Lastly let's run another subscriber. Right click over &quot;Program.cs&quot; and click
+&quot;Open Containg Folder&quot;. Navigate to the <code>bin\Debug\netcoreapp3.1</code> and double-click
+on <code>SimpleSubscriber.exe</code>. This will start a second subscriber.</p>
+<p>The notifier should now receive a second forwarded subscription from the second subscriber.</p>
+<h3 id="publisher">Publisher</h3>
+<p>Leave the subscriber and publisher running and create a new c# console app
+&quot;SimplePublisher.cs&quot;, adding the adapters nuget package. Replace the &quot;Program.cs&quot;
+with the following:</p>
+<pre><code class="lang-cs">using System;
+using System.Text;
+
+using JetBlack.MessageBus.Adapters;
+using JetBlack.MessageBus.Common.IO;
+
+namespace SimplePublisher
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var client = Client.Create(&quot;localhost&quot;, 9001);
+
+            Console.WriteLine(&quot;Publishing message to feed \&quot;TEST\&quot; and topic \&quot;FOO\&quot;.&quot;);
+            var dataPackets = new[]
+            {
+                new DataPacket(null, Encoding.UTF8.GetBytes(&quot;Hello, World!&quot;))
+            };
+            client.Publish(&quot;TEST&quot;, &quot;FOO&quot;, true, dataPackets);
+
+            Console.WriteLine(&quot;Press ENTER to quit&quot;);
+            Console.ReadLine();
+
+            client.Dispose();
+        }
+    }
+}
+</code></pre>
+<p>We create a client as before. Then we create an array of a single <code>DataPacket</code>.
+The first argument to the DataPacket is the entitlements, for which we pass
+null as this feed is not using authorisation. The contents must be a <code>byte[]</code>,
+to we encode the string. Finally we called <code>Publish</code> with the packets and the feed
+<code>TEST</code> and the topic <code>FOO</code>.</p>
+<p>Running the publisher gives the following output.</p>
+<pre><code>Publishing message to feed &quot;TEST&quot; and topic &quot;FOO&quot;.
+Press ENTER to quit
+</code></pre>
+<p>There's nothing new in the notifier, but both subscribers have the following
+output.</p>
+<pre><code>Subscribing to feed &quot;TEST&quot; topic &quot;FOO&quot;.
+Press ENTER to quit
+Received: &quot;Hello, World!&quot;
+</code></pre>
+<p>Go to the publisher's console and hit <code>ENTER</code> to quit. The publisher should stop.
+In the window for the subscribers we can see the following output:</p>
+<pre><code>Subscribing to feed &quot;TEST&quot; topic &quot;FOO&quot;.
+Press ENTER to quit
+Received: &quot;Hello, World!&quot;
+No data
+</code></pre>
+<p>When all publishers on a topic have disconnected the distributor will send an
+empty message to all the subscribers. This can be used as a staleness&quot; indicator.</p>
+<p>Now press <code>ENTER</code> in  the window of one of the subscribers.</p>
+<p>Looking in the notifier window we see the following:</p>
+<pre><code>Requesting notifications on feed &quot;TEST&quot;.
+Press ENTER to quit
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=df250556-98bb-4916-b860-47221be39ea4,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=83f8c7c5-e143-4ae2-860f-2dfd00d0a3ed,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=df250556-98bb-4916-b860-47221be39ea4,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=False
+</code></pre>
+<p>The notifier has been informed that the client that disconnected is not subscribing
+to the feed/topic any more. Pressing <code>ENTER</code> on the other subscriber shows the following in the notifier.</p>
+<pre><code>Requesting notifications on feed &quot;TEST&quot;.
+Press ENTER to quit
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=df250556-98bb-4916-b860-47221be39ea4,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=83f8c7c5-e143-4ae2-860f-2dfd00d0a3ed,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=True
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=df250556-98bb-4916-b860-47221be39ea4,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=False
+User=&quot;nobody&quot;,Host=&quot;DESKTOP-011OALS&quot;,ClientId=83f8c7c5-e143-4ae2-860f-2dfd00d0a3ed,Feed=&quot;TEST&quot;,Topic=&quot;FOO&quot;,IsAdd=False
+</code></pre>
+<p>Now noone is listening!</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/getting-started-windows.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

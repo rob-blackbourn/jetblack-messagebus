@@ -4,18 +4,30 @@ using System;
 
 namespace JetBlack.MessageBus.Adapters
 {
+    /// <summary>
+    /// The events args provided when the state of the connection changes.
+    /// </summary>
     public class ConnectionChangedEventArgs : EventArgs
     {
-        public ConnectionChangedEventArgs(ConnectionState state, Exception? error = null)
+        internal ConnectionChangedEventArgs(ConnectionState state, Exception? error = null)
         {
             State = state;
             Error = error;
         }
 
+        /// <summary>
+        /// The connection state.
+        /// </summary>
         public ConnectionState State { get; }
+        /// <summary>
+        /// The error for connection failures.
+        /// </summary>
         public Exception? Error { get; }
     }
 
+    /// <summary>
+    /// The connection state.
+    /// </summary>
     public enum ConnectionState
     {
         Connecting,

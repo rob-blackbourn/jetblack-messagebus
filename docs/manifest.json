@@ -1,0 +1,642 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/dev/public/rob-blackbourn/jetblack-messagebus/documents",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.AuthorizationRequestEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.AuthorizationRequestEventArgs.html",
+          "hash": "zuhfxDgEz9BlGhqS/QuAiBU/jxs4HOme04xwOX7i2lY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html",
+          "hash": "1VFgP18urq7W3pTD/1tk6O6LtHY+1AXROt9ONwxAqeo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.Client.html",
+          "hash": "rts7jL5cbK6VeK+pj2Wg3zY24Yj/V+ooVkYQ9VzfVcI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.ClientAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html",
+          "hash": "Ij6XMRHQSbKl9SFLp3y1LHWV/FTPEcntZ8HHeU6ZAR4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.html",
+          "hash": "MCJDpiB4brA/nlqM3Mfwrk5gCEbbjU9XBwYOewBUuWo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionState.html",
+          "hash": "LmMR2l3VVka/ob9jkCqCrDvTPPr8P1I4GMKZlPALjFo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.html",
+          "hash": "dUSVhrXl3GG1Z/9/2mC6bgA8ne7tXnOlehgMn0hmd5A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.ForwardedSubscriptionEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.ForwardedSubscriptionEventArgs.html",
+          "hash": "ASeBH9Y7f/4N50ZHjBAG8Fz5GvyyU0zqmKIW2P/MV1A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.NullClientAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.NullClientAuthenticator.html",
+          "hash": "bgFISm8LVDuXYmhvm1I1AdvYqv35xORr/ljUUfw5aAo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html",
+          "hash": "Lf+j8WcVTdiyvfB+nra+3irBbUS31TqxJpoo/4pfMUg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.html",
+          "hash": "LRrnqoY5JiHFhW5/F+NBJePppwsfRjSMypT10yhKqPs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Collections.Generic.TwoWaySet-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Collections.Generic.TwoWaySet-2.html",
+          "hash": "hrxoIZcm0pzsnNxeookWFk7yq/E0d259Yji3tI4kM+U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Collections.Generic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Collections.Generic.html",
+          "hash": "VNg/X1lmm0K5FrsnptFr932bJpZgX1Avymq63dBJlKI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.ConsoleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.ConsoleHelper.html",
+          "hash": "8qtlajUuFtecZkhSMIS853ta6lFdGeAlq5xmtN+GAiI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.IO.DataPacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.IO.DataPacket.html",
+          "hash": "Cn3AuSFTWwozS8476d0amnLIIijQIWw60fAwhyUIpyI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.IO.DataReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.IO.DataReader.html",
+          "hash": "KozZxnHSWMapqSXj7ryp9nj9PbtAoYFK2XThWUZfrFg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.IO.DataWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.IO.DataWriter.html",
+          "hash": "lzOS3cf5HUMpb4IJ9BJ7SqTVdmnl89QVzmSWnV203vQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.IO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.IO.html",
+          "hash": "+sNB+q8tHqq+2Qu1e7kJButRIZFZfy2e9vqPdFAwur0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.CollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.CollectionExtensions.html",
+          "hash": "4/oiFoQBdVbuuXtifW7lSm+8j4kWybDVSYQUN/qvJjo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.DictionaryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.DictionaryExtensions.html",
+          "hash": "OL8auUsorsTOGpWQQJ9pMTqTaPIt+L1/HBOYUm1FLEk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.EnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html",
+          "hash": "/ABu5fqCXVQrRYBjVL8bs+MiAVEpWOw9DvC8ZYvvFY4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.FunctionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.FunctionExtensions.html",
+          "hash": "PBT1q7woIs/UTfVQslc8qexJKldaIg9u1jVfOdiDrHA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTail-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTail-1.html",
+          "hash": "7CpRR/cSDMH6L0Y5TwPjGFhhTRE8bqyZxMXVcLXinO4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTailExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTailExtensions.html",
+          "hash": "wrcFmIN59mgwCXY1g7h0eTQ3C13btld861e3ZFYEFlI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.ListExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.ListExtensions.html",
+          "hash": "n3ScxiWnjcSVDFaKNjH9ReUL9C52a9SoIouZQvdKueQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Linq.html",
+          "hash": "TWjt1VK/z7chaqvCvLa2XvTstZaVz9oQCMTVMFcMVxs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.ParseExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.ParseExtensions.html",
+          "hash": "JRyIB6CPGJioYJTPV7PnC7+2M0ztHLK/ny/aeCiKgB8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.PortableBitConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.PortableBitConverter.html",
+          "hash": "TTm3oOpasKW9BN7n3Rid3NUQQKEHNW8enBCZpW63e9E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.AuthenticationResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.AuthenticationResponse.html",
+          "hash": "7aSG2f2P3J39Ld0doiw5Msq2IPFPzANmUuBSJZ3GuuE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.IAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.IAuthenticator.html",
+          "hash": "xuCMHI26/5FVnn2zgSXn2VXPS3mdSwTBYm7xDtrItIE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator.html",
+          "hash": "3CM2QWMzmP87+biso+M04jZOqUhjh2OrNpwSI9hZmzs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.html",
+          "hash": "PM7fSfFZ4npzVMgyIec4gH4cg6lFmsP/VXtXh6vNq0A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.html",
+          "hash": "E+vhz0RAHcw3wLZ2G6OXJzj6aKjekT/MYWQiN0yPqWo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.KeyUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.KeyUtils.html",
+          "hash": "R3lqdMbWLp3iw8b9fdCZo208TdPep4LLtCLm7T1IGpQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.html",
+          "hash": "JOuwtyp6iQFfuvSZBgnCNaZNr6+frjZ4YFzReZYp9hE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.SecureStringUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.SecureStringUtils.html",
+          "hash": "H2fEuvI9vBLOYhg1SG4fbWZ8CjTidPG5G9EnyHrU4Mg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.Security.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.Security.html",
+          "hash": "WqRZ/Kj4tKv60jNsirtGHzDQSUqkOraxKgCF70WJwsQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.StringExtensions.html",
+          "hash": "NPdtdgV7gz5loCe1CxPqqSHgndsQ6tBGNqPTZ4WxpzQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.TryParseDelegate-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.TryParseDelegate-1.html",
+          "hash": "SAra8OPQ73K5sA0iURWLAl+Kv0k13ea4D9Xg4LBLLcI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.TypeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.TypeExtensions.html",
+          "hash": "YoEQjQxVCtsY6nwJYira8RfbQEsHJJjT4NMSRPxvMgg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Common.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Common.html",
+          "hash": "TuM+p/sEDevjf5CbgowNe2+/f66o0nWYLTQBvYcUzO0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "kQXIJk6GRSJADV2PQhqRK+429YRRhnWhjVZ8zyFW1ZY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "aBleDnehjnRXzRfEI6DsdelfPvsixqfQ1DOl2jtOZpQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/getting-started-windows.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/getting-started-windows.html",
+          "hash": "fQJEXFEhZCxUZ0cVj4VW/nK4Bw+PJPkRCQUMdEevakE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "bJodzsFftCjjXefL6axhDGN9za6IagzVhshrBOD4zI0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/selectfeed.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/selectfeed.html",
+          "hash": "bpqf2bAIgvDD0xnyA49nAnmHFoEKaTcM0YMh/dg4Vcs="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gguyUyB4ygNc1sEeomeE/tDvf26/POiX5DJp+EvcDEA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "VB1tcR98yb/DwkS97m8z8OBlRj+RxkTbhK7YLD9ovDI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "WSuRrYiGwKKMbtdG9z8W9fXmLoCyTnGg9AxbPKLXm2Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 5,
+          "skipped_file_count": 4
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 41,
+          "skipped_file_count": 28
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
