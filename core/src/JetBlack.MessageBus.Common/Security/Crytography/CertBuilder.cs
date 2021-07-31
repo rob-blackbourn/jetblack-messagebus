@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Security.Cryptography.X509Certificates;
 
 namespace JetBlack.MessageBus.Common.Security.Cryptography
@@ -19,5 +20,25 @@ namespace JetBlack.MessageBus.Common.Security.Cryptography
             return cert.CopyWithPrivateKey(key);
         }
 #endif
+
+        public static X509Certificate2 FromStore(StoreLocation storeLocation, string subjectName)
+        {
+            X509Store store = new X509Store(storeLocation);
+            try
+            {
+                store.Open(OpenFlags.ReadOnly);
+
+                var currentCerts = store.Certificates.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
+                var signingCert = currentCerts.Find(X509FindType.FindBySubjectName, subjectName, false);
+                if (signingCert.Count == 0)
+                    throw new ApplicationException("No certificate");
+                return signingCert[0];
+            }
+            finally
+            {
+                store.Close();
+            }
+
+        }
     }
 }
