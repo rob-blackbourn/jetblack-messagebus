@@ -88,6 +88,15 @@
       <a class="xref" href="JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Authenticate_System_IO_Stream_">ClientAuthenticator.Authenticate(Stream)</a>
     </div>
     <div>
+      <a class="xref" href="JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Impersonating">ClientAuthenticator.Impersonating</a>
+    </div>
+    <div>
+      <a class="xref" href="JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_ForwardedFor">ClientAuthenticator.ForwardedFor</a>
+    </div>
+    <div>
+      <a class="xref" href="JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Application">ClientAuthenticator.Application</a>
+    </div>
+    <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
@@ -149,17 +158,20 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">impersonating</span></td>
-        <td></td>
+        <td><p>The optional user that the client is impersonating.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">forwardedFor</span></td>
-        <td></td>
+        <td><p>The optional host for which the client is forwarding requests.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">application</span></td>
-        <td></td>
+        <td><p>The name of the application.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -167,100 +179,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Application.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L37">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Application_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application*"></a>
-  <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Application" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application">Application</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Application { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ForwardedFor.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L36">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ForwardedFor_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor*"></a>
-  <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ForwardedFor" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor">ForwardedFor</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string ForwardedFor { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Impersonating.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L35">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Impersonating_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating*"></a>
-  <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Impersonating" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating">Impersonating</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Impersonating { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Token.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Token%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L34">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L32">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Token_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Token*"></a>
   <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Token" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Token">Token</h4>
@@ -293,7 +215,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToConnectionString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToConnectionString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L40">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L35">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToConnectionString_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToConnectionString*"></a>
   <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToConnectionString" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToConnectionString">ToConnectionString()</h4>
@@ -326,7 +248,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L53">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L48">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToString_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToString*"></a>
   <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToString" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToString">ToString()</h4>

@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html",
-          "hash": "1VFgP18urq7W3pTD/1tk6O6LtHY+1AXROt9ONwxAqeo="
+          "hash": "HWvI0Zqp29GtJT0tHusHu9pdGPNnoM5EQ31S7oTsNwY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -36,7 +36,7 @@
           "hash": "rts7jL5cbK6VeK+pj2Wg3zY24Yj/V+ooVkYQ9VzfVcI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html",
-          "hash": "Ij6XMRHQSbKl9SFLp3y1LHWV/FTPEcntZ8HHeU6ZAR4="
+          "hash": "7Lt0OCGsOSwlbuBbnv4FsRwAmKUMJT7uECgftvUYuyc="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.html",
-          "hash": "MCJDpiB4brA/nlqM3Mfwrk5gCEbbjU9XBwYOewBUuWo="
+          "hash": "p2pA0BoiEMieIRyzTJ1makDe+5FHzhZVLqPCqzaBBz8="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionState.html",
-          "hash": "LmMR2l3VVka/ob9jkCqCrDvTPPr8P1I4GMKZlPALjFo="
+          "hash": "+TdMIK5n0XG8ZqSb6dNPM8v5L1cM8bZIgQbzglUL1x0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.html",
-          "hash": "dUSVhrXl3GG1Z/9/2mC6bgA8ne7tXnOlehgMn0hmd5A="
+          "hash": "q6ty2es9Rcc92ss/T7FIpm/OLYutVnLfR/4+KYlnfA8="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -105,10 +105,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.NullClientAuthenticator.html",
-          "hash": "bgFISm8LVDuXYmhvm1I1AdvYqv35xORr/ljUUfw5aAo="
+          "hash": "KHL0vHykP+TiSdKmTRBGpO3iLjrsypWnSjHaE7ryltY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html",
-          "hash": "Lf+j8WcVTdiyvfB+nra+3irBbUS31TqxJpoo/4pfMUg="
+          "hash": "vCatNq5WEilSmHgobUNUb/Bwdht+xL5rRLWuJUEx2TI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -132,7 +132,7 @@
           "hash": "LRrnqoY5JiHFhW5/F+NBJePppwsfRjSMypT10yhKqPs="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -393,10 +393,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.html",
-          "hash": "E+vhz0RAHcw3wLZ2G6OXJzj6aKjekT/MYWQiN0yPqWo="
+          "hash": "BC5EGsvHAtx4oC6C0CQ9uO46JkzvQt8CSnCnrEzj9Dc="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -420,7 +420,7 @@
           "hash": "JOuwtyp6iQFfuvSZBgnCNaZNr6+frjZ4YFzReZYp9hE="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -528,7 +528,7 @@
           "hash": "h726L1hFgBt2R3DIhtECsV2fyEyrfKyBZHkmWt+I0s4="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -540,7 +540,7 @@
           "hash": "KFIg4lRD6hfmxqofTczzJo7/0B7vptFGBOYowm+dr/Y="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -552,7 +552,7 @@
           "hash": "lRQYm3hISuSCfVHXq3mJdH6NAH6WUy2eskkRS2irFWk="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -564,7 +564,7 @@
           "hash": "+r0QDwQeHJSiFxQPkfx0c/R9BO6Ck2kr7TW+w0Y188I="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -588,7 +588,7 @@
           "hash": "jf6SOEdGyeiIM0XEk/H32M1u3OQ1KZ11qnIuWVH4jrw="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -600,7 +600,7 @@
           "hash": "VFpiAKz0NzXPkzmeAW+Q51rHU2Q1pmcHBtFkcNeUvn8="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -624,7 +624,7 @@
           "hash": "VB1tcR98yb/DwkS97m8z8OBlRj+RxkTbhK7YLD9ovDI="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -653,13 +653,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 9,
-          "skipped_file_count": 4
+          "skipped_file_count": 9
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 41,
-          "skipped_file_count": 41
+          "skipped_file_count": 33
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

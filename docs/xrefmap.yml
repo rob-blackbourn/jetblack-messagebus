@@ -110,45 +110,6 @@ references:
   isSpec: "True"
   fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.BasicClientAuthenticator
   nameWithType: BasicClientAuthenticator.BasicClientAuthenticator
-- uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Application
-  name: Application
-  href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_Application
-  commentId: P:JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Application
-  fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Application
-  nameWithType: BasicClientAuthenticator.Application
-- uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Application*
-  name: Application
-  href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_Application_
-  commentId: Overload:JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Application
-  isSpec: "True"
-  fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Application
-  nameWithType: BasicClientAuthenticator.Application
-- uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ForwardedFor
-  name: ForwardedFor
-  href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_ForwardedFor
-  commentId: P:JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ForwardedFor
-  fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ForwardedFor
-  nameWithType: BasicClientAuthenticator.ForwardedFor
-- uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ForwardedFor*
-  name: ForwardedFor
-  href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_ForwardedFor_
-  commentId: Overload:JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ForwardedFor
-  isSpec: "True"
-  fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ForwardedFor
-  nameWithType: BasicClientAuthenticator.ForwardedFor
-- uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Impersonating
-  name: Impersonating
-  href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_Impersonating
-  commentId: P:JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Impersonating
-  fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Impersonating
-  nameWithType: BasicClientAuthenticator.Impersonating
-- uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Impersonating*
-  name: Impersonating
-  href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_Impersonating_
-  commentId: Overload:JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Impersonating
-  isSpec: "True"
-  fullName: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.Impersonating
-  nameWithType: BasicClientAuthenticator.Impersonating
 - uid: JetBlack.MessageBus.Adapters.BasicClientAuthenticator.ToConnectionString
   name: ToConnectionString()
   href: api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html#JetBlack_MessageBus_Adapters_BasicClientAuthenticator_ToConnectionString
@@ -369,6 +330,32 @@ references:
   commentId: T:JetBlack.MessageBus.Adapters.ClientAuthenticator
   fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator
   nameWithType: ClientAuthenticator
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.#ctor(System.String,System.String,System.String)
+  name: ClientAuthenticator(String, String, String)
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator__ctor_System_String_System_String_System_String_
+  commentId: M:JetBlack.MessageBus.Adapters.ClientAuthenticator.#ctor(System.String,System.String,System.String)
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.ClientAuthenticator(System.String, System.String, System.String)
+  nameWithType: ClientAuthenticator.ClientAuthenticator(String, String, String)
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.#ctor*
+  name: ClientAuthenticator
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator__ctor_
+  commentId: Overload:JetBlack.MessageBus.Adapters.ClientAuthenticator.#ctor
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.ClientAuthenticator
+  nameWithType: ClientAuthenticator.ClientAuthenticator
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.Application
+  name: Application
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Application
+  commentId: P:JetBlack.MessageBus.Adapters.ClientAuthenticator.Application
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.Application
+  nameWithType: ClientAuthenticator.Application
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.Application*
+  name: Application
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Application_
+  commentId: Overload:JetBlack.MessageBus.Adapters.ClientAuthenticator.Application
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.Application
+  nameWithType: ClientAuthenticator.Application
 - uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.Authenticate(System.IO.Stream)
   name: Authenticate(Stream)
   href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Authenticate_System_IO_Stream_
@@ -382,6 +369,32 @@ references:
   isSpec: "True"
   fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.Authenticate
   nameWithType: ClientAuthenticator.Authenticate
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.ForwardedFor
+  name: ForwardedFor
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_ForwardedFor
+  commentId: P:JetBlack.MessageBus.Adapters.ClientAuthenticator.ForwardedFor
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.ForwardedFor
+  nameWithType: ClientAuthenticator.ForwardedFor
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.ForwardedFor*
+  name: ForwardedFor
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_ForwardedFor_
+  commentId: Overload:JetBlack.MessageBus.Adapters.ClientAuthenticator.ForwardedFor
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.ForwardedFor
+  nameWithType: ClientAuthenticator.ForwardedFor
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.Impersonating
+  name: Impersonating
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Impersonating
+  commentId: P:JetBlack.MessageBus.Adapters.ClientAuthenticator.Impersonating
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.Impersonating
+  nameWithType: ClientAuthenticator.Impersonating
+- uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.Impersonating*
+  name: Impersonating
+  href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_Impersonating_
+  commentId: Overload:JetBlack.MessageBus.Adapters.ClientAuthenticator.Impersonating
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Adapters.ClientAuthenticator.Impersonating
+  nameWithType: ClientAuthenticator.Impersonating
 - uid: JetBlack.MessageBus.Adapters.ClientAuthenticator.ToConnectionString
   name: ToConnectionString()
   href: api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html#JetBlack_MessageBus_Adapters_ClientAuthenticator_ToConnectionString
@@ -427,6 +440,19 @@ references:
   isSpec: "True"
   fullName: JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.State
   nameWithType: ConnectionChangedEventArgs.State
+- uid: JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.ToString
+  name: ToString()
+  href: api/JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.html#JetBlack_MessageBus_Adapters_ConnectionChangedEventArgs_ToString
+  commentId: M:JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.ToString
+  fullName: JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.ToString()
+  nameWithType: ConnectionChangedEventArgs.ToString()
+- uid: JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.ToString*
+  name: ToString
+  href: api/JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.html#JetBlack_MessageBus_Adapters_ConnectionChangedEventArgs_ToString_
+  commentId: Overload:JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.ToString
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.ToString
+  nameWithType: ConnectionChangedEventArgs.ToString
 - uid: JetBlack.MessageBus.Adapters.ConnectionState
   name: ConnectionState
   href: api/JetBlack.MessageBus.Adapters.ConnectionState.html
@@ -528,6 +554,19 @@ references:
   isSpec: "True"
   fullName: JetBlack.MessageBus.Adapters.DataReceivedEventArgs.Topic
   nameWithType: DataReceivedEventArgs.Topic
+- uid: JetBlack.MessageBus.Adapters.DataReceivedEventArgs.ToString
+  name: ToString()
+  href: api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.html#JetBlack_MessageBus_Adapters_DataReceivedEventArgs_ToString
+  commentId: M:JetBlack.MessageBus.Adapters.DataReceivedEventArgs.ToString
+  fullName: JetBlack.MessageBus.Adapters.DataReceivedEventArgs.ToString()
+  nameWithType: DataReceivedEventArgs.ToString()
+- uid: JetBlack.MessageBus.Adapters.DataReceivedEventArgs.ToString*
+  name: ToString
+  href: api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.html#JetBlack_MessageBus_Adapters_DataReceivedEventArgs_ToString_
+  commentId: Overload:JetBlack.MessageBus.Adapters.DataReceivedEventArgs.ToString
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Adapters.DataReceivedEventArgs.ToString
+  nameWithType: DataReceivedEventArgs.ToString
 - uid: JetBlack.MessageBus.Adapters.DataReceivedEventArgs.User
   name: User
   href: api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.html#JetBlack_MessageBus_Adapters_DataReceivedEventArgs_User
@@ -676,45 +715,6 @@ references:
   isSpec: "True"
   fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.TokenClientAuthenticator
   nameWithType: TokenClientAuthenticator.TokenClientAuthenticator
-- uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application
-  name: Application
-  href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Application
-  commentId: P:JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application
-  fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application
-  nameWithType: TokenClientAuthenticator.Application
-- uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application*
-  name: Application
-  href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Application_
-  commentId: Overload:JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application
-  isSpec: "True"
-  fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Application
-  nameWithType: TokenClientAuthenticator.Application
-- uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor
-  name: ForwardedFor
-  href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ForwardedFor
-  commentId: P:JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor
-  fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor
-  nameWithType: TokenClientAuthenticator.ForwardedFor
-- uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor*
-  name: ForwardedFor
-  href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ForwardedFor_
-  commentId: Overload:JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor
-  isSpec: "True"
-  fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ForwardedFor
-  nameWithType: TokenClientAuthenticator.ForwardedFor
-- uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating
-  name: Impersonating
-  href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Impersonating
-  commentId: P:JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating
-  fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating
-  nameWithType: TokenClientAuthenticator.Impersonating
-- uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating*
-  name: Impersonating
-  href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_Impersonating_
-  commentId: Overload:JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating
-  isSpec: "True"
-  fullName: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.Impersonating
-  nameWithType: TokenClientAuthenticator.Impersonating
 - uid: JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToConnectionString
   name: ToConnectionString()
   href: api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html#JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToConnectionString
@@ -2812,6 +2812,19 @@ references:
   isSpec: "True"
   fullName: JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromFile
   nameWithType: CertBuilder.FromFile
+- uid: JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromStore(System.Security.Cryptography.X509Certificates.StoreLocation,System.String)
+  name: FromStore(StoreLocation, String)
+  href: api/JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.html#JetBlack_MessageBus_Common_Security_Cryptography_CertBuilder_FromStore_System_Security_Cryptography_X509Certificates_StoreLocation_System_String_
+  commentId: M:JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromStore(System.Security.Cryptography.X509Certificates.StoreLocation,System.String)
+  fullName: JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromStore(System.Security.Cryptography.X509Certificates.StoreLocation, System.String)
+  nameWithType: CertBuilder.FromStore(StoreLocation, String)
+- uid: JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromStore*
+  name: FromStore
+  href: api/JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.html#JetBlack_MessageBus_Common_Security_Cryptography_CertBuilder_FromStore_
+  commentId: Overload:JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromStore
+  isSpec: "True"
+  fullName: JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.FromStore
+  nameWithType: CertBuilder.FromStore
 - uid: JetBlack.MessageBus.Common.Security.Cryptography.KeyUtils
   name: KeyUtils
   href: api/JetBlack.MessageBus.Common.Security.Cryptography.KeyUtils.html
