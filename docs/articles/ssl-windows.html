@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Certificates </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Certificates ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<p>This article shows how to use SSL connections with the message bus on Windows.</p>
+<h1 id="certificates">Certificates</h1>
+<p>In order to use an SSL connection you will need some certificates.
+See the article <a href="ssl-windows-certs.html">here</a> for creating SSL
+certificates on windows,</p>
+<h1 id="configuration">Configuration</h1>
+<p>To use SSL we need a custom configuration. We can see the standard
+configuration [here][configuration.md].
+Create the file <code>ssl-appsettings.ssl</code> with the following contents.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: null,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Common&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator&quot;,
+            &quot;args&quot;: []
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;storeLocation&quot;: &quot;LocalMachine&quot;,
+            &quot;subjectName&quot;:  &quot;windowsvm.jetblack.net&quot;
+        },
+        &quot;allow&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: false
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
+<p>The SSL configuration is under the <code>sslConfig</code> tag.
+The
+<code>[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)</code>
+refers to the location of the certificates in the trust store. This will either
+be <code>LocalMachine</code> or <code>CurrentUser</code> depending on how you've set it up.
+The <code>subjectName</code> is the <code>CN</code> in the certificate.</p>
+<p>Now create a <code>distributor-ssl.bat</code> file to run the application. The
+following assumes the distributor was unpacked to <code>C:\Distributor</code>.</p>
+<pre><code class="lang-bat">C:\distributor\JetBlack.MessageBus.Distributor.exe C:\distributor\ssl-appsettings.json
+</code></pre>
+<p>The settings file is provided as the first argument and <em>must</em> be an absolute
+path.</p>
+<p>When the distributor is started we get the following message.</p>
+<pre><code>2021-08-01 09:05:15.2016415 info: JetBlack.MessageBus.Distributor.Acceptor[0]
+      Listening on 0.0.0.0:9001 with SSL enabled with NULL authentication
+</code></pre>
+<h1 id="clients">Clients</h1>
+<p>To Enable SSL on the clients the <code>isSslEnabled</code> flag must be set to
+<code>true</code> when the client is created.</p>
+<pre><code class="lang-cs">var client = Client.Create(&quot;localhost&quot;, 9001, isSslEnabled: true);
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/ssl-windows.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

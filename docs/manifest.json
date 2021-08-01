@@ -521,14 +521,26 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/configuration.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/configuration.html",
+          "hash": "3YOmnm9Db6Ld4o3mDOlMyKqkyA7ZhekkLOUjKpGmw6g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/getting-started-windows.md",
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-windows.html",
-          "hash": "zY/ZOe4K5zoD9xRq0DX9jhsvzOsAcVCKY46cHrPrhpI="
+          "hash": "FAadTMNNhc4zoSsjyoitBK59IZLr9dN3ALJ05e0JUyU="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -540,7 +552,7 @@
           "hash": "bJodzsFftCjjXefL6axhDGN9za6IagzVhshrBOD4zI0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -556,12 +568,36 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ssl-windows-certs.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ssl-windows-certs.html",
+          "hash": "W5YUtMW9Lr28pDq2tHCqdyKj8rhLibiEwZ1/7yS0NEc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ssl-windows.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ssl-windows.html",
+          "hash": "R29jvgUV3Hsj/SrHHV6BR7FoT60YfOBc9Y5KBxUpmP0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "gguyUyB4ygNc1sEeomeE/tDvf26/POiX5DJp+EvcDEA="
+          "hash": "lRjH9mPHfih4JdNt6xHyNtuiOMs72LCMTHA2FV8sto8="
         }
       },
       "is_incremental": false,
@@ -604,8 +640,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 5,
-          "skipped_file_count": 4
+          "total_file_count": 8,
+          "skipped_file_count": 8
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

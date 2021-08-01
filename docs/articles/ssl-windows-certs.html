@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>cfssl </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="cfssl ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<p>This article shows how to setup certificates on windows.</p>
+<h1 id="cfssl">cfssl</h1>
+<p>Download <code>cfssl</code> and <code>cfssljson</code> from the
+<a href="https://github.com/cloudflare/cfssl/releases">Releases</a>
+page. I chose version 1.6.0.</p>
+<ul>
+<li><code>cfssl_1.6.0_windows_amd64.exe</code></li>
+<li><code>cfssljson_1.6.0_windows_amd64.exe</code></li>
+</ul>
+<p>In file explorer rename the downloaded files to <code>cfssl.exe</code> and
+<code>cfssljson.exe</code> respectively and move them to <code>C:\Windows\System32</code>.</p>
+<h2 id="create-the-certificate-authority">Create the Certificate Authority</h2>
+<p>To create a self signed certificate authority for a company called &quot;JetBlack&quot; based in London, England, Great Britain, create the following config file “ca.json”.</p>
+<pre><code class="lang-json">{
+  &quot;CN&quot;: &quot;JetBlack Root CA&quot;,
+  &quot;key&quot;: {
+    &quot;algo&quot;: &quot;rsa&quot;,
+    &quot;size&quot;: 2048
+  },
+  &quot;names&quot;: [
+  {
+    &quot;C&quot;: &quot;GB&quot;,
+    &quot;L&quot;: &quot;London&quot;,
+    &quot;O&quot;: &quot;JetBlack&quot;,
+    &quot;OU&quot;: &quot;JetBlack Root CA&quot;,
+    &quot;ST&quot;: &quot;England&quot;
+  }
+ ]
+}
+</code></pre>
+<p>The following command creates &quot;ca.pem&quot; and &quot;ca-key.pem&quot;.</p>
+<pre><code class="lang-bash">cfssl gencert -initca ca.json | cfssljson -bare ca
+</code></pre>
+<h2 id="create-the-profiles">Create the Profiles</h2>
+<p>The next steps require a profile config file. The profile describes general details about the certificate. For example it’s duration, and usages.</p>
+<p>Create the following file &quot;cfssl.json&quot;.</p>
+<pre><code class="lang-json">{
+  &quot;signing&quot;: {
+    &quot;default&quot;: {
+      &quot;expiry&quot;: &quot;8760h&quot;
+    },
+    &quot;profiles&quot;: {
+      &quot;intermediate_ca&quot;: {
+        &quot;usages&quot;: [
+            &quot;signing&quot;,
+            &quot;digital signature&quot;,
+            &quot;key encipherment&quot;,
+            &quot;cert sign&quot;,
+            &quot;crl sign&quot;,
+            &quot;server auth&quot;,
+            &quot;client auth&quot;
+        ],
+        &quot;expiry&quot;: &quot;8760h&quot;,
+        &quot;ca_constraint&quot;: {
+            &quot;is_ca&quot;: true,
+            &quot;max_path_len&quot;: 0, 
+            &quot;max_path_len_zero&quot;: true
+        }
+      },
+      &quot;peer&quot;: {
+        &quot;usages&quot;: [
+            &quot;signing&quot;,
+            &quot;digital signature&quot;,
+            &quot;key encipherment&quot;, 
+            &quot;client auth&quot;,
+            &quot;server auth&quot;
+        ],
+        &quot;expiry&quot;: &quot;8760h&quot;
+      },
+      &quot;server&quot;: {
+        &quot;usages&quot;: [
+          &quot;signing&quot;,
+          &quot;digital signing&quot;,
+          &quot;key encipherment&quot;,
+          &quot;server auth&quot;
+        ],
+        &quot;expiry&quot;: &quot;8760h&quot;
+      },
+      &quot;client&quot;: {
+        &quot;usages&quot;: [
+          &quot;signing&quot;,
+          &quot;digital signature&quot;,
+          &quot;key encipherment&quot;, 
+          &quot;client auth&quot;
+        ],
+        &quot;expiry&quot;: &quot;8760h&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p>We can see how the &quot;client&quot; profile specifies &quot;client auth&quot; in its usages, while the &quot;server&quot; profile specifies &quot;server auth&quot;.</p>
+<h2 id="create-the-intermediate-ca">Create the Intermediate CA</h2>
+<p>To create an intermediate certificate authority create the following config file &quot;intermediate-ca.json&quot;.</p>
+<pre><code class="lang-json">{
+  &quot;CN&quot;: &quot;JetBlack Intermediate CA&quot;,
+  &quot;key&quot;: {
+    &quot;algo&quot;: &quot;rsa&quot;,
+    &quot;size&quot;: 2048
+  },
+  &quot;names&quot;: [
+    {
+      &quot;C&quot;:  &quot;GB&quot;,
+      &quot;L&quot;:  &quot;London&quot;,
+      &quot;O&quot;:  &quot;JetBlack&quot;,
+      &quot;OU&quot;: &quot;JetBlack Intermediate CA&quot;,
+      &quot;ST&quot;: &quot;England&quot;
+    }
+  ],
+  &quot;ca&quot;: {
+    &quot;expiry&quot;: &quot;42720h&quot;
+  }
+}
+</code></pre>
+<p>The following commands creates &quot;intermediate_ca.pem&quot;, &quot;intermediate_ca.csr&quot; and &quot;intermediate_ca-key.pem&quot; and signs the certificate.</p>
+<pre><code class="lang-bash">cfssl gencert -initca intermediate-ca.json | cfssljson -bare intermediate_ca
+cfssl sign -ca ca.pem -ca-key ca-key.pem -config cfssl.json -profile intermediate_ca intermediate_ca.csr | cfssljson -bare intermediate_ca
+</code></pre>
+<p>Note the second &quot;sign&quot; command uses the CA produced previously to sign the intermediate CA. It also uses the &quot;cfssl.json&quot; profile and specifies the &quot;intermediate_ca&quot; profile.</p>
+<h2 id="creating-the-host-certificates">Creating the Host Certificates</h2>
+<p>The fully qualified domain name of my machine is <code>windowsvm.jetblack.net</code>.
+Here is an example host certificate config file &quot;host.json&quot;.</p>
+<pre><code class="lang-json">{
+  &quot;CN&quot;: &quot;windowsvm.jetblack.net&quot;,
+  &quot;key&quot;: {
+    &quot;algo&quot;: &quot;rsa&quot;,
+    &quot;size&quot;: 2048
+  },
+  &quot;names&quot;: [
+  {
+    &quot;C&quot;: &quot;GB&quot;,
+    &quot;L&quot;: &quot;London&quot;,
+    &quot;O&quot;: &quot;JetBlack&quot;,
+    &quot;OU&quot;: &quot;JetBlack Hosts&quot;,
+    &quot;ST&quot;: &quot;England&quot;
+  }
+  ],
+  &quot;hosts&quot;: [
+    &quot;windowsvm.jetblack.net&quot;,
+    &quot;localhost&quot;
+  ]
+}
+</code></pre>
+<p>To generate the certificates with the above config do the following:</p>
+<pre><code class="lang-bash">cfssl gencert -ca intermediate_ca.pem -ca-key intermediate_ca-key.pem -config cfssl.json -profile=peer host.json | cfssljson -bare peer
+cfssl gencert -ca intermediate_ca.pem -ca-key intermediate_ca-key.pem -config cfssl.json -profile=server host.json | cfssljson -bare server
+cfssl gencert -ca intermediate_ca.pem -ca-key intermediate_ca-key.pem -config cfssl.json -profile=client host.json | cfssljson -bare client
+</code></pre>
+<p>Now copy all the <code>.pem</code> files to a folder under your home folder called <code>.keys</code>.
+Rename the keys to be <code>.key</code> (e.g. rename <code>ca-key.pem</code> to <code>ca.key</code>) and the certificates
+to <code>.crt</code> (e.g. rename <code>ca.pem</code> to <code>ca.crt</code>).</p>
+<p>We need to make a pkcs12 file for the server certificate. Download the openssl toolkit
+from <a href="https://slproweb.com/products/Win32OpenSSL.html">here</a>.
+I used &quot;Win64 OpenSSL v1.1.1k Light&quot;. The following command will make the pkcs12 file.
+You will be prompted for a password. I entered a password, but I need to check if en
+empty password is sufficient.</p>
+<pre><code class="lang-bash">openssl pkcs12 -export -inkey server.key -in server.crt -name 'JetBlack Server' -out server.pfx
+</code></pre>
+<p>Now open the microsoft management console. Click on <code>File</code> and choose <code>Add/Remove Snap-in</code>.
+Select <code>Certificates</code> and click <code>Add</code>. Choose <code>Computer account</code> to manage the certificates
+and click <code>Next</code>. Select <code>Local Computer</code> (the default) and click <code>Finish</code>. The certificates
+snap-in has been selected, now click <code>OK</code>.</p>
+<p>Fron <code>Console Root</code> expand <code>Certificates</code>, <code>Trusted Root Certification Authorities</code>,
+and <code>Certificates</code>. Right click on <code>All Tasks</code> and select <code>Import...</code>. Click
+through the wizard and select <code>ca.crt</code> and complete. Next import <code>intermediate-ca.crt</code>
+into the <code>Intermediate Certification Authorities</code>.</p>
+<p>Finally import the <code>server.pfx</code> into the <code>Personal</code> key store.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/ssl-windows-certs.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
