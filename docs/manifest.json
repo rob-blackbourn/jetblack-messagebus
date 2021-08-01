@@ -525,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/configuration.html",
-          "hash": "3YOmnm9Db6Ld4o3mDOlMyKqkyA7ZhekkLOUjKpGmw6g="
+          "hash": "h726L1hFgBt2R3DIhtECsV2fyEyrfKyBZHkmWt+I0s4="
         }
       },
       "is_incremental": false,
@@ -537,7 +537,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-windows.html",
-          "hash": "FAadTMNNhc4zoSsjyoitBK59IZLr9dN3ALJ05e0JUyU="
+          "hash": "KFIg4lRD6hfmxqofTczzJo7/0B7vptFGBOYowm+dr/Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/installation-windows.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/installation-windows.html",
+          "hash": "lRQYm3hISuSCfVHXq3mJdH6NAH6WUy2eskkRS2irFWk="
         }
       },
       "is_incremental": false,
@@ -549,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "bJodzsFftCjjXefL6axhDGN9za6IagzVhshrBOD4zI0="
+          "hash": "+r0QDwQeHJSiFxQPkfx0c/R9BO6Ck2kr7TW+w0Y188I="
         }
       },
       "is_incremental": false,
@@ -564,7 +576,7 @@
           "hash": "7KogcZfgE/OppdZzaa9rjs+J5qJBQUlIqz1TYMB4JvY="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -573,7 +585,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ssl-windows-certs.html",
-          "hash": "W5YUtMW9Lr28pDq2tHCqdyKj8rhLibiEwZ1/7yS0NEc="
+          "hash": "jf6SOEdGyeiIM0XEk/H32M1u3OQ1KZ11qnIuWVH4jrw="
         }
       },
       "is_incremental": false,
@@ -585,7 +597,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ssl-windows.html",
-          "hash": "R29jvgUV3Hsj/SrHHV6BR7FoT60YfOBc9Y5KBxUpmP0="
+          "hash": "VFpiAKz0NzXPkzmeAW+Q51rHU2Q1pmcHBtFkcNeUvn8="
         }
       },
       "is_incremental": false,
@@ -597,7 +609,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "lRjH9mPHfih4JdNt6xHyNtuiOMs72LCMTHA2FV8sto8="
+          "hash": "9Wa3/QRI4A5XnURIYiCnFrQ7TnmYZqilmBdCT9IvH64="
         }
       },
       "is_incremental": false,
@@ -612,7 +624,7 @@
           "hash": "VB1tcR98yb/DwkS97m8z8OBlRj+RxkTbhK7YLD9ovDI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -640,8 +652,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 8,
-          "skipped_file_count": 8
+          "total_file_count": 9,
+          "skipped_file_count": 4
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

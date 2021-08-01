@@ -1,6 +1,8 @@
+# SSL Certificates - Windows
+
 This article shows how to setup certificates on windows.
 
-# cfssl
+## cfssl
 
 Download `cfssl` and `cfssljson` from the
 [Releases](https://github.com/cloudflare/cfssl/releases)

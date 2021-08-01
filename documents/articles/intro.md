@@ -1,3 +1,5 @@
+# Introduction
+
 ## Why?
 
 There are a number of excellent message bus implementations available, all

@@ -1,12 +1,14 @@
+# SSL - Windows
+
 This article shows how to use SSL connections with the message bus on Windows.
 
-# Certificates
+## Certificates
 
 In order to use an SSL connection you will need some certificates.
 See the article [here](ssl-windows-certs.md) for creating SSL
 certificates on windows,
 
-# Configuration
+## Configuration
 
 To use SSL we need a custom configuration. We can see the standard
 configuration [here][configuration.md]. 
@@ -76,7 +78,7 @@ When the distributor is started we get the following message.
       Listening on 0.0.0.0:9001 with SSL enabled with NULL authentication
 ```
 
-# Clients
+## Clients
 
 To Enable SSL on the clients the `isSslEnabled` flag must be set to
 `true` when the client is created.

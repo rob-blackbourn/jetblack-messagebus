@@ -1,6 +1,9 @@
 - name: Introduction
   href: intro.md
 
+- name: Installation - Windows
+  href: installation-windows.md
+
 - name: Getting Started - Windows
   href: getting-started-windows.md
 

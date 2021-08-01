@@ -5,18 +5,8 @@ in the Windows environment.
 
 ## Installation
 
-First download and install the message bus service.
-
-To get the distributor go to the
-[Releases](https://github.com/rob-blackbourn/jetblack-messagebus/releases) 
-page of the repo and download the distributor for your platform: typically.
-distributor-5.0.0-win10-x64.zip.
-
-Unzip the archive into a folder of your choice and double-click on
-`JetBlack.MessageBus.Distributor.exe` to start it. The first time
-the service is run Windows will pop up a security alert indicating
-the service wants to access a network port. Click on "Allow access"
-to continue.
+Install and start the distributor. The instructions can be found
+[here](installation-windows.md).
 
 ## Write some code
 

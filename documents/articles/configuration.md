@@ -1,4 +1,8 @@
-The built in configuration looks like this.
+# Configuration
+
+## Default
+
+The default configuration looks like this.
 
 ```json
 {

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>SSL - Windows </title>
+    <title>Installation - Windows </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="SSL - Windows ">
+    <meta name="title" content="Installation - Windows ">
     <meta name="generator" content="docfx 2.58.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,73 +67,39 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="ssl---windows">SSL - Windows</h1>
+<h1 id="installation---windows">Installation - Windows</h1>
 
-<p>This article shows how to use SSL connections with the message bus on Windows.</p>
-<h2 id="certificates">Certificates</h2>
-<p>In order to use an SSL connection you will need some certificates.
-See the article <a href="ssl-windows-certs.html">here</a> for creating SSL
-certificates on windows,</p>
-<h2 id="configuration">Configuration</h2>
-<p>To use SSL we need a custom configuration. We can see the standard
-configuration [here][configuration.md].
-Create the file <code>ssl-appsettings.ssl</code> with the following contents.</p>
-<pre><code class="lang-json">{
-    &quot;distributor&quot;: {
-        &quot;address&quot;: &quot;0.0.0.0&quot;,
-        &quot;port&quot;: 9001,
-        &quot;authentication&quot;: {
-            &quot;assemblyPath&quot;: null,
-            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Common&quot;,
-            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator&quot;,
-            &quot;args&quot;: []
-        },
-        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
-        &quot;sslConfig&quot;: {
-            &quot;isEnabled&quot;: true,
-            &quot;storeLocation&quot;: &quot;LocalMachine&quot;,
-            &quot;subjectName&quot;:  &quot;windowsvm.jetblack.net&quot;
-        },
-        &quot;allow&quot;: [
-            &quot;All&quot;
-        ],
-        &quot;deny&quot;: [
-            &quot;None&quot;
-        ],
-        &quot;isAuthorizationRequired&quot;: false
-    },
-    &quot;Logging&quot;: {
-        &quot;LogLevel&quot;: {
-            &quot;Default&quot;: &quot;Debug&quot;,
-            &quot;System&quot;: &quot;Information&quot;,
-            &quot;Microsoft&quot;: &quot;Information&quot;
-        },
-        &quot;Console&quot;: {
-            &quot;IncludeScopes&quot;: true
-        }
-    }
-}
+<h2 id="download-and-unpack">Download and Unpack</h2>
+<p>First download and install the message bus service.</p>
+<p>To get the distributor go to the
+<a href="https://github.com/rob-blackbourn/jetblack-messagebus/releases">Releases</a>
+page of the repo and download the distributor for your platform: typically.
+distributor-5.0.0-win10-x64.zip. Unzip the archive into a folder of your choice.</p>
+<p>The examples in the documentation assume the distributer has been
+unpacked to <code>C:\distributor</code> to keep the paths simple.</p>
+<pre><code class="lang-bat">C:\distributor&gt;dir
+ Volume in drive C has no label.
+ Volume Serial Number is 3A0A-FCE5
+
+ Directory of C:\distributor
+
+31/07/2021  09:39    &lt;DIR&gt;          .
+31/07/2021  09:39    &lt;DIR&gt;          ..
+31/07/2021  08:58        70,671,627 JetBlack.MessageBus.Distributor.exe
+31/07/2021  08:58            24,404 JetBlack.MessageBus.Distributor.pdb
+               2 File(s)     70,700,256 bytes
+               2 Dir(s)  67,376,578,560 bytes free
 </code></pre>
-<p>The SSL configuration is under the <code>sslConfig</code> tag.
-The
-<code>[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)</code>
-refers to the location of the certificates in the trust store. This will either
-be <code>LocalMachine</code> or <code>CurrentUser</code> depending on how you've set it up.
-The <code>subjectName</code> is the <code>CN</code> in the certificate.</p>
-<p>Now create a <code>distributor-ssl.bat</code> file to run the application. The
-following assumes the distributor was unpacked to <code>C:\Distributor</code>.</p>
-<pre><code class="lang-bat">C:\distributor\JetBlack.MessageBus.Distributor.exe C:\distributor\ssl-appsettings.json
-</code></pre>
-<p>The settings file is provided as the first argument and <em>must</em> be an absolute
-path.</p>
-<p>When the distributor is started we get the following message.</p>
-<pre><code>2021-08-01 09:05:15.2016415 info: JetBlack.MessageBus.Distributor.Acceptor[0]
-      Listening on 0.0.0.0:9001 with SSL enabled with NULL authentication
-</code></pre>
-<h2 id="clients">Clients</h2>
-<p>To Enable SSL on the clients the <code>isSslEnabled</code> flag must be set to
-<code>true</code> when the client is created.</p>
-<pre><code class="lang-cs">var client = Client.Create(&quot;localhost&quot;, 9001, isSslEnabled: true);
+<p>To start the distrubter double-click on
+<code>JetBlack.MessageBus.Distributor.exe</code> to start it. The first time
+the service is run Windows will pop up a security alert indicating
+the service wants to access a network port. Click on &quot;Allow access&quot;
+to continue.</p>
+<h2 id="add-a-configuration-file">Add a Configuration File</h2>
+<p>Optionally create a file called <code>appsettings.json</code> in the installation folder
+using the default configuration given <a href="configuration.html">here</a>.</p>
+<p>Now create the file <code>distributor.bat</code> with the following contents.</p>
+<pre><code class="lang-bat">C:\distributor\JetBlack.MessageBus.Distributor.exe C:\distributor\appsettings.json
 </code></pre>
 </article>
           </div>
@@ -143,7 +109,7 @@ path.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/ssl-windows.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/installation-windows.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
