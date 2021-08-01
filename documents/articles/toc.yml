@@ -6,3 +6,12 @@
 
 - name: Selectfeed
   href: selectfeed.md
+
+- name: SSL - Windows
+  href: ssl-windows.md
+  items:
+    - name: Certificates - Windows
+      href: ssl-windows-certs.md
+
+- name: Configuration
+  href: configuration.html

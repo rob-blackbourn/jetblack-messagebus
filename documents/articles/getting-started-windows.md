@@ -301,3 +301,5 @@ User="nobody",Host="DESKTOP-011OALS",ClientId=83f8c7c5-e143-4ae2-860f-2dfd00d0a3
 ```
 
 Now noone is listening!
+
+Now we have a basic understanding of how this work we can build a [selectfeed](getting-started-windows).

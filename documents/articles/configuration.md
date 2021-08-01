@@ -1,0 +1,45 @@
+The built in configuration looks like this.
+
+```json
+{
+  "distributor": {
+    "address": "0.0.0.0",
+    "port": 9001,
+    "authentication": {
+      "assemblyPath": null,
+      "assemblyName": "JetBlack.MessageBus.Common",
+      "typeName": "JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator",
+      "args": []
+    },
+    "heartbeatInterval": "00:00:00",
+    "prometheus": {
+      "port": 9002
+    },
+    "allow": [
+      "All"
+    ],
+    "deny": [
+      "None"
+    ],
+    "isAuthorizationRequired": false,
+    "useJsonLogger": false
+  },
+    "Logging": {
+        "LogLevel": {
+            "Default": "Debug",
+            "System": "Information",
+            "Microsoft": "Information"
+        },
+        "Console": {
+            "IncludeScopes": true,
+            "TimestampFormat": "yyyy-MM-dd HH:mm:ss.fffffff "
+        },
+        "JsonConsole": {
+            "Timestamp": "utc"
+        }
+    }
+}
+```
+
+This provides a distributor running on port 9001 without SSL,
+authentication or authorisation.

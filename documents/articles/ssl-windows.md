@@ -1,204 +1,87 @@
 This article shows how to use SSL connections with the message bus on Windows.
 
-# cfssl
+# Certificates
 
-Download `cfssl` and `cfssljson` from the
-[Releases](https://github.com/cloudflare/cfssl/releases)
-page. I chose version 1.6.0.
+In order to use an SSL connection you will need some certificates.
+See the article [here](ssl-windows-certs.md) for creating SSL
+certificates on windows,
 
-* `cfssl_1.6.0_windows_amd64.exe`
-* `cfssljson_1.6.0_windows_amd64.exe`
+# Configuration
 
-In file explorer rename the downloaded files to `cfssl.exe` and
-`cfssljson.exe` respectively and move them to `C:\Windows\System32`.
+To use SSL we need a custom configuration. We can see the standard
+configuration [here][configuration.md]. 
+Create the file `ssl-appsettings.ssl` with the following contents.
 
-## Create the Certificate Authority
-
-To create a self signed certificate authority for a company called "JetBlack" based in London, England, Great Britain, create the following config file “ca.json”.
 
 ```json
 {
-  "CN": "JetBlack Root CA",
-  "key": {
-    "algo": "rsa",
-    "size": 2048
-  },
-  "names": [
-  {
-    "C": "GB",
-    "L": "London",
-    "O": "JetBlack",
-    "OU": "JetBlack Root CA",
-    "ST": "England"
-  }
- ]
-}
-```
-
-The following command creates "ca.pem" and "ca-key.pem".
-
-```bash
-cfssl gencert -initca ca.json | cfssljson -bare ca
-```
-
-## Create the Profiles
-
-The next steps require a profile config file. The profile describes general details about the certificate. For example it’s duration, and usages.
-
-Create the following file "cfssl.json".
-
-```json
-{
-  "signing": {
-    "default": {
-      "expiry": "8760h"
+    "distributor": {
+        "address": "0.0.0.0",
+        "port": 9001,
+        "authentication": {
+            "assemblyPath": null,
+            "assemblyName": "JetBlack.MessageBus.Common",
+            "typeName": "JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator",
+            "args": []
+        },
+        "heartbeatInterval": "00:00:00",
+        "sslConfig": {
+            "isEnabled": true,
+            "storeLocation": "LocalMachine",
+            "subjectName":  "windowsvm.jetblack.net"
+        },
+        "allow": [
+            "All"
+        ],
+        "deny": [
+            "None"
+        ],
+        "isAuthorizationRequired": false
     },
-    "profiles": {
-      "intermediate_ca": {
-        "usages": [
-            "signing",
-            "digital signature",
-            "key encipherment",
-            "cert sign",
-            "crl sign",
-            "server auth",
-            "client auth"
-        ],
-        "expiry": "8760h",
-        "ca_constraint": {
-            "is_ca": true,
-            "max_path_len": 0, 
-            "max_path_len_zero": true
+    "Logging": {
+        "LogLevel": {
+            "Default": "Debug",
+            "System": "Information",
+            "Microsoft": "Information"
+        },
+        "Console": {
+            "IncludeScopes": true
         }
-      },
-      "peer": {
-        "usages": [
-            "signing",
-            "digital signature",
-            "key encipherment", 
-            "client auth",
-            "server auth"
-        ],
-        "expiry": "8760h"
-      },
-      "server": {
-        "usages": [
-          "signing",
-          "digital signing",
-          "key encipherment",
-          "server auth"
-        ],
-        "expiry": "8760h"
-      },
-      "client": {
-        "usages": [
-          "signing",
-          "digital signature",
-          "key encipherment", 
-          "client auth"
-        ],
-        "expiry": "8760h"
-      }
     }
-  }
 }
 ```
 
-We can see how the "client" profile specifies "client auth" in its usages, while the "server" profile specifies "server auth".
 
-## Create the Intermediate CA
+The SSL configuration is under the `sslConfig` tag.
+The
+`[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)`
+refers to the location of the certificates in the trust store. This will either
+be `LocalMachine` or `CurrentUser` depending on how you've set it up.
+The `subjectName` is the `CN` in the certificate.
 
-To create an intermediate certificate authority create the following config file "intermediate-ca.json".
+Now create a `distributor-ssl.bat` file to run the application. The
+following assumes the distributor was unpacked to `C:\Distributor`.
 
-```json
-{
-  "CN": "JetBlack Intermediate CA",
-  "key": {
-    "algo": "rsa",
-    "size": 2048
-  },
-  "names": [
-    {
-      "C":  "GB",
-      "L":  "London",
-      "O":  "JetBlack",
-      "OU": "JetBlack Intermediate CA",
-      "ST": "England"
-    }
-  ],
-  "ca": {
-    "expiry": "42720h"
-  }
-}
+```bat
+C:\distributor\JetBlack.MessageBus.Distributor.exe C:\distributor\ssl-appsettings.json
 ```
 
-The following commands creates "intermediate_ca.pem", "intermediate_ca.csr" and "intermediate_ca-key.pem" and signs the certificate.
+The settings file is provided as the first argument and *must* be an absolute
+path.
 
-```bash
-cfssl gencert -initca intermediate-ca.json | cfssljson -bare intermediate_ca
-cfssl sign -ca ca.pem -ca-key ca-key.pem -config cfssl.json -profile intermediate_ca intermediate_ca.csr | cfssljson -bare intermediate_ca
+When the distributor is started we get the following message.
+
+```
+2021-08-01 09:05:15.2016415 info: JetBlack.MessageBus.Distributor.Acceptor[0]
+      Listening on 0.0.0.0:9001 with SSL enabled with NULL authentication
 ```
 
-Note the second "sign" command uses the CA produced previously to sign the intermediate CA. It also uses the "cfssl.json" profile and specifies the "intermediate_ca" profile.
+# Clients
 
-## Creating the Host Certificates
+To Enable SSL on the clients the `isSslEnabled` flag must be set to
+`true` when the client is created.
 
-The fully qualified domain name of my machine is `windowsvm.jetblack.net`.
-Here is an example host certificate config file "host.json".
-
-```json
-{
-  "CN": "windowsvm.jetblack.net",
-  "key": {
-    "algo": "rsa",
-    "size": 2048
-  },
-  "names": [
-  {
-    "C": "GB",
-    "L": "London",
-    "O": "JetBlack",
-    "OU": "JetBlack Hosts",
-    "ST": "England"
-  }
-  ],
-  "hosts": [
-    "windowsvm.jetblack.net",
-    "localhost"
-  ]
-}
+```cs
+var client = Client.Create("localhost", 9001, isSslEnabled: true);
 ```
 
-To generate the certificates with the above config do the following:
-
-```bash
-cfssl gencert -ca intermediate_ca.pem -ca-key intermediate_ca-key.pem -config cfssl.json -profile=peer host.json | cfssljson -bare peer
-cfssl gencert -ca intermediate_ca.pem -ca-key intermediate_ca-key.pem -config cfssl.json -profile=server host.json | cfssljson -bare server
-cfssl gencert -ca intermediate_ca.pem -ca-key intermediate_ca-key.pem -config cfssl.json -profile=client host.json | cfssljson -bare client
-```
-
-Now copy all the `.pem` files to a folder under your home folder called `.keys`.
-Rename the keys to be `.key` (e.g. rename `ca-key.pem` to `ca.key`) and the certificates
-to `.crt` (e.g. rename `ca.pem` to `ca.crt`).
-
-We need to make a pkcs12 file for the server certificate. Download the openssl toolkit
-from [here](https://slproweb.com/products/Win32OpenSSL.html).
-I used "Win64 OpenSSL v1.1.1k Light". The following command will make the pkcs12 file.
-You will be prompted for a password. I entered a password, but I need to check if en
-empty password is sufficient.
-
-```bash
-openssl pkcs12 -export -inkey server.key -in server.crt -name 'JetBlack Server' -out server.pfx
-```
-
-Now open the microsoft management console. Click on `File` and choose `Add/Remove Snap-in`.
-Select `Certificates` and click `Add`. Choose `Computer account` to manage the certificates
-and click `Next`. Select `Local Computer` (the default) and click `Finish`. The certificates
-snap-in has been selected, now click `OK`.
-
-Fron `Console Root` expand `Certificates`, `Trusted Root Certification Authorities`,
-and `Certificates`. Right click on `All Tasks` and select `Import...`. Click
-through the wizard and select `ca.crt` and complete. Next import `intermediate-ca.crt`
-into the `Intermediate Certification Authorities`.
-
-Finally import the `server.pfx` into the `Personal` key store.
