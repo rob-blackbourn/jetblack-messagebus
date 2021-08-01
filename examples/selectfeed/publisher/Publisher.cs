@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +30,7 @@ namespace SelectfeedPublisher
             _client.AddNotification(Feed);
         }
 
-        private void HandleExchangeData(object sender, ExchangeEventArgs args)
+        private void HandleExchangeData(object? sender, ExchangeEventArgs args)
         {
             lock (_gate)
             {
@@ -40,7 +42,7 @@ namespace SelectfeedPublisher
             }
         }
 
-        private void HandleForwardedSubscription(object sender, ForwardedSubscriptionEventArgs args)
+        private void HandleForwardedSubscription(object? sender, ForwardedSubscriptionEventArgs args)
         {
             lock (_gate)
             {
