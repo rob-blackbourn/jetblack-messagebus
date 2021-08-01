@@ -44,5 +44,14 @@ namespace JetBlack.MessageBus.Adapters
         /// The data packets.
         /// </summary>
         public DataPacket[]? DataPackets { get; }
+
+        /// <inheritdoc />
+        public override string ToString() =>
+            $"{nameof(User)}={User}" +
+            $"{nameof(Host)}={Host}" +
+            $"{nameof(Feed)}={Feed}" +
+            $"{nameof(Topic)}={Topic}" +
+            $"{nameof(IsImage)}={IsImage}" +
+            $",{nameof(DataPackets)}=\"{DataPackets?.Length ?? 0}\"";
     }
 }

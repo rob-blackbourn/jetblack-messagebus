@@ -23,6 +23,11 @@ namespace JetBlack.MessageBus.Adapters
         /// The error for connection failures.
         /// </summary>
         public Exception? Error { get; }
+
+        /// <inheritdoc />
+        public override string ToString() =>
+            $"{nameof(State)}={State}" +
+            $",{nameof(Error)}=\"{Error?.Message}\"";
     }
 
     /// <summary>

@@ -16,27 +16,22 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        /// <param name="impersonating">The username that is being impersonated.</param>
-        /// <param name="forwardedFor"></param>
-        /// <param name="application"></param>
+        /// <param name="impersonating">The optional user that the client is impersonating.</param>
+        /// <param name="forwardedFor">The optional host for which the client is forwarding requests.</param>
+        /// <param name="application">The name of the application.</param>
         public BasicClientAuthenticator(
             string username,
             string password,
             string? impersonating = null,
             string? forwardedFor = null,
             string? application = null)
+            : base(impersonating, forwardedFor, application)
         {
             Username = username;
             _password = password;
-            Impersonating = impersonating;
-            ForwardedFor = forwardedFor;
-            Application = application;
         }
 
         public string Username { get; }
-        public string? Impersonating { get; }
-        public string? ForwardedFor { get; }
-        public string? Application { get; }
 
         protected override string ToConnectionString()
         {
