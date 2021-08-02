@@ -1,18 +1,18 @@
-# SSL - Windows
+# SSL - Linux
 
-This article shows how to use SSL connections with the message bus on Windows.
+This article shows how to use SSL connections with the message bus on Linux.
 
 ## Certificates
 
 In order to use an SSL connection you will need some certificates.
-See the article [here](ssl-windows-certs.md) for creating SSL
-certificates on windows,
+See the repo [here](https://github.com/rob-blackbourn/ssl-certs) for creating SSL
+certificates on Linux,
 
 ## Configuration
 
 To use SSL we need a custom configuration. We can see the standard
 configuration [here][configuration.md]. 
-Create the file `ssl-appsettings.ssl` with the following contents.
+Create the file `appsettings-ssl.ssl` with the following contents.
 
 
 ```json
@@ -29,8 +29,8 @@ Create the file `ssl-appsettings.ssl` with the following contents.
         "heartbeatInterval": "00:00:00",
         "sslConfig": {
             "isEnabled": true,
-            "storeLocation": "LocalMachine",
-            "subjectName":  "windowsvm.jetblack.net"
+            "certFile": "%HOME%/.keys/server.crt",
+            "keyFile": "%HOME%/.keys/server.key"
         },
         "allow": [
             "All"
@@ -55,17 +55,18 @@ Create the file `ssl-appsettings.ssl` with the following contents.
 
 
 The SSL configuration is under the `sslConfig` tag.
-The
-`[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)`
-refers to the location of the certificates in the trust store. This will either
-be `LocalMachine` or `CurrentUser` depending on how you've set it up.
-The `subjectName` is the `CN` in the certificate.
+The `certFile` property is the path to the PEM certificate file,
+and the `keyFile` the path to the key file.
 
-Now create a `distributor-ssl.bat` file to run the application. The
-following assumes the distributor was unpacked to `C:\Distributor`.
+Now create a `distributor-ssl.sh` file with execute permissions to run the distributor.
 
-```bat
-C:\distributor\JetBlack.MessageBus.Distributor.exe C:\distributor\ssl-appsettings.json
+```bash
+#!/bin/bash
+
+# The path to the config file must be absolute.
+CONFIG_FILE=`pwd`/appsettings-ssl.json
+
+./JetBlack.MessageBus.Distributor $CONFIG_FILE
 ```
 
 The settings file is provided as the first argument and *must* be an absolute

@@ -16,5 +16,8 @@
     - name: Certificates - Windows
       href: ssl-windows-certs.md
 
+- name: SSL - Linux
+  href: ssl-linux.md
+
 - name: Configuration
   href: configuration.md
