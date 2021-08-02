@@ -3,9 +3,11 @@
 using System;
 using System.IO;
 using System.Security;
-using JetBlack.MessageBus.Common.IO;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Security.Authentication;
+
+namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
 {
     public class PasswordFileAuthenticator : IAuthenticator
     {

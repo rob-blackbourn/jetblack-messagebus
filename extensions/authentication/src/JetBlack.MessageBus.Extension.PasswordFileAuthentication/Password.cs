@@ -4,7 +4,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
 {
     public class Password
     {

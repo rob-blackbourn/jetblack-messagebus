@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
 {
     public class PasswordManager
     {

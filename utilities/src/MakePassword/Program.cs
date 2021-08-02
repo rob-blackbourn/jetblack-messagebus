@@ -1,7 +1,7 @@
 ﻿using System;
 
 using JetBlack.MessageBus.Common;
-using JetBlack.MessageBus.Common.Security.Authentication;
+using JetBlack.MessageBus.Extension.PasswordFileAuthentication;
 
 namespace MakePassword
 {
