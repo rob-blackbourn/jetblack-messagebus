@@ -198,7 +198,7 @@ Select `Certificates` and click `Add`. Choose `Computer account` to manage the c
 and click `Next`. Select `Local Computer` (the default) and click `Finish`. The certificates
 snap-in has been selected, now click `OK`.
 
-Fron `Console Root` expand `Certificates`, `Trusted Root Certification Authorities`,
+From `Console Root` expand `Certificates`, `Trusted Root Certification Authorities`,
 and `Certificates`. Right click on `All Tasks` and select `Import...`. Click
 through the wizard and select `ca.crt` and complete. Next import `intermediate-ca.crt`
 into the `Intermediate Certification Authorities`.
