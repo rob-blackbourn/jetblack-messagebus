@@ -37,7 +37,7 @@ namespace JetBlack.MessageBus.Adapters
             int port,
             bool monitorHeartbeat = false,
             bool isSslEnabled = false,
-            ClientAuthenticator? authenticator = null,
+            IClientAuthenticator? authenticator = null,
             bool autoConnect = true)
         {
             var ipAddress = Dns.GetHostEntry(server).AddressList

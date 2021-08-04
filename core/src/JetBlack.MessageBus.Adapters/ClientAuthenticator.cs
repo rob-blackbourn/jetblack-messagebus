@@ -7,14 +7,17 @@ using JetBlack.MessageBus.Common.IO;
 namespace JetBlack.MessageBus.Adapters
 {
     /// <summary>
-    /// The abstract client authenticator.
+    /// An abstract client authenticator using connection strings.
     /// </summary>
     /// <remarks>
+    /// A base class for client authenticators which use connection strings
+    /// to pass credentials.
+    ///
     /// In the case of a client which is acting as a proxy the
     /// authenticator is provided with the user the proxy is
     /// impersonating, and the host on which that client is running.
     /// </remarks>
-    public abstract class ClientAuthenticator
+    public abstract class ClientAuthenticator : IClientAuthenticator
     {
         /// <summary>
         /// Construct the client authenticator.
@@ -32,10 +35,7 @@ namespace JetBlack.MessageBus.Adapters
             Application = application;
         }
 
-        /// <summary>
-        /// Authenticate a client.
-        /// </summary>
-        /// <param name="stream"></param>
+        /// <inheritdoc />
         public void Authenticate(Stream stream)
         {
             var writer = new DataWriter(stream);
@@ -43,17 +43,11 @@ namespace JetBlack.MessageBus.Adapters
             writer.Write(connectionString.ToString());
         }
 
-        /// <summary>
-        /// The user that the client is impersonating or null.
-        /// </summary>
+        /// <inheritdoc />
         public string? Impersonating { get; }
-        /// <summary>
-        /// The host that the client is forwarding requests for or null.
-        /// </summary>
+        /// <inheritdoc />
         public string? ForwardedFor { get; }
-        /// <summary>
-        /// The name of the application.
-        /// </summary>
+        /// <inheritdoc />
         public string? Application { get; }
 
         /// <summary>
