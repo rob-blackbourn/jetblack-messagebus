@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Authentication </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Authentication ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="authentication">Authentication</h1>
+
+<p>The distributor server has a pluggable authentication module. As you can see from the
+default <code>appsettings.json</code> the default authenticator is the <code>NullAuthenticator</code>.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;authentication&quot;: {
+      &quot;assemblyPath&quot;: null,
+      &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Common&quot;,
+      &quot;typeName&quot;: &quot;JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator&quot;,
+      &quot;args&quot;: []
+    },
+    ...
+  }
+  ...
+}
+</code></pre>
+<p>The client must connect with the appropriate client side authenticator. For the
+<code>NullAuthenticator</code> this is the <code>NullClientAuthenticator</code> from the
+<code>JetBlack.MessageBus.Adapters</code> assembly. If no authenticator is specified
+when the client is created the null authenticator is used by default.</p>
+<pre><code class="lang-cs">var client = Client.Create(&quot;localhost&quot;, 9001);
+</code></pre>
+<p>This is equivalent to the code above.</p>
+<pre><code class="lang-cs">var authenticator = new NullClientAuthenticator();
+var client = Client.Create(&quot;localhost&quot;, 9001, authenticator: authenticator);
+</code></pre>
+<h2 id="password-file-authenticator">Password File Authenticator</h2>
+<h3 id="distributor">Distributor</h3>
+<p>A simple password file authenticator is provided as an extension. The extension
+can be downloaded from the
+<a href="https://github.com/rob-blackbourn/jetblack-messagebus/releases">Releases</a>
+page as <code>JetBlack.MessageBus.Extension.PasswordFileAuthentication</code>. Unpack the
+files into the folder &quot;extensions&quot; under the distributor. Also download the
+<code>MakePassword</code> utility and unpack it into a <code>utilities</code> folder under the
+distributor. The folder structure should look like as follows.</p>
+<pre><code>distributor
+|   appsettings.json
+|   distributor.bat
+|   JetBlack.MessageBus.Distributor.exe
+|   JetBlack.MessageBus.Distributor.pdb
+|
++---extensions
+|   +---JetBlack.MessageBus.Extension.PasswordFileAuthentication
+|           JetBlack.MessageBus.Extension.PasswordFileAuthentication.deps.json
+|           JetBlack.MessageBus.Extension.PasswordFileAuthentication.dll
+|           JetBlack.MessageBus.Extension.PasswordFileAuthentication.pdb
+|           Newtonsoft.Json.dll
+|
++---utilities
+    +---MakePassword
+            MakePassword.exe
+            MakePassword.pdb
+            passwords.json
+</code></pre>
+<p>Now create copy the <code>appsettings.json</code> to <code>appsettings-pwd.json</code> and create a
+script to run the distributor called <code>distributor-pwd.bat</code> with the following
+contents.</p>
+<pre><code class="lang-bat">REM Start the distributor
+
+set MESSAGEBUS_HOME=%~dp0
+set CONFIG_FILE=%MESSAGEBUS_HOME%\appsettings-pwd.json
+
+JetBlack.MessageBus.Distributor %CONFIG_FILE%
+</code></pre>
+<p>No change the <code>authentication</code> section of <code>appsettings-pwd.json</code> to be the
+following.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;authentication&quot;: {
+      &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_HOME%/extensions/JetBlack.MessageBus.Extension.PasswordFileAuthentication/JetBlack.MessageBus.Extension.PasswordFileAuthentication.dll&quot;,
+      &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.PasswordFileAuthentication&quot;,
+      &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.PasswordFileAuthentication.PasswordFileAuthenticator&quot;,
+      &quot;args&quot;: [
+        &quot;%MESSAGEBUS_HOME%/utilities/MakePassword/passwords.json&quot;
+      ]
+    },    ...
+  }
+  ...
+}
+</code></pre>
+<p>For simplicity we we not set up the SSL configuration here, but as usernames
+and passwords will be exchange this should also be configured.</p>
+<p>The password file authenticator takes a single argument in the <code>args</code> property
+which is the path to the passwords file. The <code>MESSAGEBUS_HOME</code> environment
+variable was set up in the launch script. The password file is created using
+the <code>MakePassword</code> utility and for simplicity we will keep the file in the
+same folder. Make a password in the following manner.</p>
+<pre><code>MakePassword passwords.json rob
+Enter Password: ********
+</code></pre>
+<p>Not start the distributor with the <code>distributor-pwd</code> script. You should see the
+following:</p>
+<pre><code>info: JetBlack.MessageBus.Distributor.Server[0]
+      Starting server version 5.1.0.0
+info: JetBlack.MessageBus.Distributor.Server[0]
+      Server started
+info: JetBlack.MessageBus.Distributor.Program[0]
+      Waiting for SIGTERM/SIGINT on PID 21864
+info: JetBlack.MessageBus.Distributor.Acceptor[0]
+      Listening on 0.0.0.0:9001 with SSL disabled with BASIC authentication
+</code></pre>
+<p>The <code>BASIC authentication</code> indicates the password file authenticator is being
+used.</p>
+<h3 id="client">Client</h3>
+<p>The client should use the <code>BasicClientAuthenticator</code> as follows.</p>
+<pre><code class="lang-cs">var authenticator = new BasicClientAuthenticator(username, password);
+var client = Client.Create(server, 9002, authenticator: authenticator);
+</code></pre>
+<p>Using the code found in <a href="getting-started-windows.html">Getting Started - Windows</a>
+change the client creation for the subscriber and publisher to use the code above
+with the username and password that were created with <code>MakePassword</code>.</p>
+<h2 id="ldap-authenticator">LDAP Authenticator</h2>
+<p>There is an extension which can perform LDAP authentication.</p>
+<h3 id="distributor-1">Distributor</h3>
+<p>Download the <code>JetBlack.MessageBus.Extension.LdapAuthentication</code> package and
+unpack it in the same manner as before. Copy the <code>appsettings.json</code> to
+<code>appsettings-ldap.json</code> and change the <code>authentication</code> section to the following.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;authentication&quot;: {
+      &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_HOME%/extensions/JetBlack.MessageBus.Extension.LdapAuthentication/JetBlack.MessageBus.Extension.LdapAuthentication.dll&quot;,
+      &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.LdapAuthentication&quot;,
+      &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.LdapAuthentication.LdapAuthenticator&quot;,
+      &quot;args&quot;: [
+          &quot;ldap.jetblack.net&quot;,
+          &quot;636&quot;
+      ]
+    },
+    ...
+  }
+  ...
+}
+</code></pre>
+<p>This extension takes two arguments in the <code>args</code> array property. The first is
+the host of the LDAP service, and the second is the port.</p>
+<h3 id="client-1">Client</h3>
+<p>The <code>BasicClientAuthenticator</code> class is used for the client, as the same
+properties are required (username and password). This time pass in valid LDAP
+credentials.</p>
+<h2 id="jwt-authentication">JWT Authentication</h2>
+<p>The JWT authenticator uses JSON web tokens to perform authentication.</p>
+<h3 id="distributor-2">Distributor</h3>
+<p>Download the <code>JetBlack.MessageBus.Extension.JwtAuthentication</code> package and
+unpack it in the same manner as before. Copy the <code>appsettings.json</code> to
+<code>appsettings-jwt.json</code> and change the <code>authentication</code> section to the following.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;authentication&quot;: {
+      &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_HOME%/extensions/JetBlack.MessageBus.Extension.JwtAuthentication/JetBlack.MessageBus.Extension.JwtAuthentication.dll&quot;,
+      &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.JwtAuthentication&quot;,
+      &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.JwtAuthenticator&quot;,
+      &quot;args&quot;: [
+        &quot;A secret of more than 15 characters&quot;
+      ]
+    },
+    ...
+  }
+  ...
+}
+</code></pre>
+<p>This extension takes a single argument in the <code>args</code> array property, the secret
+used to sign the token.</p>
+<h3 id="client-2">Client</h3>
+<p>The client uses the <code>TokenClientAuthenticator</code> for authentication in the
+following manner.</p>
+<pre><code class="lang-cs">var authenticator = new TokenClientAuthenticator(jwtToken);
+var client = Client.Create(server, 9002, authenticator: authenticator);
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/authentication.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

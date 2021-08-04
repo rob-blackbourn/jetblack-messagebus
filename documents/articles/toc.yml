@@ -19,5 +19,8 @@
 - name: SSL - Linux
   href: ssl-linux.md
 
+- name: Authentication
+  href: authentication.md
+
 - name: Configuration
   href: configuration.md

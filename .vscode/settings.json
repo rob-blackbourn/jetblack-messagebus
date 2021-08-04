@@ -3,17 +3,30 @@
       "Configurator",
       "Entitler",
       "JETBLACK",
+      "LDAP",
       "MESSAGEBUS",
+      "Newtonsoft",
+      "SIGINT",
+      "SIGTERM",
       "Selectfeed",
       "aburrows",
+      "appsettings",
       "inazir",
       "interactor",
-      "notifiables"
+      "notifiables",
+      "pluggable"
     ],
     "files.exclude": {
       "**/.classpath": true,
       "**/.project": true,
       "**/.settings": true,
       "**/.factorypath": true
+    },
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "[markdown]": {
+      "editor.wordWrap": "on",
+      "editor.quickSuggestions": false,
+      "editor.rulers": [80],
+      "editor.tabSize": 2
     }
 }

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>SSL - Windows </title>
+    <title>SSL - Linux </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="SSL - Windows ">
+    <meta name="title" content="SSL - Linux ">
     <meta name="generator" content="docfx 2.58.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,13 +67,13 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="ssl---windows">SSL - Windows</h1>
+<h1 id="ssl---linux">SSL - Linux</h1>
 
-<p>This article shows how to use SSL connections with the message bus on Windows.</p>
+<p>This article shows how to use SSL connections with the message bus on Linux.</p>
 <h2 id="certificates">Certificates</h2>
 <p>In order to use an SSL connection you will need some certificates.
-See the article <a href="ssl-windows-certs.html">here</a> for creating SSL
-certificates on windows,</p>
+See the repo <a href="https://github.com/rob-blackbourn/ssl-certs">here</a> for creating SSL
+certificates on Linux,</p>
 <h2 id="configuration">Configuration</h2>
 <p>To use SSL we need a custom configuration. We can see the standard
 configuration [here][configuration.md].
@@ -91,8 +91,8 @@ Create the file <code>appsettings-ssl.ssl</code> with the following contents.</p
         &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
         &quot;sslConfig&quot;: {
             &quot;isEnabled&quot;: true,
-            &quot;storeLocation&quot;: &quot;LocalMachine&quot;,
-            &quot;subjectName&quot;:  &quot;windowsvm.jetblack.net&quot;
+            &quot;certFile&quot;: &quot;%HOME%/.keys/server.crt&quot;,
+            &quot;keyFile&quot;: &quot;%HOME%/.keys/server.key&quot;
         },
         &quot;allow&quot;: [
             &quot;All&quot;
@@ -115,14 +115,15 @@ Create the file <code>appsettings-ssl.ssl</code> with the following contents.</p
 }
 </code></pre>
 <p>The SSL configuration is under the <code>sslConfig</code> tag.
-The
-<code>[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)</code>
-refers to the location of the certificates in the trust store. This will either
-be <code>LocalMachine</code> or <code>CurrentUser</code> depending on how you've set it up.
-The <code>subjectName</code> is the <code>CN</code> in the certificate.</p>
-<p>Now create a <code>distributor-ssl.bat</code> file to run the application. The
-following assumes the distributor was unpacked to <code>C:\Distributor</code>.</p>
-<pre><code class="lang-bat">JetBlack.MessageBus.Distributor %~dp0%\appsettings-ssl.json
+The <code>certFile</code> property is the path to the PEM certificate file,
+and the <code>keyFile</code> the path to the key file.</p>
+<p>Now create a <code>distributor-ssl.sh</code> file with execute permissions to run the distributor.</p>
+<pre><code class="lang-bash">#!/bin/bash
+
+# The path to the config file must be absolute.
+CONFIG_FILE=`pwd`/appsettings-ssl.json
+
+./JetBlack.MessageBus.Distributor $CONFIG_FILE
 </code></pre>
 <p>The settings file is provided as the first argument and <em>must</em> be an absolute
 path.</p>
@@ -143,7 +144,7 @@ path.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/ssl-windows.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/ssl-linux.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

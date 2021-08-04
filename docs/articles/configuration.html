@@ -112,6 +112,319 @@
 </code></pre>
 <p>This provides a distributor running on port 9001 without SSL,
 authentication or authorisation.</p>
+<h2 id="ssl---windows">SSL - Windows</h2>
+<p>SSL configuration is done in the <code>sslConfig</code> section
+of the <code>distributor</code> configuration.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: null,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Common&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator&quot;,
+            &quot;args&quot;: []
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;storeLocation&quot;: &quot;LocalMachine&quot;,
+            &quot;subjectName&quot;:  &quot;windowsvm.jetblack.net&quot;
+        },
+        &quot;allow&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: false
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
+<p>For Windows the
+<code>[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)</code>
+refers to the location of the certificates in the trust store. This will either
+be <code>LocalMachine</code> or <code>CurrentUser</code> depending on how you've set it up.
+The <code>subjectName</code> is the <code>CN</code> in the certificate.</p>
+<h2 id="ssl---linux">SSL - Linux</h2>
+<p>The Linux SSL configuration uses PEM certificates and keys from files.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: null,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Common&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator&quot;,
+            &quot;args&quot;: []
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;certFile&quot;: &quot;%HOME%/.keys/server.crt&quot;,
+            &quot;keyFile&quot;: &quot;%HOME%/.keys/server.key&quot;
+        },
+        &quot;allow&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: false
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
+<p>The <code>certFile</code> property specifies the path to the certificate,
+while the <code>keyFile</code> specifies the path to the key.</p>
+<h2 id="authentication---jwt">Authentication - JWT</h2>
+<p>The following configuration provides authentication through JSON Web Tokens.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_EXTENSIONS%/JetBlack.MessageBus.Extension.JwtAuthentication.dll&quot;,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.JwtAuthentication&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.JwtAuthenticator&quot;,
+            &quot;args&quot;: [
+                &quot;A secret of more than 15 characters&quot;
+            ]
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;certFile&quot;: &quot;%HOME%/.keys/server.crt&quot;,
+            &quot;keyFile&quot;: &quot;%HOME%/.keys/server.key&quot;
+        },
+        &quot;prometheus&quot;: {
+            &quot;port&quot;: 9002,
+            &quot;isEnabled&quot;: true
+        },
+        &quot;allow&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: false
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Information&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
+<h2 id="authentication---ldap">Authentication - LDAP</h2>
+<p>The following configuration file provides authentication for LDAP.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_EXTENSIONS%/JetBlack.MessageBus.Extension.LdapAuthentication.dll&quot;,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.LdapAuthentication&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.LdapAuthentication.LdapAuthenticator&quot;,
+            &quot;args&quot;: [
+                &quot;%LDAP_HOST%&quot;,
+                &quot;636&quot;
+            ]
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;certFile&quot;: &quot;%HOME%/.keys/server.crt&quot;,
+            &quot;keyFile&quot;: &quot;%HOME%/.keys/server.key&quot;
+        },
+        &quot;allow&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: false
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
+<h2 id="authentication---password-file">Authentication - Password File</h2>
+<p>The following provides authentication using a password file.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_EXTENSIONS%/JetBlack.MessageBus.Extension.PasswordFileAuthentication.dll&quot;,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.PasswordFileAuthentication&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.PasswordFileAuthentication.PasswordFileAuthenticator&quot;,
+            &quot;args&quot;: [
+                &quot;%PASSWORD_FOLDER%/passwords.json&quot;
+            ]
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;certFile&quot;: &quot;%HOME%/.keys/server.crt&quot;,
+            &quot;keyFile&quot;: &quot;%HOME%/.keys/server.key&quot;
+        },
+        &quot;allow&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: false
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
+<h2 id="authorization">Authorization</h2>
+<p>The following is an example of authorisation.</p>
+<pre><code class="lang-json">{
+    &quot;distributor&quot;: {
+        &quot;address&quot;: &quot;0.0.0.0&quot;,
+        &quot;port&quot;: 9001,
+        &quot;authentication&quot;: {
+            &quot;assemblyPath&quot;: &quot;%MESSAGEBUS_EXTENSIONS%/JetBlack.MessageBus.Extension.PasswordFileAuthentication.dll&quot;,
+            &quot;assemblyName&quot;: &quot;JetBlack.MessageBus.Extension.PasswordFileAuthentication&quot;,
+            &quot;typeName&quot;: &quot;JetBlack.MessageBus.Extension.PasswordFileAuthentication.PasswordFileAuthenticator&quot;,
+            &quot;args&quot;: [
+                &quot;%JETBLACK_MESSAGEBUS_ROOT%/examples/server-config/password-file/passwords.json&quot;
+            ]
+        },
+        &quot;heartbeatInterval&quot;: &quot;00:00:00&quot;,
+        &quot;sslConfig&quot;: {
+            &quot;isEnabled&quot;: true,
+            &quot;certFile&quot;: &quot;%HOME%/.keys/server.crt&quot;,
+            &quot;keyFile&quot;: &quot;%HOME%/.keys/server.key&quot;
+        },
+        &quot;allow&quot;: [
+            &quot;None&quot;
+        ],
+        &quot;deny&quot;: [
+            &quot;All&quot;
+        ],
+        &quot;isAuthorizationRequired&quot;: true,
+        &quot;feedRoles&quot;: {
+            &quot;UNAUTH&quot;: {
+                &quot;isAuthorized&quot;: false,
+                &quot;allow&quot;: [
+                    &quot;All&quot;
+                ],
+                &quot;deny&quot;: [
+                    &quot;None&quot;
+                ]
+            },
+            &quot;AUTH&quot;: {
+                &quot;isAuthorized&quot;: true,
+                &quot;allow&quot;: [
+                    &quot;None&quot;
+                ],
+                &quot;deny&quot;: [
+                    &quot;All&quot;
+                ],
+                &quot;interactorRoles&quot;: {
+                    &quot;%HOSTNAME%&quot;: {
+                        &quot;tom&quot;: {
+                            &quot;allow&quot;: [
+                                &quot;Subscribe&quot;
+                            ],
+                            &quot;deny&quot;: [
+                                &quot;Publish&quot;,
+                                &quot;Notify&quot;,
+                                &quot;Authorize&quot;
+                            ]
+                        },
+                        &quot;dick&quot;: {
+                            &quot;allow&quot;: [
+                                &quot;Subscribe&quot;
+                            ],
+                            &quot;deny&quot;: [
+                                &quot;Publish&quot;,
+                                &quot;Notify&quot;,
+                                &quot;Authorize&quot;
+                            ]
+                        },
+                        &quot;harry&quot;: {
+                            &quot;allow&quot;: [
+                                &quot;Publish&quot;,
+                                &quot;Notify&quot;
+                            ],
+                            &quot;deny&quot;: [
+                                &quot;Subscribe&quot;,
+                                &quot;Authorize&quot;
+                            ]
+                        },
+                        &quot;mary&quot;: {
+                            &quot;allow&quot;: [
+                                &quot;Authorize&quot;
+                            ],
+                            &quot;deny&quot;: [
+                                &quot;Publish&quot;,
+                                &quot;Notify&quot;,
+                                &quot;Subscribe&quot;
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    &quot;Logging&quot;: {
+        &quot;LogLevel&quot;: {
+            &quot;Default&quot;: &quot;Debug&quot;,
+            &quot;System&quot;: &quot;Information&quot;,
+            &quot;Microsoft&quot;: &quot;Information&quot;
+        },
+        &quot;Console&quot;: {
+            &quot;IncludeScopes&quot;: true
+        }
+    }
+}
+</code></pre>
 </article>
           </div>
           
