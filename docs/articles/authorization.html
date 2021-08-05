@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Authorization </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Authorization ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="authorization">Authorization</h1>
+
+<p>The distributor can be configured to require authorization.</p>
+<h2 id="configuration">Configuration</h2>
+<p>When a feed is authorized the following roles are available.</p>
+<ul>
+<li><code>Subscribe</code></li>
+<li><code>Publish</code></li>
+<li><code>Notify</code></li>
+<li><code>Authorize</code></li>
+</ul>
+<p>The are also roles <code>None</code> and <code>All</code>.</p>
+<p>The authorization is configured under the <code>feedRoles</code> property, where the
+key for each section is the name of the feed. The following sets the feed role
+for <code>FOO</code> to <em>not</em> require authorization.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;feedRoles&quot;: {
+      &quot;FOO&quot;: {
+        &quot;isAuthorized&quot;: false,
+      }
+    }
+  }
+}
+</code></pre>
+<p>The roles can be allowed or denied. For example the following allows <em>all</em>
+roles and denies <em>none</em> for the feed <code>FOO</code>. Furthermore, THis achieves the same
+as the above.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;feedRoles&quot;: {
+      &quot;FOO&quot;: {
+        &quot;isAuthorized&quot;: true,
+        &quot;allow&quot;: [
+          &quot;All&quot;
+        ],
+        &quot;deny&quot;: [
+          &quot;None&quot;
+        ]
+      }
+      }
+  }
+}
+</code></pre>
+<p>For finer grained control we can add an <code>interactorRoles</code> section. The interactor
+roles are keyed by a <em>host</em> which contains an object which is keyed by a <em>username</em>.
+The final nested object has an <code>allow</code> list and a <code>deny</code> list.</p>
+<p>The following example shows that on <code>windowsvm.jetblack.net</code> the user <code>tom</code> can
+subscribe, publish and notify, but not authorize, while the user <code>dick</code> can
+only authorize.</p>
+<pre><code class="lang-json">{
+  &quot;distributor&quot;: {
+    ...
+    &quot;feedRoles&quot;: {
+      &quot;AUTH&quot;: {
+        &quot;isAuthorized&quot;: true,
+        &quot;allow&quot;: [
+          &quot;None&quot;
+        ],
+        &quot;deny&quot;: [
+          &quot;All&quot;
+        ],
+        &quot;interactorRoles&quot;: {
+          &quot;windowsvm.jetblack.net&quot;: {
+            &quot;tom&quot;: {
+              &quot;allow&quot;: [
+                &quot;Subscribe&quot;,
+                &quot;Publish&quot;,
+                &quot;Notify&quot;
+              ],
+              &quot;deny&quot;: [
+                &quot;Authorize&quot;
+              ]
+            },
+            &quot;dick&quot;: {
+              &quot;allow&quot;: [
+                &quot;Authorize&quot;
+              ],
+              &quot;deny&quot;: [
+                &quot;Subscribe&quot;,
+                &quot;Publish&quot;,
+                &quot;Notify&quot;,
+              ]
+            }
+          }
+        }
+      }
+    }
+    ...
+  }
+  ...
+}
+</code></pre>
+<h2 id="client-authorizer">Client Authorizer</h2>
+<p>It is not enough to configure authorization, there must also be a client to
+provide entitlements for a given feed and topic. For example it is common in a
+financial feed to have one cost to see the basics of a stock (bid, ask, etc),
+but an additional cost to see the market depth (all the bids and asks from each
+of the brokers)</p>
+<p>To achieve this we make a client which adds a handler to the <code>OnAuthorizationRequest</code>
+event. When it receives an authorization request it can then use the <code>Authorize</code>
+method to instruct the distributor on the entitlements. This is shown in the
+following code.</p>
+<pre><code class="lang-cs">#nullable enable
+
+using System;
+using System.Collections.Generic;
+
+using JetBlack.MessageBus.Adapters;
+using JetBlack.MessageBus.Common;
+
+using Common;
+
+namespace AuthEntitler
+{
+  class Program
+  {
+    public static int Level1 = 42;
+    public static int Level2 = 43;
+
+    static void Main(string[] args)
+    {
+      var authenticator = new BasicClientAuthenticator(&quot;dick&quot;, &quot;dicksPassword&quot;);
+      var client = Client.Create(
+        &quot;localhost&quot;, 9002,
+        authenticator: authenticator,
+        isSslEnabled: true);
+
+      client.OnAuthorizationRequest += OnAuthorizationRequest;
+
+      Console.WriteLine(&quot;Press ENTER to quit&quot;);
+      Console.ReadLine();
+      client.Dispose();
+    }
+
+    private static void OnAuthorizationRequest(object? sender, AuthorizationRequestEventArgs e)
+    {
+      if (!(sender is Client)) return;
+      var client = (Client)sender;
+
+      if (e.User == &quot;tom&quot; &amp;&amp; e.Feed == &quot;NASDAQ&quot; &amp;&amp; e.Topic == &quot;AAPL&quot;)
+      {
+          Console.WriteLine(&quot;tom can see both level1 and level2&quot;);
+          client.Authorize(
+            e.ClientId,
+            e.Feed, e.Topic,
+            true,
+            new HashSet&lt;int&gt; { Constants.Level1, Constants.Level2 });
+      }
+      else if (e.User == &quot;harry&quot; &amp;&amp; e.Feed == &quot;NASDAQ&quot; &amp;&amp; e.Topic == &quot;AAPL&quot;)
+      {
+          Console.WriteLine(&quot;harry can only see level1&quot;);
+          client.Authorize(
+            e.ClientId,
+            e.Feed, e.Topic,
+            true,
+            new HashSet&lt;int&gt; { Constants.Level1 });
+      }
+      else
+      {
+          Console.WriteLine(&quot;others have no entitlements&quot;);
+          client.Authorize(e.ClientId, e.Feed, e.Topic, true, null);
+      }
+
+      Console.WriteLine($&quot;OnAuthorizationRequest: {e}&quot;);
+    }
+  }
+}
+</code></pre>
+<p>The signature of the <code>OnAuthorizationRequest</code> is as follows.</p>
+<pre><code class="lang-cs">void OnAuthorizationRequest(object? sender, AuthorizationRequestEventArgs e)
+</code></pre>
+<p>The send will be the message bus client, which can later be used for sending
+authorizations. The <code>AuthorizationRequestEventArgs</code> has the following properties.</p>
+<pre><code class="lang-cs">using System;
+
+namespace JetBlack.MessageBus.Adapters
+{
+  public class AuthorizationRequestEventArgs : EventArgs
+  {
+    ...
+
+    public Guid ClientId { get; private set; }
+    public string Host { get; private set; }
+    public string User { get; private set; }
+    public string Feed { get; private set; }
+    public string Topic { get; private set; }
+
+    ...
+  }
+}
+
+</code></pre>
+<p>The <code>Authorize</code> instance method has the following prototype.</p>
+<pre><code class="lang-cs">public void Authorize(
+  Guid clientId,
+  string feed, string topic,
+  bool isAuthorizationRequired,
+  ISet&lt;int&gt;? entitlements)
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/documents/articles/authorization.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

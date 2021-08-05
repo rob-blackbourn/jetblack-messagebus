@@ -22,5 +22,8 @@
 - name: Authentication
   href: authentication.md
 
+- name: Authorization
+  href: authorization.md
+
 - name: Configuration
   href: configuration.md

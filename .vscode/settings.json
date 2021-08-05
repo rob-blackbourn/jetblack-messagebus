@@ -14,7 +14,8 @@
       "inazir",
       "interactor",
       "notifiables",
-      "pluggable"
+      "pluggable",
+      "windowsvm"
     ],
     "files.exclude": {
       "**/.classpath": true,

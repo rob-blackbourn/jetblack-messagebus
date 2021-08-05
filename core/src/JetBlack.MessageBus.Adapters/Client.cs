@@ -288,12 +288,12 @@ namespace JetBlack.MessageBus.Adapters
         }
 
         /// <summary>
-        /// Authorise a client.
+        /// Authorize a client.
         /// </summary>
         /// <param name="clientId">The client id.</param>
         /// <param name="feed">The feed name.</param>
         /// <param name="topic">The topic name</param>
-        /// <param name="isAuthorizationRequired">If true authorisation is required.</param>
+        /// <param name="isAuthorizationRequired">If true authorization is required.</param>
         /// <param name="entitlements">The set of entitlements granted to the client.</param>
         public void Authorize(Guid clientId, string feed, string topic, bool isAuthorizationRequired, ISet<int>? entitlements)
         {
