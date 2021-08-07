@@ -1,8 +1,7 @@
 # Authorization
 
-The distributor can be configured to require authorization.
-
-## Configuration
+The distributor can be configured to require authorization for roles through
+configuration, and entitlements through an authorization client.
 
 When a feed is authorized the following roles are available.
 
@@ -10,12 +9,21 @@ When a feed is authorized the following roles are available.
 * `Publish`
 * `Notify`
 * `Authorize`
+* `All` and `None`
 
-The are also roles `None` and `All`.
+The `Authorize` role allows a client to provide entitlements. Entitlements are
+specific to a given client, feed and topic. The specify what *parts* of a
+message should be sent to the client. For example it is common in a
+financial feed to have one cost to see the basics of a stock (bid, ask, etc),
+but an additional cost to see the market depth (all the bids and asks from each
+of the brokers).
 
-The authorization is configured under the `feedRoles` property, where the
-key for each section is the name of the feed. The following sets the feed role
-for `FOO` to *not* require authorization.
+## Configuration
+
+The authorization is configured under the `feedRoles` tag, where the
+key for each section is the name of the feed. The roles can be allowed or
+denied. The following allows *all* roles and denies *none* for the feed `FOO`.
+When `isAuthorized` is `false` entitlements will not be requested.
 
 ```json
 {
@@ -24,23 +32,6 @@ for `FOO` to *not* require authorization.
     "feedRoles": {
       "FOO": {
         "isAuthorized": false,
-      }
-    }
-  }
-}
-```
-
-The roles can be allowed or denied. For example the following allows *all*
-roles and denies *none* for the feed `FOO`. Furthermore, THis achieves the same
-as the above.
-
-```json
-{
-  "distributor": {
-    ...
-    "feedRoles": {
-      "FOO": {
-        "isAuthorized": true,
         "allow": [
           "All"
         ],
@@ -108,13 +99,13 @@ only authorize.
 
 ## Client Authorizer
 
-It is not enough to configure authorization, there must also be a client to
-provide entitlements for a given feed and topic. For example it is common in a
-financial feed to have one cost to see the basics of a stock (bid, ask, etc),
-but an additional cost to see the market depth (all the bids and asks from each
-of the brokers)
+When `isAuthorized` is set to `true` the distributor will find connected clients
+that have the `Authorized` role, and request authorization. These clients can
+respond with the set of entitlements for the host/user and feed/topic. After
+authorization has been received the distributor will use the entitlements to
+filter the data to include only information for which a client is entitled.
 
-To achieve this we make a client which adds a handler to the `OnAuthorizationRequest`
+To write an authorizer we make a client which adds a handler to the `OnAuthorizationRequest`
 event. When it receives an authorization request it can then use the `Authorize`
 method to instruct the distributor on the entitlements. This is shown in the
 following code.
@@ -226,3 +217,4 @@ public void Authorize(
   bool isAuthorizationRequired,
   ISet<int>? entitlements)
 ```
+
