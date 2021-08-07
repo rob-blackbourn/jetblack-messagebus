@@ -218,3 +218,6 @@ public void Authorize(
   ISet<int>? entitlements)
 ```
 
+A subscription can be rejected by specifying `isAuthorization` to `true` and
+sending `null` or empty `entitlements`. The client will receive a data response
+with no data indicating the rejection.
