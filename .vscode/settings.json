@@ -24,10 +24,10 @@
       "**/.factorypath": true
     },
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "editor.rulers": [80],
     "[markdown]": {
       "editor.wordWrap": "on",
       "editor.quickSuggestions": false,
-      "editor.rulers": [80],
       "editor.tabSize": 2
     }
 }

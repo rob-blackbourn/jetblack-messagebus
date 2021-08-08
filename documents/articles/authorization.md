@@ -105,10 +105,10 @@ respond with the set of entitlements for the host/user and feed/topic. After
 authorization has been received the distributor will use the entitlements to
 filter the data to include only information for which a client is entitled.
 
-To write an authorizer we make a client which adds a handler to the `OnAuthorizationRequest`
-event. When it receives an authorization request it can then use the `Authorize`
-method to instruct the distributor on the entitlements. This is shown in the
-following code.
+To write an authorizer make a client and add a handler to the
+`OnAuthorizationRequest` event. When the client receives an authorization
+request it can then use the `Authorize` method to instruct the distributor on
+the entitlements. This is shown in the following code.
 
 ```cs
 #nullable enable
@@ -132,7 +132,7 @@ namespace AuthEntitler
     {
       var authenticator = new BasicClientAuthenticator("dick", "dicksPassword");
       var client = Client.Create(
-        "localhost", 9002,
+        "localhost", 9001,
         authenticator: authenticator,
         isSslEnabled: true);
 
@@ -171,8 +171,6 @@ namespace AuthEntitler
           Console.WriteLine("others have no entitlements");
           client.Authorize(e.ClientId, e.Feed, e.Topic, true, null);
       }
-
-      Console.WriteLine($"OnAuthorizationRequest: {e}");
     }
   }
 }
