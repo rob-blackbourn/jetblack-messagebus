@@ -35,7 +35,9 @@ namespace JetBlack.MessageBus.Distributor.Configuration
 
         public IPEndPoint ToIPEndPoint()
         {
-            return new IPEndPoint(Address?.AsIPAddress() ?? IPAddress.Any, Port);
+            if (Address == null || !IPAddress.TryParse(Address, out var address))
+                address = IPAddress.Any;
+            return new IPEndPoint(address, Port);
         }
     }
 }

@@ -82,6 +82,10 @@
     <div class="level1"><a class="xref" href="JetBlack.MessageBus.Adapters.ClientAuthenticator.html">ClientAuthenticator</a></div>
     <div class="level2"><span class="xref">TokenClientAuthenticator</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="JetBlack.MessageBus.Adapters.IClientAuthenticator.html">IClientAuthenticator</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -119,7 +123,7 @@
   <h6><strong>Assembly</strong>: JetBlack.MessageBus.Adapters.dll</h6>
   <h5 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class TokenClientAuthenticator : ClientAuthenticator</code></pre>
+    <pre><code class="lang-csharp hljs">public class TokenClientAuthenticator : ClientAuthenticator, IClientAuthenticator</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -248,11 +252,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L48">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Adapters/TokenClientAuthenticator.cs/#L52">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToString_" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToString*"></a>
   <h4 id="JetBlack_MessageBus_Adapters_TokenClientAuthenticator_ToString" data-uid="JetBlack.MessageBus.Adapters.TokenClientAuthenticator.ToString">ToString()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts the value of the current object to it's equivalent string representation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -269,21 +274,16 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td></td>
+        <td><p>A string representation of the current object.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Object.ToString()</span></div>
-  <h3 id="extensionmethods">Extension Methods</h3>
+  <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_DepthFirstTraverse__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.DepthFirstTraverse&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_BreadthFirstTraversal__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.BreadthFirstTraversal&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.FunctionExtensions.html#JetBlack_MessageBus_Common_Linq_FunctionExtensions_Apply__2___0_System_Func___0___1__">FunctionExtensions.Apply&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
+      <a class="xref" href="JetBlack.MessageBus.Adapters.IClientAuthenticator.html">IClientAuthenticator</a>
   </div>
 </article>
           </div>

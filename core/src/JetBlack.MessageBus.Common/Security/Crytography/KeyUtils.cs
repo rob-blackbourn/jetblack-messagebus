@@ -26,11 +26,11 @@ namespace JetBlack.MessageBus.Common.Security.Cryptography
         private const string PrivateEncryptedKeyFooter = "-----END ENCRYPTED PRIVATE KEY-----";
 
         private static IDictionary<string, string> PrefixAndSuffix = new Dictionary<string, string>
-    {
-      { RSAPrivateKeyHeader, RSAPrivateKeyFooter },
-      { PrivateKeyHeader, PrivateKeyFooter },
-      { PrivateEncryptedKeyHeader, PrivateEncryptedKeyFooter },
-    };
+        {
+              { RSAPrivateKeyHeader, RSAPrivateKeyFooter },
+              { PrivateKeyHeader, PrivateKeyFooter },
+              { PrivateEncryptedKeyHeader, PrivateEncryptedKeyFooter },
+        };
 
         public static RSACryptoServiceProvider FromFile(this string path, SecureString? password = null)
         {

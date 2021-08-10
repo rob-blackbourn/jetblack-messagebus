@@ -1,5 +1,8 @@
 namespace JetBlack.MessageBus.Messages
 {
+    /// <summary>
+    /// The message type.
+    /// </summary>
     public enum MessageType : byte
     {
         MulticastData = 1,

@@ -71,6 +71,5 @@ namespace JetBlack.MessageBus.Common.Security.Cryptography
 
             throw new FormatException();
         }
-
     }
 }

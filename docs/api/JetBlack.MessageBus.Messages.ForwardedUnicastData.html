@@ -73,7 +73,9 @@
   
   <h1 id="JetBlack_MessageBus_Messages_ForwardedUnicastData" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData" class="text-break">Class ForwardedUnicastData
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>When a client sends a message to another client it gets sent to the broker as a unicast data
+message, then forwarded to the destination client as a forwarded unicast data message.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -119,11 +121,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData__ctor_System_String_System_String_System_Guid_System_String_System_String_System_Boolean_JetBlack_MessageBus_Common_IO_DataPacket___.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.%23ctor(System.String%2CSystem.String%2CSystem.Guid%2CSystem.String%2CSystem.String%2CSystem.Boolean%2CJetBlack.MessageBus.Common.IO.DataPacket%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L12">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L26">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData__ctor_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.#ctor*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData__ctor_System_String_System_String_System_Guid_System_String_System_String_System_Boolean_JetBlack_MessageBus_Common_IO_DataPacket___" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.#ctor(System.String,System.String,System.Guid,System.String,System.String,System.Boolean,JetBlack.MessageBus.Common.IO.DataPacket[])">ForwardedUnicastData(String, String, Guid, String, String, Boolean, DataPacket[])</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Construct the message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -142,37 +145,44 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">user</span></td>
-        <td></td>
+        <td><p>The user that sent the data.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">host</span></td>
-        <td></td>
+        <td><p>The host from which the data was sent.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Guid</span></td>
         <td><span class="parametername">clientId</span></td>
-        <td></td>
+        <td><p>The id of the client that sent the message.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">feed</span></td>
-        <td></td>
+        <td><p>The name of the feed.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">topic</span></td>
-        <td></td>
+        <td><p>The name of the topic.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">isImage</span></td>
-        <td></td>
+        <td><p>If true the data is considered to be an image.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataPacket.html">DataPacket</a>[]</td>
         <td><span class="parametername">dataPackets</span></td>
-        <td></td>
+        <td><p>The data packets.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -183,11 +193,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_ClientId.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.ClientId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L26">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L49">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_ClientId_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.ClientId*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_ClientId" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.ClientId">ClientId</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The id of the client that sent the data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -213,11 +224,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_DataPackets.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.DataPackets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L30">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L65">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_DataPackets_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.DataPackets*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_DataPackets" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.DataPackets">DataPackets</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The data packets.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -243,11 +255,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_Feed.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.Feed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L27">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L53">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Feed_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Feed*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Feed" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Feed">Feed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name of the feed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -273,11 +286,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_Host.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.Host%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L25">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L45">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Host_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Host*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Host" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Host">Host</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The host from whence the data was sent.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -303,11 +317,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_IsImage.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.IsImage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L29">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L61">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_IsImage_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.IsImage*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_IsImage" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.IsImage">IsImage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>If true the data is considered to be an image.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -333,11 +348,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_Topic.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.Topic%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L28">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L57">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Topic_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Topic*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Topic" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Topic">Topic</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name of the topic.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -363,11 +379,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_User.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.User%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L24">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L41">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_User_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.User*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_User" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.User">User</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The user that sent hte data.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -395,11 +412,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_Equals_JetBlack_MessageBus_Messages_ForwardedUnicastData_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.Equals(JetBlack.MessageBus.Messages.ForwardedUnicastData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L57">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L103">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Equals_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Equals*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Equals_JetBlack_MessageBus_Messages_ForwardedUnicastData_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Equals(JetBlack.MessageBus.Messages.ForwardedUnicastData)">Equals(ForwardedUnicastData)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Test for equality.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -418,7 +436,8 @@
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Messages.ForwardedUnicastData.html">ForwardedUnicastData</a></td>
         <td><span class="parametername">other</span></td>
-        <td></td>
+        <td><p>The message to test against.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -433,7 +452,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>True if the messages are equal.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -442,11 +462,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_Equals_System_Object_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L72">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L123">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Equals_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Equals*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Equals_System_Object_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Equals(System.Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Test for equality.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -465,7 +486,8 @@
       <tr>
         <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td></td>
+        <td><p>The object to compare.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -480,7 +502,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>True if the objects are equal.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -491,11 +514,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_GetHashCode.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L77">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L132">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_GetHashCode_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.GetHashCode*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_GetHashCode" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.GetHashCode">GetHashCode()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the hash code for this instance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -512,7 +536,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -523,11 +548,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_ReadBody_JetBlack_MessageBus_Common_IO_DataReader_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.ReadBody(JetBlack.MessageBus.Common.IO.DataReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L32">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L72">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_ReadBody_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.ReadBody*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_ReadBody_JetBlack_MessageBus_Common_IO_DataReader_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.ReadBody(JetBlack.MessageBus.Common.IO.DataReader)">ReadBody(DataReader)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Read the message body.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -546,7 +572,8 @@
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataReader.html">DataReader</a></td>
         <td><span class="parametername">reader</span></td>
-        <td></td>
+        <td><p>The reader.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -561,7 +588,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Messages.ForwardedUnicastData.html">ForwardedUnicastData</a></td>
-        <td></td>
+        <td><p>The message.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -570,11 +598,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_ToString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L89">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L148">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_ToString_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.ToString*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_ToString" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.ToString">ToString()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts the value of the current object to it's equivalent string representation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -591,7 +620,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td></td>
+        <td><p>A string representation of the current object.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -602,11 +632,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData_Write_JetBlack_MessageBus_Common_IO_DataWriter_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData.Write(JetBlack.MessageBus.Common.IO.DataWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L44">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L85">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Write_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Write*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedUnicastData_Write_JetBlack_MessageBus_Common_IO_DataWriter_" data-uid="JetBlack.MessageBus.Messages.ForwardedUnicastData.Write(JetBlack.MessageBus.Common.IO.DataWriter)">Write(DataWriter)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Write a message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -625,7 +656,8 @@
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataWriter.html">DataWriter</a></td>
         <td><span class="parametername">writer</span></td>
-        <td></td>
+        <td><p>The message writer.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -640,7 +672,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataWriter.html">DataWriter</a></td>
-        <td></td>
+        <td><p>The message writer.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -649,16 +682,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">System.IEquatable&lt;T&gt;</span>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_DepthFirstTraverse__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.DepthFirstTraverse&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_BreadthFirstTraversal__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.BreadthFirstTraversal&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.FunctionExtensions.html#JetBlack_MessageBus_Common_Linq_FunctionExtensions_Apply__2___0_System_Func___0___1__">FunctionExtensions.Apply&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
   </div>
 </article>
           </div>
@@ -671,7 +694,7 @@
                     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedUnicastData.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedUnicastData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedUnicastData.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

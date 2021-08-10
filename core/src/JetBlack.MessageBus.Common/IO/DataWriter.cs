@@ -3,16 +3,23 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Text;
 
 namespace JetBlack.MessageBus.Common.IO
 {
+    /// <summary>
+    /// A data writer.
+    /// </summary>
     public class DataWriter : IDisposable
     {
         private readonly Stream _stream;
         private readonly bool _leaveInnerStreamOpen;
 
+        /// <summary>
+        /// Construct a data writer.
+        /// </summary>
+        /// <param name="stream">The tsream to write to.</param>
+        /// <param name="leaveInnerStreamOpen">If true, leave the inner stream open when disposing.</param>
         public DataWriter(Stream stream, bool leaveInnerStreamOpen = true)
         {
             _stream = stream;
@@ -38,66 +45,20 @@ namespace JetBlack.MessageBus.Common.IO
         }
 
         /// <summary>
-        /// Write a character
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(char value)
-        {
-            _stream.Write(value.GetBytes(), 0, 2);
-        }
-
-        /// <summary>
         /// Write an int
         /// </summary>
         /// <param name="value">The value to write</param>
         public void Write(int value)
         {
-            _stream.Write(value.GetBytes(), 0, 4);
-        }
+            var buf = new[]
+            {
+                (byte) ((value >> 24) & 0xFF),
+                (byte) ((value >> 16) & 0xFF),
+                (byte) ((value >> 8) & 0xFF),
+                (byte) ((value >> 0) & 0xFF)
+            };
 
-        /// <summary>
-        /// Write a long
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(long value)
-        {
-            _stream.Write(value.GetBytes(), 0, 8);
-        }
-
-        /// <summary>
-        /// Write a short
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(short value)
-        {
-            _stream.Write(value.GetBytes(), 0, 2);
-        }
-
-        /// <summary>
-        /// Write an unsigned short to a stream
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(ushort value)
-        {
-            _stream.Write(PortableBitConverter.GetBytes(value), 0, 2);
-        }
-
-        /// <summary>
-        /// Write a float
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(float value)
-        {
-            _stream.Write(value.GetBytes(), 0, 4);
-        }
-
-        /// <summary>
-        /// Write a double
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(double value)
-        {
-            Write(BitConverter.DoubleToInt64Bits(value));
+            _stream.Write(buf, 0, 4);
         }
 
         /// <summary>
@@ -119,26 +80,6 @@ namespace JetBlack.MessageBus.Common.IO
         }
 
         /// <summary>
-        /// Write a date
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(DateTime value)
-        {
-            Write(value.DateToInt64());
-        }
-
-        /// <summary>
-        /// Write an ip address to a stream.
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(IPAddress value)
-        {
-            byte[] address = value.GetAddressBytes();
-            Write(address.Length);
-            _stream.Write(address, 0, address.Length);
-        }
-
-        /// <summary>
         /// Write a byte array
         /// </summary>
         /// <param name="value">The value to write</param>
@@ -150,50 +91,6 @@ namespace JetBlack.MessageBus.Common.IO
             {
                 Write(value.Length);
                 _stream.Write(value, 0, value.Length);
-            }
-        }
-
-        /// <summary>
-        /// Write an array of byte arrays
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(byte[][] value)
-        {
-            if (value == null)
-                Write(0);
-            else
-            {
-                Write(value.Length);
-                foreach (var t in value)
-                    Write(t);
-            }
-        }
-
-        /// <summary>
-        /// Write an array of stings to a stream
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(string[]? value)
-        {
-            if (value == null)
-                Write(0);
-            else
-            {
-                Write(value.Length);
-                foreach (var t in value)
-                    Write(t);
-            }
-        }
-
-        public void Write(int[]? value)
-        {
-            if (value == null)
-                Write(0);
-            else
-            {
-                Write(value.Length);
-                foreach (var t in value)
-                    Write(t);
             }
         }
 
@@ -217,22 +114,6 @@ namespace JetBlack.MessageBus.Common.IO
         {
             var buf = value.ToByteArray();
             _stream.Write(buf, 0, buf.Length);
-        }
-
-        /// <summary>
-        /// Write an array of guids.
-        /// </summary>
-        /// <param name="value">The value to write</param>
-        public void Write(Guid[]? value)
-        {
-            if (value == null)
-                Write(0);
-            else
-            {
-                Write(value.Length);
-                foreach (var guid in value)
-                    Write(guid);
-            }
         }
 
         public void Write(DataPacket dataPacket)

@@ -73,7 +73,8 @@
   
   <h1 id="JetBlack_MessageBus_Common_IO_DataReader" data-uid="JetBlack.MessageBus.Common.IO.DataReader" class="text-break">Class DataReader
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>A data reader.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -121,11 +122,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader__ctor_System_IO_Stream_System_Boolean_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.%23ctor(System.IO.Stream%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L16">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L23">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader__ctor_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.#ctor*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader__ctor_System_IO_Stream_System_Boolean_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.#ctor(System.IO.Stream,System.Boolean)">DataReader(Stream, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Construct a data reader.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -144,12 +146,14 @@
       <tr>
         <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
-        <td></td>
+        <td><p>The stream to read.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">leaveInnerStreamOpen</span></td>
-        <td></td>
+        <td><p>If true leave the inner stream open when disposing.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -160,7 +164,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_Dispose.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L310">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L155">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_Dispose_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.Dispose*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_Dispose" data-uid="JetBlack.MessageBus.Common.IO.DataReader.Dispose">Dispose()</h4>
@@ -172,186 +176,10 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_Read_System_Byte___.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.Read(System.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L27">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_Read_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.Read*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_Read_System_Byte___" data-uid="JetBlack.MessageBus.Common.IO.DataReader.Read(System.Byte[])">Read(Byte[])</h4>
-  <div class="markdown level1 summary"><p>Read an array of bytes.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Read(byte[] value)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Byte</span>[]</td>
-        <td><span class="parametername">value</span></td>
-        <td><p>The buffer to hold the data</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>The count of bytes read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_Read_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.Read(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L39">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_Read_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.Read*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_Read_System_Byte___System_Int32_System_Int32_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.Read(System.Byte[],System.Int32,System.Int32)">Read(Byte[], Int32, Int32)</h4>
-  <div class="markdown level1 summary"><p>Read an array of bytes from a stream into an array at a given offset.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Read(byte[] value, int off, int len)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Byte</span>[]</td>
-        <td><span class="parametername">value</span></td>
-        <td><p>The buffer to hold the data</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">off</span></td>
-        <td><p>The offset into the array where the data will be written</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">len</span></td>
-        <td><p>The number of bytes to read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>The count of bytes read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadArrayOfByteArrays.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadArrayOfByteArrays%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L221">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadArrayOfByteArrays_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadArrayOfByteArrays*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadArrayOfByteArrays" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadArrayOfByteArrays">ReadArrayOfByteArrays()</h4>
-  <div class="markdown level1 summary"><p>Read an array of byte arrays.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public byte[][] ReadArrayOfByteArrays()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Byte</span>[][]</td>
-        <td><p>The array of byte arrays read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadArrayOfStrings.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadArrayOfStrings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L167">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadArrayOfStrings_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadArrayOfStrings*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadArrayOfStrings" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadArrayOfStrings">ReadArrayOfStrings()</h4>
-  <div class="markdown level1 summary"><p>Read an array of strings.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string[] ReadArrayOfStrings()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span>[]</td>
-        <td><p>The array of strings read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadBinaryDataPacket.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadBinaryDataPacket%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L260">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L114">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadBinaryDataPacket_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadBinaryDataPacket*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadBinaryDataPacket" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadBinaryDataPacket">ReadBinaryDataPacket()</h4>
@@ -381,7 +209,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadBinaryDataPacketArray.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadBinaryDataPacketArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L267">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L121">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadBinaryDataPacketArray_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadBinaryDataPacketArray*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadBinaryDataPacketArray" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadBinaryDataPacketArray">ReadBinaryDataPacketArray()</h4>
@@ -411,7 +239,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadBoolean.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadBoolean%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L48">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L33">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadBoolean_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadBoolean*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadBoolean" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadBoolean">ReadBoolean()</h4>
@@ -443,7 +271,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadByte.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadByte%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L57">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L42">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadByte_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadByte*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadByte" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadByte">ReadByte()</h4>
@@ -475,7 +303,7 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadByteArray.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadByteArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L204">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L90">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadByteArray_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadByteArray*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadByteArray" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadByteArray">ReadByteArray()</h4>
@@ -504,138 +332,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadChar.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadChar%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L69">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadChar_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadChar*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadChar" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadChar">ReadChar()</h4>
-  <div class="markdown level1 summary"><p>Read a character.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public char ReadChar()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Char</span></td>
-        <td><p>The character read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadDate.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadDate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L305">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadDate_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadDate*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadDate" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadDate">ReadDate()</h4>
-  <div class="markdown level1 summary"><p>Read a date.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DateTime ReadDate()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.DateTime</span></td>
-        <td><p>The date read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadDouble.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadDouble%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L78">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadDouble_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadDouble*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadDouble" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadDouble">ReadDouble()</h4>
-  <div class="markdown level1 summary"><p>Read a double.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double ReadDouble()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><p>The double read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadFloat.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadFloat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L87">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadFloat_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadFloat*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadFloat" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadFloat">ReadFloat()</h4>
-  <div class="markdown level1 summary"><p>Read a float.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public float ReadFloat()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Single</span></td>
-        <td><p>The float read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadGuid.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadGuid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L236">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L107">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadGuid_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadGuid*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadGuid" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadGuid">ReadGuid()</h4>
@@ -664,74 +364,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadGuidArray.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadGuidArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L247">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadGuidArray_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadGuidArray*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadGuidArray" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadGuidArray">ReadGuidArray()</h4>
-  <div class="markdown level1 summary"><p>Read an array of guids.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Guid[] ReadGuidArray()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Guid</span>[]</td>
-        <td><p>The array of guids read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadInt16.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadInt16%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L96">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt16_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt16*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt16" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt16">ReadInt16()</h4>
-  <div class="markdown level1 summary"><p>Read a short.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public short ReadInt16()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int16</span></td>
-        <td><p>The short read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadInt32.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadInt32%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L114">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L54">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt32_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt32*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt32" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt32">ReadInt32()</h4>
@@ -760,40 +396,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadInt32Array.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadInt32Array%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L178">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt32Array_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt32Array*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt32Array" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt32Array">ReadInt32Array()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int[] ReadInt32Array()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span>[]</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadInt32Set.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadInt32Set%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L189">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L75">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt32Set_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt32Set*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt32Set" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt32Set">ReadInt32Set()</h4>
@@ -820,104 +426,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadInt64.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadInt64%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L123">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt64_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt64*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadInt64" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadInt64">ReadInt64()</h4>
-  <div class="markdown level1 summary"><p>Read a long.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public long ReadInt64()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int64</span></td>
-        <td><p>The long read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadIPAddress.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadIPAddress%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L132">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadIPAddress_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadIPAddress*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadIPAddress" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadIPAddress">ReadIPAddress()</h4>
-  <div class="markdown level1 summary"><p>Read an ip address.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IPAddress ReadIPAddress()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Net.IPAddress</span></td>
-        <td><p>The ip address read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadNullableString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadNullableString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L151">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadNullableString_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadNullableString*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadNullableString" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadNullableString">ReadNullableString()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string ReadNullableString()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L144">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L68">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadString_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadString*"></a>
   <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadString" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadString">ReadString()</h4>
@@ -944,51 +456,9 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader_ReadUInt16.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader.ReadUInt16%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L105">View Source</a>
-  </span>
-  <a id="JetBlack_MessageBus_Common_IO_DataReader_ReadUInt16_" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadUInt16*"></a>
-  <h4 id="JetBlack_MessageBus_Common_IO_DataReader_ReadUInt16" data-uid="JetBlack.MessageBus.Common.IO.DataReader.ReadUInt16">ReadUInt16()</h4>
-  <div class="markdown level1 summary"><p>Read an unsigned short.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ushort ReadUInt16()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.UInt16</span></td>
-        <td><p>The unsigned short read</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">System.IDisposable</span>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_DepthFirstTraverse__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.DepthFirstTraverse&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_BreadthFirstTraversal__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.BreadthFirstTraversal&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.FunctionExtensions.html#JetBlack_MessageBus_Common_Linq_FunctionExtensions_Apply__2___0_System_Func___0___1__">FunctionExtensions.Apply&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
   </div>
 </article>
           </div>
@@ -1001,7 +471,7 @@
                     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Common_IO_DataReader.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Common.IO.DataReader%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Common/IO/DataReader.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

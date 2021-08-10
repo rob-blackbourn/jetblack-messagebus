@@ -44,7 +44,10 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         public bool IsAdd { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Converts the value of the current object to it's equivalent string representation.
+        /// </summary>
+        /// <returns>A string representation of the current object.</returns>
         public override string ToString() => $"{nameof(User)}=\"{User}\",{nameof(Host)}=\"{Host}\",{nameof(ClientId)}={ClientId},{nameof(Feed)}=\"{Feed}\",{nameof(Topic)}=\"{Topic}\",IsAdd={IsAdd}";
     }
 }

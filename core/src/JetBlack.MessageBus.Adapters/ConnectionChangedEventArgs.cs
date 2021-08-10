@@ -24,7 +24,10 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         public Exception? Error { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Converts the value of the current object to it's equivalent string representation.
+        /// </summary>
+        /// <returns>A string representation of the current object.</returns>
         public override string ToString() =>
             $"{nameof(State)}={State}" +
             $",{nameof(Error)}=\"{Error?.Message}\"";

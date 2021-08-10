@@ -45,6 +45,10 @@ namespace JetBlack.MessageBus.Adapters
             return connectionString.ToString();
         }
 
+        /// <summary>
+        /// Converts the value of the current object to it's equivalent string representation.
+        /// </summary>
+        /// <returns>A string representation of the current object.</returns>
         public override string ToString() =>
             $"{nameof(Token)}=\"{Token}\"" +
             $",{nameof(Impersonating)}=\"{Impersonating}\"" +

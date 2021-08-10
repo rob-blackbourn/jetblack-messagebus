@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.AuthorizationRequestEventArgs.html",
-          "hash": "zuhfxDgEz9BlGhqS/QuAiBU/jxs4HOme04xwOX7i2lY="
+          "hash": "IDIy+T3J+EMQK6C88t1OXG4utWgAznScviwxqmxNHTI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.BasicClientAuthenticator.html",
-          "hash": "HWvI0Zqp29GtJT0tHusHu9pdGPNnoM5EQ31S7oTsNwY="
+          "hash": "kIyn3MgowxPXKBgvazkk6qH/MdQRdG/d2leRHphBOaM="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.Client.html",
-          "hash": "rts7jL5cbK6VeK+pj2Wg3zY24Yj/V+ooVkYQ9VzfVcI="
+          "hash": "nlr2uJ1w2jXySsM0jtqbA+wL7O0OCeaay16ifSqXhpY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ClientAuthenticator.html",
-          "hash": "7Lt0OCGsOSwlbuBbnv4FsRwAmKUMJT7uECgftvUYuyc="
+          "hash": "J7+mUCQ6oeu4qUSi9e36NIQzswYJ6cg/w5Igsi2uUhg="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionChangedEventArgs.html",
-          "hash": "p2pA0BoiEMieIRyzTJ1makDe+5FHzhZVLqPCqzaBBz8="
+          "hash": "niQiNR9KTDtpnEiQ+P49JG0rSu/5POE9dvipNLp0/Ck="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ConnectionState.html",
-          "hash": "+TdMIK5n0XG8ZqSb6dNPM8v5L1cM8bZIgQbzglUL1x0="
+          "hash": "LRiH5IWSlfPyMnUqyQhCe2r5gEkko2X6ydgDueBHIHk="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.DataReceivedEventArgs.html",
-          "hash": "q6ty2es9Rcc92ss/T7FIpm/OLYutVnLfR/4+KYlnfA8="
+          "hash": "wAwTywGFkQr+7t7WwqRreKevoJjjJFnTYeRn7NlznUM="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,10 +93,22 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.ForwardedSubscriptionEventArgs.html",
-          "hash": "ASeBH9Y7f/4N50ZHjBAG8Fz5GvyyU0zqmKIW2P/MV1A="
+          "hash": "aII/0cpD9TDNHWNnRAXf7OQ0BCF3gq/bovYqHv2FGNQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Adapters.IClientAuthenticator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Adapters.IClientAuthenticator.html",
+          "hash": "ktooC8UQXj7VBBksq0PLm8ybCWO68E2eZRLuRZTdllU="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -105,10 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.NullClientAuthenticator.html",
-          "hash": "KHL0vHykP+TiSdKmTRBGpO3iLjrsypWnSjHaE7ryltY="
+          "hash": "VQTyYNjbsri4BLaX6U5S+COTWuidM4InbX5AXbEmzqY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.TokenClientAuthenticator.html",
-          "hash": "vCatNq5WEilSmHgobUNUb/Bwdht+xL5rRLWuJUEx2TI="
+          "hash": "WkC7G1nnzPv2ncZCqF71zwvAkJZufm1JCBIkTd2wykY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -129,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Adapters.html",
-          "hash": "LRrnqoY5JiHFhW5/F+NBJePppwsfRjSMypT10yhKqPs="
+          "hash": "9cGOhecv/UvslX9OjGUvwUn54PXq7yDnYnFgrWEui2g="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -141,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Collections.Generic.TwoWaySet-2.html",
-          "hash": "hrxoIZcm0pzsnNxeookWFk7yq/E0d259Yji3tI4kM+U="
+          "hash": "izJtbP6+79Y4MYi8MSZe42Iybvr3PjdKzm1lOH61SUQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -156,7 +168,7 @@
           "hash": "VNg/X1lmm0K5FrsnptFr932bJpZgX1Avymq63dBJlKI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -168,7 +180,7 @@
           "hash": "8qtlajUuFtecZkhSMIS853ta6lFdGeAlq5xmtN+GAiI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -177,10 +189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.IO.DataPacket.html",
-          "hash": "Cn3AuSFTWwozS8476d0amnLIIijQIWw60fAwhyUIpyI="
+          "hash": "fNJKt9JrNeSzUgWc5jlYcQpV92oWog9wISnf3TQ8hHk="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -189,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.IO.DataReader.html",
-          "hash": "KozZxnHSWMapqSXj7ryp9nj9PbtAoYFK2XThWUZfrFg="
+          "hash": "SoG2Hoe6CuhQKLEzjkbRtzsPqQv8SbkhOQN/eJlzZfA="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -201,10 +213,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.IO.DataWriter.html",
-          "hash": "lzOS3cf5HUMpb4IJ9BJ7SqTVdmnl89QVzmSWnV203vQ="
+          "hash": "0TBleRxSjtvmUxcN0cVEf86tV1Spwud+FlwdTIOoJ8s="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -213,130 +225,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.IO.html",
-          "hash": "+sNB+q8tHqq+2Qu1e7kJButRIZFZfy2e9vqPdFAwur0="
+          "hash": "BtL2zVyg0/tJXLwlEtL1BNCgvIsOKZK8QqGd08KRBMI="
         }
       },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.CollectionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.CollectionExtensions.html",
-          "hash": "4/oiFoQBdVbuuXtifW7lSm+8j4kWybDVSYQUN/qvJjo="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.DictionaryExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.DictionaryExtensions.html",
-          "hash": "OL8auUsorsTOGpWQQJ9pMTqTaPIt+L1/HBOYUm1FLEk="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.EnumerableExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html",
-          "hash": "/ABu5fqCXVQrRYBjVL8bs+MiAVEpWOw9DvC8ZYvvFY4="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.FunctionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.FunctionExtensions.html",
-          "hash": "PBT1q7woIs/UTfVQslc8qexJKldaIg9u1jVfOdiDrHA="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTail-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTail-1.html",
-          "hash": "7CpRR/cSDMH6L0Y5TwPjGFhhTRE8bqyZxMXVcLXinO4="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTailExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.HeadAndTailExtensions.html",
-          "hash": "wrcFmIN59mgwCXY1g7h0eTQ3C13btld861e3ZFYEFlI="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.ListExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.ListExtensions.html",
-          "hash": "n3ScxiWnjcSVDFaKNjH9ReUL9C52a9SoIouZQvdKueQ="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.Linq.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.Linq.html",
-          "hash": "TWjt1VK/z7chaqvCvLa2XvTstZaVz9oQCMTVMFcMVxs="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.ParseExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.ParseExtensions.html",
-          "hash": "JRyIB6CPGJioYJTPV7PnC7+2M0ztHLK/ny/aeCiKgB8="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.PortableBitConverter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.PortableBitConverter.html",
-          "hash": "TTm3oOpasKW9BN7n3Rid3NUQQKEHNW8enBCZpW63e9E="
-        }
-      },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -345,10 +237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.AuthenticationResponse.html",
-          "hash": "7aSG2f2P3J39Ld0doiw5Msq2IPFPzANmUuBSJZ3GuuE="
+          "hash": "0+FleLwpP89WxubP5kTJIj35xApZ9B2a5lsD/hHRG0E="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -357,10 +249,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.IAuthenticator.html",
-          "hash": "xuCMHI26/5FVnn2zgSXn2VXPS3mdSwTBYm7xDtrItIE="
+          "hash": "Lc24dIUH6KwdvFaYVNZ/tbFaEl/SdlC6ZPUQJ+LMM+8="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -369,10 +261,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.NullAuthenticator.html",
-          "hash": "3CM2QWMzmP87+biso+M04jZOqUhjh2OrNpwSI9hZmzs="
+          "hash": "+5kIPTZVJsTSPW9ixDgDsDJr3gp9lPqZlVYHDnNDXTQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -381,10 +273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Security.Authentication.html",
-          "hash": "PM7fSfFZ4npzVMgyIec4gH4cg6lFmsP/VXtXh6vNq0A="
+          "hash": "HcEzxCZ7EiJbKibUTs5/o7p4iAcIU4RarwAba8cW5zM="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -393,10 +285,10 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.Security.Cryptography.CertBuilder.html",
-          "hash": "BC5EGsvHAtx4oC6C0CQ9uO46JkzvQt8CSnCnrEzj9Dc="
+          "hash": "mxZS9VkmhcbpaAMvGd9zc3KFW48zhgvGM2cZ9h8bJOI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -408,7 +300,7 @@
           "hash": "R3lqdMbWLp3iw8b9fdCZo208TdPep4LLtCLm7T1IGpQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -420,7 +312,7 @@
           "hash": "JOuwtyp6iQFfuvSZBgnCNaZNr6+frjZ4YFzReZYp9hE="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -432,7 +324,7 @@
           "hash": "H2fEuvI9vBLOYhg1SG4fbWZ8CjTidPG5G9EnyHrU4Mg="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -444,43 +336,7 @@
           "hash": "WqRZ/Kj4tKv60jNsirtGHzDQSUqkOraxKgCF70WJwsQ="
         }
       },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.StringExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.StringExtensions.html",
-          "hash": "NPdtdgV7gz5loCe1CxPqqSHgndsQ6tBGNqPTZ4WxpzQ="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.TryParseDelegate-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.TryParseDelegate-1.html",
-          "hash": "SAra8OPQ73K5sA0iURWLAl+Kv0k13ea4D9Xg4LBLLcI="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/JetBlack.MessageBus.Common.TypeExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/JetBlack.MessageBus.Common.TypeExtensions.html",
-          "hash": "YoEQjQxVCtsY6nwJYira8RfbQEsHJJjT4NMSRPxvMgg="
-        }
-      },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -489,10 +345,166 @@
       "output": {
         ".html": {
           "relative_path": "api/JetBlack.MessageBus.Common.html",
-          "hash": "TuM+p/sEDevjf5CbgowNe2+/f66o0nWYLTQBvYcUzO0="
+          "hash": "LGFypc/kaZr8n4uyRU5SJB/uwKFetz18wn2OE5Y11Dc="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.AuthorizationRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.AuthorizationRequest.html",
+          "hash": "t3Y0wOK8u1Awqi4jwSCSCLqdXjQXTB9HE+QknoLR3OY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.AuthorizationResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.AuthorizationResponse.html",
+          "hash": "INihHMnRr70lDY4gPg/7DNU7aXacUy/Eac5hkrldf/4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.FeedTopic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.FeedTopic.html",
+          "hash": "gg8lbAcMn7Ei/R4PdbYdeCRl7gjPWFVIUFBUlnvXq3s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.ForwardedMulticastData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.ForwardedMulticastData.html",
+          "hash": "ZYAiOsviXcVV+3YTADmurCqBFFYGwxJRuX2y3Icc8zY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.html",
+          "hash": "bVB8OPtpWq6DAr7HEex92VqsIpx41RSkSCX+Y86Ixk0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.ForwardedUnicastData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.ForwardedUnicastData.html",
+          "hash": "Isnj9Q8zz3u8wTchGfzsN/2TmpzOdD82Fs5Jjqpnzj8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.Message.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.Message.html",
+          "hash": "lC0Ig14NaOTl4uDf2C2YRuN+YXc8kbwM4p0BiUIGyMU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.MessageType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.MessageType.html",
+          "hash": "YZbOLVwId4/xqjMFR9gVlnfRsfPHQfHfsFMvQl1Ejfk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.MulticastData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.MulticastData.html",
+          "hash": "gVfzsZh66R2Yo4Wlw2jiPhyfEm14YoYJIlBMcK0bnrc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.NotificationRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.NotificationRequest.html",
+          "hash": "UUbe7IsHjO4xUixizTnkSi+6EHKGyNak9JsVdtcYrzU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.SubscriptionRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.SubscriptionRequest.html",
+          "hash": "jdj1eX25ThR5PoodeRWW4amDCDSuQQu3EPM8JcvJcRo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.UnicastData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.UnicastData.html",
+          "hash": "mjhidBHeGETzX0fSnVsqOLwsJweYzVRSE53BR7IEdec="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/JetBlack.MessageBus.Messages.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/JetBlack.MessageBus.Messages.html",
+          "hash": "qI+yDuvktZdVDLUx81ZWV26P7EvC6mI31RYW86Bc+EU="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -504,7 +516,7 @@
           "hash": "kQXIJk6GRSJADV2PQhqRK+429YRRhnWhjVZ8zyFW1ZY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -513,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "aBleDnehjnRXzRfEI6DsdelfPvsixqfQ1DOl2jtOZpQ="
+          "hash": "A1OxQSlnUx3V9icFuD9lT3qJ63rLR3xss9OPsoeXUsA="
         }
       },
       "is_incremental": false,
@@ -540,7 +552,7 @@
           "hash": "2Neum9d3wmale+jHvbBvTBJ9lVpFSfPkrfBysn3jLbY="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -689,13 +701,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 12,
-          "skipped_file_count": 11
+          "skipped_file_count": 12
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 41,
-          "skipped_file_count": 41
+          "total_file_count": 42,
+          "skipped_file_count": 7
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

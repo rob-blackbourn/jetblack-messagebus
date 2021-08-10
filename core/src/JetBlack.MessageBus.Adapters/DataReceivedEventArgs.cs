@@ -45,7 +45,10 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         public DataPacket[]? DataPackets { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Converts the value of the current object to it's equivalent string representation.
+        /// </summary>
+        /// <returns>A string representation of the current object.</returns>
         public override string ToString() =>
             $"{nameof(User)}={User}" +
             $"{nameof(Host)}={Host}" +

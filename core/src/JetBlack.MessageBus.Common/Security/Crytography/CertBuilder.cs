@@ -38,7 +38,6 @@ namespace JetBlack.MessageBus.Common.Security.Cryptography
             {
                 store.Close();
             }
-
         }
     }
 }

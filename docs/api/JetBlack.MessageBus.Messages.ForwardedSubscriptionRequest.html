@@ -73,7 +73,9 @@
   
   <h1 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest" class="text-break">Class ForwardedSubscriptionRequest
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>A forwarded subscription requests. This is sent to clients that have requested notification
+on a feed.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -119,11 +121,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest__ctor_System_String_System_String_System_Guid_System_String_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.%23ctor(System.String%2CSystem.String%2CSystem.Guid%2CSystem.String%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L10">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L23">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest__ctor_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.#ctor*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest__ctor_System_String_System_String_System_Guid_System_String_System_String_System_Boolean_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.#ctor(System.String,System.String,System.Guid,System.String,System.String,System.Boolean)">ForwardedSubscriptionRequest(String, String, Guid, String, String, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Construct the message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -142,32 +145,38 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">user</span></td>
-        <td></td>
+        <td><p>The user that requested the subscription.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">host</span></td>
-        <td></td>
+        <td><p>The host of the user that requested the subscription.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Guid</span></td>
         <td><span class="parametername">clientId</span></td>
-        <td></td>
+        <td><p>The id of that client that requested the subscription.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">feed</span></td>
-        <td></td>
+        <td><p>The name of the feed.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">topic</span></td>
-        <td></td>
+        <td><p>The name of the topic.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">isAdd</span></td>
-        <td></td>
+        <td><p>If true the client is adding a subscription, otherwise it is a removal.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -178,11 +187,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ClientId.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ClientId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L23">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L45">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ClientId_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ClientId*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ClientId" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ClientId">ClientId</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The id of the client that made the subscription.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -208,11 +218,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Feed.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Feed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L24">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L49">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Feed_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Feed*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Feed" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Feed">Feed</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name of the feed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -238,11 +249,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Host.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Host%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L22">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L41">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Host_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Host*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Host" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Host">Host</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The host of the user that requested the subscription.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -268,11 +280,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_IsAdd.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.IsAdd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L26">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L57">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_IsAdd_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.IsAdd*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_IsAdd" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.IsAdd">IsAdd</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>If true the client is adding a subscription, otherwise it is a removal.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -298,11 +311,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Topic.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Topic%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L25">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L53">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Topic_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Topic*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Topic" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Topic">Topic</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The name of the topic.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -328,11 +342,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_User.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.User%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L21">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L37">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_User_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.User*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_User" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.User">User</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The user that requested the subscription.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -360,11 +375,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Equals_JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Equals(JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L51">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L93">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Equals_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Equals*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Equals_JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Equals(JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest)">Equals(ForwardedSubscriptionRequest)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Test for equality.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -383,7 +399,8 @@
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.html">ForwardedSubscriptionRequest</a></td>
         <td><span class="parametername">other</span></td>
-        <td></td>
+        <td><p>The message to test.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -398,7 +415,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>True if the messages are equal.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -407,11 +425,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Equals_System_Object_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L63">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L110">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Equals_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Equals*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Equals_System_Object_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Equals(System.Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Test for equality.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -430,7 +449,8 @@
       <tr>
         <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td></td>
+        <td><p>The object to compare.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -445,7 +465,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>True if the objects are equal.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -456,11 +477,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_GetHashCode.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L68">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L119">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_GetHashCode_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.GetHashCode*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_GetHashCode" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.GetHashCode">GetHashCode()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns the hash code for this instance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -477,7 +499,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -488,11 +511,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ReadBody_JetBlack_MessageBus_Common_IO_DataReader_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ReadBody(JetBlack.MessageBus.Common.IO.DataReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L28">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L64">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ReadBody_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ReadBody*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ReadBody_JetBlack_MessageBus_Common_IO_DataReader_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ReadBody(JetBlack.MessageBus.Common.IO.DataReader)">ReadBody(DataReader)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Read the body of the message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -511,7 +535,8 @@
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataReader.html">DataReader</a></td>
         <td><span class="parametername">reader</span></td>
-        <td></td>
+        <td><p>The reader.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -526,7 +551,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.html">ForwardedSubscriptionRequest</a></td>
-        <td></td>
+        <td><p>The message.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -535,11 +561,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ToString.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L79">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L134">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ToString_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ToString*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_ToString" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.ToString">ToString()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts the value of the current object to it's equivalent string representation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -556,7 +583,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td></td>
+        <td><p>A string representation of the current object.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -567,11 +595,12 @@
     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Write_JetBlack_MessageBus_Common_IO_DataWriter_.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Write(JetBlack.MessageBus.Common.IO.DataWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L39">View Source</a>
+    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L76">View Source</a>
   </span>
   <a id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Write_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Write*"></a>
   <h4 id="JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest_Write_JetBlack_MessageBus_Common_IO_DataWriter_" data-uid="JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest.Write(JetBlack.MessageBus.Common.IO.DataWriter)">Write(DataWriter)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Write a message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -590,7 +619,8 @@
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataWriter.html">DataWriter</a></td>
         <td><span class="parametername">writer</span></td>
-        <td></td>
+        <td><p>The message writer.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -605,7 +635,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="JetBlack.MessageBus.Common.IO.DataWriter.html">DataWriter</a></td>
-        <td></td>
+        <td><p>The message writer.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -614,16 +645,6 @@
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">System.IEquatable&lt;T&gt;</span>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_DepthFirstTraverse__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.DepthFirstTraverse&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.EnumerableExtensions.html#JetBlack_MessageBus_Common_Linq_EnumerableExtensions_BreadthFirstTraversal__1___0_System_Func___0_System_Collections_Generic_IEnumerable___0___">EnumerableExtensions.BreadthFirstTraversal&lt;T&gt;(T, Func&lt;T, IEnumerable&lt;T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="JetBlack.MessageBus.Common.Linq.FunctionExtensions.html#JetBlack_MessageBus_Common_Linq_FunctionExtensions_Apply__2___0_System_Func___0___1__">FunctionExtensions.Apply&lt;TIn, TOut&gt;(TIn, Func&lt;TIn, TOut&gt;)</a>
   </div>
 </article>
           </div>
@@ -636,7 +657,7 @@
                     <a href="https://github.com/rob-blackbourn/jetblack-messagebus/new/master/apiSpec/new?filename=JetBlack_MessageBus_Messages_ForwardedSubscriptionRequest.md&amp;value=---%0Auid%3A%20JetBlack.MessageBus.Messages.ForwardedSubscriptionRequest%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/rob-blackbourn/jetblack-messagebus/blob/master/core/src/JetBlack.MessageBus.Messages/ForwardedSubscriptionRequest.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

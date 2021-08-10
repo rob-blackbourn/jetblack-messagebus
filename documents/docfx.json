@@ -5,7 +5,8 @@
         {
           "files": [
             "core/src/JetBlack.MessageBus.Adapters/**.csproj",
-            "core/src/JetBlack.MessageBus.Common/**.csproj"
+            "core/src/JetBlack.MessageBus.Common/**.csproj",
+            "core/src/JetBlack.MessageBus.Messages/**.csproj"
           ],
           "src": ".."
         }
