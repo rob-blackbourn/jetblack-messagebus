@@ -27,7 +27,7 @@ C:\distributor>dir
                2 Dir(s)  67,376,578,560 bytes free
 ```
 
-To start the distrubter double-click on
+To start the distributor double-click on
 `JetBlack.MessageBus.Distributor.exe` to start it. The first time
 the service is run Windows will pop up a security alert indicating
 the service wants to access a network port. Click on "Allow access"
