@@ -10,7 +10,7 @@
       "request": "launch",
       "preLaunchTask": "build JetBlack.MessageBus.Distributor",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.1/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net5.0/JetBlack.MessageBus.Distributor.dll",
       "args": [],
       "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
@@ -25,7 +25,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.1/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net5.0/JetBlack.MessageBus.Distributor.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/password-file/appsettings.json"
       ],
@@ -41,7 +41,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.1/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net5.0/JetBlack.MessageBus.Distributor.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/ldap/appsettings.json"
       ],
@@ -57,7 +57,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/netcoreapp3.1/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net5.0/JetBlack.MessageBus.Distributor.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/jwt/appsettings.json"
       ],
@@ -73,7 +73,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build simple notifier",
-      "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/netcoreapp3.1/notifier.dll",
+      "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/net5.0/notifier.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/notifier",
       "env": {
@@ -87,7 +87,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build simple publisher",
-      "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/netcoreapp3.1/publisher.dll",
+      "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/net5.0/publisher.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/publisher",
       "env": {
@@ -101,7 +101,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build simple subscriber",
-      "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/netcoreapp3.1/subscriber.dll",
+      "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/net5.0/subscriber.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
@@ -115,7 +115,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build selectfeed publisher",
-      "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/netcoreapp3.1/publisher.dll",
+      "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/net5.0/publisher.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
       "env": {
@@ -129,7 +129,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build auth authorizer",
-      "program": "${workspaceFolder}/examples/authorization/authorizer/bin/Debug/netcoreapp3.1/authorizer.dll",
+      "program": "${workspaceFolder}/examples/authorization/authorizer/bin/Debug/net5.0/authorizer.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
@@ -143,7 +143,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build auth notifier",
-      "program": "${workspaceFolder}/examples/authorization/notifier/bin/Debug/netcoreapp3.1/notifier.dll",
+      "program": "${workspaceFolder}/examples/authorization/notifier/bin/Debug/net5.0/notifier.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
@@ -157,7 +157,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build auth publisher",
-      "program": "${workspaceFolder}/examples/authorization/publisher/bin/Debug/netcoreapp3.1/publisher.dll",
+      "program": "${workspaceFolder}/examples/authorization/publisher/bin/Debug/net5.0/publisher.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
@@ -171,7 +171,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build auth subscriber",
-      "program": "${workspaceFolder}/examples/authorization/subscriber/bin/Debug/netcoreapp3.1/subscriber.dll",
+      "program": "${workspaceFolder}/examples/authorization/subscriber/bin/Debug/net5.0/subscriber.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
@@ -185,7 +185,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build MakePassword",
-      "program": "${workspaceFolder}/utilities/src/MakePassword/bin/Debug/netcoreapp3.1/MakePassword.dll",
+      "program": "${workspaceFolder}/utilities/src/MakePassword/bin/Debug/net5.0/MakePassword.dll",
       "args": [
         "password.json",
         "tom"

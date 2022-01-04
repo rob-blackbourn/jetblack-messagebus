@@ -106,7 +106,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
         private DataPacket[]? GetAuthorizedData(DataPacket[]? dataPackets, AuthorizationInfo authorization)
         {
             return authorization.IsAuthorizationRequired
-                    ? dataPackets.Where(packet => packet.IsAuthorized(authorization.Entitlements)).ToArray()
+                    ? dataPackets?.Where(packet => packet.IsAuthorized(authorization.Entitlements)).ToArray()
                     : dataPackets;
         }
 

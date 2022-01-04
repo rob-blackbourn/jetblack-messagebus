@@ -14,14 +14,14 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public bool IsImpersonationAllowed { get; set; } = false;
         public bool IsProxyAllowed { get; set; } = false;
 
-        public Dictionary<string, Dictionary<string, InteractorRoleConfig>?>? InteractorRoles { get; set; }
+        public Dictionary<string, Dictionary<string, InteractorRoleConfig>>? InteractorRoles { get; set; }
 
         public FeedRole ToFeedRole(string feed)
         {
             return new FeedRole(
                 feed,
-                Allow.Aggregate(Role.None, (aggregate, role) => aggregate | role),
-                Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role),
+                Allow?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
+                Deny?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
                 IsAuthorized,
                 IsImpersonationAllowed,
                 IsProxyAllowed,

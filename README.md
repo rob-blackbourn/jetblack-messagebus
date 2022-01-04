@@ -36,7 +36,7 @@ This message bus supports SSL connections between clients and the server.
 Authentication is provided as a pluggable component. Out of the box three methods are supported:
 
 - No authentication
-- Passwrod File
+- Password File
 - LDAP
 
 SSL connections are recommended when using authentication to prevent password snooping.
@@ -44,3 +44,12 @@ SSL connections are recommended when using authentication to prevent password sn
 ### Authorization
 
 Many financial feeds require the distribution of data to be restricted to those who have paid for it. This message bus supports such authorization, such that it will not transmit data to clients that are not entitled to receive it.
+
+## Notes
+
+On linux you may have to add the following lines to `/etc/sysctl.conf`:
+
+```bash
+fs.inotify.max_user_watches = 524288
+fs.inotify.max_user_instances = 524288
+```

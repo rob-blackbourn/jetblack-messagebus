@@ -31,7 +31,7 @@ namespace publisher
 
                 var data = new[]
                 {
-                    new DataPacket(null, Encoding.UTF8.GetBytes(message))
+                    new DataPacket(null, message == null ? null : Encoding.UTF8.GetBytes(message))
                 };
 
                 Console.WriteLine($"Publishing on feed \"{feed}\" topic \"{topic}\" message \"{message}\"");

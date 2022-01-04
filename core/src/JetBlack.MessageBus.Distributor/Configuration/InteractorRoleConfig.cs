@@ -19,8 +19,8 @@ namespace JetBlack.MessageBus.Distributor.Configuration
             return new InteractorRole(
               expandedHost,
               user,
-              Allow.Aggregate(Role.None, (aggregate, role) => aggregate | role),
-              Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role));
+              Allow?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
+              Deny?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None);
         }
     }
 }

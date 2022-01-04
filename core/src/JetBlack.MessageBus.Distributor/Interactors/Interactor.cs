@@ -45,7 +45,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             var stream = GetStream(tcpClient, certificate, logger);
 
-            var address = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address;
+            var address = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.Any;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
 
             var authenticationResponse = authenticator.Authenticate(stream);
@@ -80,7 +80,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             }
             catch
             {
-                throw new SslException(((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address);
+                throw new SslException((tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.None);
             }
         }
 

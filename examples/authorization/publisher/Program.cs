@@ -29,7 +29,7 @@ namespace AuthPublisher
                 Console.WriteLine("  username=\"harry\", password=\"harrysPassword\", roles=Notify|Publish");
                 Console.WriteLine("  username=\"mary\", password=\"marysPassword\", roles=Authorize");
                 Console.Write("Username: ");
-                var username = Console.ReadLine();
+                var username = Console.ReadLine() ?? String.Empty;
                 Console.Write("Password: ");
                 var password = ConsoleHelper.ReadPassword();
 

@@ -189,7 +189,7 @@ request. It checks for authorization, then finally informs clients requesting
 notifications of the subscription.
 
 Lastly let's run another subscriber. Right click over "Program.cs" and click
-"Open Containg Folder". Navigate to the `bin\Debug\netcoreapp3.1` and double-click
+"Open Containg Folder". Navigate to the `bin\Debug\net5.0` and double-click
 on `SimpleSubscriber.exe`. This will start a second subscriber.
 
 The notifier should now receive a second forwarded subscription from the second subscriber.

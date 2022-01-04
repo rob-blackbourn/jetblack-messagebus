@@ -27,8 +27,8 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public DistributorRole ToDistributorRole()
         {
             return new DistributorRole(
-                Allow.Aggregate(Role.None, (aggregate, role) => aggregate | role),
-                Deny.Aggregate(Role.None, (aggregate, role) => aggregate | role),
+                Allow?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
+                Deny?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
                 IsAuthorizationRequired,
                 FeedRoles?.ToDictionary(x => x.Key, x => x.Value.ToFeedRole(x.Key)));
         }
