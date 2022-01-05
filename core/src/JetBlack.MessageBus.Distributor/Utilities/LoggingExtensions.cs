@@ -2,7 +2,6 @@
 
 using Microsoft.Extensions.Logging;
 
-using JetBlack.JsonConsoleLogger;
 using JetBlack.MessageBus.Distributor.Configuration;
 
 namespace JetBlack.MessageBus.Distributor.Utilities
