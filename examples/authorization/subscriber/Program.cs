@@ -70,9 +70,12 @@ namespace AuthSubscriber
                 {
                     var json = Encoding.UTF8.GetString(packet.Data);
                     var message = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                    Console.WriteLine(
-                    "Data: " +
-                        string.Join(",", message.Select(x => $"{x.Key}={x.Value}")));
+                    if (message == null)
+                        Console.WriteLine("Empty message");
+                    else
+                        Console.WriteLine(
+                            "Data: " +
+                            string.Join(",", message.Select(x => $"{x.Key}={x.Value}")));
                 }
             }
         }

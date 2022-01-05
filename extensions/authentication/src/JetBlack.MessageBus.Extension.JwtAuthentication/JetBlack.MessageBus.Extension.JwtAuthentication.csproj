@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>JetBlack.MessageBus.Extension.JwtAuthentication</PackageId>
-    <Version>5.2.0</Version>
+    <Version>6.0.0-alpha1</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
   </ItemGroup>
 
 </Project>

@@ -133,6 +133,6 @@ push-adapters:
 	dotnet nuget push ${CORE_SRC}/JetBlack.MessageBus.Adapters/bin/Debug/JetBlack.MessageBus.Adapters.${ADAPTERS_VERSION}.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
 
 clean:
-	rm -r build
+	-rm -r build
 	find . -type d -name bin -exec rm -rf {} \;	
 	find . -type d -name obj -exec rm -rf {} \;	
