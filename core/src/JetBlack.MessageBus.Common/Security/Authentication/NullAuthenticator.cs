@@ -1,5 +1,3 @@
-#nullable enable
-
 using System.IO;
 
 namespace JetBlack.MessageBus.Common.Security.Authentication

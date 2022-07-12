@@ -1,6 +1,5 @@
-#nullable enable
-
 using System.Collections.Generic;
+
 using Prometheus;
 
 namespace JetBlack.MessageBus.Distributor.Utilities

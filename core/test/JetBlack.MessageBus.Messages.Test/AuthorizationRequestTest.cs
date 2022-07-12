@@ -1,8 +1,8 @@
-#nullable enable
-
 using System;
 using System.IO;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using JetBlack.MessageBus.Common.IO;
 
 namespace JetBlack.MessageBus.Messages.Test

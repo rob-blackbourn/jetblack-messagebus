@@ -1,14 +1,9 @@
-#nullable enable
-
 using System.IO;
 using System.Security;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using JetBlack.MessageBus.Common.IO;
-using JetBlack.MessageBus.Common.Security.Authentication;
-
-using JetBlack.MessageBus.Extension.PasswordFileAuthentication;
 
 namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
 {

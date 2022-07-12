@@ -1,6 +1,5 @@
-#nullable enable
-
 using System;
+
 using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Distributor.Interactors

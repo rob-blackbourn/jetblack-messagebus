@@ -1,5 +1,3 @@
-#nullable enable
-
 namespace JetBlack.MessageBus.Common.Security.Authentication
 {
     /// <summary>

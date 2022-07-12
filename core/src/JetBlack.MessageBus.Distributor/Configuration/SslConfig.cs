@@ -1,7 +1,6 @@
-#nullable enable
-
 using System;
 using System.Security.Cryptography.X509Certificates;
+
 using JetBlack.MessageBus.Common.Security.Cryptography;
 
 namespace JetBlack.MessageBus.Distributor.Configuration

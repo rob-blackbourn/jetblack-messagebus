@@ -1,5 +1,3 @@
-#nullable enable
-
 using Microsoft.Extensions.Logging;
 
 using JetBlack.MessageBus.Distributor.Configuration;

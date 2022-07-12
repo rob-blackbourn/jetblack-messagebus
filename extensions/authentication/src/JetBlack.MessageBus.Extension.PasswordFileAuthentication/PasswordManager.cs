@@ -1,7 +1,6 @@
-#nullable enable
-
 using System.Collections.Generic;
 using System.IO;
+
 using Newtonsoft.Json;
 
 namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication

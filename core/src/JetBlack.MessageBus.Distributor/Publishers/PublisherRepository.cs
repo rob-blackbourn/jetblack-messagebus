@@ -1,6 +1,5 @@
-#nullable enable
-
 using System.Collections.Generic;
+
 using JetBlack.MessageBus.Common.Collections.Generic;
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Messages;

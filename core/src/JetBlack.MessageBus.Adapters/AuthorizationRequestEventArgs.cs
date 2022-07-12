@@ -3,7 +3,7 @@ using System;
 namespace JetBlack.MessageBus.Adapters
 {
     /// <summary>
-    /// The event args for an authorisation request.
+    /// The event args for an authorization request.
     /// </summary>
     public class AuthorizationRequestEventArgs : EventArgs
     {
