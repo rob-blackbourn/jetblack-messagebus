@@ -1,5 +1,3 @@
-#nullable enable
-
 using System.IO;
 
 using JetBlack.MessageBus.Common.IO;

@@ -1,15 +1,14 @@
-#nullable enable
-
+using System;
+using System.Collections.Generic;
 using System.Linq;
+
+using Microsoft.Extensions.Logging;
 
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Distributor.Notifiers;
 using JetBlack.MessageBus.Distributor.Publishers;
 using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
-using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor.Subscribers
 {

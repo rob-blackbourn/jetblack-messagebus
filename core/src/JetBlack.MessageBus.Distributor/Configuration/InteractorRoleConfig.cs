@@ -1,8 +1,7 @@
-#nullable enable
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using JetBlack.MessageBus.Distributor.Roles;
 
 namespace JetBlack.MessageBus.Distributor.Configuration

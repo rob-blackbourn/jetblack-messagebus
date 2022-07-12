@@ -1,13 +1,10 @@
-﻿#nullable enable
-
-using System;
+﻿using System.IO;
 using System.Text;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using JetBlack.MessageBus.Distributor.Configuration;
-using System.IO;
 
 namespace JetBlack.MessageBus.Distributor.Test.Configuration
 {

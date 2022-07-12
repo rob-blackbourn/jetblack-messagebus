@@ -1,7 +1,5 @@
-#nullable enable
-
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using JetBlack.MessageBus.Distributor.Roles;
 
 namespace JetBlack.MessageBus.Distributor.Test.Roles

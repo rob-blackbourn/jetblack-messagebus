@@ -1,5 +1,3 @@
-#nullable enable
-
 using JetBlack.MessageBus.Distributor.Interactors;
 
 namespace JetBlack.MessageBus.Distributor.Notifiers

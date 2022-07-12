@@ -111,8 +111,6 @@ request it can then use the `Authorize` method to instruct the distributor on
 the entitlements. This is shown in the following code.
 
 ```cs
-#nullable enable
-
 using System;
 using System.Collections.Generic;
 

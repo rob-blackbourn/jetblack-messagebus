@@ -1,5 +1,3 @@
-#nullable enable
-
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -7,11 +5,12 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Distributor.Utilities;
-using Microsoft.Extensions.Logging;
 
 namespace JetBlack.MessageBus.Distributor
 {

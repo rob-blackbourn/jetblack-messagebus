@@ -1,5 +1,3 @@
-#nullable enable
-
 namespace JetBlack.MessageBus.Distributor.Configuration
 {
     public class PrometheusConfig

@@ -1,20 +1,23 @@
 {
     "cSpell.words": [
+      "aburrows",
+      "appsettings",
       "Configurator",
       "Entitler",
+      "inazir",
+      "inheritdoc",
+      "interactor",
+      "Interactors",
       "JETBLACK",
       "LDAP",
       "MESSAGEBUS",
       "Newtonsoft",
-      "SIGINT",
-      "SIGTERM",
-      "Selectfeed",
-      "aburrows",
-      "appsettings",
-      "inazir",
-      "interactor",
       "notifiables",
       "pluggable",
+      "Selectfeed",
+      "SIGINT",
+      "SIGTERM",
+      "typeparam",
       "windowsvm"
     ],
     "files.exclude": {
@@ -27,7 +30,11 @@
     "editor.rulers": [80],
     "[markdown]": {
       "editor.wordWrap": "on",
-      "editor.quickSuggestions": false,
+      "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+      },
       "editor.tabSize": 2
     }
 }

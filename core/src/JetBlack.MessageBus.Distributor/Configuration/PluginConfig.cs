@@ -1,8 +1,7 @@
-#nullable enable
-
 using System;
 using System.Linq;
 using System.Reflection;
+
 using JetBlack.MessageBus.Distributor.Plugins;
 
 namespace JetBlack.MessageBus.Distributor.Configuration

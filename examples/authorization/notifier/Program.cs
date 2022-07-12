@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System;
+﻿using System;
 
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common;
