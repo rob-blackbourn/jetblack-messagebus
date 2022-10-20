@@ -23,6 +23,7 @@ namespace JetBlack.MessageBus.Distributor
         private readonly CancellationTokenSource _tokenSource = new CancellationTokenSource();
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
         private readonly Acceptor _acceptor;
+        private readonly SspiAcceptor? _sspiAcceptor;
         private readonly Timer _heartbeatTimer;
         private readonly InteractorManager _interactorManager;
         private readonly SubscriptionManager _subscriptionManager;
@@ -34,6 +35,7 @@ namespace JetBlack.MessageBus.Distributor
             IAuthenticator authenticator,
             X509Certificate2? certificate,
             DistributorRole distributorRole,
+            IPEndPoint? sspiEndPoint,
             ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<Server>();
@@ -51,6 +53,15 @@ namespace JetBlack.MessageBus.Distributor
                 _eventQueue,
                 loggerFactory,
                 _tokenSource.Token);
+
+            _sspiAcceptor = sspiEndPoint == null
+                ? null
+                : new SspiAcceptor(
+                    sspiEndPoint,
+                    distributorRole,
+                    _eventQueue,
+                    loggerFactory,
+                    _tokenSource.Token);
 
             _interactorManager = new InteractorManager(distributorRole, loggerFactory);
 
@@ -76,6 +87,7 @@ namespace JetBlack.MessageBus.Distributor
 
             _eventQueue.Start();
             _acceptor.Start();
+            _sspiAcceptor?.Start();
 
             if (heartbeatInterval != TimeSpan.Zero)
                 _heartbeatTimer.Change(heartbeatInterval, heartbeatInterval);

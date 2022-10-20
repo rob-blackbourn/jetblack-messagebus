@@ -13,7 +13,8 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public string? Address { get; set; }
         public int Port { get; set; }
         public TimeSpan HeartbeatInterval { get; set; }
-        public SslConfig? SslConfig { get; set; }
+        public SslConfig? Ssl { get; set; }
+        public SspiConfig? Sspi { get; set; }
         public PrometheusConfig? Prometheus { get; set; }
         public PluginConfig? Authentication { get; set; }
         public List<Role>? Allow { get; set; }
