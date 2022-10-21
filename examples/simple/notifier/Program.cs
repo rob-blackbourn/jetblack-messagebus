@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 using JetBlack.MessageBus.Adapters;
 
@@ -8,8 +9,8 @@ namespace notifier
     {
         static void Main(string[] args)
         {
-            var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9001);
+            var client = Client.Create(Dns.GetHostName(), 9001);
+
             client.OnForwardedSubscription += OnForwardedSubscription;
 
             Console.WriteLine("Enter the feed to be notified on.");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text;
 
 using JetBlack.MessageBus.Adapters;
@@ -9,8 +10,7 @@ namespace subscriber
     {
         static void Main(string[] args)
         {
-            var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9001);
+            var client = Client.Create(Dns.GetHostName(), 9001);
 
             client.OnDataReceived += OnDataReceived;
 
