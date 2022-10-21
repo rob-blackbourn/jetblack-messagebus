@@ -10,7 +10,8 @@ namespace subscriber
     {
         static void Main(string[] args)
         {
-            var client = Client.Create(Dns.GetHostName(), 9001);
+            var host = Dns.GetHostEntry("LocalHost").HostName;
+            var client = Client.Create(host, 9001, isSslEnabled: true);
 
             client.OnDataReceived += OnDataReceived;
 
