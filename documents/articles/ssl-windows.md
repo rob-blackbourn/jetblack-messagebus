@@ -27,7 +27,7 @@ Create the file `appsettings-ssl.ssl` with the following contents.
             "args": []
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "storeLocation": "LocalMachine",
             "subjectName":  "windowsvm.jetblack.net"
@@ -54,7 +54,7 @@ Create the file `appsettings-ssl.ssl` with the following contents.
 ```
 
 
-The SSL configuration is under the `sslConfig` tag.
+The SSL configuration is under the `ssl` tag.
 The
 `[storeLocation](https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.x509certificates.storelocation)`
 refers to the location of the certificates in the trust store. This will either
