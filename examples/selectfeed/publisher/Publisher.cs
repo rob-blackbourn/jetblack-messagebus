@@ -38,7 +38,7 @@ namespace SelectfeedPublisher
                     return;
 
                 Console.WriteLine($"Publishing {args.Ticker}");
-                _client.Publish(Feed, args.Ticker, false, ToDataPackets(args.Delta));
+                _client.Publish(Feed, args.Ticker, false, ToDataPackets(args.Ticker, args.Delta));
             }
         }
 
@@ -75,7 +75,7 @@ namespace SelectfeedPublisher
                 {
                     Console.WriteLine($"Sending image of {topic} to {clientId}");
                     topicSubscriptions[clientId] = 1;
-                    _client.Send(clientId, feed, topic, true, ToDataPackets(_exchangeFeed.Data[topic]));
+                    _client.Send(clientId, feed, topic, true, ToDataPackets(topic, _exchangeFeed.Data[topic]));
                 }
             }
         }
@@ -112,9 +112,14 @@ namespace SelectfeedPublisher
             }
         }
 
-        private static DataPacket[] ToDataPackets(Dictionary<string, object> data)
+        private static DataPacket[] ToDataPackets(string topic, Dictionary<string, object> data)
         {
-            var json = JsonConvert.SerializeObject(data);
+            var dataFrame = new Dictionary<string, Dictionary<string, object>>
+            {
+                { topic, data }
+            };
+            
+            var json = JsonConvert.SerializeObject(dataFrame);
             return new DataPacket[]
             {
                 new DataPacket(null, Encoding.UTF8.GetBytes(json))

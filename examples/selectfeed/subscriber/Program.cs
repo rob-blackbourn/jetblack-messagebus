@@ -59,15 +59,18 @@ namespace subscriber
                 if (packet.Data != null)
                 {
                     var json = Encoding.UTF8.GetString(packet.Data);
-                    var message = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                    if (message == null)
+                    var dataFrame = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(json);
+                    if (dataFrame == null)
                     {
                         return;
                     }
 
-                    foreach (var item in message)
+                    foreach (var dataItem in dataFrame)
                     {
-                        Console.WriteLine($"{item.Key}: {item.Value}");
+                        foreach (var item in dataItem.Value)
+                        {
+                            Console.WriteLine($"{dataItem.Key}: {item.Key} = {item.Value}");
+                        }
                     }
                 }
             }
