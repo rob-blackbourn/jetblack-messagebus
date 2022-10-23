@@ -28,7 +28,7 @@ namespace JetBlack.MessageBus.Distributor.Test.Configuration
             ]
         },
         ""heartbeatInterval"": ""00:00:00"",
-        ""sslConfig"": {
+        ""ssl"": {
                 ""isEnabled"": true,
             ""certFile"": ""%HOME%/.keys/server.crt"",
             ""keyFile"": ""%HOME%/.keys/server.key""

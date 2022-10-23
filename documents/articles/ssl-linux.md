@@ -27,7 +27,7 @@ Create the file `appsettings-ssl.ssl` with the following contents.
             "args": []
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "certFile": "%HOME%/.keys/server.crt",
             "keyFile": "%HOME%/.keys/server.key"
@@ -54,7 +54,7 @@ Create the file `appsettings-ssl.ssl` with the following contents.
 ```
 
 
-The SSL configuration is under the `sslConfig` tag.
+The SSL configuration is under the `ssl` tag.
 The `certFile` property is the path to the PEM certificate file,
 and the `keyFile` the path to the key file.
 

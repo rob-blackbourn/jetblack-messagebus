@@ -6,14 +6,22 @@ using Newtonsoft.Json;
 
 using JetBlack.MessageBus.Adapters;
 
+using common;
+
 namespace subscriber
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9001);
+            var programArgs = ProgramArgs.Parse(args);
+
+            var client = programArgs.Method != ConnectionMethod.Sspi
+                ? Client.Create(
+                    programArgs.Host,
+                    programArgs.Port,
+                    isSslEnabled: programArgs.Method == ConnectionMethod.Ssl)
+                : Client.SspiCreate(programArgs.Host, programArgs.Port);
 
             client.OnDataReceived += OnDataReceived;
 
@@ -51,15 +59,18 @@ namespace subscriber
                 if (packet.Data != null)
                 {
                     var json = Encoding.UTF8.GetString(packet.Data);
-                    var message = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                    if (message == null)
+                    var dataFrame = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(json);
+                    if (dataFrame == null)
                     {
                         return;
                     }
 
-                    foreach (var item in message)
+                    foreach (var dataItem in dataFrame)
                     {
-                        Console.WriteLine($"{item.Key}: {item.Value}");
+                        foreach (var item in dataItem.Value)
+                        {
+                            Console.WriteLine($"{dataItem.Key}: {item.Key} = {item.Value}");
+                        }
                     }
                 }
             }

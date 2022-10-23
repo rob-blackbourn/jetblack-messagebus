@@ -81,6 +81,41 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 throw new SslException((tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.None);
             }
         }
+        public static Interactor CreateSspi(
+            TcpClient tcpClient,
+            DistributorRole distributorRole,
+            EventQueue<InteractorEventArgs> eventQueue,
+            ILoggerFactory loggerFactory,
+            CancellationToken token)
+        {
+            var logger = loggerFactory.CreateLogger<Interactor>();
+
+            var stream = new NegotiateStream(tcpClient.GetStream(), false);
+            stream.AuthenticateAsServer();
+
+            var address = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.Any;
+            var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
+
+            logger.LogInformation(
+                "Authenticated with {Type} as {Name}",
+                stream.RemoteIdentity.AuthenticationType,
+                stream.RemoteIdentity.Name);
+
+            var roleManager = new RoleManager(
+                distributorRole,
+                hostName,
+                stream.RemoteIdentity.Name ?? "nobody",
+                null,
+                null);
+
+            return new Interactor(
+                stream,
+                "sspi",
+                roleManager,
+                eventQueue,
+                logger,
+                token);
+        }
 
         internal Interactor(
             Stream stream,

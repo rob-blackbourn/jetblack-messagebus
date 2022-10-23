@@ -50,7 +50,7 @@ authentication or authorisation.
 
 ## SSL - Windows
 
-SSL configuration is done in the `sslConfig` section
+SSL configuration is done in the `ssl` section
 of the `distributor` configuration.
 
 ```json
@@ -65,7 +65,7 @@ of the `distributor` configuration.
             "args": []
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "storeLocation": "LocalMachine",
             "subjectName":  "windowsvm.jetblack.net"
@@ -113,7 +113,7 @@ The Linux SSL configuration uses PEM certificates and keys from files.
             "args": []
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "certFile": "%HOME%/.keys/server.crt",
             "keyFile": "%HOME%/.keys/server.key"
@@ -160,7 +160,7 @@ The following configuration provides authentication through JSON Web Tokens.
             ]
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "certFile": "%HOME%/.keys/server.crt",
             "keyFile": "%HOME%/.keys/server.key"
@@ -209,7 +209,7 @@ The following configuration file provides authentication for LDAP.
             ]
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "certFile": "%HOME%/.keys/server.crt",
             "keyFile": "%HOME%/.keys/server.key"
@@ -253,7 +253,7 @@ The following provides authentication using a password file.
             ]
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "certFile": "%HOME%/.keys/server.crt",
             "keyFile": "%HOME%/.keys/server.key"
@@ -297,7 +297,7 @@ The following is an example of authorisation.
             ]
         },
         "heartbeatInterval": "00:00:00",
-        "sslConfig": {
+        "ssl": {
             "isEnabled": true,
             "certFile": "%HOME%/.keys/server.crt",
             "keyFile": "%HOME%/.keys/server.key"

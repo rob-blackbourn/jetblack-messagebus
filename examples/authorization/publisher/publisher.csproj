@@ -10,7 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\core\src\JetBlack.MessageBus.Common\JetBlack.MessageBus.Common.csproj" />
     <ProjectReference Include="..\..\..\core\src\JetBlack.MessageBus.Adapters\JetBlack.MessageBus.Adapters.csproj" />
-    <ProjectReference Include="..\common\common.csproj" />
+    <ProjectReference Include="..\entitlements\entitlements.csproj" />
+    <ProjectReference Include="..\..\simple\common\common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

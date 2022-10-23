@@ -23,22 +23,22 @@ namespace JetBlack.MessageBus.Adapters
         /// <summary>
         /// Create a new client.
         /// </summary>
-        /// <param name="server">The server host name.</param>
+        /// <param name="host">The server host name.</param>
         /// <param name="port">The server port</param>
         /// <param name="monitorHeartbeat">If true send heartbeats.</param>
         /// <param name="isSslEnabled">If true use SSL.</param>
         /// <param name="authenticator">The client authenticator.</param>
         /// <param name="autoConnect">If true automatically connect to the message bus.</param>
-        /// <returns></returns>
+        /// <returns>A client</returns>
         public static Client Create(
-            string server,
+            string host,
             int port,
             bool monitorHeartbeat = false,
             bool isSslEnabled = false,
             IClientAuthenticator? authenticator = null,
             bool autoConnect = true)
         {
-            var ipAddress = Dns.GetHostEntry(server).AddressList
+            var ipAddress = Dns.GetHostEntry(host).AddressList
                .First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
             var endpoint = new IPEndPoint(ipAddress, port);
 
@@ -53,12 +53,48 @@ namespace JetBlack.MessageBus.Adapters
                     false,
                     new RemoteCertificateValidationCallback(ValidateServerCertificate),
                     null);
-                sslStream.AuthenticateAsClient(server);
+                sslStream.AuthenticateAsClient(host);
                 stream = sslStream;
             }
 
             if (authenticator != null)
                 authenticator.Authenticate(stream);
+
+            var client = new Client(stream);
+
+            if (autoConnect)
+                client.Start();
+
+            if (monitorHeartbeat)
+                client.AddSubscription("__admin__", "heartbeat");
+
+            return client;
+        }
+
+        /// <summary>
+        /// Create a new client using SSPI negotiatiion.
+        /// </summary>
+        /// <param name="host">The server host name.</param>
+        /// <param name="port">The server port</param>
+        /// <param name="monitorHeartbeat">If true send heartbeats.</param>
+        /// <param name="autoConnect">If true automatically connect to the message bus.</param>
+        /// <returns>A client</returns>
+        public static Client SspiCreate(
+            string host,
+            int port,
+            bool monitorHeartbeat = false,
+            bool autoConnect = true)
+        {
+            var ipAddress = Dns.GetHostEntry(host).AddressList
+               .First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+            var endpoint = new IPEndPoint(ipAddress, port);
+
+            var tcpClient = new TcpClient();
+            tcpClient.Connect(endpoint.Address, endpoint.Port);
+
+            var stream = new NegotiateStream(tcpClient.GetStream());
+
+            stream.AuthenticateAsClient();
 
             var client = new Client(stream);
 

@@ -3,14 +3,22 @@ using System.Text;
 
 using JetBlack.MessageBus.Adapters;
 
+using common;
+
 namespace subscriber
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var authenticator = new NullClientAuthenticator();
-            var client = Client.Create("localhost", 9001);
+            var programArgs = ProgramArgs.Parse(args);
+
+            var client = programArgs.Method != ConnectionMethod.Sspi
+                ? Client.Create(
+                    programArgs.Host,
+                    programArgs.Port,
+                    isSslEnabled: programArgs.Method == ConnectionMethod.Ssl)
+                : Client.SspiCreate(programArgs.Host, programArgs.Port);
 
             client.OnDataReceived += OnDataReceived;
 
