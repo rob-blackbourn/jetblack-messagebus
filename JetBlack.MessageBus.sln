@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "publisher", "examples\selec
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authorization", "authorization", "{4B8AC91C-B704-4EBC-86D5-D51B230AD2A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "examples\authorization\common\common.csproj", "{5B0B8039-4BF7-49B6-9747-704AD1ABF688}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "entitlements", "examples\authorization\entitlements\entitlements.csproj", "{5B0B8039-4BF7-49B6-9747-704AD1ABF688}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "authorizer", "examples\authorization\authorizer\authorizer.csproj", "{D86E1F3B-001F-4648-9429-25770DB72307}"
 EndProject

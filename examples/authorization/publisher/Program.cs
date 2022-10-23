@@ -8,7 +8,7 @@ using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Common.IO;
 
-using Common;
+using Entitlements;
 
 namespace AuthPublisher
 {

@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Entitlements
 {
     public class Constants
     {
