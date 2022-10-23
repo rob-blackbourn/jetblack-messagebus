@@ -39,6 +39,24 @@
       "stopAtEntry": false
     },
     {
+      "name": "Distributor SSPI",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "args": [
+        "${workspaceFolder}/examples/server-config/sspi/appsettings.json"
+      ],
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
       "name": "Distributor: Password",
       "type": "coreclr",
       "request": "launch",
@@ -87,7 +105,7 @@
       "stopAtEntry": false
     },
     {
-      "name": "simple notifier",
+      "name": "Simple notifier",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build simple notifier",
@@ -101,7 +119,39 @@
       "stopAtEntry": false
     },
     {
-      "name": "simple publisher",
+      "name": "Simple notifier (SSL)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple notifier",
+      "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/net6.0/notifier.dll",
+      "args": [
+        "--method", "SSL"
+      ],
+      "cwd": "${workspaceFolder}/examples/simple/notifier",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Simple notifier (SSPI)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple notifier",
+      "program": "${workspaceFolder}/examples/simple/notifier/bin/Debug/net6.0/notifier.dll",
+      "args": [
+        "--method", "SSPI"
+      ],
+      "cwd": "${workspaceFolder}/examples/simple/notifier",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Simple publisher",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build simple publisher",
@@ -115,7 +165,39 @@
       "stopAtEntry": false
     },
     {
-      "name": "simple subscriber",
+      "name": "Simple publisher (SSL)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple publisher",
+      "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/net6.0/publisher.dll",
+      "args": [
+        "--method", "SSL"
+      ],
+      "cwd": "${workspaceFolder}/examples/simple/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Simple publisher (SSPI)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple publisher",
+      "program": "${workspaceFolder}/examples/simple/publisher/bin/Debug/net6.0/publisher.dll",
+      "args": [
+        "--method", "SSPI"
+      ],
+      "cwd": "${workspaceFolder}/examples/simple/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Simple subscriber",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build simple subscriber",
@@ -129,13 +211,123 @@
       "stopAtEntry": false
     },
     {
-      "name": "selectfeed publisher",
+      "name": "Simple subscriber (SSL)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple subscriber",
+      "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/net6.0/subscriber.dll",
+      "args": [
+        "--method", "SSL"
+      ],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Simple subscriber (SSPI)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build simple subscriber",
+      "program": "${workspaceFolder}/examples/simple/subscriber/bin/Debug/net6.0/subscriber.dll",
+      "args": [
+        "--method", "SSPI",
+      ],
+      "cwd": "${workspaceFolder}/examples/simple/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Selectfeed publisher",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build selectfeed publisher",
       "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/net6.0/publisher.dll",
       "args": [],
       "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Selectfeed publisher (SSL)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build selectfeed publisher",
+      "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/net6.0/publisher.dll",
+      "args": [
+        "--method", "SSL"
+      ],
+      "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Selectfeed publisher (SSPI)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build selectfeed publisher",
+      "program": "${workspaceFolder}/examples/selectfeed/publisher/bin/Debug/net6.0/publisher.dll",
+      "args": [
+        "--method", "SSPI"
+      ],
+      "cwd": "${workspaceFolder}/examples/selectfeed/publisher",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Selectfeed subscriber",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build selectfeed subscriber",
+      "program": "${workspaceFolder}/examples/selectfeed/subscriber/bin/Debug/net6.0/subscriber.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/examples/selectfeed/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Selectfeed subscriber (SSL)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build selectfeed subscriber",
+      "program": "${workspaceFolder}/examples/selectfeed/subscriber/bin/Debug/net6.0/subscriber.dll",
+      "args": [
+        "--method", "SSL"
+      ],
+      "cwd": "${workspaceFolder}/examples/selectfeed/subscriber",
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "externalTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Selectfeed subscriber (SSPI)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build selectfeed subscriber",
+      "program": "${workspaceFolder}/examples/selectfeed/subscriber/bin/Debug/net6.0/subscriber.dll",
+      "args": [
+        "--method", "SSPI"
+      ],
+      "cwd": "${workspaceFolder}/examples/selectfeed/subscriber",
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },

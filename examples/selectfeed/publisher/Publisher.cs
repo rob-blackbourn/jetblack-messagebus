@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common.IO;
 
+using common;
+
 namespace SelectfeedPublisher
 {
     class Publisher : IDisposable
@@ -18,10 +20,10 @@ namespace SelectfeedPublisher
         private readonly ExchangeFeed _exchangeFeed;
         private object _gate = new object();
 
-        public Publisher(ExchangeFeed exchangeFeed)
+        public Publisher(Client client, ExchangeFeed exchangeFeed)
         {
             _exchangeFeed = exchangeFeed;
-            _client = Client.Create("localhost", 9001);
+            _client = client;
 
             _exchangeFeed.OnData += HandleExchangeData;
             _client.OnForwardedSubscription += HandleForwardedSubscription;

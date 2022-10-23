@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Net;
 using System.Text;
 
 using JetBlack.MessageBus.Adapters;
+
+using common;
 
 namespace subscriber
 {
@@ -10,8 +11,14 @@ namespace subscriber
     {
         static void Main(string[] args)
         {
-            var host = Dns.GetHostEntry("LocalHost").HostName;
-            var client = Client.Create(host, 9001, isSslEnabled: true);
+            var programArgs = ProgramArgs.Parse(args);
+
+            var client = programArgs.Method != ConnectionMethod.Sspi
+                ? Client.Create(
+                    programArgs.Host,
+                    programArgs.Port,
+                    isSslEnabled: programArgs.Method == ConnectionMethod.Ssl)
+                : Client.SspiCreate(programArgs.Host, programArgs.Port);
 
             client.OnDataReceived += OnDataReceived;
 

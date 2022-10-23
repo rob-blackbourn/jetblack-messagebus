@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Net;
 using System.Text;
 
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common.IO;
+
+using common;
 
 namespace publisher
 {
@@ -11,8 +12,14 @@ namespace publisher
     {
         static void Main(string[] args)
         {
-            var host = Dns.GetHostEntry("LocalHost").HostName;
-            var client = Client.Create(host, 9001, isSslEnabled: true);
+            var programArgs = ProgramArgs.Parse(args);
+
+            var client = programArgs.Method != ConnectionMethod.Sspi
+                ? Client.Create(
+                    programArgs.Host,
+                    programArgs.Port,
+                    isSslEnabled: programArgs.Method == ConnectionMethod.Ssl)
+                : Client.SspiCreate(programArgs.Host, programArgs.Port);
 
             Console.WriteLine("Enter the feed and topic to publish on, then the message to send.");
             Console.WriteLine("Press ENTER to quit");
