@@ -13,13 +13,19 @@ UTILS_SRC=utilities/src
 
 DIST_WIN10_X86=distributor-${DISTRIBUTOR_VERSION}-win10-x86
 DIST_WIN10_X64=distributor-${DISTRIBUTOR_VERSION}-win10-x64
+DIST_WIN10_ARM64=distributor-${DISTRIBUTOR_VERSION}-win10-arm64
 DIST_LINUX_X64=distributor-${DISTRIBUTOR_VERSION}-linux-x64
+DIST_LINUX_ARM64=distributor-${DISTRIBUTOR_VERSION}-linux-arm64
 DIST_OSX_X64=distributor-${DISTRIBUTOR_VERSION}-osx-x64
+DIST_OSX_ARM64=distributor-${DISTRIBUTOR_VERSION}-osx-arm64
 
 MKPASSWD_WIN10_X86=MakePassword-${MKPASSWD_VERSION}-win10-x86
 MKPASSWD_WIN10_X64=MakePassword-${MKPASSWD_VERSION}-win10-x64
+MKPASSWD_WIN10_ARM64=MakePassword-${MKPASSWD_VERSION}-win10-arm64
 MKPASSWD_LINUX_X64=MakePassword-${MKPASSWD_VERSION}-linux-x64
+MKPASSWD_LINUX_ARM64=MakePassword-${MKPASSWD_VERSION}-linux-arm64
 MKPASSWD_OSX_X64=MakePassword-${MKPASSWD_VERSION}-osx-x64
+MKPASSWD_OSX_ARM64=MakePassword-${MKPASSWD_VERSION}-osx-arm64
 
 .PHONY: all dist dotnet-build publish clean
 
@@ -35,65 +41,135 @@ dotnet-build:
 
 publish: publish-dist publish-mkpasswd
 
-.PHONY: publish-dist-win10-x86 publish-dist-win10-x64 publish-dist-linux-x64 publish-dist-osx-x64
+.PHONY: publish-dist-win10 publish-dist-linux publish-dist-osx
 
-publish-dist: publish-dist-win10-x86 publish-dist-win10-x64 publish-dist-linux-x64 publish-dist-osx-x64
+publish-dist: publish-dist-win10 publish-dist-linux publish-dist-osx
+
+.PHONY: publish-dist-win10-x86 publish-dist-win10-x64 publish-dist-win10-arm64
+
+publish-dist-win10: publish-dist-win10-x86 publish-dist-win10-x64 publish-dist-win10-arm64
 
 publish-dist-win10-x86:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-x86 -p:PublishSingleFile=true -o build/${DIST_WIN10_X86}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-x86 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_X86}
 	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_WIN10_X86}
 	cp scripts/distributor.bat build/${DIST_WIN10_X86}
 	cd build && zip -r ${DIST_WIN10_X86}.zip ${DIST_WIN10_X86}
 	rm -r build/${DIST_WIN10_X86}
 
 publish-dist-win10-x64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-x64 -p:PublishSingleFile=true -o build/${DIST_WIN10_X64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_X64}
 	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_WIN10_X64}
 	cp scripts/distributor.bat build/${DIST_WIN10_X64}
 	cd build && zip -r ${DIST_WIN10_X64}.zip ${DIST_WIN10_X64}
 	rm -r build/${DIST_WIN10_X64}
 
+publish-dist-win10-arm64:
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_ARM64}
+	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_WIN10_ARM64}
+	cp scripts/distributor.bat build/${DIST_WIN10_ARM64}
+	cd build && zip -r ${DIST_WIN10_ARM64}.zip ${DIST_WIN10_ARM64}
+	rm -r build/${DIST_WIN10_ARM64}
+
+.PHONY: publish-dist-linux-x64 publish-dist-linux-arm64
+
+public-dist-linux: publish-dist-linux-x64 publish-dist-linux-arm64
+
 publish-dist-linux-x64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r linux-x64 -p:PublishSingleFile=true -o build/${DIST_LINUX_X64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r linux-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_LINUX_X64}
 	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_LINUX_X64}
 	cp scripts/distributor.sh build/${DIST_LINUX_X64}
 	cd build && tar cvzf ${DIST_LINUX_X64}.tar.gz ${DIST_LINUX_X64}
 	rm -r build/${DIST_LINUX_X64}
 
+publish-dist-linux-arm64:
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r linux-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_LINUX_ARM64}
+	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_LINUX_ARM64}
+	cp scripts/distributor.sh build/${DIST_LINUX_ARM64}
+	cd build && tar cvzf ${DIST_LINUX_ARM64}.tar.gz ${DIST_LINUX_ARM64}
+	rm -r build/${DIST_LINUX_ARM64}
+
+.PHONY: publish-dist-osx-x64 publish-dist-osx-arm64
+
+publish-dist-osx: publish-dist-osx-x64 publish-dist-osx-arm64
+
 publish-dist-osx-x64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-x64 -p:PublishSingleFile=true -o build/${DIST_OSX_X64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_X64}
 	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_OSX_X64}
 	cp scripts/distributor.sh build/${DIST_OSX_X64}
 	cd build && tar cvzf ${DIST_OSX_X64}.tar.gz ${DIST_OSX_X64}
 	rm -r build/${DIST_OSX_X64}
 
-.PHONY: publish-mkpasswd-win10-x86 publish-mkpasswd-win10-x64 publish-mkpasswd-linux-x64 publish-mkpasswd-osx-x64
+publish-dist-osx-arm64:
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_ARM64}
+	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_OSX_ARM64}
+	cp scripts/distributor.sh build/${DIST_OSX_ARM64}
+	cd build && tar cvzf ${DIST_OSX_ARM64}.tar.gz ${DIST_OSX_ARM64}
+	rm -r build/${DIST_OSX_ARM64}
 
-publish-mkpasswd: publish-mkpasswd-win10-x86 publish-mkpasswd-win10-x64 publish-mkpasswd-linux-x64 publish-mkpasswd-osx-x64
+publish-dist-osx-arm64:
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_ARM64}
+	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_OSX_ARM64}
+	cp scripts/distributor.sh build/${DIST_OSX_ARM64}
+	cd build && tar cvzf ${DIST_OSX_ARM64}.tar.gz ${DIST_OSX_ARM64}
+	rm -r build/${DIST_OSX_ARM64}
+
+.PHONY: publish-mkpasswd-win10 publish-mkpasswd-linux publish-mkpasswd-osx
+
+publish-mkpasswd: publish-mkpasswd-win10 publish-mkpasswd-linux publish-mkpasswd-osx
+
+publish-mkpasswd-win10: publish-mkpasswd-win10-x86 publish-mkpasswd-win10-x64 publish-mkpasswd-win10-arm64
+
+.PHONY: publish-mkpasswd-win10-x86 publish-mkpasswd-win10-x64 publish-mkpasswd-win10-arm64
 
 publish-mkpasswd-win10-x86:
-	dotnet publish ${UTILS_SRC}/MakePassword -r win10-x86 -p:PublishSingleFile=true -o build/${MKPASSWD_WIN10_X86}
+	dotnet publish ${UTILS_SRC}/MakePassword -r win10-x86 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_WIN10_X86}
 	cp scripts/mkpasswd.bat build/${MKPASSWD_WIN10_X86}
 	cd build && zip -r ${MKPASSWD_WIN10_X86}.zip ${MKPASSWD_WIN10_X86}
 	rm -r build/${MKPASSWD_WIN10_X86}
 
 publish-mkpasswd-win10-x64:
-	dotnet publish ${UTILS_SRC}/MakePassword -r win10-x64 -p:PublishSingleFile=true -o build/${MKPASSWD_WIN10_X64}
+	dotnet publish ${UTILS_SRC}/MakePassword -r win10-x64 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_WIN10_X64}
 	cp scripts/mkpasswd.bat build/${MKPASSWD_WIN10_X64}
 	cd build && zip -r ${MKPASSWD_WIN10_X64}.zip ${MKPASSWD_WIN10_X64}
 	rm -r build/${MKPASSWD_WIN10_X64}
 
+publish-mkpasswd-win10-arm64:
+	dotnet publish ${UTILS_SRC}/MakePassword -r win10-arm64 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_WIN10_ARM64}
+	cp scripts/mkpasswd.bat build/${MKPASSWD_WIN10_ARM64}
+	cd build && zip -r ${MKPASSWD_WIN10_ARM64}.zip ${MKPASSWD_WIN10_ARM64}
+	rm -r build/${MKPASSWD_WIN10_ARM64}
+
+publish-mkpasswd-linux: publish-mkpasswd-linux-x64 publish-mkpasswd-linux-arm64
+
+.PHONY: publish-mkpasswd-linux-x64 publish-mkpasswd-linux-arm64
+
 publish-mkpasswd-linux-x64:
-	dotnet publish ${UTILS_SRC}/MakePassword -r linux-x64 -p:PublishSingleFile=true -o build/${MKPASSWD_LINUX_X64}
+	dotnet publish ${UTILS_SRC}/MakePassword -r linux-x64 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_LINUX_X64}
 	cp scripts/mkpasswd.sh build/${MKPASSWD_LINUX_X64}
 	cd build && tar cvzf ${MKPASSWD_LINUX_X64}.tar.gz ${MKPASSWD_LINUX_X64}
 	rm -r build/${MKPASSWD_LINUX_X64}
 
+publish-mkpasswd-linux-arm64:
+	dotnet publish ${UTILS_SRC}/MakePassword -r linux-arm64 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_LINUX_ARM64}
+	cp scripts/mkpasswd.sh build/${MKPASSWD_LINUX_ARM64}
+	cd build && tar cvzf ${MKPASSWD_LINUX_ARM64}.tar.gz ${MKPASSWD_LINUX_ARM64}
+	rm -r build/${MKPASSWD_LINUX_ARM64}
+
+publish-mkpasswd-osx: publish-mkpasswd-osx-x64 publish-mkpasswd-osx-arm64
+
+.PHONY: publish-mkpasswd-osx-x64 publish-mkpasswd-osx-arm64
+
 publish-mkpasswd-osx-x64:
-	dotnet publish ${UTILS_SRC}/MakePassword -r osx-x64 -p:PublishSingleFile=true -o build/${MKPASSWD_OSX_X64}
+	dotnet publish ${UTILS_SRC}/MakePassword -r osx-x64 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_OSX_X64}
 	cp scripts/mkpasswd.sh build/${MKPASSWD_OSX_X64}
 	cd build && tar cvzf ${MKPASSWD_OSX_X64}.tar.gz ${MKPASSWD_OSX_X64}
 	rm -r build/${MKPASSWD_OSX_X64}
+
+publish-mkpasswd-osx-arm64:
+	dotnet publish ${UTILS_SRC}/MakePassword -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${MKPASSWD_OSX_ARM64}
+	cp scripts/mkpasswd.sh build/${MKPASSWD_OSX_ARM64}
+	cd build && tar cvzf ${MKPASSWD_OSX_ARM64}.tar.gz ${MKPASSWD_OSX_ARM64}
+	rm -r build/${MKPASSWD_OSX_ARM64}
 
 .PHONY: copy-extensions copy-extension-jwtauthentication copy-extension-ldapauthentication copy-extension-pwdauthentication
 
