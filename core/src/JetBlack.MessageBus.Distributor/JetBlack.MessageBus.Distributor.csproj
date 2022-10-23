@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <PackageId>JetBlack.MessageBus.Distributor</PackageId>
-    <Version>6.0.0-alpha1</Version>
+    <Version>6.0.0-alpha.1</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
@@ -31,7 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\JetBlack.MessageBus.Common\JetBlack.MessageBus.Common.csproj" />
     <ProjectReference Include="..\JetBlack.MessageBus.Messages\JetBlack.MessageBus.Messages.csproj" />
-    <ProjectReference Include="..\..\..\extensions\authentication\src\JetBlack.MessageBus.Extension.PasswordFileAuthentication\JetBlack.MessageBus.Extension.PasswordFileAuthentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>
