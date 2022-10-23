@@ -21,6 +21,24 @@
       "stopAtEntry": false
     },
     {
+      "name": "Distributor SSL (Windows)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      // If you have changed target frameworks, make sure to update the program path.
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "args": [
+        "${workspaceFolder}/examples/server-config/ssl/appsettings-windows.json"
+      ],
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+      "env": {
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
       "name": "Distributor: Password",
       "type": "coreclr",
       "request": "launch",
