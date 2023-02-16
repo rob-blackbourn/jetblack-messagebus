@@ -51,7 +51,7 @@ namespace JetBlack.MessageBus.Distributor
         private void Accept()
         {
             _logger.LogInformation(
-                "Listening on {EndPoint} with SSPI authentication",
+                "Listening to {EndPoint} using SSPI authentication.",
                 _endPoint);
 
             var listener = new TcpListener(_endPoint);
@@ -66,7 +66,7 @@ namespace JetBlack.MessageBus.Distributor
                 }
                 catch (Exception error)
                 {
-                    _logger.LogWarning(error, "Failed to accept connection");
+                    _logger.LogWarning(error, "Failed to accept a connection.");
                     throw;
                 }
             }
@@ -88,11 +88,11 @@ namespace JetBlack.MessageBus.Distributor
             }
             catch (AuthenticationException error)
             {
-                _logger.LogWarning("Authentication failed for connection from {Message}", error.Message);
+                _logger.LogWarning(error, "Authentication failed.");
             }
             catch (Exception error)
             {
-                _logger.LogWarning(error, "Failed to create interactor");
+                _logger.LogWarning(error, "Failed to create interactor.");
             }
         }
     }

@@ -83,7 +83,9 @@ namespace JetBlack.MessageBus.Distributor
 
         public void Start(TimeSpan heartbeatInterval)
         {
-            _logger.LogInformation("Starting server version {Version}", Assembly.GetExecutingAssembly().GetName().Version);
+            _logger.LogInformation(
+                "Starting the server (version \"{Version}\").",
+                Assembly.GetExecutingAssembly().GetName().Version);
 
             _eventQueue.Start();
             _acceptor.Start();
@@ -92,7 +94,7 @@ namespace JetBlack.MessageBus.Distributor
             if (heartbeatInterval != TimeSpan.Zero)
                 _heartbeatTimer.Change(heartbeatInterval, heartbeatInterval);
 
-            _logger.LogInformation("Server started");
+            _logger.LogInformation("The server is ready.");
         }
 
         private void OnInteractorEvent(object? sender, InteractorEventArgs args)
@@ -106,7 +108,7 @@ namespace JetBlack.MessageBus.Distributor
             else if (args is InteractorMessageEventArgs)
                 OnMessage((InteractorMessageEventArgs)args);
             else
-                _logger.LogError("Unhandled interactor event");
+                _logger.LogError("An unknown interactor event has been received.");
         }
 
         private static bool IsCloseException(Exception error)
@@ -141,7 +143,10 @@ namespace JetBlack.MessageBus.Distributor
 
         private void OnMessage(InteractorMessageEventArgs args)
         {
-            _logger.LogDebug("OnMessage(sender={Sender}, message={Message}", args.Interactor, args.Message);
+            _logger.LogTrace(
+                "Message received from {Sender} with {Message}.",
+                args.Interactor,
+                args.Message);
 
             switch (args.Message.MessageType)
             {
@@ -166,27 +171,30 @@ namespace JetBlack.MessageBus.Distributor
                     break;
 
                 default:
-                    _logger.LogWarning("Received unknown message type {MessageType} from interactor {Interactor}.", args.Message.MessageType, args.Interactor);
+                    _logger.LogError(
+                        "Received unknown message type {MessageType} from interactor {Interactor}.",
+                        args.Message.MessageType,
+                        args.Interactor);
                     break;
             }
         }
 
         private void HeartbeatCallback(object? state)
         {
-            _logger.LogDebug("Sending heartbeat");
+            _logger.LogTrace("Sending a heartbeat.");
             _eventQueue.Enqueue(new InteractorMessageEventArgs(_heartbeatInteractor, new MulticastData("__admin__", "heartbeat", true, null)));
         }
 
         public void Dispose()
         {
-            _logger.LogInformation("Stopping server");
+            _logger.LogInformation("Stopping the server.");
 
             _heartbeatTimer.Dispose();
             _heartbeatInteractor.Dispose();
 
             _tokenSource.Cancel();
 
-            _logger.LogInformation("Server stopped");
+            _logger.LogInformation("The server has stopped.");
         }
     }
 }
