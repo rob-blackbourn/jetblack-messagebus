@@ -32,7 +32,10 @@ namespace JetBlack.MessageBus.Distributor.Publishers
         {
             if (!publisher.HasRole(unicastData.Feed, Role.Publish))
             {
-                _logger.LogWarning("Rejected request from {Publisher} to publish on feed {Feed}", publisher, unicastData.Feed);
+                _logger.LogWarning(
+                    "Rejected request from {Publisher} to publish on feed \"{Feed}\".",
+                    publisher,
+                    unicastData.Feed);
                 return;
             }
 
@@ -47,7 +50,11 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 unicastData.IsImage,
                 GetAuthorizedData(unicastData.DataPackets, authorization));
 
-            _logger.LogDebug("Sending unicast data from {Publisher} to {Subscriber}: {Message}", publisher, subscriber, clientUnicastData);
+            _logger.LogTrace(
+                "Sending unicast data from {Publisher} to {Subscriber} with {Message}.",
+                publisher,
+                subscriber,
+                clientUnicastData);
 
             _repository.AddPublisher(publisher, unicastData.Feed, unicastData.Topic);
 
@@ -57,7 +64,11 @@ namespace JetBlack.MessageBus.Distributor.Publishers
             }
             catch (Exception error)
             {
-                _logger.LogDebug(error, "Failed to send to subscriber {Subscriber} unicast data {Message}", subscriber, clientUnicastData);
+                _logger.LogDebug(
+                    error,
+                    "Failed to send to subscriber {Subscriber} unicast data {Message}.",
+                    subscriber,
+                    clientUnicastData);
             }
         }
 
@@ -65,7 +76,10 @@ namespace JetBlack.MessageBus.Distributor.Publishers
         {
             if (!(publisher == null || publisher.HasRole(multicastData.Feed, Role.Publish)))
             {
-                _logger.LogWarning("Rejected request from {Publisher} to publish to Feed {Feed}", publisher, multicastData.Feed);
+                _logger.LogWarning(
+                    "Rejected request from {Publisher} to publish to Feed \"{Feed}\".",
+                    publisher,
+                    multicastData.Feed);
                 return;
             }
 
@@ -85,7 +99,11 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                     multicastData.IsImage,
                     GetAuthorizedData(multicastData.DataPackets, authorization));
 
-                _logger.LogDebug("Sending multicast data from {Publisher} to {Subscriber}: {Message}", publisher, subscriber, subscriberMulticastData);
+                _logger.LogTrace(
+                    "Sending multicast data from {Publisher} to {Subscriber} with {Message}.",
+                    publisher,
+                    subscriber,
+                    subscriberMulticastData);
 
                 if (publisher != null)
                     _repository.AddPublisher(publisher, subscriberMulticastData.Feed, subscriberMulticastData.Topic);
@@ -96,7 +114,11 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 }
                 catch (Exception error)
                 {
-                    _logger.LogDebug(error, "Failed to send to subscriber {Subscriber} multicast data {Message}", subscriber, subscriberMulticastData);
+                    _logger.LogDebug(
+                        error,
+                        "Failed to send to subscriber {Subscriber} multicast data {Message}.",
+                        subscriber,
+                        subscriberMulticastData);
                 }
             }
         }
@@ -115,7 +137,11 @@ namespace JetBlack.MessageBus.Distributor.Publishers
 
         private void OnFaultedInteractor(object? sender, InteractorFaultedEventArgs args)
         {
-            _logger.LogDebug("Interactor faulted: {Interactor} - {Message}", args.Interactor, args.Error.Message);
+            _logger.LogDebug(
+                args.Error,
+                "Interactor {Interactor} faulted.",
+                args.Interactor);
+
             CloseInteractor(args.Interactor);
         }
 

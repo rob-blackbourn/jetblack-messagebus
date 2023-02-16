@@ -56,7 +56,7 @@ namespace JetBlack.MessageBus.Distributor
         private void Accept()
         {
             _logger.LogInformation(
-                "Listening on {EndPoint} with SSL {SslState} with {Authenticator} authentication",
+                "Listening to {EndPoint} with SSL {SslState} using {Authenticator} authentication.",
                 _endPoint,
                 _certificate == null ? "disabled" : "enabled",
                 _authenticator.Method);
@@ -73,7 +73,7 @@ namespace JetBlack.MessageBus.Distributor
                 }
                 catch (Exception error)
                 {
-                    _logger.LogWarning(error, "Failed to accept connection");
+                    _logger.LogWarning(error, "Failed to accept the connection.");
                     throw;
                 }
             }
@@ -97,11 +97,11 @@ namespace JetBlack.MessageBus.Distributor
             }
             catch (SslException error)
             {
-                _logger.LogWarning("SSL handshake failed for connection from {Address}", error.Address);
+                _logger.LogWarning(error, "SSL handshake failed.", error.Address);
             }
             catch (Exception error)
             {
-                _logger.LogWarning(error, "Failed to create interactor");
+                _logger.LogWarning(error, "Failed to create interactor.");
             }
         }
     }

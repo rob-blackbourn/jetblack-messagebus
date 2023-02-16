@@ -24,19 +24,29 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
 
         private void OnFaultedInteractor(object? sender, InteractorFaultedEventArgs args)
         {
-            _logger.LogDebug("Interactor faulted: {Interactor} - {Message}", args.Interactor, args.Error.Message);
+            _logger.LogDebug(
+                args.Error,
+                "Interactor {Interactor} faulted.",
+                args.Interactor);
+
             _repository.RemoveInteractor(args.Interactor);
         }
 
         private void OnClosedInteractor(object? sender, InteractorClosedEventArgs args)
         {
-            _logger.LogDebug("Removing notification requests from {Interactor}", args.Interactor);
+            _logger.LogDebug(
+                "Removing notification requests from {Interactor}.",
+                args.Interactor);
+
             _repository.RemoveInteractor(args.Interactor);
         }
 
         public void RequestNotification(Interactor notifiable, NotificationRequest notificationRequest)
         {
-            _logger.LogInformation("Handling notification request for {Notifiable} on {Message}", notifiable, notificationRequest);
+            _logger.LogInformation(
+                "Handling notification request for {Notifiable} with {Message}.",
+                notifiable,
+                notificationRequest);
 
             if (notificationRequest.IsAdd)
             {
@@ -64,7 +74,10 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
                 subscriptionRequest.Topic,
                 subscriptionRequest.IsAdd);
 
-            _logger.LogDebug("Notifying interactors[{Interactors}] of subscription {Message}", string.Join(",", notifiables), forwardedSubscriptionRequest);
+            _logger.LogDebug(
+                "Notifying interactors [{Interactors}] of subscription {Message}.",
+                string.Join(",", notifiables),
+                forwardedSubscriptionRequest);
 
             // Inform each notifiable interactor of the subscription request.
             foreach (var notifiable in notifiables)
@@ -75,7 +88,11 @@ namespace JetBlack.MessageBus.Distributor.Notifiers
                 }
                 catch (Exception error)
                 {
-                    _logger.LogDebug(error, "Failed to notify {Notifiable} regarding {Message}", notifiable, forwardedSubscriptionRequest);
+                    _logger.LogDebug(
+                        error,
+                        "Failed to notify {Notifiable} regarding {Message}.",
+                        notifiable,
+                        forwardedSubscriptionRequest);
                 }
             }
         }

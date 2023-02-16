@@ -45,11 +45,17 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
         {
             if (!subscriber.HasRole(request.Feed, Role.Subscribe))
             {
-                _logger.LogWarning("Rejected request from {Subscriber} to subscribe to feed \"{Feed}\"", subscriber, request.Feed);
+                _logger.LogWarning(
+                    "Rejected request from {Subscriber} to subscribe to feed \"{Feed}\".",
+                    subscriber,
+                    request.Feed);
                 return;
             }
 
-            _logger.LogInformation("Received subscription from {Subscriber} on \"{Request}\"", subscriber, request);
+            _logger.LogInformation(
+                "Received subscription from {Subscriber} on {Request}.",
+                subscriber,
+                request);
 
             if (request.IsAdd)
             {
@@ -80,7 +86,10 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         private void OnFaultedInteractor(object? sender, InteractorFaultedEventArgs args)
         {
-            _logger.LogDebug("Interactor faulted: {Interactor} - {Message}", args.Interactor, args.Error.Message);
+            _logger.LogDebug(
+                args.Error,
+                "Interactor {Interactor} faulted.",
+                args.Interactor);
 
             CloseInteractor(args.Interactor);
         }
@@ -92,7 +101,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
 
         private void CloseInteractor(Interactor interactor)
         {
-            _logger.LogDebug("Removing subscriptions for {Interactor}", interactor);
+            _logger.LogDebug("Removing subscriptions for {Interactor}.", interactor);
 
             // Remove the subscriptions
             var feedTopics = _repository.FindByInteractor(interactor).ToList();
@@ -116,7 +125,11 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 }
                 catch (Exception error)
                 {
-                    _logger.LogDebug(error, "Failed to send to {Requester} multi cast message {Message}", args.Requester, message);
+                    _logger.LogDebug(
+                        error,
+                        "Failed to send to {Requester} multicast message {Message}.",
+                        args.Requester,
+                        message);
                 }
 
                 return;
@@ -192,7 +205,10 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                     }
                     catch (Exception error)
                     {
-                        _logger.LogDebug(error, "Failed to inform {subscriber} regarding {Message}", message);
+                        _logger.LogDebug(
+                            error,
+                            "Failed to inform {subscriber} regarding {Message}.",
+                            message);
                     }
                 }
             }
@@ -217,7 +233,11 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 }
                 catch (Exception error)
                 {
-                    _logger.LogDebug(error, "Failed to inform {Subscriber} of stale {StaleFeedTopic}", subscriber, staleFeedTopic);
+                    _logger.LogDebug(
+                        error,
+                        "Failed to inform {Subscriber} of stale {StaleFeedTopic}.",
+                        subscriber,
+                        staleFeedTopic);
                 }
             }
         }

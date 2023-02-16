@@ -217,7 +217,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 }
             }
 
-            _logger.LogDebug("Exited read loop for {Interactor}", this);
+            _logger.LogDebug("Exited the read loop for {Interactor}.", this);
 
             if (!_tokenSource.IsCancellationRequested)
                 _tokenSource.Cancel();
@@ -246,7 +246,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 }
             }
 
-            _logger.LogDebug("Exited write loop for {Interactor}", this);
+            _logger.LogDebug("Exited the write loop for {Interactor}.", this);
 
             Metrics.WriteQueueLength.Set(0);
 

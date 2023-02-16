@@ -40,6 +40,8 @@ namespace JetBlack.MessageBus.Distributor
 
         private void ProcessQueue()
         {
+            _logger.LogDebug("Starting the event loop.");
+
             while (!_token.IsCancellationRequested)
             {
                 try
@@ -51,17 +53,17 @@ namespace JetBlack.MessageBus.Distributor
                 }
                 catch (OperationCanceledException)
                 {
-                    _logger.LogInformation("The event queue has finished");
+                    _logger.LogDebug("The event loop has finished.");
                     break;
                 }
                 catch (Exception error)
                 {
-                    _logger.LogError(error, "The event queue has faulted");
+                    _logger.LogError(error, "The event loop has faulted.");
                     break;
                 }
             }
 
-            _logger.LogInformation("Exited the event loop");
+            _logger.LogDebug("Stopped the event loop.");
 
             _eventsQueueLength.Set(0);
         }
