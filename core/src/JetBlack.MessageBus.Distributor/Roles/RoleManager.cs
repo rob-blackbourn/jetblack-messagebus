@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
+
 namespace JetBlack.MessageBus.Distributor.Roles
 {
     public class RoleManager

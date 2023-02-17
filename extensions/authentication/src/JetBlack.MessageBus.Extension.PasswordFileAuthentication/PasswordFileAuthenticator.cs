@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Security;
 
 using JetBlack.MessageBus.Common.IO;
@@ -9,50 +10,84 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
 {
     public class PasswordFileAuthenticator : IAuthenticator
     {
-        private readonly FileSystemWatcher _watcher;
-        private PasswordManager _manager;
+        private readonly FileSystemWatcher _passwordWatcher;
+        private JsonPasswordManager _passwordManager;
+
+        private readonly FileSystemWatcher _roleWatcher;
+        private JsonRoleManager _roleManager;
 
         public PasswordFileAuthenticator(string[] args)
         {
-            if (args == null || args.Length != 1)
-                throw new ArgumentException("Expected 1 argument");
+            if (args == null || args.Length != 2)
+                throw new ArgumentException("Usage: <password-file> <role-file>");
 
-            FileName = Environment.ExpandEnvironmentVariables(args[0]);
+            PasswordFileName = Environment.ExpandEnvironmentVariables(args[0]);
 
-            var directory = Path.GetDirectoryName(FileName);
-            if (directory == string.Empty)
-                directory = ".";
-            var fileName = Path.GetFileName(FileName);
+            var passwordFolder = Path.GetDirectoryName(PasswordFileName);
+            if (passwordFolder == string.Empty)
+                passwordFolder = ".";
+            var passwordFileName = Path.GetFileName(PasswordFileName);
 
-            _watcher = new FileSystemWatcher(directory, fileName);
-            _watcher.Changed += OnChanged;
+            _passwordWatcher = new FileSystemWatcher(passwordFolder, passwordFileName);
+            _passwordWatcher.Changed += OnChanged;
 
-            _manager = PasswordManager.Load(FileName);
+            _passwordManager = JsonPasswordManager.Load(PasswordFileName);
 
-            _watcher.EnableRaisingEvents = true;
+            _passwordWatcher.EnableRaisingEvents = true;
+
+            RoleFileName = Environment.ExpandEnvironmentVariables(args[1]);
+            var roleFolder = Path.GetDirectoryName(RoleFileName);
+            if (roleFolder == string.Empty)
+                roleFolder = ".";
+            var roleFileName = Path.GetFileName(PasswordFileName);
+
+            _roleWatcher = new FileSystemWatcher(roleFolder, roleFileName);
+            _roleWatcher.Changed += OnChanged;
+
+            _roleManager = JsonRoleManager.Load(RoleFileName);
+
+            _roleWatcher.EnableRaisingEvents = true;
         }
 
         private void OnChanged(object? sender, FileSystemEventArgs e)
         {
-            Manager = PasswordManager.Load(FileName);
+            PasswordManager = JsonPasswordManager.Load(PasswordFileName);
         }
 
         public string Method => "BASIC";
-        public string FileName { get; }
-        public PasswordManager Manager
+        public string PasswordFileName { get; }
+        public JsonPasswordManager PasswordManager
         {
             get
             {
-                lock (_watcher)
+                lock (_passwordWatcher)
                 {
-                    return _manager;
+                    return _passwordManager;
                 }
             }
             set
             {
-                lock (_watcher)
+                lock (_passwordWatcher)
                 {
-                    _manager = value;
+                    _passwordManager = value;
+                }
+            }
+        }
+        public string RoleFileName { get; }
+        public JsonRoleManager RoleManager
+        {
+            get
+            {
+                lock (_roleWatcher)
+                {
+                    return _roleManager;
+                }
+            }
+            set
+            {
+                lock (_roleWatcher)
+                {
+                    _roleManager = value;
                 }
             }
         }
@@ -63,15 +98,20 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
             var connectionString = reader.ReadString();
             var connectionDetails = PasswordFileConnectionDetails.Parse(connectionString);
 
-            if (!Manager.IsValid(connectionDetails.Username, connectionDetails.Password))
+            if (!PasswordManager.IsValid(connectionDetails.Username, connectionDetails.Password))
                 throw new SecurityException();
+
+            var roles = RoleManager.UserFeedRoles.TryGetValue(connectionDetails.Username, out var feedRoles)
+                ? feedRoles
+                : null;
 
             return new AuthenticationResponse(
                 connectionDetails.Username,
                 Method,
                 connectionDetails.Impersonating,
                 connectionDetails.ForwardedFor,
-                connectionDetails.Application);
+                connectionDetails.Application,
+                feedRoles);
         }
     }
 }

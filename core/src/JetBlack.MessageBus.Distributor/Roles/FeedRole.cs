@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
+
 namespace JetBlack.MessageBus.Distributor.Roles
 {
     public class FeedRole

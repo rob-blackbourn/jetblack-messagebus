@@ -4,8 +4,8 @@ using System.Linq;
 
 using Microsoft.Extensions.Logging;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Interactors;
-using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
 using JetBlack.MessageBus.Common.IO;
 

@@ -1,5 +1,7 @@
 using System;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
+
 namespace JetBlack.MessageBus.Distributor.Roles
 {
     public class InteractorRole

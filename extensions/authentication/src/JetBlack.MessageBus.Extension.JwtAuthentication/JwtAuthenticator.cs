@@ -49,7 +49,8 @@ namespace JetBlack.MessageBus.Extension.JwtAuthentication
                     Method,
                     connectionDetails.Impersonating,
                     connectionDetails.ForwardedFor,
-                    connectionDetails.Application);
+                    connectionDetails.Application,
+                    null);
             }
             catch
             {

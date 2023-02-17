@@ -115,7 +115,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -131,7 +131,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -147,7 +147,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -161,7 +161,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -177,7 +177,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -193,7 +193,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -207,7 +207,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -223,7 +223,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -239,7 +239,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -253,7 +253,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -269,7 +269,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -285,7 +285,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -299,7 +299,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -315,7 +315,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -331,7 +331,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -345,7 +345,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -359,7 +359,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -373,7 +373,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -385,9 +385,10 @@
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
-        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}",
+        "FQDN": "brick.jetblack.net"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {
@@ -404,7 +405,7 @@
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     },
     {

@@ -18,7 +18,7 @@ namespace MakePassword
             var filename = args[0];
             var username = args[1];
 
-            var passwordManager = PasswordManager.Load(filename);
+            var passwordManager = JsonPasswordManager.Load(filename);
             Console.Write("Enter password: ");
             var password = ConsoleHelper.ReadPassword();
             passwordManager.Set(username, password);

@@ -10,7 +10,7 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
         [TestMethod]
         public void ValidityTest()
         {
-            var manager = new PasswordManager();
+            var manager = new JsonPasswordManager();
             manager.Set("john", "trustno1");
             Assert.IsTrue(manager.IsValid("john", "trustno1"));
             Assert.IsFalse(manager.IsValid("john", "trustsome1"));
@@ -24,12 +24,12 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
 
             try
             {
-                var source = new PasswordManager();
+                var source = new JsonPasswordManager();
                 source.Set("john", "trustno1");
                 source.Set("jane", "trustsome1");
                 source.Save(fileName);
 
-                var dest = PasswordManager.Load(fileName);
+                var dest = JsonPasswordManager.Load(fileName);
                 Assert.IsTrue(dest.IsValid("john", "trustno1"));
                 Assert.IsTrue(dest.IsValid("jane", "trustsome1"));
                 Assert.IsFalse(dest.IsValid("john", "bad password"));

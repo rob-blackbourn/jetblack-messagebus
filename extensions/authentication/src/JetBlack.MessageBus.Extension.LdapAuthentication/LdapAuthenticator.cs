@@ -48,7 +48,8 @@ namespace JetBlack.MessageBus.Extension.LdapAuthentication
                         Method,
                         connectionDetails.Impersonating,
                         connectionDetails.ForwardedFor,
-                        connectionDetails.Application);
+                        connectionDetails.Application,
+                        null);
                 }
                 catch
                 {
