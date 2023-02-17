@@ -13,7 +13,7 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
         [TestMethod]
         public void ValidTest()
         {
-            var authenticator = new PasswordFileAuthenticator(new[] { "somefile.json" });
+            var authenticator = new PasswordFileAuthenticator(new[] { "passwords.json", "permissions.json" });
             authenticator.PasswordManager.Set("john", "trustno1");
             authenticator.PasswordManager.Set("mary", "password");
 
@@ -32,7 +32,7 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication.Test
         [TestMethod]
         public void InvalidTest()
         {
-            var authenticator = new PasswordFileAuthenticator(new[] { "somefile.json" });
+            var authenticator = new PasswordFileAuthenticator(new[] { "passwords.json", "permissions.json" });
             authenticator.PasswordManager.Set("john", "trustno1");
             authenticator.PasswordManager.Set("mary", "password");
 
