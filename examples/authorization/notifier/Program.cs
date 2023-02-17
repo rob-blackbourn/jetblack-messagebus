@@ -28,7 +28,7 @@ namespace AuthNotifier
 
             var server = Environment.ExpandEnvironmentVariables("%FQDN%");
             var authenticator = new BasicClientAuthenticator(username, password);
-            var client = Client.Create(server, 9001, authenticator: authenticator, isSslEnabled: true);
+            var client = Client.Create(server, 9001, authenticator: authenticator, isSslEnabled: false);
 
             client.OnForwardedSubscription += OnForwardedSubscription;
 

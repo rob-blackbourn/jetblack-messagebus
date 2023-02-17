@@ -343,7 +343,8 @@
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
-        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}",
+        "FQDN": "beast.jetblack.net"
       },
       "console": "externalTerminal",
       "stopAtEntry": false
@@ -357,7 +358,8 @@
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
-        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}",
+        "FQDN": "beast.jetblack.net"
       },
       "console": "externalTerminal",
       "stopAtEntry": false
@@ -371,7 +373,8 @@
       "args": [],
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
-        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
+        "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}",
+        "FQDN": "beast.jetblack.net"
       },
       "console": "externalTerminal",
       "stopAtEntry": false
@@ -386,7 +389,7 @@
       "cwd": "${workspaceFolder}/examples/simple/subscriber",
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}",
-        "FQDN": "brick.jetblack.net"
+        "FQDN": "beast.jetblack.net"
       },
       "console": "externalTerminal",
       "stopAtEntry": false
