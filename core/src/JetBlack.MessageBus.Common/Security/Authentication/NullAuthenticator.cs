@@ -28,7 +28,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
         /// <returns>An authentication response for the user "nobody".</returns>
         public AuthenticationResponse Authenticate(Stream stream)
         {
-            return new AuthenticationResponse("nobody", Method, null, null, null);
+            return new AuthenticationResponse("nobody", Method, null, null, null, null);
         }
     }
 }

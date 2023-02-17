@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-using JetBlack.MessageBus.Common;
+using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Roles;
 
 namespace JetBlack.MessageBus.Distributor.Configuration
@@ -20,7 +20,8 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public List<Role>? Allow { get; set; }
         public List<Role>? Deny { get; set; }
         public bool IsAuthorizationRequired { get; set; }
-        public Dictionary<string, FeedRoleConfig>? FeedRoles { get; set; }
+        public bool IsImpersonationAllowed { get; set; }
+        public bool IsProxyAllowed { get; set; }
         public bool UseJsonLogger { get; set; } = false;
 
         public DistributorRole ToDistributorRole()
@@ -29,7 +30,8 @@ namespace JetBlack.MessageBus.Distributor.Configuration
                 Allow?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
                 Deny?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
                 IsAuthorizationRequired,
-                FeedRoles?.ToDictionary(x => x.Key, x => x.Value.ToFeedRole(x.Key)));
+                IsImpersonationAllowed,
+                IsProxyAllowed);
         }
 
         public IPEndPoint ToIPEndPoint()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Roles;
 
 namespace JetBlack.MessageBus.Distributor.Interactors
@@ -58,17 +59,14 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         private void AddFeedRoles(Interactor interactor)
         {
-            foreach (var feed in DistributorRole.FeedRoles.Keys)
+            foreach (var feed in interactor.Feeds)
             {
                 if (!_feedRoleInteractors.TryGetValue(feed, out var roleInteractor))
                     _feedRoleInteractors.Add(feed, roleInteractor = new Dictionary<Role, HashSet<Interactor>>());
 
-                var host = interactor.HostForFeed(feed);
-                var user = interactor.UserForFeed(feed);
-
                 foreach (var role in new[] { Role.Publish, Role.Subscribe, Role.Notify, Role.Authorize })
                 {
-                    if (DistributorRole.HasRole(host, user, feed, role))
+                    if (interactor.HasRole(feed, role))
                     {
                         if (!roleInteractor.TryGetValue(role, out var interactors))
                             roleInteractor.Add(role, interactors = new HashSet<Interactor>());

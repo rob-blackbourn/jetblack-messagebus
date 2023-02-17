@@ -5,14 +5,14 @@ using Newtonsoft.Json;
 
 namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
 {
-    public class PasswordManager
+    public class JsonPasswordManager
     {
-        public PasswordManager()
+        public JsonPasswordManager()
             : this(new Dictionary<string, Password>())
         {
         }
 
-        public PasswordManager(Dictionary<string, Password> passwords)
+        public JsonPasswordManager(Dictionary<string, Password> passwords)
         {
             Passwords = passwords;
         }
@@ -34,10 +34,10 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
             return Passwords.TryGetValue(username, out var item) && item.IsValid(password);
         }
 
-        public static PasswordManager Load(string fileName)
+        public static JsonPasswordManager Load(string fileName)
         {
             if (!File.Exists(fileName))
-                return new PasswordManager();
+                return new JsonPasswordManager();
 
             using (var reader = File.OpenText(fileName))
             {
@@ -45,16 +45,16 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
             }
         }
 
-        public static PasswordManager Load(StreamReader reader)
+        public static JsonPasswordManager Load(StreamReader reader)
         {
             using (var jsonReader = new JsonTextReader(reader))
             {
                 var serializer = new JsonSerializer();
                 var passwords = serializer.Deserialize<Dictionary<string, Password>>(jsonReader);
                 if (passwords == null)
-                    return new PasswordManager();
+                    return new JsonPasswordManager();
                 else
-                    return new PasswordManager(passwords);
+                    return new JsonPasswordManager(passwords);
             }
         }
 

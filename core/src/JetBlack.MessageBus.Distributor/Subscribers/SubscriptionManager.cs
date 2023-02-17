@@ -4,10 +4,10 @@ using System.Linq;
 
 using Microsoft.Extensions.Logging;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Distributor.Interactors;
 using JetBlack.MessageBus.Distributor.Notifiers;
 using JetBlack.MessageBus.Distributor.Publishers;
-using JetBlack.MessageBus.Distributor.Roles;
 using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Distributor.Subscribers
@@ -194,8 +194,8 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 foreach (var subscriber in matchingSubscriptions.Value)
                 {
                     var message = new ForwardedSubscriptionRequest(
-                        subscriber.UserForFeed(args.Feed),
-                        subscriber.HostForFeed(args.Feed),
+                        subscriber.User,
+                        subscriber.Host,
                         subscriber.Id,
                         args.Feed,
                         matchingSubscriptions.Key, true);

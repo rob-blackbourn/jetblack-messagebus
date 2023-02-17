@@ -1,56 +1,36 @@
 using System.Collections.Generic;
 
+using JetBlack.MessageBus.Common.Security.Authentication;
+
 namespace JetBlack.MessageBus.Distributor.Roles
 {
     public class DistributorRole
     {
-        public DistributorRole(Role allow, Role deny, bool isAuthorizationRequired, IReadOnlyDictionary<string, FeedRole>? feedRoles)
+        public DistributorRole(Role allow, Role deny, bool isAuthorizationRequired, bool isImpersonationAllowed, bool isProxyAllowed)
         {
             Allow = allow;
             Deny = deny;
             IsAuthorizationRequired = isAuthorizationRequired;
-            FeedRoles = feedRoles ?? new Dictionary<string, FeedRole>();
+            IsImpersonationAllowed = isImpersonationAllowed;
+            IsProxyAllowed = isProxyAllowed;
         }
 
         public Role Allow { get; }
         public Role Deny { get; }
         public bool IsAuthorizationRequired { get; }
-        public IReadOnlyDictionary<string, FeedRole> FeedRoles { get; }
+        public bool IsImpersonationAllowed { get; }
+        public bool IsProxyAllowed { get; }
 
-        public bool HasRole(string host, string user, string feed, Role role)
+        public bool HasRole(Role role)
         {
             var decision = Allow.HasFlag(role);
 
             if (Deny.HasFlag(role))
                 decision = false;
 
-            if (FeedRoles.TryGetValue(feed, out var feedPermission))
-                decision = feedPermission.HasRole(host, user, feed, role, decision);
-
             return decision;
         }
 
-        public bool IsAuthorizationRequiredForFeed(string feed)
-        {
-            if (FeedRoles.TryGetValue(feed, out var feedRole))
-                return feedRole.IsAuthorizationRequired;
-            return IsAuthorizationRequired;
-        }
-
-        public bool IsImpersonationAllowedForFeed(string feed)
-        {
-            if (FeedRoles.TryGetValue(feed, out var feedRole))
-                return feedRole.IsImpersonationAllowed;
-            return false;
-        }
-
-        public bool IsProxyAllowedForFeed(string feed)
-        {
-            if (FeedRoles.TryGetValue(feed, out var feedRole))
-                return feedRole.IsProxyAllowed;
-            return false;
-        }
-
-        public override string ToString() => $"{nameof(Allow)}={Allow},{nameof(Deny)}={Deny},{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(FeedRoles)}=[{string.Join(", ", FeedRoles.Values)}]";
+        public override string ToString() => $"{nameof(Allow)}={Allow},{nameof(Deny)}={Deny},{nameof(IsAuthorizationRequired)}={IsAuthorizationRequired},{nameof(IsImpersonationAllowed)}={IsImpersonationAllowed},{nameof(IsProxyAllowed)}={IsProxyAllowed}";
     }
 }

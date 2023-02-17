@@ -1,4 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
+
+using JetBlack.MessageBus.Common;
+using JetBlack.MessageBus.Common.Security.Authentication;
 
 namespace JetBlack.MessageBus.Distributor.Roles
 {
@@ -6,13 +10,23 @@ namespace JetBlack.MessageBus.Distributor.Roles
     {
         private readonly IDictionary<string, IDictionary<Role, bool>> _feedDecision = new Dictionary<string, IDictionary<Role, bool>>();
 
-        public RoleManager(DistributorRole distributorPermission, string host, string user, string? impersonating, string? forwardedFor)
+        public RoleManager(
+            DistributorRole distributorPermission,
+            string host,
+            string user,
+            string? impersonating,
+            string? forwardedFor,
+            Dictionary<string, Dictionary<string, Permission>>? feedPermissions)
         {
             DistributorRole = distributorPermission;
             Host = host;
             User = user;
-            Impersonating = string.IsNullOrWhiteSpace(impersonating) ? null : impersonating;
-            ForwardedFor = string.IsNullOrWhiteSpace(forwardedFor) ? null : forwardedFor;
+            Impersonating = impersonating;
+            ForwardedFor = forwardedFor;
+            FeedPermissions = feedPermissions?.ToDictionary(
+                feed => feed.Key,
+                feed => feed.Value.Where(x => EffectiveHost.Glob(x.Key)).Select(x => x.Value).FirstOrDefault() ?? new Permission(Role.None, Role.All)
+            ) ?? new Dictionary<string, Permission>();
         }
 
         public DistributorRole DistributorRole { get; }
@@ -20,6 +34,9 @@ namespace JetBlack.MessageBus.Distributor.Roles
         public string Host { get; }
         public string? Impersonating { get; }
         public string? ForwardedFor { get; }
+        public string EffectiveUser => DistributorRole.IsImpersonationAllowed ? Impersonating ?? User : User;
+        public string EffectiveHost => DistributorRole.IsProxyAllowed ? ForwardedFor ?? Host : Host;
+        public Dictionary<string, Permission> FeedPermissions { get; }
 
         public bool HasRole(string feed, Role role)
         {
@@ -29,42 +46,24 @@ namespace JetBlack.MessageBus.Distributor.Roles
             if (roleDecision.TryGetValue(role, out var decision))
                 return decision;
 
-            decision = DistributorRole.HasRole(HostForFeed(feed), UserForFeed(feed), feed, role);
+            if (DistributorRole.Allow.HasFlag(role))
+                decision = true;
+            if (DistributorRole.Deny.HasFlag(role))
+                decision = false;
+                
+            if (FeedPermissions != null && FeedPermissions.TryGetValue(feed, out var permission))
+            {
+                if (permission.Allow.HasFlag(role))
+                    decision = true;
+
+                if (permission.Deny.HasFlag(role))
+                    decision = false;
+            }
 
             // Cache the decision;
             roleDecision.Add(role, decision);
 
             return decision;
         }
-
-        public bool IsAuthorizationRequired(string feed)
-        {
-            return DistributorRole.IsAuthorizationRequiredForFeed(feed);
-        }
-
-        public bool IsImpersonationAllowed(string feed)
-        {
-            return DistributorRole.IsImpersonationAllowedForFeed(feed);
-        }
-
-        public bool IsProxyAllowed(string feed)
-        {
-            return DistributorRole.IsProxyAllowedForFeed(feed);
-        }
-
-        public string UserForFeed(string feed)
-        {
-            return IsImpersonationAllowed(feed)
-                ? Impersonating ?? User
-                : User;
-        }
-
-        public string HostForFeed(string feed)
-        {
-            return IsProxyAllowed(feed)
-                ? (ForwardedFor ?? Host)
-                : Host;
-        }
-
     }
 }

@@ -1,0 +1,98 @@
+{
+    "tom": {
+        "UNAUTH": {
+            "*": {
+                "allow": [
+                    "All"
+                ],
+                "deny": [
+                    "None"
+                ]
+            }
+        },
+        "AUTH": {
+            "*": {
+                "allow": [
+                    "Subscribe"
+                ],
+                "deny": [
+                    "Publish",
+                    "Notify",
+                    "Authorize"
+                ]
+            }
+        }
+    },
+    "dick": {
+        "UNAUTH": {
+            "*": {
+                "allow": [
+                    "All"
+                ],
+                "deny": [
+                    "None"
+                ]
+            }
+        },
+        "AUTH": {
+            "*": {
+                "allow": [
+                    "Subscribe"
+                ],
+                "deny": [
+                    "Publish",
+                    "Notify",
+                    "Authorize"
+                ]
+            }
+        }
+    },
+    "harry": {
+        "UNAUTH": {
+            "*": {
+                "allow": [
+                    "All"
+                ],
+                "deny": [
+                    "None"
+                ]
+            }
+        },
+        "AUTH": {
+            "*": {
+                "allow": [
+                    "Publish",
+                    "Notify"
+                ],
+                "deny": [
+                    "Subscribe",
+                    "Authorize"
+                ]
+            }
+        }
+    },
+    "mary": {
+        "UNAUTH": {
+            "*": {
+                "allow": [
+                    "All"
+                ],
+                "deny": [
+                    "None"
+                ]
+            }
+        },
+        "AUTH": {
+            "*": {
+                "allow": [
+                    "Authorize"
+                ],
+                "deny": [
+                    "Publish",
+                    "Notify",
+                    "Subscribe"
+                ]
+            }
+        }
+    }
+}

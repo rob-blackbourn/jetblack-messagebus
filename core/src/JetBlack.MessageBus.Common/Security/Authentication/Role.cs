@@ -1,6 +1,6 @@
 using System;
 
-namespace JetBlack.MessageBus.Distributor.Roles
+namespace JetBlack.MessageBus.Common.Security.Authentication
 {
     [Flags]
     public enum Role
