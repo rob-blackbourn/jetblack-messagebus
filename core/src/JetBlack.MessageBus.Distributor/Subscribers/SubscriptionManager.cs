@@ -194,8 +194,8 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                 foreach (var subscriber in matchingSubscriptions.Value)
                 {
                     var message = new ForwardedSubscriptionRequest(
-                        subscriber.UserForFeed(args.Feed),
-                        subscriber.HostForFeed(args.Feed),
+                        subscriber.User,
+                        subscriber.Host,
                         subscriber.Id,
                         args.Feed,
                         matchingSubscriptions.Key, true);

@@ -1,28 +1,26 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 using Newtonsoft.Json;
 
 using JetBlack.MessageBus.Common.Security.Authentication;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json.Converters;
+using System.Linq;
 
 namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
 {
     public class JsonRoleManager
     {
         public JsonRoleManager()
-            : this(new Dictionary<string, Dictionary<string, Dictionary<Regex, Permission>>>())
+            : this(new Dictionary<string, Dictionary<string, Dictionary<string, Permission>>>())
         {
         }
 
-        public JsonRoleManager(Dictionary<string, Dictionary<string , Dictionary<Regex, Permission>>> userFeedRoles)
+        public JsonRoleManager(Dictionary<string, Dictionary<string , Dictionary<string, Permission>>> userFeedRoles)
         {
             UserFeedRoles = userFeedRoles;
         }
 
-        public Dictionary<string, Dictionary<string, Dictionary<Regex, Permission>>> UserFeedRoles { get; }
+        public Dictionary<string, Dictionary<string, Dictionary<string, Permission>>> UserFeedRoles { get; }
 
         public static JsonRoleManager Load(string fileName)
         {
@@ -40,7 +38,7 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
             using (var jsonReader = new JsonTextReader(reader))
             {
                 var serializer = new JsonSerializer();
-                var userFeedRoles = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, Permission>>>>(jsonReader);
+                var userFeedRoles = serializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, PermissionConfig>>>>(jsonReader);
                 if (userFeedRoles == null)
                     return new JsonRoleManager();
                 else
@@ -50,12 +48,10 @@ namespace JetBlack.MessageBus.Extension.PasswordFileAuthentication
                             user => user.Value.ToDictionary(
                                 feed => feed.Key,
                                 feed => feed.Value.ToDictionary(
-                                    host => new Regex(host.Key),
-                                    host => host.Value
-                                )
-                            )
-                        )
-                    );
+                                    host => host.Key,
+                                    host => new Permission(
+                                        host.Value.Allow?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None,
+                                        host.Value.Deny?.Aggregate(Role.None, (aggregate, role) => aggregate | role) ?? Role.None)))));
             }
         }
     }

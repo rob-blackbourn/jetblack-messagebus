@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace JetBlack.MessageBus.Common.Security.Authentication
 {
@@ -24,7 +23,7 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
             string? impersonating,
             string? forwardedFor,
             string? application,
-            Dictionary<string, Dictionary<Regex, Permission>>? feedRoles)
+            Dictionary<string, Dictionary<string, Permission>>? feedRoles)
         {
             User = user;
             Method = method;
@@ -37,30 +36,30 @@ namespace JetBlack.MessageBus.Common.Security.Authentication
         /// <summary>
         /// The user.
         /// </summary>
-        public string User { get; }
+        public string User { get; set; }
         /// <summary>
         /// The authentication method.
         /// </summary>
-        public string Method { get; }
+        public string Method { get; set; }
         /// <summary>
         /// If the authentication was a proxy, the impersonated user.
         /// </summary>
-        public string? Impersonating { get; }
+        public string? Impersonating { get; set; }
         /// <summary>
         /// If the authentication was a proxy the originating host.
         /// </summary>
-        public string? ForwardedFor { get; }
+        public string? ForwardedFor { get; set; }
         /// <summary>
         /// The name of the application.
         /// </summary>
-        public string? Application { get; }
+        public string? Application { get; set; }
         /// <summary>
         /// The available roles for given feeds.
         ///
         /// The first dictionary is keyed by feed, and the second
         /// is keyed by a host regular expression.
         /// </summary>
-        public Dictionary<string, Dictionary<Regex, Permission>>? FeedRoles { get; }
+        public Dictionary<string, Dictionary<string, Permission>>? FeedRoles { get; set; }
 
         /// <inheritdoc />
         public override string ToString()

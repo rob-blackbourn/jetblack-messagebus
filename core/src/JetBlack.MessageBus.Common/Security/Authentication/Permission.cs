@@ -1,10 +1,14 @@
-using System.Collections.Generic;
-
 namespace JetBlack.MessageBus.Common.Security.Authentication
 {
     public class Permission
     {
-        public List<Role>? Allow { get; set; }
-        public List<Role>? Deny { get; set; }
+        public Permission(Role allow, Role deny)
+        {
+            Allow = allow;
+            Deny = deny;
+        }
+
+        public Role Allow { get; }
+        public Role Deny { get; }
     }
 }

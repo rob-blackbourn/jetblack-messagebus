@@ -42,8 +42,8 @@ namespace JetBlack.MessageBus.Distributor.Publishers
             publisher.Metrics.UnicastMessages[unicastData.Feed].Inc();
 
             var clientUnicastData = new ForwardedUnicastData(
-                publisher.UserForFeed(unicastData.Feed),
-                publisher.HostForFeed(unicastData.Feed),
+                publisher.User,
+                publisher.Host,
                 unicastData.ClientId,
                 unicastData.Feed,
                 unicastData.Topic,
@@ -92,8 +92,8 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 var authorization = subscriberAndAuthorizationInfo.Value;
 
                 var subscriberMulticastData = new ForwardedMulticastData(
-                    publisher?.UserForFeed(multicastData.Feed) ?? "internal",
-                    publisher?.HostForFeed(multicastData.Feed) ?? "localhost",
+                    publisher?.User ?? "internal",
+                    publisher?.Host ?? "localhost",
                     multicastData.Feed,
                     multicastData.Topic,
                     multicastData.IsImage,

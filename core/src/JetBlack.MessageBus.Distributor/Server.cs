@@ -76,7 +76,13 @@ namespace JetBlack.MessageBus.Distributor
             _heartbeatInteractor = new Interactor(
                 new MemoryStream(),
                 "Heartbeat",
-                new RoleManager(new DistributorRole(Role.Publish, Role.Authorize | Role.Notify | Role.Subscribe, false, null), "localhost", "admin", null, null),
+                new RoleManager(
+                    new DistributorRole(Role.Publish, Role.Authorize | Role.Notify | Role.Subscribe, false, false, false),
+                    "localhost",
+                    "admin",
+                    null,
+                    null,
+                    null),
                 _eventQueue,
                 loggerFactory.CreateLogger<Interactor>(),
                 _tokenSource.Token);

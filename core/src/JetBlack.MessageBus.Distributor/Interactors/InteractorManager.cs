@@ -12,11 +12,13 @@ namespace JetBlack.MessageBus.Distributor.Interactors
     {
         private readonly ILogger<InteractorManager> _logger;
         private readonly InteractorRepository _repository;
+        private readonly bool _isAuthorizationRequired;
 
         public InteractorManager(DistributorRole distributorRole, ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<InteractorManager>();
             _repository = new InteractorRepository(distributorRole);
+            _isAuthorizationRequired = distributorRole.IsAuthorizationRequired;
         }
 
         internal EventHandler<AuthorizationResponseEventArg>? AuthorizationResponses;
@@ -57,7 +59,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             interactor.Metrics.AuthorizationRequests.Inc();
 
-            if (!interactor.IsAuthorizationRequired(feed))
+            if (!_isAuthorizationRequired)
             {
                 _logger.LogDebug("No authorization is required.");
                 AcceptAuthorization(interactor, new AuthorizationResponse(interactor.Id, feed, topic, false, null));
@@ -66,8 +68,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             var authorizationRequest = new AuthorizationRequest(
                 interactor.Id,
-                interactor.HostForFeed(feed),
-                interactor.UserForFeed(feed),
+                interactor.Host,
+                interactor.User,
                 feed,
                 topic);
 

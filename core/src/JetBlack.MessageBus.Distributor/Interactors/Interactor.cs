@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -53,7 +54,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 hostName,
                 authenticationResponse.User,
                 authenticationResponse.Impersonating,
-                authenticationResponse.ForwardedFor);
+                authenticationResponse.ForwardedFor,
+                authenticationResponse.FeedRoles);
 
             return new Interactor(
                 stream,
@@ -95,6 +97,11 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             stream.AuthenticateAsServer();
 
             var authenticationResponse = authenticator.Authenticate(stream);
+            if (authenticationResponse.User == null)
+                authenticationResponse.User = stream.RemoteIdentity.Name ?? "nobody";
+            authenticationResponse.Method = string.IsNullOrEmpty(authenticationResponse.Method)
+                ? "SSPI"
+                : authenticationResponse.Method + " SSPI";
 
             var address = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.Any;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
@@ -107,9 +114,10 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             var roleManager = new RoleManager(
                 distributorRole,
                 hostName,
-                stream.RemoteIdentity.Name ?? "nobody",
+                authenticationResponse.User,
                 authenticationResponse.Impersonating,
-                authenticationResponse.ForwardedFor);
+                authenticationResponse.ForwardedFor,
+                authenticationResponse.FeedRoles);
 
             return new Interactor(
                 stream,
@@ -134,6 +142,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             Id = Guid.NewGuid();
             Application = application;
             _roleManager = roleManager;
+            Feeds = _roleManager.FeedPermissions.Keys.ToArray();
             _eventQueue = eventQueue;
             _readTask = new Task(QueueReceivedMessages, _tokenSource.Token);
             _writeTask = new Task(WriteQueuedMessages, _tokenSource.Token);
@@ -142,10 +151,12 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
         public Guid Id { get; }
         public string Application { get; }
-        public string Host => _roleManager.Host;
-        public string User => _roleManager.User;
+        public string Host => _roleManager.EffectiveHost;
+        public string User => _roleManager.EffectiveUser;
         public string? Impersonating => _roleManager.Impersonating;
         public string? ForwardedFor => _roleManager.ForwardedFor;
+        public IList<string> Feeds { get; }
+
         public InteractorMetrics Metrics { get; }
 
         public bool HasRole(string feed, Role role)
@@ -153,9 +164,9 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             return _roleManager.HasRole(feed, role);
         }
 
-        public string UserForFeed(string feed) => _roleManager.UserForFeed(feed);
-        public string HostForFeed(string feed) => _roleManager.HostForFeed(feed);
-        public bool IsAuthorizationRequired(string feed) => _roleManager.IsAuthorizationRequired(feed);
+        // public string UserForFeed(string feed) => _roleManager.UserForFeed(feed);
+        // public string HostForFeed(string feed) => _roleManager.HostForFeed(feed);
+        // public bool IsAuthorizationRequired(string feed) => _roleManager.IsAuthorizationRequired(feed);
 
         public void Start()
         {
