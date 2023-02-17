@@ -83,6 +83,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
         }
         public static Interactor CreateSspi(
             TcpClient tcpClient,
+            IAuthenticator authenticator,
             DistributorRole distributorRole,
             EventQueue<InteractorEventArgs> eventQueue,
             ILoggerFactory loggerFactory,
@@ -92,6 +93,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             var stream = new NegotiateStream(tcpClient.GetStream(), false);
             stream.AuthenticateAsServer();
+
+            var authenticationResponse = authenticator.Authenticate(stream);
 
             var address = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.Any;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
@@ -105,8 +108,8 @@ namespace JetBlack.MessageBus.Distributor.Interactors
                 distributorRole,
                 hostName,
                 stream.RemoteIdentity.Name ?? "nobody",
-                null,
-                null);
+                authenticationResponse.Impersonating,
+                authenticationResponse.ForwardedFor);
 
             return new Interactor(
                 stream,

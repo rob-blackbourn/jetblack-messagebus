@@ -58,6 +58,7 @@ namespace JetBlack.MessageBus.Distributor
                 ? null
                 : new SspiAcceptor(
                     sspiEndPoint,
+                    authenticator,
                     distributorRole,
                     _eventQueue,
                     loggerFactory,

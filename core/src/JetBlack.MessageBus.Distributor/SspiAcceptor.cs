@@ -20,18 +20,21 @@ namespace JetBlack.MessageBus.Distributor
         private readonly ILogger<Acceptor> _logger;
         private readonly ILoggerFactory _loggerFactory;
         private readonly IPEndPoint _endPoint;
+        private readonly IAuthenticator _authenticator;
         private readonly DistributorRole _distributorRole;
         private readonly EventQueue<InteractorEventArgs> _eventQueue;
         private readonly CancellationToken _token;
 
         public SspiAcceptor(
             IPEndPoint endPoint,
+            IAuthenticator authenticator,
             DistributorRole distributorRole,
             EventQueue<InteractorEventArgs> eventQueue,
             ILoggerFactory loggerFactory,
             CancellationToken token)
         {
             _endPoint = endPoint;
+            _authenticator = authenticator;
             _distributorRole = distributorRole;
             _eventQueue = eventQueue;
             _loggerFactory = loggerFactory;
@@ -80,6 +83,7 @@ namespace JetBlack.MessageBus.Distributor
             {
                 var interactor = Interactor.CreateSspi(
                     tcpClient,
+                    _authenticator,
                     _distributorRole,
                     _eventQueue,
                     _loggerFactory,
