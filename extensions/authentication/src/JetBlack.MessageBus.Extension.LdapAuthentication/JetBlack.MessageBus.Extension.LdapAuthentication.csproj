@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>JetBlack.MessageBus.Extension.LdapAuthentication</PackageId>
-    <Version>6.0.0-alpha.1</Version>
+    <Version>6.0.0-alpha.2</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>

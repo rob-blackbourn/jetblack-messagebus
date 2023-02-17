@@ -1,11 +1,11 @@
-DISTRIBUTOR_VERSION=6.0.0-alpha.1
-COMMON_VERSION=6.0.0-alpha.1
-MESSAGES_VERSION=6.0.0-alpha.1
-ADAPTERS_VERSION=6.0.0-alpha.1
-JWT_AUTHENTICATION_VERSION=6.0.0-alpha.1
-LDAP_AUTHENTICATION_VERSION=6.0.0-alpha.1
-PWD_AUTHENTICATION_VERSION=6.0.0-alpha.1
-MKPASSWD_VERSION=6.0.0-alpha.1
+DISTRIBUTOR_VERSION=6.0.0-alpha.2
+COMMON_VERSION=6.0.0-alpha.2
+MESSAGES_VERSION=6.0.0-alpha.2
+ADAPTERS_VERSION=6.0.0-alpha.2
+JWT_AUTHENTICATION_VERSION=6.0.0-alpha.2
+LDAP_AUTHENTICATION_VERSION=6.0.0-alpha.2
+PWD_AUTHENTICATION_VERSION=6.0.0-alpha.2
+MKPASSWD_VERSION=6.0.0-alpha.2
 
 CORE_SRC=core/src
 EXTENSIONS_AUTH_SRC=extensions/authentication/src
@@ -98,13 +98,6 @@ publish-dist-osx-x64:
 	cp scripts/distributor.sh build/${DIST_OSX_X64}
 	cd build && tar cvzf ${DIST_OSX_X64}.tar.gz ${DIST_OSX_X64}
 	rm -r build/${DIST_OSX_X64}
-
-publish-dist-osx-arm64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_ARM64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_OSX_ARM64}
-	cp scripts/distributor.sh build/${DIST_OSX_ARM64}
-	cd build && tar cvzf ${DIST_OSX_ARM64}.tar.gz ${DIST_OSX_ARM64}
-	rm -r build/${DIST_OSX_ARM64}
 
 publish-dist-osx-arm64:
 	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_ARM64}
