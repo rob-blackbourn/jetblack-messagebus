@@ -5,6 +5,7 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -14,6 +15,8 @@
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
     <RepositoryUrl>https://github.com/rob-blackbourn/jetblack-messagebus</RepositoryUrl>
+    <Description>The message bus distributor.</Description>
+    <PackageTags>MessageBus, Network, Publish, Subscribe, pubsub</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
