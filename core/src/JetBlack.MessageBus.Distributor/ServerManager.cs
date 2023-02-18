@@ -14,43 +14,14 @@ using JetBlack.MessageBus.Distributor.Utilities;
 
 namespace JetBlack.MessageBus.Distributor
 {
-    class Program : IDisposable
+    public class ServerManager : IDisposable
     {
-
-        public const string DefaultSettingsFilename = "appsettings.json";
-
-        static void Main(string[] args)
-        {
-            var settingsFilename = (args != null && args.Length >= 1) ? args[0] : DefaultSettingsFilename;
-
-            var program = new Program(settingsFilename);
-
-            var exitEvent = new ManualResetEvent(false);
-            AppDomain.CurrentDomain.ProcessExit += (sender, args) =>
-            {
-                Console.WriteLine("Shutting down ...");
-                exitEvent.Set();
-            };
-            Console.CancelKeyPress += (sender, args) =>
-            {
-                // This will call AppDomain.ProcessExit.
-                Environment.Exit(0);
-            };
-
-            var process = Process.GetCurrentProcess();
-            program.Logger.LogInformation("Waiting for SIGTERM/SIGINT on PID {ProcessId}", process.Id);
-            exitEvent.WaitOne();
-
-            program.Dispose();
-        }
-
-
-        public ILogger<Program> Logger { get; }
+        public ILogger<ServerManager> Logger { get; }
         private readonly DistributorConfig _distributorConfig;
         private readonly Server _server;
         private MetricServer? _metricServer;
 
-        public Program(string settingsFilename)
+        public ServerManager(string settingsFilename)
         {
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(settingsFilename, false, true)
@@ -65,7 +36,7 @@ namespace JetBlack.MessageBus.Distributor
                     .AddDistributorLogger(_distributorConfig);
             });
 
-            Logger = loggerFactory.CreateLogger<Program>();
+            Logger = loggerFactory.CreateLogger<ServerManager>();
 
             _server = CreateServer(_distributorConfig, loggerFactory);
         }

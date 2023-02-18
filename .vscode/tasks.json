@@ -2,37 +2,37 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build JetBlack.MessageBus.Distributor",
+            "label": "build JetBlack.MessageBus.DistributorConsole",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/JetBlack.MessageBus.Distributor.csproj",
+                "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/JetBlack.MessageBus.DistributorConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish JetBlack.MessageBus.Distributor",
+            "label": "publish JetBlack.MessageBus.DistributorConsole",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/JetBlack.MessageBus.Distributor.csproj",
+                "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/JetBlack.MessageBus.DistributorConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch JetBlack.MessageBus.Distributor",
+            "label": "watch JetBlack.MessageBus.DistributorConsole",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/JetBlack.MessageBus.Distributor.csproj",
+                "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/JetBlack.MessageBus.DistributorConsole.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
