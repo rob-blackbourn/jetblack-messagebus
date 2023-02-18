@@ -1,11 +1,12 @@
-DISTRIBUTOR_VERSION=6.0.0-alpha.2
-COMMON_VERSION=6.0.0-alpha.2
-MESSAGES_VERSION=6.0.0-alpha.2
-ADAPTERS_VERSION=6.0.0-alpha.2
-JWT_AUTHENTICATION_VERSION=6.0.0-alpha.2
-LDAP_AUTHENTICATION_VERSION=6.0.0-alpha.2
-PWD_AUTHENTICATION_VERSION=6.0.0-alpha.2
-MKPASSWD_VERSION=6.0.0-alpha.2
+DISTRIBUTOR_CONSOLE_VERSION=6.0.0-alpha.3
+DISTRIBUTOR_VERSION=6.0.0-alpha.3
+COMMON_VERSION=6.0.0-alpha.3
+MESSAGES_VERSION=6.0.0-alpha.3
+ADAPTERS_VERSION=6.0.0-alpha.3
+JWT_AUTHENTICATION_VERSION=6.0.0-alpha.3
+LDAP_AUTHENTICATION_VERSION=6.0.0-alpha.3
+PWD_AUTHENTICATION_VERSION=6.0.0-alpha.3
+MKPASSWD_VERSION=6.0.0-alpha.3
 
 CORE_SRC=core/src
 EXTENSIONS_AUTH_SRC=extensions/authentication/src
@@ -50,22 +51,22 @@ publish-dist: publish-dist-win10 publish-dist-linux publish-dist-osx
 publish-dist-win10: publish-dist-win10-x86 publish-dist-win10-x64 publish-dist-win10-arm64
 
 publish-dist-win10-x86:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-x86 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_X86}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_WIN10_X86}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r win10-x86 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_X86}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_WIN10_X86}
 	cp scripts/distributor.bat build/${DIST_WIN10_X86}
 	cd build && zip -r ${DIST_WIN10_X86}.zip ${DIST_WIN10_X86}
 	rm -r build/${DIST_WIN10_X86}
 
 publish-dist-win10-x64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_X64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_WIN10_X64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r win10-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_X64}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_WIN10_X64}
 	cp scripts/distributor.bat build/${DIST_WIN10_X64}
 	cd build && zip -r ${DIST_WIN10_X64}.zip ${DIST_WIN10_X64}
 	rm -r build/${DIST_WIN10_X64}
 
 publish-dist-win10-arm64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r win10-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_ARM64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_WIN10_ARM64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r win10-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_WIN10_ARM64}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_WIN10_ARM64}
 	cp scripts/distributor.bat build/${DIST_WIN10_ARM64}
 	cd build && zip -r ${DIST_WIN10_ARM64}.zip ${DIST_WIN10_ARM64}
 	rm -r build/${DIST_WIN10_ARM64}
@@ -75,15 +76,15 @@ publish-dist-win10-arm64:
 public-dist-linux: publish-dist-linux-x64 publish-dist-linux-arm64
 
 publish-dist-linux-x64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r linux-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_LINUX_X64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_LINUX_X64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r linux-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_LINUX_X64}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_LINUX_X64}
 	cp scripts/distributor.sh build/${DIST_LINUX_X64}
 	cd build && tar cvzf ${DIST_LINUX_X64}.tar.gz ${DIST_LINUX_X64}
 	rm -r build/${DIST_LINUX_X64}
 
 publish-dist-linux-arm64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r linux-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_LINUX_ARM64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_LINUX_ARM64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r linux-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_LINUX_ARM64}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_LINUX_ARM64}
 	cp scripts/distributor.sh build/${DIST_LINUX_ARM64}
 	cd build && tar cvzf ${DIST_LINUX_ARM64}.tar.gz ${DIST_LINUX_ARM64}
 	rm -r build/${DIST_LINUX_ARM64}
@@ -93,15 +94,15 @@ publish-dist-linux-arm64:
 publish-dist-osx: publish-dist-osx-x64 publish-dist-osx-arm64
 
 publish-dist-osx-x64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_X64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_OSX_X64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r osx-x64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_X64}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_OSX_X64}
 	cp scripts/distributor.sh build/${DIST_OSX_X64}
 	cd build && tar cvzf ${DIST_OSX_X64}.tar.gz ${DIST_OSX_X64}
 	rm -r build/${DIST_OSX_X64}
 
 publish-dist-osx-arm64:
-	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.Distributor -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_ARM64}
-	cp core/src/JetBlack.MessageBus.Distributor/appsettings.json build/${DIST_OSX_ARM64}
+	dotnet publish ${CORE_SRC}/JetBlack.MessageBus.DistributorConsole -r osx-arm64 -p:PublishSingleFile=true --self-contained false -o build/${DIST_OSX_ARM64}
+	cp core/src/JetBlack.MessageBus.DistributorConsole/appsettings.json build/${DIST_OSX_ARM64}
 	cp scripts/distributor.sh build/${DIST_OSX_ARM64}
 	cd build && tar cvzf ${DIST_OSX_ARM64}.tar.gz ${DIST_OSX_ARM64}
 	rm -r build/${DIST_OSX_ARM64}
@@ -200,6 +201,10 @@ push-messages:
 push-adapters:
 	dotnet pack ${CORE_SRC}/JetBlack.MessageBus.Adapters
 	dotnet nuget push ${CORE_SRC}/JetBlack.MessageBus.Adapters/bin/Debug/JetBlack.MessageBus.Adapters.${ADAPTERS_VERSION}.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
+
+push-distributor:
+	dotnet pack ${CORE_SRC}/JetBlack.MessageBus.Distributor
+	dotnet nuget push ${CORE_SRC}/JetBlack.MessageBus.Distributor/bin/Debug/JetBlack.MessageBus.Distributor.${ADAPTERS_VERSION}.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
 
 clean:
 	-rm -r build

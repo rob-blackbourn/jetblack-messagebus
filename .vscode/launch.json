@@ -8,11 +8,11 @@
       "name": "Distributor",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      "preLaunchTask": "build JetBlack.MessageBus.DistributorConsole",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/bin/Debug/net6.0/JetBlack.MessageBus.DistributorConsole.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
@@ -24,13 +24,13 @@
       "name": "Distributor SSL (Windows)",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      "preLaunchTask": "build JetBlack.MessageBus.DistributorConsole",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/bin/Debug/net6.0/JetBlack.MessageBus.DistributorConsole.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/ssl/appsettings-windows.json"
       ],
-      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
@@ -42,13 +42,13 @@
       "name": "Distributor SSPI",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
+      "preLaunchTask": "build JetBlack.MessageBus.DistributorConsole",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/bin/Debug/net6.0/JetBlack.MessageBus.DistributorConsole.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/sspi/appsettings.json"
       ],
-      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
@@ -60,12 +60,12 @@
       "name": "Distributor: Password",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "preLaunchTask": "build JetBlack.MessageBus.DistributorConsole",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/bin/Debug/net6.0/JetBlack.MessageBus.DistributorConsole.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/password-file/appsettings.json"
       ],
-      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole",
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
@@ -76,12 +76,12 @@
       "name": "Distributor: LDAP",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "preLaunchTask": "build JetBlack.MessageBus.DistributorConsole",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/bin/Debug/net6.0/JetBlack.MessageBus.DistributorConsole.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/ldap/appsettings.json"
       ],
-      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole",
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
@@ -92,12 +92,12 @@
       "name": "Distributor: JWT",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build JetBlack.MessageBus.Distributor",
-      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor/bin/Debug/net6.0/JetBlack.MessageBus.Distributor.dll",
+      "preLaunchTask": "build JetBlack.MessageBus.DistributorConsole",
+      "program": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole/bin/Debug/net6.0/JetBlack.MessageBus.DistributorConsole.dll",
       "args": [
         "${workspaceFolder}/examples/server-config/jwt/appsettings.json"
       ],
-      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.Distributor",
+      "cwd": "${workspaceFolder}/core/src/JetBlack.MessageBus.DistributorConsole",
       "env": {
         "JETBLACK_MESSAGEBUS_ROOT": "${workspaceFolder}"
       },
