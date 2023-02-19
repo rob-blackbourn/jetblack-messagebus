@@ -193,6 +193,7 @@ build:
 .PHONY: push
 
 push: push-common push-messages push-adapters push-distributor
+	dist
 
 .PHONY: push-common push-messages push-adapters push-distributor
 
