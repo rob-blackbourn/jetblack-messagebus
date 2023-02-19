@@ -2,7 +2,7 @@ using System.IO;
 
 using JetBlack.MessageBus.Common.IO;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Adapters
 {
     /// <summary>
     /// An abstract client authenticator using connection strings.
