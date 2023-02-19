@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>JetBlack.MessageBus.Adapters</PackageId>
-    <Version>6.0.0-alpha.5</Version>
+    <Version>6.0.0-alpha.6</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Authors>Rob Blackbourn</Authors>
     <Company>JetBlack</Company>
