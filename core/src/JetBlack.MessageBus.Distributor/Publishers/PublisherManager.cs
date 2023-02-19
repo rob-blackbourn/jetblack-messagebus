@@ -47,7 +47,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                 unicastData.ClientId,
                 unicastData.Feed,
                 unicastData.Topic,
-                unicastData.IsImage,
+                unicastData.ContentType,
                 GetAuthorizedData(unicastData.DataPackets, authorization));
 
             _logger.LogTrace(
@@ -96,7 +96,7 @@ namespace JetBlack.MessageBus.Distributor.Publishers
                     publisher?.Host ?? "localhost",
                     multicastData.Feed,
                     multicastData.Topic,
-                    multicastData.IsImage,
+                    multicastData.ContentType,
                     GetAuthorizedData(multicastData.DataPackets, authorization));
 
                 _logger.LogTrace(

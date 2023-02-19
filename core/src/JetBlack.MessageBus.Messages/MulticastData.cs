@@ -15,14 +15,14 @@ namespace JetBlack.MessageBus.Messages
         /// </summary>
         /// <param name="feed">The name of the feed.</param>
         /// <param name="topic">The name of the topic.</param>
-        /// <param name="isImage">If true the data is considered complete.</param>
+        /// <param name="contentType">If true the data is considered complete.</param>
         /// <param name="dataPackets">The data packets.</param>
-        public MulticastData(string feed, string topic, bool isImage, DataPacket[]? dataPackets)
+        public MulticastData(string feed, string topic, string contentType, DataPacket[]? dataPackets)
             : base(MessageType.MulticastData)
         {
             Feed = feed;
             Topic = topic;
-            IsImage = isImage;
+            ContentType = contentType;
             DataPackets = dataPackets;
         }
 
@@ -37,7 +37,7 @@ namespace JetBlack.MessageBus.Messages
         /// <summary>
         /// If true the data is considered complete.
         /// </summary>
-        public bool IsImage { get; }
+        public string ContentType { get; }
         /// <summary>
         /// The data packets.
         /// </summary>
@@ -52,9 +52,9 @@ namespace JetBlack.MessageBus.Messages
         {
             var feed = reader.ReadString();
             var topic = reader.ReadString();
-            var isImage = reader.ReadBoolean();
+            var contentType = reader.ReadString();
             var dataPackets = reader.ReadBinaryDataPacketArray();
-            return new MulticastData(feed, topic, isImage, dataPackets);
+            return new MulticastData(feed, topic, contentType, dataPackets);
         }
 
         /// <inheritdoc />
@@ -63,7 +63,7 @@ namespace JetBlack.MessageBus.Messages
             base.Write(writer);
             writer.Write(Feed);
             writer.Write(Topic);
-            writer.Write(IsImage);
+            writer.Write(ContentType);
             writer.Write(DataPackets);
             return writer;
         }
@@ -79,7 +79,7 @@ namespace JetBlack.MessageBus.Messages
               MessageType == other.MessageType &&
               Feed == other.Feed &&
               Topic == other.Topic &&
-              IsImage == other.IsImage &&
+              string.Compare(ContentType, other.ContentType) == 0 &&
               (
                 (DataPackets == null && other.DataPackets == null) ||
                 (DataPackets != null && other.DataPackets != null && DataPackets.SequenceEqual(other.DataPackets))
@@ -105,7 +105,7 @@ namespace JetBlack.MessageBus.Messages
             return MessageType.GetHashCode() ^
               Feed.GetHashCode() ^
               Topic.GetHashCode() ^
-              IsImage.GetHashCode() ^
+              ContentType.GetHashCode() ^
               (DataPackets?.GetHashCode() ?? 0);
         }
 
@@ -117,7 +117,7 @@ namespace JetBlack.MessageBus.Messages
             $"{base.ToString()}" +
             $",{nameof(Feed)}=\"{Feed}\"" +
             $",{nameof(Topic)}=\"{Topic}\"" +
-            $",{nameof(IsImage)}={IsImage}" +
+            $",{nameof(ContentType)}={ContentType}" +
             $",{nameof(DataPackets)}.Length={DataPackets?.Length}";
     }
 }

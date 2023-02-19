@@ -9,13 +9,13 @@ namespace JetBlack.MessageBus.Adapters
     /// </summary>
     public class DataReceivedEventArgs : EventArgs
     {
-        internal DataReceivedEventArgs(string user, string host, string feed, string topic, DataPacket[]? dataPackets, bool isImage)
+        internal DataReceivedEventArgs(string user, string host, string feed, string topic, DataPacket[]? dataPackets, string contentType)
         {
             User = user;
             Host = host;
             Feed = feed;
             Topic = topic;
-            IsImage = isImage;
+            ContentType = contentType;
             DataPackets = dataPackets;
         }
 
@@ -36,9 +36,9 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         public string Topic { get; }
         /// <summary>
-        /// An indication of whether the data represents an image.
+        /// The content type of the message.
         /// </summary>
-        public bool IsImage { get; }
+        public string ContentType { get; }
         /// <summary>
         /// The data packets.
         /// </summary>
@@ -53,7 +53,7 @@ namespace JetBlack.MessageBus.Adapters
             $"{nameof(Host)}={Host}" +
             $"{nameof(Feed)}={Feed}" +
             $"{nameof(Topic)}={Topic}" +
-            $"{nameof(IsImage)}={IsImage}" +
+            $"{nameof(ContentType)}={ContentType}" +
             $",{nameof(DataPackets)}=\"{DataPackets?.Length ?? 0}\"";
     }
 }

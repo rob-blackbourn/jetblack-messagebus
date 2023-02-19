@@ -190,7 +190,10 @@ namespace JetBlack.MessageBus.Distributor
         private void HeartbeatCallback(object? state)
         {
             _logger.LogTrace("Sending a heartbeat.");
-            _eventQueue.Enqueue(new InteractorMessageEventArgs(_heartbeatInteractor, new MulticastData("__admin__", "heartbeat", true, null)));
+            _eventQueue.Enqueue(
+                new InteractorMessageEventArgs(
+                    _heartbeatInteractor,
+                    new MulticastData("__admin__", "heartbeat", string.Empty, null)));
         }
 
         public void Dispose()
