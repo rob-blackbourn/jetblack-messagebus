@@ -7,19 +7,19 @@ namespace JetBlack.MessageBus.Adapters
     /// </summary>
     public class SspiClientAuthenticator : ClientAuthenticator
     {
-        public SspiClientAuthenticator(string? domainName = null, string? userName = null)
+        public SspiClientAuthenticator(string? userName = null)
         {
-            DomainName = domainName ?? Environment.UserDomainName;
-            UserName = userName ?? Environment.UserName;
+            UserName = userName != null
+                ? userName
+                : $"{Environment.UserDomainName}\\{Environment.UserName}";
         }
 
         public string UserName { get; }
-        public string DomainName { get; }
 
         /// <inheritdoc />
         protected override string ToConnectionString()
         {
-            return $"Username={DomainName}\\{UserName}";
+            return $"Username={UserName}";
         }
     }
 }
