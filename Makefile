@@ -190,6 +190,12 @@ copy-extension-pwdauthentication: build
 build:
 	mkdir build
 
+.PHONY: push
+
+push: push-common push-messages push-adapters push-distributor
+
+.PHONY: push-common push-messages push-adapters push-distributor
+
 push-common:
 	dotnet pack ${CORE_SRC}/JetBlack.MessageBus.Common
 	dotnet nuget push ${CORE_SRC}/JetBlack.MessageBus.Common/bin/Debug/JetBlack.MessageBus.Common.${COMMON_VERSION}.nupkg --api-key ${NUGET_API_KEY} --source https://api.nuget.org/v3/index.json
