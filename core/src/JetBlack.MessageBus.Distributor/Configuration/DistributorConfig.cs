@@ -17,6 +17,7 @@ namespace JetBlack.MessageBus.Distributor.Configuration
         public SspiConfig? Sspi { get; set; }
         public PrometheusConfig? Prometheus { get; set; }
         public PluginConfig? Authentication { get; set; }
+        public PluginConfig? SspiAuthentication { get; set; }
         public List<Role>? Allow { get; set; }
         public List<Role>? Deny { get; set; }
         public bool IsAuthorizationRequired { get; set; }

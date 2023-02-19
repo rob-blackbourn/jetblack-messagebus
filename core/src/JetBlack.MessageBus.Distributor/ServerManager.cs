@@ -63,15 +63,19 @@ namespace JetBlack.MessageBus.Distributor
 
             var endPoint = distributorConfig.ToIPEndPoint();
             var certificate = distributorConfig.Ssl?.ToCertificate();
-            var authenticator = distributorConfig.Authentication?.Construct<IAuthenticator>() ?? new NullAuthenticator(new string[0]);
+            var authenticator = distributorConfig.Authentication?.Construct<IAuthenticator>()
+                ?? new NullAuthenticator(new string[0]);
             var distributorRole = distributorConfig.ToDistributorRole();
             var sspiEndPoint = distributorConfig.Sspi?.IsEnabled == true
                 ? distributorConfig.Sspi.ToIPEndPoint()
                 : null;
+            var sspiAuthenticator = distributorConfig.SspiAuthentication?.Construct<IAuthenticator>()
+                ?? new NullSspiAuthenticator(new string[0]);
 
             var server = new Server(
                 endPoint,
                 authenticator,
+                sspiAuthenticator,
                 certificate,
                 distributorRole,
                 sspiEndPoint,

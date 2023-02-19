@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Adapters
 {
     /// <summary>
     /// The abstract client authenticator.

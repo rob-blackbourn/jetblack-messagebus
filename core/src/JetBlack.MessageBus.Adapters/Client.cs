@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using JetBlack.MessageBus.Common.IO;
-using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Adapters
@@ -58,8 +57,9 @@ namespace JetBlack.MessageBus.Adapters
                 stream = sslStream;
             }
 
-            if (authenticator != null)
-                authenticator.Authenticate(stream);
+            if (authenticator == null)
+                authenticator = new NullClientAuthenticator();
+            authenticator.Authenticate(stream);
 
             var client = new Client(stream);
 
@@ -84,6 +84,7 @@ namespace JetBlack.MessageBus.Adapters
             string host,
             int port,
             bool monitorHeartbeat = false,
+            IClientAuthenticator? authenticator = null,
             bool autoConnect = true)
         {
             var ipAddress = Dns.GetHostEntry(host).AddressList
@@ -97,6 +98,10 @@ namespace JetBlack.MessageBus.Adapters
 
             stream.AuthenticateAsClient();
 
+            if (authenticator == null)
+                authenticator = new SspiClientAuthenticator();
+            authenticator.Authenticate(stream);
+                
             var client = new Client(stream);
 
             if (autoConnect)

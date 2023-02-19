@@ -17,6 +17,7 @@
       "Selectfeed",
       "SIGINT",
       "SIGTERM",
+      "sspi",
       "typeparam",
       "windowsvm"
     ],

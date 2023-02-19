@@ -33,6 +33,7 @@ namespace JetBlack.MessageBus.Distributor
         public Server(
             IPEndPoint endPoint,
             IAuthenticator authenticator,
+            IAuthenticator sspiAuthenticator,
             X509Certificate2? certificate,
             DistributorRole distributorRole,
             IPEndPoint? sspiEndPoint,
@@ -58,7 +59,7 @@ namespace JetBlack.MessageBus.Distributor
                 ? null
                 : new SspiAcceptor(
                     sspiEndPoint,
-                    authenticator,
+                    sspiAuthenticator,
                     distributorRole,
                     _eventQueue,
                     loggerFactory,

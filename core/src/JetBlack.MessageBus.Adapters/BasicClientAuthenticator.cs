@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace JetBlack.MessageBus.Common.Security.Authentication
+namespace JetBlack.MessageBus.Adapters
 {
     /// <summary>
     /// The base class for client authenticators.
