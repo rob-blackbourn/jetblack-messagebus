@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common;
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Security.Authentication;
 
 using Entitlements;
 
