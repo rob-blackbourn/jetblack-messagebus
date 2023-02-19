@@ -43,7 +43,7 @@ namespace publisher
                 };
 
                 Console.WriteLine($"Publishing on feed \"{feed}\" topic \"{topic}\" message \"{message}\"");
-                client.Publish(feed, topic, true, data);
+                client.Publish(feed, topic, string.Empty, data);
             }
 
             client.Dispose();

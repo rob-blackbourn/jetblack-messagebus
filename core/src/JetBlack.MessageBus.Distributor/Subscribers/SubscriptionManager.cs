@@ -118,7 +118,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
             if (args.Response.IsAuthorizationRequired && (args.Response.Entitlements == null || args.Response.Entitlements.Count == 0))
             {
                 // Inform the subscriber that they are not entitled.
-                var message = new ForwardedMulticastData(string.Empty, string.Empty, args.Response.Feed, args.Response.Topic, true, null);
+                var message = new ForwardedMulticastData(string.Empty, string.Empty, args.Response.Feed, args.Response.Topic, string.Empty, null);
                 try
                 {
                     args.Requester.SendMessage(message);
@@ -223,7 +223,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
         private void OnStaleTopic(FeedTopic staleFeedTopic)
         {
             // Inform subscribers by sending an image with no data.
-            var staleMessage = new ForwardedMulticastData(string.Empty, string.Empty, staleFeedTopic.Feed, staleFeedTopic.Topic, true, null);
+            var staleMessage = new ForwardedMulticastData(string.Empty, string.Empty, staleFeedTopic.Feed, staleFeedTopic.Topic, string.Empty, null);
 
             foreach (var subscriber in _repository.GetSubscribersToFeedAndTopic(staleFeedTopic.Feed, staleFeedTopic.Topic).Select(x => x.Key))
             {

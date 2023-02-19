@@ -45,8 +45,7 @@ namespace subscriber
 
         private static void OnDataReceived(object? sender, DataReceivedEventArgs args)
         {
-            var type = args.IsImage ? "image" : "delta";
-            Console.WriteLine($"Received {type} on feed \"{args.Feed}\" for topic \"{args.Topic}\"");
+            Console.WriteLine($"Received on feed \"{args.Feed}\" for topic \"{args.Topic}\"");
 
             if (args.DataPackets == null)
             {

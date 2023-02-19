@@ -71,7 +71,7 @@ namespace AuthPublisher
                     var topic = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(topic)) break;
 
-                    client.Publish(feed, topic, true, data);
+                    client.Publish(feed, topic, string.Empty, data);
                 }
 
                 client.Dispose();

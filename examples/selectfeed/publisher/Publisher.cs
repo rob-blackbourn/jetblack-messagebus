@@ -38,7 +38,7 @@ namespace SelectfeedPublisher
                     return;
 
                 Console.WriteLine($"Publishing {args.Ticker}");
-                _client.Publish(Feed, args.Ticker, false, ToDataPackets(args.Ticker, args.Delta));
+                _client.Publish(Feed, args.Ticker, string.Empty, ToDataPackets(args.Ticker, args.Delta));
             }
         }
 
@@ -75,7 +75,7 @@ namespace SelectfeedPublisher
                 {
                     Console.WriteLine($"Sending image of {topic} to {clientId}");
                     topicSubscriptions[clientId] = 1;
-                    _client.Send(clientId, feed, topic, true, ToDataPackets(topic, _exchangeFeed.Data[topic]));
+                    _client.Send(clientId, feed, topic, string.Empty, ToDataPackets(topic, _exchangeFeed.Data[topic]));
                 }
             }
         }

@@ -22,7 +22,7 @@ namespace JetBlack.MessageBus.Messages.Test
                     Guid.NewGuid(),
                     "__admin__",
                     "heartbeat",
-                    true,
+                    "application/json",
                     null);
                 source.Write(new DataWriter(stream));
                 stream.Seek(0, SeekOrigin.Begin);
@@ -42,7 +42,7 @@ namespace JetBlack.MessageBus.Messages.Test
                     Guid.NewGuid(),
                     "__admin__",
                     "heartbeat",
-                    true,
+                    string.Empty,
                     new DataPacket[]
                     {
                          new DataPacket(

@@ -298,16 +298,16 @@ namespace JetBlack.MessageBus.Adapters
         /// <param name="clientId">The client id.</param>
         /// <param name="feed">The feed name.</param>
         /// <param name="topic">The topic name</param>
-        /// <param name="isImage">A boolean indicating if the message was an image.</param>
+        /// <param name="contentType">The message content type.</param>
         /// <param name="dataPackets">The data packets to send.</param>
-        public void Send(Guid clientId, string feed, string topic, bool isImage, DataPacket[]? dataPackets)
+        public void Send(Guid clientId, string feed, string topic, string contentType, DataPacket[]? dataPackets)
         {
             if (feed == null)
                 throw new ArgumentNullException(nameof(feed));
             if (topic == null)
                 throw new ArgumentNullException(nameof(topic));
 
-            _writeQueue.Add(new UnicastData(clientId, feed, topic, isImage, dataPackets));
+            _writeQueue.Add(new UnicastData(clientId, feed, topic, contentType, dataPackets));
         }
 
         /// <summary>
@@ -315,16 +315,16 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         /// <param name="feed">The feed name.</param>
         /// <param name="topic">The topic name</param>
-        /// <param name="isImage">A boolean indicating if the message was an image.</param>
+        /// <param name="contentType">The content type of the message.</param>
         /// <param name="dataPackets">The data packets to send.</param>
-        public void Publish(string feed, string topic, bool isImage, DataPacket[]? dataPackets)
+        public void Publish(string feed, string topic, string contentType, DataPacket[]? dataPackets)
         {
             if (feed == null)
                 throw new ArgumentNullException(nameof(feed));
             if (topic == null)
                 throw new ArgumentNullException(nameof(topic));
 
-            _writeQueue.Add(new MulticastData(feed, topic, isImage, dataPackets));
+            _writeQueue.Add(new MulticastData(feed, topic, contentType, dataPackets));
         }
 
         /// <summary>
@@ -375,7 +375,7 @@ namespace JetBlack.MessageBus.Adapters
             if (message.Feed == "__admin__" && message.Topic == "heartbeat")
                 RaiseOnHeartbeat();
             else
-                RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.DataPackets, message.IsImage);
+                RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.DataPackets, message.ContentType);
         }
 
         private void RaiseOnHeartbeat()
@@ -385,12 +385,12 @@ namespace JetBlack.MessageBus.Adapters
 
         private void RaiseOnData(ForwardedUnicastData message)
         {
-            RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.DataPackets, message.IsImage);
+            RaiseOnData(message.User, message.Host, message.Feed, message.Topic, message.DataPackets, message.ContentType);
         }
 
-        private void RaiseOnData(string user, string host, string feed, string topic, DataPacket[]? dataPackets, bool isImage)
+        private void RaiseOnData(string user, string host, string feed, string topic, DataPacket[]? dataPackets, string contentType)
         {
-            OnDataReceived?.Invoke(this, new DataReceivedEventArgs(user, host, feed, topic, dataPackets, isImage));
+            OnDataReceived?.Invoke(this, new DataReceivedEventArgs(user, host, feed, topic, dataPackets, contentType));
         }
 
         /// <summary>
