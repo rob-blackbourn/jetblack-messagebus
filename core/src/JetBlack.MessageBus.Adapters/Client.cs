@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using JetBlack.MessageBus.Common.IO;
+using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Adapters
@@ -72,7 +73,7 @@ namespace JetBlack.MessageBus.Adapters
         }
 
         /// <summary>
-        /// Create a new client using SSPI negotiatiion.
+        /// Create a new client using SSPI negotiation.
         /// </summary>
         /// <param name="host">The server host name.</param>
         /// <param name="port">The server port</param>
@@ -125,7 +126,7 @@ namespace JetBlack.MessageBus.Adapters
         /// </summary>
         public event EventHandler<ForwardedSubscriptionEventArgs>? OnForwardedSubscription;
         /// <summary>
-        /// Raised when authorisation is requested.
+        /// Raised when authorization is requested.
         /// </summary>
         public event EventHandler<AuthorizationRequestEventArgs>? OnAuthorizationRequest;
         /// <summary>

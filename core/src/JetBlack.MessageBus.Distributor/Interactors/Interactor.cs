@@ -48,7 +48,12 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
 
             var authenticationResponse = authenticator.Authenticate(stream);
-            logger.LogInformation("Authenticated with {Type} as {Name}", authenticationResponse.Method, authenticationResponse.User);
+
+            logger.LogInformation(
+                "Authenticated with {Type} as {Name}",
+                authenticationResponse.Method,
+                authenticationResponse.User);
+
             var roleManager = new RoleManager(
                 distributorRole,
                 hostName,
@@ -96,15 +101,12 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             var stream = new NegotiateStream(tcpClient.GetStream(), false);
             stream.AuthenticateAsServer();
 
-            var authenticationResponse = authenticator.Authenticate(stream);
-            if (authenticationResponse.User == null)
-                authenticationResponse.User = stream.RemoteIdentity.Name ?? "nobody";
-            authenticationResponse.Method = string.IsNullOrEmpty(authenticationResponse.Method)
-                ? "SSPI"
-                : authenticationResponse.Method + " SSPI";
-
             var address = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.Any;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
+
+            var clientAuthenticator = new BasicClientAuthenticator(stream.RemoteIdentity.Name ?? "nobody", "nopassword");
+            clientAuthenticator.Authenticate(stream);
+            var authenticationResponse = authenticator.Authenticate(stream);
 
             logger.LogInformation(
                 "Authenticated with {Type} as {Name}",
@@ -121,7 +123,7 @@ namespace JetBlack.MessageBus.Distributor.Interactors
 
             return new Interactor(
                 stream,
-                "sspi",
+                authenticationResponse.Application ?? "unspecified",
                 roleManager,
                 eventQueue,
                 logger,

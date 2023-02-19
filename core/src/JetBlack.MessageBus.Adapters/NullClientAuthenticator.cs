@@ -1,3 +1,5 @@
+using JetBlack.MessageBus.Common.Security.Authentication;
+
 namespace JetBlack.MessageBus.Adapters
 {
     /// <summary>

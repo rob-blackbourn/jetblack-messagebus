@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 using JetBlack.MessageBus.Adapters;
 using JetBlack.MessageBus.Common;
+using JetBlack.MessageBus.Common.Security.Authentication;
 
 using Entitlements;
-
-using common;
 
 namespace AuthEntitler
 {
