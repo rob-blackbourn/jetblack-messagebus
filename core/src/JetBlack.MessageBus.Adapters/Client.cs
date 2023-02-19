@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using JetBlack.MessageBus.Common.IO;
-using JetBlack.MessageBus.Common.Security.Authentication;
 using JetBlack.MessageBus.Messages;
 
 namespace JetBlack.MessageBus.Adapters

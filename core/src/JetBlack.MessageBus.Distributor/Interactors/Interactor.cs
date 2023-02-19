@@ -104,8 +104,6 @@ namespace JetBlack.MessageBus.Distributor.Interactors
             var address = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address ?? IPAddress.Any;
             var hostName = address.Equals(IPAddress.Loopback) ? Dns.GetHostName() : Dns.GetHostEntry(address).HostName;
 
-            var clientAuthenticator = new BasicClientAuthenticator(stream.RemoteIdentity.Name ?? "nobody", "nopassword");
-            clientAuthenticator.Authenticate(stream);
             var authenticationResponse = authenticator.Authenticate(stream);
 
             logger.LogInformation(

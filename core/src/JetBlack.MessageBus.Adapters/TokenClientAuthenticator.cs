@@ -1,5 +1,4 @@
 using System.Text;
-using ClientAuthenticator = JetBlack.MessageBus.Common.Security.Authentication.ClientAuthenticator;
 
 namespace JetBlack.MessageBus.Adapters
 {
