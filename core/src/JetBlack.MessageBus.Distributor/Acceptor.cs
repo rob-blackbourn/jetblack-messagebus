@@ -97,7 +97,7 @@ namespace JetBlack.MessageBus.Distributor
             }
             catch (SslException error)
             {
-                _logger.LogWarning(error, "SSL handshake failed.", error.Address);
+                _logger.LogWarning(error, "SSL handshake failed.", new [] {error.Address});
             }
             catch (Exception error)
             {

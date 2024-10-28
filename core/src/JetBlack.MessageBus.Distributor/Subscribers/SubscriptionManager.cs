@@ -208,7 +208,7 @@ namespace JetBlack.MessageBus.Distributor.Subscribers
                         _logger.LogDebug(
                             error,
                             "Failed to inform {subscriber} regarding {Message}.",
-                            message);
+                            new [] {message});
                     }
                 }
             }

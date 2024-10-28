@@ -37,5 +37,6 @@
         "other": "off"
       },
       "editor.tabSize": 2
-    }
+    },
+    "makefile.configureOnOpen": false
 }
